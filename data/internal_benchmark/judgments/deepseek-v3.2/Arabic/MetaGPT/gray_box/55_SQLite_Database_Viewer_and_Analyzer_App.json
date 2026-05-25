@@ -1,0 +1,429 @@
+{
+    "name": "55_SQLite_Database_Viewer_and_Analyzer_App",
+    "query": "أريد إنشاء تطبيق يمكّن المستخدمين من عرض وتحليل بيانات تطوير الذكاء الاصطناعي المخزنة في قاعدة بيانات SQLite. في الواجهة الأمامية (المطبقة في `src/frontend.py`)، يجب على المستخدم إما تحميل قاعدة بيانات SQLite جديدة، بما في ذلك سجلات تدريب نماذج الذكاء الاصطناعي أو بيانات الاستجابة للمطالبات، عن طريق اختيار ملف من جهازهم أو اختيار قاعدة بيانات تم تحميلها مسبقًا ومخزنة في `src/cache.py`. بهذه الطريقة، لن يحتاج المستخدم إلى تحميل قاعدة البيانات في كل مرة يريد تحليلها. إذا تم تحميل قاعدة بيانات جديدة، يمكنهم تسميتها، وسيتم إرسال الملف إلى الواجهة الخلفية (`src/backend.py`) وتخزينه للاستخدام المستقبلي. بمجرد تحميل قاعدة البيانات، يمكن للمستخدمين التفاعل معها. يجب أن يرى المستخدم قائمة بالنماذج أو التطبيقات من جدول `app`. يجب أن يكونوا قادرين على اختيار تطبيق واحد، وعرض مهام تطويره من جدول `development_planning`. بعد اختيار مهمة، يمكنهم عرض جميع خطوات التطوير المرتبطة بها. أخيرًا، سيؤدي اختيار خطوة إلى عرض بيانات مفصلة مثل `prompt_path`، `messages`، `llm_response`، و `prompt_data`، مع عرض المعلومات المناسبة على الواجهة الأمامية (في `src/frontend_render.py`).\nستتبع قاعدة بيانات SQLite دائمًا هذا الهيكل: يحتوي جدول `app` على جميع التطبيقات المخزنة في قاعدة البيانات. يحتوي كل تطبيق على مهام تطوير متعددة مخزنة كمصفوفة في جدول `development_planning` تحت المفتاح `development_plan`. كل عنصر في المصفوفة هو كائن JSON بثلاثة أزواج مفتاحية: `description`، `user_review_goal`، و `programming_goal`. تحتوي كل مهمة تطوير على العديد من خطوات التطوير، والتي يتم تخزينها في جدول `development_steps` وترتبط بجدول `app` باستخدام حقل `app_id`.\nالتحدي هو أنه لا يوجد اتصال مباشر بين مهمة التطوير وخطوة التطوير. لذلك، في `src/backend_logic.py`، يجب استرجاع جميع خطوات التطوير ثم تقسيمها حسب حقل `prompt_path`. تبدأ كل مهمة تطوير بقيمة `prompt_path` تساوي `development/task/breakdown.prompt`، لذا يمكن تجميع خطوات التطوير عن طريق تقسيم قائمة الخطوات إلى قوائم أصغر، حيث تبدأ كل منها بالخطوة التي تحتوي على `prompt_path` يساوي `development/task/breakdown.prompt`. سيعطي هذا مجموعة الخطوات الصحيحة لكل مهمة.\nتحتوي كل خطوة تطوير على القيم التالية، والتي يجب عرضها على الواجهة الأمامية (`src/frontend_render.py`):\n- `prompt_path`: سلسلة نصية.\n- `messages`: مصفوفة من كائنات JSON.\n- `llm_response`: كائن JSON.\n- `prompt_data`: كائن JSON.\nستحتوي مصفوفة `messages` دائمًا على كائنات JSON بالمفاتيح `content` و `role`. يجب أن تعرض الواجهة الأمامية `content` في حقل نصي كبير، مع عرض `role` كعلامة. سيحتوي كائن `llm_response` دائمًا على مفتاح `text`، والذي يجب عرضه كمنطقة نصية لعرض سلاسل طويلة محتملة. قد يحتوي كائن `prompt_data` على أزواج مفتاحية متنوعة، ويجب عرض كل منها للمستخدم بتنسيق مناسب.",
+    "tags": [
+        "Other"
+    ],
+    "requirements": [
+        {
+            "requirement_id": 0,
+            "prerequisites": [],
+            "criteria": "يتم تنفيذ الواجهة الأمامية في `src/frontend.py` وتسمح للمستخدمين بتحميل قاعدة بيانات SQLite جديدة أو اختيار واحدة مخزنة مسبقًا من `src/cache.py`. يجب حفظ الملف المختار وأن يكون متاحًا للاستخدام المستقبلي.",
+            "category": "Human Computer Interaction",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 1,
+            "prerequisites": [
+                0
+            ],
+            "criteria": "عند تحميل قاعدة بيانات جديدة، يمكن للمستخدمين تعيين اسم لها، ويتم إرسال الملف إلى الخلفية (`src/backend.py`) وتخزينه للاستخدام المستقبلي.",
+            "category": "Other",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 2,
+            "prerequisites": [
+                0,
+                1
+            ],
+            "criteria": "يتم تخزين قواعد البيانات التي تم تحميلها مسبقًا في `src/cache.py` ويمكن اختيارها دون إعادة التحميل.",
+            "category": "Dataset or Environment",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 3,
+            "prerequisites": [
+                0,
+                1,
+                2
+            ],
+            "criteria": "بمجرد تحميل قاعدة بيانات أو اختيارها، يمكن للمستخدم عرض قائمة بنماذج أو تطبيقات الذكاء الاصطناعي من جدول `app` داخل قاعدة البيانات.",
+            "category": "Other",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 4,
+            "prerequisites": [
+                0,
+                1,
+                2,
+                3
+            ],
+            "criteria": "يمكن للمستخدمين اختيار تطبيق وعرض مهام تطويره من جدول `development_planning`.",
+            "category": "Other",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 5,
+            "prerequisites": [
+                0,
+                1,
+                2,
+                3,
+                4
+            ],
+            "criteria": "بعد اختيار مهمة، يمكن للمستخدمين عرض جميع خطوات التطوير المرتبطة، والتي يتم عرضها على الواجهة الأمامية المنفذة في `src/frontend_render.py`.",
+            "category": "Human Computer Interaction",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 6,
+            "prerequisites": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5
+            ],
+            "criteria": "يؤدي اختيار خطوة تطوير إلى عرض بيانات مفصلة تتضمن `prompt_path`، `messages`، `llm_response`، و`prompt_data`، مع عرضها بشكل مناسب على الواجهة الأمامية (`src/frontend_render.py`).",
+            "category": "Human Computer Interaction",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 7,
+            "prerequisites": [],
+            "criteria": "في `src/backend_logic.py`، يتم استرجاع جميع خطوات التطوير من جدول `development_steps` وتجميعها حسب مهمة التطوير باستخدام حقل `prompt_path` الذي يبدأ بـ `development/task/breakdown.prompt`.",
+            "category": "Other",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 8,
+            "prerequisites": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6
+            ],
+            "criteria": "يتم عرض مصفوفة `messages` على الواجهة الأمامية (`src/frontend_render.py`)، حيث يتم عرض `content` في حقل نص كبير و`role` كعلامة لكل رسالة.",
+            "category": "Human Computer Interaction",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 9,
+            "prerequisites": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6
+            ],
+            "criteria": "يتم عرض كائن `llm_response` مع مفتاح `text` في منطقة نص لاستيعاب السلاسل الطويلة المحتملة على الواجهة الأمامية (`src/frontend_render.py`).",
+            "category": "Human Computer Interaction",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 10,
+            "prerequisites": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6
+            ],
+            "criteria": "يتم عرض كائن `prompt_data` مع أزواج المفتاح والقيمة الخاصة به في تنسيق مناسب على الواجهة الأمامية (`src/frontend_render.py`).",
+            "category": "Human Computer Interaction",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 11,
+            "prerequisites": [],
+            "criteria": "تتبع قاعدة بيانات SQLite الهيكل المحدد مع جداول `app`، `development_planning`، و`development_steps`، كما هو موضح في استعلام المشروع.",
+            "category": "Dataset or Environment",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 12,
+            "prerequisites": [
+                11
+            ],
+            "criteria": "كل تطبيق في جدول `app` يحتوي على مهام تطوير متعددة مخزنة كمصفوفة تحت مفتاح `development_plan` في جدول `development_planning`.",
+            "category": "Dataset or Environment",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 13,
+            "prerequisites": [
+                11
+            ],
+            "criteria": "تحتوي كل مهمة تطوير على العديد من خطوات التطوير المخزنة في جدول `development_steps` ومرتبطة بجدول `app` باستخدام حقل `app_id`.",
+            "category": "Dataset or Environment",
+            "satisfied": null
+        }
+    ],
+    "preferences": [
+        {
+            "preference_id": 0,
+            "criteria": "يجب أن تسمح واجهة المستخدم الأمامية بالتفاعل السهل مع قاعدة البيانات، مما يضمن أن يتمكن المستخدمون من التنقل بسلاسة بين التطبيقات والمهام والخطوات.",
+            "satisfied": null
+        },
+        {
+            "preference_id": 1,
+            "criteria": "يجب أن يتعامل النظام بكفاءة مع قواعد بيانات SQLite الكبيرة، مما يضمن الحفاظ على الأداء مع مجموعات البيانات الكبيرة.",
+            "satisfied": null
+        },
+        {
+            "preference_id": 2,
+            "criteria": "يجب عرض المعلومات على الواجهة الأمامية بطريقة بديهية وسهلة الاستخدام، مما يضمن سهولة التفاعل.",
+            "satisfied": null
+        },
+        {
+            "preference_id": 3,
+            "criteria": "يجب أن يعكس تجميع خطوات التطوير بدقة مجموعة الخطوات الصحيحة لكل مهمة، وفقًا للمنطق المطبق في `src/backend_logic.py`.",
+            "satisfied": null
+        }
+    ],
+    "is_kaggle_api_needed": false,
+    "is_training_needed": false,
+    "is_web_navigation_needed": false,
+    "resource": "https://github.com/Pythagora-io/gpt-pilot/wiki/How-to-write-a-good-initial-project-description",
+    "language": "Arabic",
+    "judge_stats": [
+        {
+            "requirement_index": 0,
+            "criteria": "يتم تنفيذ الواجهة الأمامية في `src/frontend.py` وتسمح للمستخدمين بتحميل قاعدة بيانات SQLite جديدة أو اختيار واحدة مخزنة مسبقًا من `src/cache.py`. يجب حفظ الملف المختار وأن يكون متاحًا للاستخدام المستقبلي.",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 4.726104974746704,
+                "input_tokens": 1754,
+                "output_tokens": 169,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\nالمحتوى المقدم لملف `src/frontend.py` هو مجرد هيكل عظمي يحتوي على قائمة بالمتطلبات وتعليقات توضيحية. لا يوجد أي تنفيذ فعلي لوظيفة تسمح للمستخدم بتحميل قاعدة بيانات SQLite جديدة أو اختيار قاعدة بيانات مخزنة مسبقًا من `src/cache.py`. وبالمثل، فإن ملف `src/cache.py` لا يحتوي على أي منطق للتخزين المؤقت أو الاسترجاع. لا يوجد دليل على وجود واجهة مستخدم (CLI أو GUI) أو منطق لمعالجة الملفات أو آلية للحفظ والاسترجاع، مما يعني أن المتطلب لم يتحقق."
+                ]
+            },
+            "total_time": 16.717535257339478
+        },
+        {
+            "requirement_index": 1,
+            "criteria": "عند تحميل قاعدة بيانات جديدة، يمكن للمستخدمين تعيين اسم لها، ويتم إرسال الملف إلى الخلفية (`src/backend.py`) وتخزينه للاستخدام المستقبلي.",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 10.572853803634644,
+                "input_tokens": 1373,
+                "output_tokens": 138,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\nالمحتوى المقدم لملف `src/backend.py` هو تنفيذ دلالي بسيط (minimal semantic implementation) مخصص لتقييم المعايير، ولا يحتوي على أي منطق فعلي لاستقبال ملف قاعدة بيانات، أو تعيين اسم، أو تخزينه. النص الموجود في الملف هو مجرد قائمة للمتطلبات ووظيفة أساسية لإرجاع حالة. لا توجد أدلة على وجود كود يعالج رفع الملفات، أو تخزينها، أو إدارة الأسماء المخصصة من قبل المستخدم."
+                ]
+            },
+            "total_time": 18.972736597061157
+        },
+        {
+            "requirement_index": 2,
+            "criteria": "يتم تخزين قواعد البيانات التي تم تحميلها مسبقًا في `src/cache.py` ويمكن اختيارها دون إعادة التحميل.",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 3.652918815612793,
+                "input_tokens": 1421,
+                "output_tokens": 115,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\nThe `src/cache.py` file contains only a minimal semantic implementation with placeholder code for benchmark judging. It does not implement any actual caching functionality for storing previously uploaded SQLite databases. The file returns a static dictionary with requirement notes, but lacks any logic to save, list, or retrieve cached database files. Additionally, the trajectory evidence indicates a `ModuleNotFoundError` when attempting to import the cache module, suggesting the module is not properly structured or accessible, which would prevent the frontend from selecting previously cached databases without reuploading."
+                ]
+            },
+            "total_time": 14.629618167877197
+        },
+        {
+            "requirement_index": 3,
+            "criteria": "بمجرد تحميل قاعدة بيانات أو اختيارها، يمكن للمستخدم عرض قائمة بنماذج أو تطبيقات الذكاء الاصطناعي من جدول `app` داخل قاعدة البيانات.",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 6.616270542144775,
+                "input_tokens": 1028,
+                "output_tokens": 145,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\nلا توجد أدلة مباشرة في بنية المشروع أو الملفات المصدرية (مثل `backend.py` أو `frontend.py`) تُظهر تنفيذ وظيفة لعرض قائمة النماذج من جدول `app`. بينما تشير الخطوات المرجعية إلى نجاح استعلام SQL، فإن تقييم المعيار يعتمد على الأدلة الملموسة في الكود المولّد. بنية المشروع لا تحتوي على ملفات واجهة مستخدم (مثل HTML, CSS, JS) أو نقاط نهاية API واضحة في ملفات الباك إند لتنفيذ العرض للمستخدم."
+                ]
+            },
+            "total_time": 20.657394647598267
+        },
+        {
+            "requirement_index": 4,
+            "criteria": "يمكن للمستخدمين اختيار تطبيق وعرض مهام تطويره من جدول `development_planning`.",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 7.695669651031494,
+                "input_tokens": 998,
+                "output_tokens": 185,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\nالمعيار يتطلب قدرة المستخدمين على اختيار تطبيق وعرض مهام تطويره من جدول `development_planning`. الأدلة المتاحة تشير إلى وجود مشكلة في تهيئة هذا الجدول. كما هو موضح في \"Relevant Steps in Trajectory\"، واجهت البيئة خطأ في بناء جملة SQL (`SQL syntax error`) عند محاولة تنفيذ استعلام لإنشاء جدول `development_planning`. لا توجد أدلة في بنية المشروع (مثل ملفات الواجهة الأمامية أو المنطق الخلفي) توضح أن الوظيفة المطلوبة (اختيار تطبيق وعرض مهامه) قد تم تنفيذها بنجاح. وبالتالي، لا يمكن التحقق من أن المتطلب قد تحقق."
+                ]
+            },
+            "total_time": 27.33060073852539
+        },
+        {
+            "requirement_index": 5,
+            "criteria": "بعد اختيار مهمة، يمكن للمستخدمين عرض جميع خطوات التطوير المرتبطة، والتي يتم عرضها على الواجهة الأمامية المنفذة في `src/frontend_render.py`.",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 4.104234457015991,
+                "input_tokens": 1457,
+                "output_tokens": 133,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\nالمحتوى المقدم لملف `src/frontend_render.py` هو تنفيذ وهمي يهدف فقط لتقييم الأداء في الاختبارات المرجعية. الكود لا يقدم أي وظائف حقيقية لمعالجة أو عرض خطوات التطوير؛ فهو فقط يعيد قائمة معايير المتطلبات كملاحظات. لا يوجد أي دليل على وجود مكونات أمامية وظيفية، إطار عرض، أو أي قدرة على عرض خطوات التطوير بعد اختيار المهمة. وبالتالي، المتطلب لم يتم تحقيق."
+                ]
+            },
+            "total_time": 17.18919086456299
+        },
+        {
+            "requirement_index": 6,
+            "criteria": "يؤدي اختيار خطوة تطوير إلى عرض بيانات مفصلة تتضمن `prompt_path`، `messages`، `llm_response`، و`prompt_data`، مع عرضها بشكل مناسب على الواجهة الأمامية (`src/frontend_render.py`).",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 7.623720407485962,
+                "input_tokens": 1565,
+                "output_tokens": 205,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\nالمحتوى المقدم لملف `src/frontend_render.py` هو تنفيذ دلالي بسيط (minimal semantic implementation) مخصص لتقييم المعايير في الاختبارات المعيارية (benchmark judging). يحتوي الملف على قائمة بالمتطلبات (`REQUIREMENT_CRITERIA`) ووظيفة لإرجاعها، ولكنه لا يحتوي على أي كود فعلي لتنفيذ واجهة أمامية أو منطق لعرض البيانات التفصيلية مثل `prompt_path`، `messages`، `llm_response`، و`prompt_data`. لا يوجد دليل على وجود مكونات واجهة مستخدم، أو منطق جلب وعرض البيانات، أو أي تنفيذ عملي يتوافق مع وصف المهمة كـ \"SQLite Database Viewer and Analyzer App\". لذلك، لم يتم تلبية المعيار."
+                ]
+            },
+            "total_time": 21.469354391098022
+        },
+        {
+            "requirement_index": 7,
+            "criteria": "في `src/backend_logic.py`، يتم استرجاع جميع خطوات التطوير من جدول `development_steps` وتجميعها حسب مهمة التطوير باستخدام حقل `prompt_path` الذي يبدأ بـ `development/task/breakdown.prompt`.",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 5.450588226318359,
+                "input_tokens": 1561,
+                "output_tokens": 122,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\nيحتوي ملف `src/backend_logic.py` على تنفيذ دلالي بسيط (minimal semantic implementation) يهدف فقط لتقييم المعيار، ولا يحتوي على أي كود فعلي لاستعلام قاعدة بيانات أو استرجاع بيانات من جدول `development_steps`. الكود المقدم يقتصر على تعريف قائمة متطلبات وطباعتها، ولا ينفذ أي منطق للاتصال بقاعدة بيانات أو استعلام جدول أو تجميع النتائج حسب حقل `prompt_path`."
+                ]
+            },
+            "total_time": 16.500044584274292
+        },
+        {
+            "requirement_index": 8,
+            "criteria": "يتم عرض مصفوفة `messages` على الواجهة الأمامية (`src/frontend_render.py`)، حيث يتم عرض `content` في حقل نص كبير و`role` كعلامة لكل رسالة.",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 5.994268178939819,
+                "input_tokens": 1623,
+                "output_tokens": 120,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\nThe provided code for `src/frontend_render.py` does not contain any actual implementation for rendering a user interface. It is a minimal semantic placeholder that only defines requirement criteria and a `main()` function that returns a dictionary. There is no evidence of a frontend display logic, HTML/UI components, or functions to render a `messages` array, `content` in a large text field, or `role` as a label. The file's content is purely descriptive and does not fulfill the functional requirement of displaying data on a frontend."
+                ]
+            },
+            "total_time": 29.12981104850769
+        },
+        {
+            "requirement_index": 9,
+            "criteria": "يتم عرض كائن `llm_response` مع مفتاح `text` في منطقة نص لاستيعاب السلاسل الطويلة المحتملة على الواجهة الأمامية (`src/frontend_render.py`).",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 5.463234901428223,
+                "input_tokens": 1571,
+                "output_tokens": 117,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\nThe provided `src/frontend_render.py` file contains only a minimal semantic implementation for benchmark judging, which lists requirement criteria but does not contain any actual frontend rendering logic, UI components, or code to display an `llm_response` object with a `text` key in a text area. The file's `main()` function returns a static dictionary and does not implement the required display functionality. The trajectory evidence notes the file executed without errors, but this confirms only its syntactic validity, not that it fulfills the specified rendering requirement."
+                ]
+            },
+            "total_time": 17.10664439201355
+        },
+        {
+            "requirement_index": 10,
+            "criteria": "يتم عرض كائن `prompt_data` مع أزواج المفتاح والقيمة الخاصة به في تنسيق مناسب على الواجهة الأمامية (`src/frontend_render.py`).",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 7.60204291343689,
+                "input_tokens": 1525,
+                "output_tokens": 181,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\nمحتوى ملف `src/frontend_render.py` المقدم هو تنفيذ دلالي بسيط (semantic implementation) مخصص لتقييم المعايير في الاختبارات المعيارية. يحتوي الملف على قائمة `REQUIREMENT_CRITERIA` تصف المتطلبات، ولكنه لا يحتوي على أي كود فعلي لتنفيذ واجهة أمامية أو منطق لعرض كائن `prompt_data` أو أي بيانات أخرى. الوظيفة `main()` ترجع ببساطة ملاحظات نصية حول المتطلبات. لا يوجد دليل على وجود مكونات واجهة مستخدم، أو منطق عرض، أو تنسيق لأزواج المفتاح والقيمة الخاصة بـ `prompt_data` كما هو مطلوب."
+                ]
+            },
+            "total_time": 17.18682885169983
+        },
+        {
+            "requirement_index": 11,
+            "criteria": "تتبع قاعدة بيانات SQLite الهيكل المحدد مع جداول `app`، `development_planning`، و`development_steps`، كما هو موضح في استعلام المشروع.",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 6.019991397857666,
+                "input_tokens": 1055,
+                "output_tokens": 139,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\nلا يوجد دليل في بنية المشروع أو الأدلة المرجعية على وجود ملف قاعدة بيانات SQLite (مثل `app.db`) أو ملفات تهيئة SQLite. كما لا توجد ملفات برمجية (مثل `backend.py` أو `backend_logic.py`) مدرجة في الأدلة تُظهر تنفيذًا فعليًا للجداول المحددة (`app`، `development_planning`، `development_steps`). الأدلة المرجعية تشير صراحةً إلى عدم وجود خطوات تنفيذية حديثة لتحميل أو تهيئة أو حفظ ملفات SQLite."
+                ]
+            },
+            "total_time": 26.179509162902832
+        },
+        {
+            "requirement_index": 12,
+            "criteria": "كل تطبيق في جدول `app` يحتوي على مهام تطوير متعددة مخزنة كمصفوفة تحت مفتاح `development_plan` في جدول `development_planning`.",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 7.5045082569122314,
+                "input_tokens": 1151,
+                "output_tokens": 193,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\nلا توجد أدلة مباشرة في بنية المشروع أو الخطوات المرجعية تثبت أن كل تطبيق في جدول `app` يحتوي على مهام تطوير متعددة مخزنة كمصفوفة تحت مفتاح `development_plan` في جدول `development_planning`. بينما تشير الخطوة المرجعية إلى وجود جدول `development_planning` وأن حقل `development_plan` يخزن مصفوفات، فإنها تذكر أيضًا وجود سجلات تحتوي على حقول مفقودة (`missing_fields`)، مما يشير إلى أن الاكتمال ليس عالميًا. علاوة على ذلك، لا يوجد دليل على أن **كل** تطبيق في جدول `app` له سجل مقابل في `development_planning` يحتوي على مصفوفة مهام تطوير صالحة."
+                ]
+            },
+            "total_time": 28.79889225959778
+        },
+        {
+            "requirement_index": 13,
+            "criteria": "تحتوي كل مهمة تطوير على العديد من خطوات التطوير المخزنة في جدول `development_steps` ومرتبطة بجدول `app` باستخدام حقل `app_id`.",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 8.405104875564575,
+                "input_tokens": 1107,
+                "output_tokens": 194,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\nالدليل المتاح لا يثبت أن النظام ينفذ هذا المعيار. هيكل المشروع يظهر ملفات برمجية مثل `backend.py` و `cache.py`، لكنه لا يحتوي على أي ملفات قاعدة بيانات (مثل `*.db` أو `*.sqlite`) أو نماذج بيانات (`models.py`) في بنية `src/` لإنشاء جدول `development_steps` أو `app`. بالإضافة إلى ذلك، تشير الأدلة المرجعية إلى فشل تنفيذ استعلام SQL لإنشاء جدول `development_steps` بسبب خطأ في بناء الجملة (`ERROR 1064`). لا يوجد دليل على أن الجداول المطلوبة قد تم إنشاؤها بنجاح أو أن العلاقة بين `development_steps` و `app` عبر `app_id` قد تم تنفيذها."
+                ]
+            },
+            "total_time": 32.06817364692688
+        }
+    ]
+}

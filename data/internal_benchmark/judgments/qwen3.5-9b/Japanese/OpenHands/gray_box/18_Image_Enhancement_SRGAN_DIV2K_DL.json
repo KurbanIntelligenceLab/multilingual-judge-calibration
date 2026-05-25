@@ -1,0 +1,188 @@
+{
+    "name": "18_Image_Enhancement_SRGAN_DIV2K_DL",
+    "query": "SRGANモデルを使用して画像を強化するシステムを作成する必要があります（事前にトレーニングされたSRGANを[こちら](https://github.com/tensorlayer/srgan)から入手できます）。DIV2Kデータセットは[このリンク](https://data.vision.ee.ethz.ch/cvl/DIV2K/)からダウンロードできます。データセットは`src/data_loader.py`ファイルにロードする必要があります。システムは、`src/data_loader.py`でリサイズや正規化を含む画像の前処理を行う必要があります。時間を節約するために、`models/saved_models/`に保存された事前トレーニング済みモデルを使用し、強化された画像を`results/figures/`ディレクトリに保存します。さらに、システムは元の画像と強化された画像の比較を視覚化し、`results/figures/enhanced_comparison.png`に保存する必要があります。最後に、さまざまな種類の画像に対するモデルの性能を示すために、結果と視覚化を含むMarkdownレポートを作成し、`results/report.md`として保存します。このレポートには、選択されたサンプルに対するモデルの性能の詳細な比較を含め、モデルが優れている点や苦手な点を強調する必要があります。",
+    "tags": [
+        "Computer Vision",
+        "Generative Models"
+    ],
+    "requirements": [
+        {
+            "requirement_id": 0,
+            "prerequisites": [],
+            "criteria": "\"DIV2K\"データセットは`src/data_loader.py`ファイルにロードされます。",
+            "category": "Dataset or Environment",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 1,
+            "prerequisites": [],
+            "criteria": "事前トレーニング済みの\"SRGAN\"モデルは`models/saved_models/`に保存されています。",
+            "category": "Save Trained Model",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 2,
+            "prerequisites": [
+                0
+            ],
+            "criteria": "リサイズや正規化を含む画像の前処理は`src/data_loader.py`で実装されています。",
+            "category": "Data preprocessing and postprocessing",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 3,
+            "prerequisites": [
+                0,
+                1,
+                2
+            ],
+            "criteria": "強化された画像は指定されたフォルダ`results/figures/`に保存されます。",
+            "category": "Data preprocessing and postprocessing",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 4,
+            "prerequisites": [
+                0,
+                1,
+                2,
+                3
+            ],
+            "criteria": "元の画像と強化された画像の比較は視覚化され、`results/figures/enhanced_comparison.png`として保存されます。",
+            "category": "Visualization",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 5,
+            "prerequisites": [
+                1,
+                2,
+                3,
+                4
+            ],
+            "criteria": "結果と視覚化を含むMarkdownファイルが生成され、`results/report.md`として保存されます。",
+            "category": "Visualization",
+            "satisfied": null
+        }
+    ],
+    "preferences": [
+        {
+            "preference_id": 0,
+            "criteria": "モデルの性能をさまざまな種類の画像にわたって示すために、多様なサンプルセットを選択する必要があります。",
+            "satisfied": null
+        },
+        {
+            "preference_id": 1,
+            "criteria": "Markdownレポートには、選択されたサンプルに対するモデルの性能の詳細な比較を含め、モデルが優れている点や苦手な点を強調する必要があります。",
+            "satisfied": null
+        }
+    ],
+    "is_kaggle_api_needed": false,
+    "is_training_needed": false,
+    "is_web_navigation_needed": true,
+    "language": "Japanese",
+    "judge_stats": [
+        {
+            "requirement_index": 0,
+            "criteria": "\"DIV2K\"データセットは`src/data_loader.py`ファイルにロードされます。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 10.16607403755188,
+                "input_tokens": 937,
+                "output_tokens": 546,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>: The `src/data_loader.py` file contains only a placeholder implementation for `load_dataset()` that returns `{\"dataset\": \"loaded\", \"notes\": requirement_notes()}` without any actual DIV2K dataset loading logic. There are no file paths, dataset loading functions, or real data loading operations present in the code. The function is explicitly documented as a \"Minimal dataset loader placeholder\" and does not fulfill the requirement of actually loading the DIV2K dataset."
+                ]
+            },
+            "total_time": 59.57378101348877
+        },
+        {
+            "requirement_index": 1,
+            "criteria": "事前トレーニング済みの\"SRGAN\"モデルは`models/saved_models/`に保存されています。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 12.04967451095581,
+                "input_tokens": 945,
+                "output_tokens": 637,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>: 事前トレーニング済みの\"SRGAN\"モデルが`models/saved_models/`に保存されているという証拠が不足しています。\n\n根拠:\n1. ワークスペース構造では `models/saved_models/` ディレクトリが存在することは示されていますが、その中身（モデルファイル）のリストは提供されていません。\n2. `src/data_loader.py` は最小限のセマンティック実装であり、実際の SRGAN モデルの読み込みや保存に関するコードが含まれていません。\n3. 提供された証拠には、モデルファイル（.pth、.pt、.h5 など）の存在や、SRGAN モデルの読み込み処理に関する具体的な記述は一切含まれていません。\n4. トラジェクトリ証拠も空であり、モデルの保存や読み込みに関する実行履歴が確認できません。"
+                ]
+            },
+            "total_time": 72.56371665000916
+        },
+        {
+            "requirement_index": 2,
+            "criteria": "リサイズや正規化を含む画像の前処理は`src/data_loader.py`で実装されています。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 10.878868818283081,
+                "input_tokens": 945,
+                "output_tokens": 626,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>: 要件が満たされていません。`src/data_loader.py` の実装を確認すると、`load_dataset()` と `build_transforms()` の両方が「placeholder（プレースホルダー）」として実装されており、実際の画像前処理ロジックが含まれていません。具体的には：\n\n1. `build_transforms()` は `[\"rotation\", \"scaling\", \"normalization\"]` という文字列リストを返すだけで、実際の画像リサイズや正規化処理を実行するコードがありません。\n2. `load_dataset()` は `{\"dataset\": \"loaded\", \"notes\": requirement_notes()}` という辞書を返すのみで、DIV2K データセットの実際の読み込み処理が実装されていません。\n3. ファイル自体が「Minimal semantic implementation for benchmark judging」と明記されており、実用的な実装ではなくベンチマーク判定用の簡易実装であることが示されています。\n\n要件は「実装されています」と述べているため、実際の処理ロジックが存在する必要があります。"
+                ]
+            },
+            "total_time": 83.41455745697021
+        },
+        {
+            "requirement_index": 3,
+            "criteria": "強化された画像は指定されたフォルダ`results/figures/`に保存されます。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 6.963706731796265,
+                "input_tokens": 935,
+                "output_tokens": 379,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>: 要件が満たされていません。`results/figures/` フォルダには `enhanced_comparison.png` というファイルが存在しますが、その内容は有効な画像ファイルではなく、画像読み込みエラーメッセージ（`litellm.BadRequestError`）です。画像検証チェックに失敗したため、実際には強化された画像が正常に保存されていません。"
+                ]
+            },
+            "total_time": 51.34951424598694
+        },
+        {
+            "requirement_index": 4,
+            "criteria": "元の画像と強化された画像の比較は視覚化され、`results/figures/enhanced_comparison.png`として保存されます。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 10.071424007415771,
+                "input_tokens": 945,
+                "output_tokens": 607,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n\n要件が満たされていません。`results/figures/enhanced_comparison.png` ファイルは存在しますが、その内容には実際の画像比較の可視化ではなく、以下のエラーメッセージが含まれています：\n\n```\nError reading image file: litellm.BadRequestError: OpenrouterException - Error code: 400 - ... \"Supplied image did not pass validation checks.\"\n```\n\nこれは画像生成プロセスが失敗し、検証チェックに合格しなかったことを示しています。元の画像と強化された画像の比較が視覚化され保存されているという要件は、エラーログのみが保存されている現状では達成されていません。"
+                ]
+            },
+            "total_time": 63.429410457611084
+        },
+        {
+            "requirement_index": 5,
+            "criteria": "結果と視覚化を含むMarkdownファイルが生成され、`results/report.md`として保存されます。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 7.894944906234741,
+                "input_tokens": 735,
+                "output_tokens": 393,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>: 要件が満たされていません。`results/report.md` ファイルは存在しますが、その内容は `('placeholder', None)` というプレースホルダーのみであり、実際の結果や視覚化（図表など）が含まれていません。要件では「結果と視覚化を含む Markdown ファイル」と明記されているため、この状態では要件を満たしていません。"
+                ]
+            },
+            "total_time": 60.64656853675842
+        }
+    ]
+}

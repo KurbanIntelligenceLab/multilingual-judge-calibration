@@ -1,0 +1,187 @@
+{
+    "name": "15_Image_Captioning_ShowAndTell_Flickr8k_DL",
+    "query": "Bu benim mevcut PyTorch projem: Show and Tell modelini kullanarak otomatik bir görüntü altyazı sistemi geliştirin. Burada size rehberlik edebilecek bir depo buldum: https://github.com/sgrvinod/a-PyTorch-Tutorial-to-Image-Captioning. Flickr8k veri setini kullanın, [bu bağlantıdan](https://huggingface.co/datasets/jxie/flickr8k) indirerek `src/data_loader.py` içinde yükleyin. Sistem, örnek görüntülerin açıklamalarını oluşturmalı ve bunları `results/metrics/generated_descriptions.txt` dosyasına kaydetmelidir. `src/model.py` içinde bir dikkat mekanizması uygulanmalıdır. Önceden eğitilmiş modeli `models/saved_models/show_and_tell_model.pt` olarak kaydedin. Dikkat ağırlıklarını görselleştirin ve `results/figures/attention_weights.png` dosyasına kaydedin. Veri seti sorunsuz bir şekilde yüklenmeli, herhangi bir sorun çıkarsa uygun hata yönetimi yapılmalıdır. İdeal olarak, dikkat mekanizması, altyazıların oluşturulmasında en etkili olan görüntü bölgelerini net bir şekilde vurgulamalıdır.",
+    "tags": [
+        "Computer Vision",
+        "Natural Language Processing"
+    ],
+    "requirements": [
+        {
+            "requirement_id": 0,
+            "prerequisites": [],
+            "criteria": "Önceden eğitilmiş \"Show and Tell\" modeli kullanılır.",
+            "category": "Machine Learning Method",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 1,
+            "prerequisites": [],
+            "criteria": "\"Flickr8k\" veri seti, muhtemelen [bu bağlantıdan](https://huggingface.co/datasets/jxie/flickr8k) indirilerek `src/data_loader.py` içinde yüklenir.",
+            "category": "Dataset or Environment",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 2,
+            "prerequisites": [
+                0,
+                1
+            ],
+            "criteria": "Dikkat mekanizması `src/model.py` içinde uygulanır.",
+            "category": "Machine Learning Method",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 3,
+            "prerequisites": [
+                0,
+                1,
+                2
+            ],
+            "criteria": "Örnek görüntülerin oluşturulan açıklamaları `results/metrics/generated_descriptions.txt` dosyasında kaydedilir.",
+            "category": "Other",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 4,
+            "prerequisites": [
+                0,
+                1,
+                2
+            ],
+            "criteria": "Eğitilmiş model `models/saved_models/show_and_tell_model.pt` olarak kaydedilir.",
+            "category": "Save Trained Model",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 5,
+            "prerequisites": [
+                0,
+                1,
+                2
+            ],
+            "criteria": "Dikkat ağırlıklarının görselleştirilmesi `results/figures/attention_weights.png` dosyasında kaydedilir.",
+            "category": "Visualization",
+            "satisfied": null
+        }
+    ],
+    "preferences": [
+        {
+            "preference_id": 0,
+            "criteria": "Veri seti sorunsuz bir şekilde yüklenmeli, indirme sırasında herhangi bir sorun çıkarsa net bir hata yönetimi yapılmalıdır.",
+            "satisfied": null
+        },
+        {
+            "preference_id": 1,
+            "criteria": "Dikkat mekanizması, oluşturulan altyazılara en çok katkıda bulunan görüntü bölgelerini net bir şekilde vurgulamalıdır.",
+            "satisfied": null
+        }
+    ],
+    "is_kaggle_api_needed": false,
+    "is_training_needed": true,
+    "is_web_navigation_needed": true,
+    "language": "Turkish",
+    "judge_stats": [
+        {
+            "requirement_index": 0,
+            "criteria": "Önceden eğitilmiş \"Show and Tell\" modeli kullanılır.",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.3609824180603027,
+                "input_tokens": 1461,
+                "output_tokens": 135,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED> `src/model.py` içinde önceden eğitilmiş bir “Show and Tell” modelini yükleyen veya kullanan bir kod yok; `build_model()` yalnızca `\"model placeholder\"` döndürüyor. Çalışma alanında `models/saved_models/show_and_tell_model.pt` dosyası bulunsa da bu checkpoint’in kodda `torch.load(...)` benzeri bir çağrıyla kullanıldığına dair kanıt yok. Trajectory notları da önceden eğitilmiş modelin yüklendiğini/çalıştırıldığını doğrulayan bir kayıt olmadığını söylüyor."
+                ]
+            },
+            "total_time": 8.658437252044678
+        },
+        {
+            "requirement_index": 1,
+            "criteria": "\"Flickr8k\" veri seti, muhtemelen [bu bağlantıdan](https://huggingface.co/datasets/jxie/flickr8k) indirilerek `src/data_loader.py` içinde yüklenir.",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 3.3292129039764404,
+                "input_tokens": 1304,
+                "output_tokens": 143,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED> `src/data_loader.py` içinde gerçek bir Flickr8k yükleme mantığı yok. Dosya yalnızca bir placeholder içeriyor: `load_dataset()` fonksiyonu `{\"dataset\": \"loaded\", \"notes\": requirement_notes()}` döndürüyor; Hugging Face `jxie/flickr8k`, `datasets.load_dataset`, dosya yolu, indirme ya da train/validation/test bölünmeleriyle ilgili çalışan bir kod parçası bulunmuyor. `KEYWORDS = [\"Flickr8k\"]` ve metinsel notlar tek başına veri setinin gerçekten bu dosyada yüklendiğini kanıtlamaz."
+                ]
+            },
+            "total_time": 11.443116903305054
+        },
+        {
+            "requirement_index": 2,
+            "criteria": "Dikkat mekanizması `src/model.py` içinde uygulanır.",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.885178804397583,
+                "input_tokens": 1041,
+                "output_tokens": 133,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>: `src/model.py` içinde dikkat mekanizmasına ait bir sınıf, katman veya hesaplama yok. Dosya yalnızca `REQUIREMENT_CRITERIA`, `requirement_notes()` ve `\"model placeholder\"` döndüren `build_model()` içeriyor; örneğin attention weight hesaplaması, encoder-decoder attention modülü veya ilgili PyTorch katmanları bulunmuyor. Ayrıca görünen tek çıktı kanıtı `results/figures/attention_weights.png` olsa da, bu dosya `src/model.py` içinde dikkat mekanizmasının uygulandığını kanıtlamıyor."
+                ]
+            },
+            "total_time": 6.385226726531982
+        },
+        {
+            "requirement_index": 3,
+            "criteria": "Örnek görüntülerin oluşturulan açıklamaları `results/metrics/generated_descriptions.txt` dosyasında kaydedilir.",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 1.6732826232910156,
+                "input_tokens": 1090,
+                "output_tokens": 86,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED> `results/metrics/generated_descriptions.txt` dosyası mevcut olsa da içeriği yalnızca `('placeholder\\r\\n', None)` şeklindedir. Bu, örnek görüntüler için oluşturulmuş gerçek açıklamaların kaydedildiğini göstermiyor; ayrıca çalışma izlerinde bu dosyaya başarılı yazım yapıldığına dair bir çıktı da bulunmuyor."
+                ]
+            },
+            "total_time": 11.149932384490967
+        },
+        {
+            "requirement_index": 4,
+            "criteria": "Eğitilmiş model `models/saved_models/show_and_tell_model.pt` olarak kaydedilir.",
+            "satisfied": true,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 1.8339183330535889,
+                "input_tokens": 990,
+                "output_tokens": 93,
+                "accumulated_cost": 0.0,
+                "satisfied": true,
+                "reason": [
+                    "<SATISFIED>: `models/saved_models/show_and_tell_model.pt` dosyası çalışma alanında mevcut (`models\\saved_models\\show_and_tell_model.pt`). Ayrıca yörünge kanıtında bu hedef yola kayıt işleminin tetiklendiği ve hata olmadan tamamlandığı belirtiliyor; dolayısıyla eğitilmiş modelin istenen konuma kaydedildiği doğrulanıyor."
+                ]
+            },
+            "total_time": 7.563027620315552
+        },
+        {
+            "requirement_index": 5,
+            "criteria": "Dikkat ağırlıklarının görselleştirilmesi `results/figures/attention_weights.png` dosyasında kaydedilir.",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.316676378250122,
+                "input_tokens": 1167,
+                "output_tokens": 113,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED> `results/figures/attention_weights.png` mevcut görünse de dosya içeriği geçerli bir görsel değil; okuma denemesinde `\"The image data you provided does not represent a valid image\"` hatası dönüyor. Ayrıca iz kayıtlarında bu dosya için başarılı bir `savefig`/kaydetme kanıtı da yok. Bu nedenle dikkat ağırlıkları görselleştirmesinin bu PNG dosyasına düzgün şekilde kaydedildiği doğrulanamıyor."
+                ]
+            },
+            "total_time": 7.101621389389038
+        }
+    ]
+}

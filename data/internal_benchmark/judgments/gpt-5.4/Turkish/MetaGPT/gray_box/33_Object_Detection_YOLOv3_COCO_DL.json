@@ -1,0 +1,215 @@
+{
+    "name": "33_Object_Detection_YOLOv3_COCO_DL",
+    "query": "YOLOv3 modeli ve COCO veri kümesini kullanarak bir nesne algılama sistemi geliştirmeme yardım et. Veri kümesini indir ve `src/data_loader.py` içinde yeniden boyutlandırma ve normalizasyon yaparak görüntüleri ön işle. YOLOv3 modelini uygula ve sonuçları iyileştirmek için `src/model.py` içinde Non-Maximum Suppression (NMS) kullan. Algılanan nesneleri `results/figures/` içine kaydet ve algılama sonuçlarını göstermek için `src/app.py` içinde etkileşimli bir Streamlit web sayfası oluştur. Son olarak, mAP ve çıkarım süresi gibi metrikleri içeren modelin performansını değerlendir ve değerlendirme sonuçlarını `results/metrics/model_performance.txt` içine kaydet. Sistem, gereksiz kaynak kullanımını önlemek için Streamlit uygulamasının başlatılmasını ve sonlandırılmasını düzgün bir şekilde yönetmelidir.",
+    "tags": [
+        "Computer Vision"
+    ],
+    "requirements": [
+        {
+            "requirement_id": 0,
+            "prerequisites": [],
+            "criteria": "\"COCO\" veri kümesinin indirilmesi `src/data_loader.py` içinde uygulanmıştır.",
+            "category": "Dataset or Environment",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 1,
+            "prerequisites": [
+                0
+            ],
+            "criteria": "Görüntülerin yeniden boyutlandırılması ve normalizasyonu dahil veri ön işleme `src/data_loader.py` içinde gerçekleştirilir.",
+            "category": "Data preprocessing and postprocessing",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 2,
+            "prerequisites": [],
+            "criteria": "\"YOLOv3\" modeli `src/model.py` içinde uygulanmıştır.",
+            "category": "Machine Learning Method",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 3,
+            "prerequisites": [
+                1,
+                2
+            ],
+            "criteria": "Algılama sonuçlarını iyileştirmek için \"Non-Maximum Suppression\" (NMS) uygulanır. Lütfen bunu `src/model.py` içinde uygulayın.",
+            "category": "Data preprocessing and postprocessing",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 4,
+            "prerequisites": [
+                2,
+                3
+            ],
+            "criteria": "Algılama sonuçları belirtilen `results/figures/` klasörüne kaydedilir.",
+            "category": "Visualization",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 5,
+            "prerequisites": [
+                2,
+                3,
+                4
+            ],
+            "criteria": "`src/app.py` içinde \"Streamlit\" kullanarak etkileşimli bir web sayfası oluşturulur ve `results/figures/` içinde kaydedilen algılama sonuçlarını gösterir.",
+            "category": "Human Computer Interaction",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 6,
+            "prerequisites": [
+                2,
+                3
+            ],
+            "criteria": "Model performans değerlendirme sonuçları `results/metrics/model_performance.txt` içinde kaydedilir.",
+            "category": "Performance Metrics",
+            "satisfied": null
+        }
+    ],
+    "preferences": [
+        {
+            "preference_id": 0,
+            "criteria": "\"Streamlit\" web sayfası kullanıcı dostu olmalı, kullanıcıların algılama için kolayca yeni görüntüler yüklemesine ve görüntülemesine olanak tanımalı.",
+            "satisfied": null
+        },
+        {
+            "preference_id": 1,
+            "criteria": "Performans değerlendirmesi, mAP ve çıkarım süresi gibi metrikleri içerir.",
+            "satisfied": null
+        },
+        {
+            "preference_id": 2,
+            "criteria": "Sistem, Streamlit uygulamasının başlatılmasını ve sonlandırılmasını düzgün bir şekilde yönetmelidir.",
+            "satisfied": null
+        }
+    ],
+    "is_kaggle_api_needed": false,
+    "is_training_needed": true,
+    "is_web_navigation_needed": false,
+    "language": "Turkish",
+    "judge_stats": [
+        {
+            "requirement_index": 0,
+            "criteria": "\"COCO\" veri kümesinin indirilmesi `src/data_loader.py` içinde uygulanmıştır.",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.1738789081573486,
+                "input_tokens": 1267,
+                "output_tokens": 94,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>: `src/data_loader.py` içinde gerçek bir COCO indirme uygulaması görünmüyor. Dosya yalnızca `load_dataset()` içinde `{\"dataset\": \"loaded\", \"notes\": requirement_notes()}` döndüren bir yer tutucu içeriyor; `CocoDetection`, `download=True`, `requests`, `urllib` veya benzeri bir indirme mantığı kodun mevcut içeriğinde yok."
+                ]
+            },
+            "total_time": 10.222410440444946
+        },
+        {
+            "requirement_index": 1,
+            "criteria": "Görüntülerin yeniden boyutlandırılması ve normalizasyonu dahil veri ön işleme `src/data_loader.py` içinde gerçekleştirilir.",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.5564322471618652,
+                "input_tokens": 1239,
+                "output_tokens": 115,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED> `src/data_loader.py` içinde gerçek bir ön işleme akışı uygulanmamış. Dosyada yalnızca `build_transforms()` fonksiyonu `[\"rotation\", \"scaling\", \"normalization\"]` döndüren bir placeholder içeriyor; görüntü yeniden boyutlandırma/normalizasyonu yapan gerçek kod, transform pipeline’ı veya veri üzerinde uygulama yok. Ayrıca `load_dataset()` da sadece `{\"dataset\": \"loaded\", \"notes\": requirement_notes()}` döndürüyor."
+                ]
+            },
+            "total_time": 8.081616401672363
+        },
+        {
+            "requirement_index": 2,
+            "criteria": "\"YOLOv3\" modeli `src/model.py` içinde uygulanmıştır.",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.517810821533203,
+                "input_tokens": 1320,
+                "output_tokens": 119,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>: `src/model.py` içinde gerçek bir YOLOv3 implementasyonu yok. Dosya yalnızca `REQUIREMENT_CRITERIA` ve `KEYWORDS = [\"Non-Maximum Suppression\", \"YOLOv3\", \"yolo\"]` gibi metinsel ifadeler içeriyor; tek işlevsel kısım olan `build_model()` ise `\"model placeholder\"` döndürüyor. YOLOv3’e özgü katmanlar, ağ mimarisi veya çalışan model sınıfı tanımlanmamış."
+                ]
+            },
+            "total_time": 9.515844106674194
+        },
+        {
+            "requirement_index": 3,
+            "criteria": "Algılama sonuçlarını iyileştirmek için \"Non-Maximum Suppression\" (NMS) uygulanır. Lütfen bunu `src/model.py` içinde uygulayın.",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.1191134452819824,
+                "input_tokens": 1256,
+                "output_tokens": 104,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED> `src/model.py` içinde gerçek bir NMS uygulaması yok. Dosya yalnızca metinsel kriterler ve `KEYWORDS = [\"Non-Maximum Suppression\", \"YOLOv3\", \"yolo\"]` tanımlıyor; ayrıca `build_model()` sadece `\"model placeholder\"` döndürüyor. Kutu/skor işleme, IoU hesabı veya bastırma mantığına dair herhangi bir kod parçası bulunmuyor."
+                ]
+            },
+            "total_time": 7.417252540588379
+        },
+        {
+            "requirement_index": 4,
+            "criteria": "Algılama sonuçları belirtilen `results/figures/` klasörüne kaydedilir.",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.5866334438323975,
+                "input_tokens": 1632,
+                "output_tokens": 143,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>: Workspace’te `results/figures/` klasörü mevcut olsa da, sağlanan dosya içeriklerinde (`src/app.py` içeriği verilmemiş; `src/data_loader.py` ve `src/model.py` yalnızca placeholder) algılama sonuçlarını bu klasöre kaydeden doğrulanabilir bir uygulama veya üretilmiş çıktı dosyası kanıtı yok. Referans izde `results_dir = \"results/figures\"` ayarlandığı belirtiliyor, ancak aynı iz açıkça “başarılı kayıt yapıldığına dair doğrudan çalıştırma kanıtı yok” diyor."
+                ]
+            },
+            "total_time": 10.055183410644531
+        },
+        {
+            "requirement_index": 5,
+            "criteria": "`src/app.py` içinde \"Streamlit\" kullanarak etkileşimli bir web sayfası oluşturulur ve `results/figures/` içinde kaydedilen algılama sonuçlarını gösterir.",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.373509407043457,
+                "input_tokens": 1286,
+                "output_tokens": 129,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED> `src/app.py` içinde gerçek bir Streamlit arayüzü yok. Dosya yalnızca metinsel bir kriter listesi ve `main()` içinde `{\"status\": \"ok\", ...}` döndürüyor; örneğin `import streamlit as st` bulunmuyor ve `results/figures/` altındaki görselleri okuyup göstermeye yönelik hiçbir kod yer almıyor. Workspace’te `results/figures` klasörü olsa da, verilen dosya içeriği bu sonuçları web sayfasında görüntülediğini kanıtlamıyor."
+                ]
+            },
+            "total_time": 10.388909339904785
+        },
+        {
+            "requirement_index": 6,
+            "criteria": "Model performans değerlendirme sonuçları `results/metrics/model_performance.txt` içinde kaydedilir.",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.355851650238037,
+                "input_tokens": 978,
+                "output_tokens": 104,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>: `results/metrics/model_performance.txt` dosyası mevcut olsa da içeriği yalnızca `('placeholder\\r\\n', None)` şeklinde bir yer tutucu görünüyor; model performans değerlendirme sonuçları (ör. metrik adları/değerleri) kaydedildiğine dair somut kanıt yok. Ayrıca verilen kanıtlarda bu dosyaya gerçek sonuçların yazdırıldığına ilişkin açık bir kayıt da bulunmuyor."
+                ]
+            },
+            "total_time": 7.624714136123657
+        }
+    ]
+}

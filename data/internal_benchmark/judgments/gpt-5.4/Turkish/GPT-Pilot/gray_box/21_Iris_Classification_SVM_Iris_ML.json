@@ -1,0 +1,213 @@
+{
+    "name": "21_Iris_Classification_SVM_Iris_ML",
+    "query": "İris türlerini sınıflandırmak için İris veri kümesini kullanarak `src/model.py` içinde uygulanmış bir Destek Vektör Makinesi (SVM) sınıflandırıcısı ile bir proje talep ediyorum. Proje, verileri standartlaştırmalı ve `src/data_loader.py` içinde özellik seçimi yapmalıdır. Sınıflandırma doğruluğunu belgeleyip `results/metrics/classification_accuracy.txt` olarak kaydedecek ve bir karışıklık matrisi oluşturup `results/figures/confusion_matrix.png` olarak kaydedecektir. Ayrıca, sınıflandırma sonuçlarını ve model performansını sergilemek için `src/app.py` içinde Streamlit kullanarak etkileşimli bir web uygulaması oluşturacak ve figürleri `results/figures/` içinde saklayacaktır. Web sayfası kullanıcı dostu olmalı ve kullanıcıların SVM sınıflandırıcısının nasıl çalıştığını anlamalarına yardımcı olacak kısa bir model açıklaması içermelidir.",
+    "tags": [
+        "Classification",
+        "Supervised Learning"
+    ],
+    "requirements": [
+        {
+            "requirement_id": 0,
+            "prerequisites": [],
+            "criteria": "\"Iris\" veri kümesi kullanılır.",
+            "category": "Dataset or Environment",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 1,
+            "prerequisites": [
+                0
+            ],
+            "criteria": "Veriler, `src/data_loader.py` içinde özellik değerlerinin aynı aralıkta olmasını sağlamak için standartlaştırılır.",
+            "category": "Data preprocessing and postprocessing",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 2,
+            "prerequisites": [
+                0
+            ],
+            "criteria": "Özellik seçimi, `src/data_loader.py` içinde önemli özellikleri belirlemek için yapılır.",
+            "category": "Data preprocessing and postprocessing",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 3,
+            "prerequisites": [],
+            "criteria": "\"SVM sınıflandırıcısı\" `src/model.py` içinde uygulanır.",
+            "category": "Machine Learning Method",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 4,
+            "prerequisites": [
+                1,
+                2,
+                3
+            ],
+            "criteria": "Sınıflandırma doğruluğu `results/metrics/classification_accuracy.txt` içinde kaydedilir.",
+            "category": "Performance Metrics",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 5,
+            "prerequisites": [
+                1,
+                2,
+                3
+            ],
+            "criteria": "Bir karışıklık matrisi oluşturulur ve `results/figures/confusion_matrix.png` olarak kaydedilir.",
+            "category": "Visualization",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 6,
+            "prerequisites": [
+                2,
+                3,
+                4,
+                5
+            ],
+            "criteria": "Etkileşimli bir web uygulaması `src/app.py` içinde \"Streamlit\" kullanılarak oluşturulur ve sınıflandırma sonuçları ile model performansı `results/figures/` içinde sergilenir.",
+            "category": "Human Computer Interaction",
+            "satisfied": null
+        }
+    ],
+    "preferences": [
+        {
+            "preference_id": 0,
+            "criteria": "Streamlit web sayfası kullanıcı dostu olmalı ve kullanıcıların modelin performansının farklı yönlerini kolayca keşfetmelerine olanak tanımalıdır.",
+            "satisfied": null
+        },
+        {
+            "preference_id": 1,
+            "criteria": "Web sayfasında kısa bir model açıklaması bulunmalı, kullanıcıların SVM sınıflandırıcısının nasıl çalıştığını anlamalarına yardımcı olmalıdır.",
+            "satisfied": null
+        }
+    ],
+    "is_kaggle_api_needed": false,
+    "is_training_needed": true,
+    "is_web_navigation_needed": false,
+    "language": "Turkish",
+    "judge_stats": [
+        {
+            "requirement_index": 0,
+            "criteria": "\"Iris\" veri kümesi kullanılır.",
+            "satisfied": true,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.0628650188446045,
+                "input_tokens": 1417,
+                "output_tokens": 98,
+                "accumulated_cost": 0.0,
+                "satisfied": true,
+                "reason": [
+                    "<SATISFIED>: Referans yürütme izinde `load_iris` ile Iris veri kümesinin doğrudan yüklendiğine dair açık kanıt var: “`load_iris` ile veri setinin alınmasına dair başarılı yürütme izi var.” Ayrıca bu veri kümesi üzerinden model/eğitim akışının devam ettiğinin belirtildiği için, “Iris” veri kümesi kullanılır ölçütü karşılanmıştır."
+                ]
+            },
+            "total_time": 10.921947479248047
+        },
+        {
+            "requirement_index": 1,
+            "criteria": "Veriler, `src/data_loader.py` içinde özellik değerlerinin aynı aralıkta olmasını sağlamak için standartlaştırılır.",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.1098074913024902,
+                "input_tokens": 1115,
+                "output_tokens": 114,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED> `src/data_loader.py` içinde gerçek bir standartlaştırma uygulanmıyor. Dosyada `load_dataset()` yalnızca `{\"dataset\": \"loaded\", \"notes\": requirement_notes()}` döndürüyor; `StandardScaler`, normalize etme işlemi veya özellikleri aynı aralığa getiren herhangi bir veri işleme kodu yok. `build_transforms()` içindeki `\"normalization\"` ifadesi sadece bir placeholder liste elemanı ve fiili standartlaştırma kanıtı sağlamıyor."
+                ]
+            },
+            "total_time": 6.322771072387695
+        },
+        {
+            "requirement_index": 2,
+            "criteria": "Özellik seçimi, `src/data_loader.py` içinde önemli özellikleri belirlemek için yapılır.",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.0422024726867676,
+                "input_tokens": 1134,
+                "output_tokens": 102,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED> `src/data_loader.py` içinde gerçek bir özellik seçimi uygulanmamış. Dosyada yalnızca `REQUIREMENT_CRITERIA` listesinde `\"Feature selection is performed...\"` metni bulunuyor ve `load_dataset()` sadece `{\"dataset\": \"loaded\", \"notes\": requirement_notes()}` döndürüyor. Önemli özellikleri hesaplayan/seçen herhangi bir işlem, model, skor ya da çıktı kanıtı yok."
+                ]
+            },
+            "total_time": 6.190351486206055
+        },
+        {
+            "requirement_index": 3,
+            "criteria": "\"SVM sınıflandırıcısı\" `src/model.py` içinde uygulanır.",
+            "satisfied": true,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.014601469039917,
+                "input_tokens": 1175,
+                "output_tokens": 112,
+                "accumulated_cost": 0.0,
+                "satisfied": true,
+                "reason": [
+                    "<SATISFIED>: `src/model.py` içinde gereksinime doğrudan işaret eden kanıt var. Referans yürütüm kaydında dosyanın AST ile incelendiği ve **`class SVMClassifier` bulunduğunun raporlandığı** belirtilmiş. Ayrıca aynı dosya son durumda yeniden görüntülenmiş ve hata/eksik uygulama işareti görülmemiş. Bu, SVM sınıflandırıcısının `src/model.py` içinde uygulandığını destekler."
+                ]
+            },
+            "total_time": 7.08210825920105
+        },
+        {
+            "requirement_index": 4,
+            "criteria": "Sınıflandırma doğruluğu `results/metrics/classification_accuracy.txt` içinde kaydedilir.",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 1.4898900985717773,
+                "input_tokens": 918,
+                "output_tokens": 78,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED> `results/metrics/classification_accuracy.txt` dosyası mevcut olsa da içeriği doğruluk değeri değil, yalnızca `('placeholder\\r\\n', None)` şeklinde bir yer tutucudur. Bu, sınıflandırma doğruluğunun dosyaya kaydedildiğine dair somut kanıt sağlamaz."
+                ]
+            },
+            "total_time": 5.8079833984375
+        },
+        {
+            "requirement_index": 5,
+            "criteria": "Bir karışıklık matrisi oluşturulur ve `results/figures/confusion_matrix.png` olarak kaydedilir.",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.219463586807251,
+                "input_tokens": 1092,
+                "output_tokens": 110,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED> `results/figures/confusion_matrix.png` dosyası ağaçta mevcut olsa da içerik incelemesinde dosya “valid image” olarak okunamıyor: `\"The image data you provided does not represent a valid image.\"` Ayrıca yürütme izlerinde bu karışıklık matrisinin gerçekten üretilip bu yola başarıyla kaydedildiğine dair doğrulama yok. Bu nedenle ölçüt kanıtlanmış şekilde karşılanmamış."
+                ]
+            },
+            "total_time": 7.510021686553955
+        },
+        {
+            "requirement_index": 6,
+            "criteria": "Etkileşimli bir web uygulaması `src/app.py` içinde \"Streamlit\" kullanılarak oluşturulur ve sınıflandırma sonuçları ile model performansı `results/figures/` içinde sergilenir.",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.534747838973999,
+                "input_tokens": 1391,
+                "output_tokens": 159,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED> `src/app.py` içinde gerçek bir Streamlit uygulaması yok. Dosyada `import streamlit as st` veya herhangi bir `st.*` kullanımı bulunmuyor; sadece metinsel bir açıklama ve `main()` ile sözlük döndüren minimal bir iskelet var:\n```python\nREQUIREMENT_CRITERIA = [\n    \"An interactive web application `src/app.py` is created using \\\"Streamlit\\\"...\"\n]\n```\nBu, Streamlit ile oluşturulmuş etkileşimli web uygulaması kanıtı değildir. Ayrıca `results/figures/confusion_matrix.png` mevcut olsa da, bu görsellerin `src/app.py` içinde sergilendiğine dair kod kanıtı yok."
+                ]
+            },
+            "total_time": 10.390249967575073
+        }
+    ]
+}

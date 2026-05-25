@@ -1,0 +1,212 @@
+{
+    "name": "30_Image_Segmentation_UNet_PascalVOC_DL",
+    "query": "你能帮我使用 Pascal VOC 数据集和在 PyTorch 中实现的预训练 U-Net 模型设置一个图像分割项目吗？不需要额外的训练。应用数据增强（例如，翻转和旋转图像），使用 Dice 系数进行评估，将分割后的图像保存到 `results/figures/`，生成并保存一个显示分割前后图像的 GIF 动画到 `results/figures/segmentation_results.gif`，并创建一个包含模型架构、过程和分割结果的文档良好的 Jupyter Notebook，将其转换为 HTML 报告（保存为 `results/report.html`）。",
+    "tags": [
+        "Computer Vision"
+    ],
+    "requirements": [
+        {
+            "requirement_id": 0,
+            "prerequisites": [],
+            "criteria": "在 `src/data_loader.py` 中使用 \"Pascal VOC\" 数据集。",
+            "category": "Dataset or Environment",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 1,
+            "prerequisites": [
+                0
+            ],
+            "criteria": "在 `src/data_loader.py` 中执行数据增强，包括翻转和旋转图像。",
+            "category": "Data preprocessing and postprocessing",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 2,
+            "prerequisites": [],
+            "criteria": "使用来自 PyTorch 的预训练 \"U-Net\" 模型，无需额外训练，并保存在 `models/saved_models/`。",
+            "category": "Machine Learning Method",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 3,
+            "prerequisites": [
+                1,
+                2
+            ],
+            "criteria": "使用 \"Dice 系数\" 进行评估，并应保存在 `results/metrics/`。",
+            "category": "Performance Metrics",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 4,
+            "prerequisites": [
+                1,
+                2
+            ],
+            "criteria": "分割后的图像保存到指定文件夹 `results/figures/`。",
+            "category": "Data preprocessing and postprocessing",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 5,
+            "prerequisites": [
+                1,
+                2,
+                4
+            ],
+            "criteria": "生成分割前后图像的 GIF 动画，并保存为 `results/figures/segmentation_results.gif`。",
+            "category": "Visualization",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 6,
+            "prerequisites": [
+                1,
+                2,
+                3,
+                4
+            ],
+            "criteria": "创建一个 Jupyter Notebook，包含模型架构、应用预训练模型的过程和分割结果。将其转换为 HTML 报告并保存为 `results/report.html`。",
+            "category": "Visualization",
+            "satisfied": null
+        }
+    ],
+    "preferences": [
+        {
+            "preference_id": 0,
+            "criteria": "Jupyter Notebook 应包含文档良好的代码片段，解释过程的每一步。",
+            "satisfied": null
+        },
+        {
+            "preference_id": 1,
+            "criteria": "GIF 动画应清晰显示数据集中不同图像分割前后的变化。",
+            "satisfied": null
+        }
+    ],
+    "is_kaggle_api_needed": false,
+    "is_training_needed": false,
+    "is_web_navigation_needed": false,
+    "language": "Chinese",
+    "judge_stats": [
+        {
+            "requirement_index": 0,
+            "criteria": "在 `src/data_loader.py` 中使用 \"Pascal VOC\" 数据集。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 26.114346027374268,
+                "input_tokens": 826,
+                "output_tokens": 2048,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    ""
+                ]
+            },
+            "total_time": 90.8072988986969
+        },
+        {
+            "requirement_index": 1,
+            "criteria": "在 `src/data_loader.py` 中执行数据增强，包括翻转和旋转图像。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 14.981374502182007,
+                "input_tokens": 828,
+                "output_tokens": 1828,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n依据：\n1. `build_transforms()` 函数返回 `[\"rotation\", \"scaling\", \"normalization\"]`，未包含“翻转”（flipping）操作。\n2. 代码仅为占位符（placeholder），未实际执行图像增强逻辑，仅返回字符串列表。\n3. 要求明确要求包含“翻转和旋转”，代码未满足“翻转”部分。"
+                ]
+            },
+            "total_time": 83.45374894142151
+        },
+        {
+            "requirement_index": 2,
+            "criteria": "使用来自 PyTorch 的预训练 \"U-Net\" 模型，无需额外训练，并保存在 `models/saved_models/`。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 10.670367956161499,
+                "input_tokens": 840,
+                "output_tokens": 1299,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n依据：提供的代码 `src/data_loader.py` 仅包含数据加载和转换的占位符函数（如 `load_dataset` 和 `build_transforms`），并未实现加载 PyTorch 预训练 U-Net 模型的逻辑，也没有任何代码将模型保存到 `models/saved_models/` 目录。代码中缺少 `torchvision.models` 相关导入及模型权重加载/保存操作。"
+                ]
+            },
+            "total_time": 51.0182147026062
+        },
+        {
+            "requirement_index": 3,
+            "criteria": "使用 \"Dice 系数\" 进行评估，并应保存在 `results/metrics/`。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 11.572513580322266,
+                "input_tokens": 828,
+                "output_tokens": 1102,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n代码未满足要求。提供的 `src/data_loader.py` 文件仅包含数据加载和转换的占位符函数（如 `load_dataset` 和 `build_transforms`），没有任何计算 \"Dice 系数\" 的逻辑，也没有将评估结果保存到 `results/metrics/` 目录的操作。"
+                ]
+            },
+            "total_time": 45.358800411224365
+        },
+        {
+            "requirement_index": 4,
+            "criteria": "分割后的图像保存到指定文件夹 `results/figures/`。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 14.2060387134552,
+                "input_tokens": 822,
+                "output_tokens": 1655,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n依据：提供的 `src/data_loader.py` 代码中仅包含占位符函数（如 `load_dataset` 返回字典，`build_transforms` 返回字符串列表），没有任何文件写入或图像保存逻辑。代码中未体现将分割结果保存到 `results/figures/` 文件夹的操作。"
+                ]
+            },
+            "total_time": 58.20271682739258
+        },
+        {
+            "requirement_index": 5,
+            "criteria": "生成分割前后图像的 GIF 动画，并保存为 `results/figures/segmentation_results.gif`。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 9.216468811035156,
+                "input_tokens": 847,
+                "output_tokens": 985,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n依据文件内容证据，`results/figures/segmentation_results.gif` 的内容并非有效的 GIF 动画，而是一个错误日志字符串（`litellm.BadRequestError: ... One of the image(s) is 1 by 1 pixel in size, not supported`）。这表明图像生成或读取过程失败，未成功生成符合要求的分割前后图像 GIF 动画。"
+                ]
+            },
+            "total_time": 43.795132637023926
+        },
+        {
+            "requirement_index": 6,
+            "criteria": "创建一个 Jupyter Notebook，包含模型架构、应用预训练模型的过程和分割结果。将其转换为 HTML 报告并保存为 `results/report.html`。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 15.511940240859985,
+                "input_tokens": 634,
+                "output_tokens": 1693,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n虽然工作区结构显示存在 `results/report.html` 文件，但其内容仅为 `('', None)`，这不是有效的 HTML 格式。该文件未包含模型架构、预训练模型应用过程或分割结果等必要信息，表明 HTML 报告生成失败或内容无效。\n</UNSATISFIED>"
+                ]
+            },
+            "total_time": 52.00063514709473
+        }
+    ]
+}

@@ -1,0 +1,210 @@
+{
+    "name": "22_Sentiment_Analysis_LSTM_IMDb_DL",
+    "query": "¿Podrías ayudarme a configurar un proyecto de análisis de sentimientos usando un modelo LSTM y el conjunto de datos IMDb? Por favor, implementa la limpieza de datos en `src/data_loader.py`, incluyendo la eliminación de palabras vacías y puntuación. Usa incrustaciones de palabras para convertir el texto a un formato numérico y guarda estas incrustaciones en `models/saved_models/`. Luego, utiliza estas incrustaciones como entrada de un modelo LSTM, que debe ser implementado en `src/model.py`. Guarda el informe de clasificación en `results/metrics/classification_report.txt`. Crea un Jupyter Notebook guardado como `results/report.ipynb` con la arquitectura del modelo y el proceso de entrenamiento visualizados. Además, guarda las curvas de pérdida y precisión del entrenamiento en `results/figures/training_curves.png`. Se prefieren las incrustaciones preentrenadas (por ejemplo, Word2Vec o GloVe) para mejorar el rendimiento del modelo.",
+    "tags": [
+        "Natural Language Processing",
+        "Supervised Learning"
+    ],
+    "requirements": [
+        {
+            "requirement_id": 0,
+            "prerequisites": [],
+            "criteria": "Se utiliza el conjunto de datos de reseñas de películas \"IMDb\".",
+            "category": "Dataset or Environment",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 1,
+            "prerequisites": [
+                0
+            ],
+            "criteria": "La limpieza de datos se implementa en `src/data_loader.py`, incluyendo la eliminación de palabras vacías y puntuación.",
+            "category": "Data preprocessing and postprocessing",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 2,
+            "prerequisites": [
+                0,
+                1
+            ],
+            "criteria": "Se utilizan incrustaciones de palabras para convertir el texto a formato numérico y se guardan en `models/saved_models/`.",
+            "category": "Data preprocessing and postprocessing",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 3,
+            "prerequisites": [],
+            "criteria": "Se utiliza un modelo \"LSTM\" para el análisis de sentimientos y debe ser implementado en `src/model.py`.",
+            "category": "Machine Learning Method",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 4,
+            "prerequisites": [
+                2,
+                3
+            ],
+            "criteria": "Se guarda un informe de clasificación como `results/metrics/classification_report.txt`.",
+            "category": "Performance Metrics",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 5,
+            "prerequisites": [
+                2,
+                3
+            ],
+            "criteria": "Se genera un Jupyter Notebook que contiene la visualización de la arquitectura del modelo y el proceso de entrenamiento, y se guarda como `results/report.ipynb`.",
+            "category": "Visualization",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 6,
+            "prerequisites": [
+                2,
+                3
+            ],
+            "criteria": "Se generan y guardan las curvas de pérdida y precisión del entrenamiento como `results/figures/training_curves.png`.",
+            "category": "Visualization",
+            "satisfied": null
+        }
+    ],
+    "preferences": [
+        {
+            "preference_id": 0,
+            "criteria": "Las incrustaciones de palabras deben estar preentrenadas (por ejemplo, Word2Vec o GloVe) para aprovechar el conocimiento semántico existente.",
+            "satisfied": null
+        },
+        {
+            "preference_id": 1,
+            "criteria": "El Jupyter Notebook debe estar bien documentado, facilitando que otros entiendan la arquitectura del modelo y el proceso de entrenamiento.",
+            "satisfied": null
+        }
+    ],
+    "is_kaggle_api_needed": false,
+    "is_training_needed": true,
+    "is_web_navigation_needed": false,
+    "language": "Spanish",
+    "judge_stats": [
+        {
+            "requirement_index": 0,
+            "criteria": "Se utiliza el conjunto de datos de reseñas de películas \"IMDb\".",
+            "satisfied": true,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.2715940475463867,
+                "input_tokens": 1631,
+                "output_tokens": 117,
+                "accumulated_cost": 0.0,
+                "satisfied": true,
+                "reason": [
+                    "<SATISFIED>\n\nEl requisito se cumple satisfactoriamente. La evidencia en la trayectoria de ejecución confirma que se utilizó la función `datasets.load_dataset(\"imdb\")`, logrando descargar y generar con éxito los splits de entrenamiento (25,000 ejemplos), prueba (25,000 ejemplos) y no supervisados (50,000 ejemplos). Además, se validó la creación de tensores compatibles tras la tokenización, lo que demuestra una integración funcional y completa del conjunto de datos IMDb en el flujo de trabajo del proyecto."
+                ]
+            },
+            "total_time": 9.066527128219604
+        },
+        {
+            "requirement_index": 1,
+            "criteria": "La limpieza de datos se implementa en `src/data_loader.py`, incluyendo la eliminación de palabras vacías y puntuación.",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.1613268852233887,
+                "input_tokens": 1318,
+                "output_tokens": 133,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n\nThe requirement is not satisfied because the provided content of `src/data_loader.py` does not contain any implementation for data cleaning, stop words removal, or punctuation removal. The file only contains placeholder functions (`load_dataset`, `build_transforms`) and a string list of requirements, but lacks the actual logic or imports (such as `nltk` or `re`) necessary to perform text processing. Although the trajectory evidence suggests that execution was attempted in the environment, the actual code provided in the workspace for `src/data_loader.py` is a \"minimal semantic implementation\" that lacks the required functional code."
+                ]
+            },
+            "total_time": 6.5457985401153564
+        },
+        {
+            "requirement_index": 2,
+            "criteria": "Se utilizan incrustaciones de palabras para convertir el texto a formato numérico y se guardan en `models/saved_models/`.",
+            "satisfied": true,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.143606185913086,
+                "input_tokens": 1637,
+                "output_tokens": 140,
+                "accumulated_cost": 0.0,
+                "satisfied": true,
+                "reason": [
+                    "<SATISFIED>\n\nThe requirement is satisfied based on the evidence provided in the project structure and the execution trajectory. \n\n1.  **Word Embeddings and Numerical Conversion**: The trajectory evidence confirms that the processing script was executed, generating word embeddings and converting text into numerical tensors without errors (e.g., `ShapeMismatch`).\n2.  **Persistence**: The workspace structure shows the directory `models/saved_models/` exists. Furthermore, the trajectory explicitly states that the \"successful writing operation of the embedding weights and the model state\" was recorded in that specific directory (`models/saved_models/`), and the environment confirmed the export of the model containing the embedding layer."
+                ]
+            },
+            "total_time": 7.128363370895386
+        },
+        {
+            "requirement_index": 3,
+            "criteria": "Se utiliza un modelo \"LSTM\" para el análisis de sentimientos y debe ser implementado en `src/model.py`.",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 3.7804043292999268,
+                "input_tokens": 1238,
+                "output_tokens": 124,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n\nThe requirement is not satisfied because the file `src/model.py` does not contain a functional implementation of an LSTM model. Although the file exists and includes the keyword \"LSTM\" in its metadata/comments, the actual `build_model()` function returns a simple string `\"model placeholder\"` instead of defining or instantiating a neural network architecture using a framework like PyTorch or TensorFlow. While the trajectory evidence suggests that a model was executed, the current content of `src/model.py` provided in the evidence lacks the necessary code to perform sentiment analysis with an LSTM."
+                ]
+            },
+            "total_time": 7.839348793029785
+        },
+        {
+            "requirement_index": 4,
+            "criteria": "Se guarda un informe de clasificación como `results/metrics/classification_report.txt`.",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 1.7348053455352783,
+                "input_tokens": 956,
+                "output_tokens": 90,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n\nThe requirement is not satisfied because, although the file `results/metrics/classification_report.txt` exists in the project structure, its content is merely a placeholder (`('placeholder\\r\\n', None)`). A valid classification report should contain standard evaluation metrics such as precision, recall, and f1-score derived from the model's performance on the IMDb dataset, which are missing in this case."
+                ]
+            },
+            "total_time": 4.82025933265686
+        },
+        {
+            "requirement_index": 5,
+            "criteria": "Se genera un Jupyter Notebook que contiene la visualización de la arquitectura del modelo y el proceso de entrenamiento, y se guarda como `results/report.ipynb`.",
+            "satisfied": true,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 1.8859703540802002,
+                "input_tokens": 1000,
+                "output_tokens": 101,
+                "accumulated_cost": 0.0,
+                "satisfied": true,
+                "reason": [
+                    "<SATISFIED> The requirement is fully met. The project structure confirms the existence of the file `results/report.ipynb` within the workspace. Additionally, the trajectory evidence (Steps 8 and 9) explicitly confirms that the model architecture visualization and the training process were executed successfully in an interactive environment and subsequently saved to that specific file path without errors. Although the file content cannot be directly read, the instructions specify to assume its content is satisfactory given its confirmed creation and the successful execution logs."
+                ]
+            },
+            "total_time": 5.27235221862793
+        },
+        {
+            "requirement_index": 6,
+            "criteria": "Se generan y guardan las curvas de pérdida y precisión del entrenamiento como `results/figures/training_curves.png`.",
+            "satisfied": true,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.0037293434143066,
+                "input_tokens": 1172,
+                "output_tokens": 106,
+                "accumulated_cost": 0.0,
+                "satisfied": true,
+                "reason": [
+                    "<SATISFIED>\n\nThe requirement is satisfied. Although the image file content could not be rendered in the text-based evidence due to a technical error in the reading tool, the project structure confirms the existence of the file at the specified path: `results/figures/training_curves.png`. Furthermore, the trajectory evidence (Steps 7 and 8) explicitly confirms that the training process finished successfully, the visualization function was called, and the file system registered the creation of the plot without any corruption or writing errors."
+                ]
+            },
+            "total_time": 7.355466604232788
+        }
+    ]
+}

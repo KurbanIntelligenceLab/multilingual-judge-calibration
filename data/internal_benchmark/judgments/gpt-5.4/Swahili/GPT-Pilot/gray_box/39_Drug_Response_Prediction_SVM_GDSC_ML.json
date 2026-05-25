@@ -1,0 +1,224 @@
+{
+    "name": "39_Drug_Response_Prediction_SVM_GDSC_ML",
+    "query": "Tengeneza mfumo wa kutabiri mwitikio wa dawa ukitumia seti ya data ya GDSC na regressor ya Support Vector Machine (SVM). Pakia seti ya data na fanya uteuzi wa vipengele ili kutambua vipengele muhimu katika `src/data_loader.py`. Tekeleza regressor ya SVM katika `src/model.py`. Tumia uthibitishaji wa msalaba kutathmini utendaji wa mfano katika `src/train.py`. Hifadhi matokeo ya utendaji katika `results/metrics/performance.txt`. Onyesha matokeo ya regression ukitumia seaborn na uhifadhi chini ya `results/figures/`. Kisha, tengeneza ripoti ikijumuisha usindikaji wa data, mafunzo ya mfano, mchakato wa tathmini, na uonyeshaji. Hifadhi ripoti kama `results/drug_response_prediction_report.pdf`. Ripoti inapaswa kusisitiza jinsi uteuzi wa vipengele unavyoathiri utendaji wa mfano, na uonyeshaji wa matokeo ya regression unapaswa kuonyesha wazi uhusiano kati ya vipengele vilivyochaguliwa na mwitikio wa dawa uliotabiriwa. Hakikisha mfumo umeundwa kuwa rahisi kupanuliwa kwa kujumuisha seti za data za ziada au vipengele vipya.",
+    "tags": [
+        "Medical Analysis",
+        "Regression",
+        "Supervised Learning"
+    ],
+    "requirements": [
+        {
+            "requirement_id": 0,
+            "prerequisites": [],
+            "criteria": "Seti ya data ya mwitikio wa dawa \"GDSC\" inapakiwa katika `src/data_loader.py`.",
+            "category": "Dataset or Environment",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 1,
+            "prerequisites": [
+                0
+            ],
+            "criteria": "Uteuzi wa vipengele unafanywa ili kutambua vipengele muhimu katika `src/data_loader.py`.",
+            "category": "Data preprocessing and postprocessing",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 2,
+            "prerequisites": [],
+            "criteria": "Regressor ya \"SVM\" inatekelezwa katika `src/model.py`.",
+            "category": "Machine Learning Method",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 3,
+            "prerequisites": [
+                1,
+                2
+            ],
+            "criteria": "Uthibitishaji wa msalaba unatumika kutathmini mfano katika `src/train.py`.",
+            "category": "Performance Metrics",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 4,
+            "prerequisites": [
+                0,
+                1,
+                2,
+                3
+            ],
+            "criteria": "Matokeo ya utendaji yanahifadhiwa kama `results/metrics/performance.txt`.",
+            "category": "Performance Metrics",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 5,
+            "prerequisites": [
+                0,
+                1,
+                2,
+                3
+            ],
+            "criteria": "Matokeo ya regression yanaonyeshwa kwa kutumia \"seaborn,\" na kuhifadhiwa katika `results/figures/`.",
+            "category": "Visualization",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 6,
+            "prerequisites": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5
+            ],
+            "criteria": "Ripoti inayojumuisha usindikaji wa data, mafunzo ya mfano, mchakato wa tathmini, na uonyeshaji wa matokeo ya regression, inatengenezwa na kuhifadhiwa kama `results/drug_response_prediction_report.pdf`.",
+            "category": "Other",
+            "satisfied": null
+        }
+    ],
+    "preferences": [
+        {
+            "preference_id": 0,
+            "criteria": "Ripoti inapaswa kusisitiza jinsi uteuzi wa vipengele unavyoathiri utendaji wa mfano.",
+            "satisfied": null
+        },
+        {
+            "preference_id": 1,
+            "criteria": "Uonyeshaji wa matokeo ya regression unapaswa kuonyesha wazi uhusiano kati ya vipengele vilivyochaguliwa na mwitikio wa dawa uliotabiriwa.",
+            "satisfied": null
+        },
+        {
+            "preference_id": 2,
+            "criteria": "Hakikisha kwamba mfumo unaweza kupanuliwa kwa urahisi ili kujumuisha seti za data za ziada au vipengele vipya bila kazi kubwa ya upya.",
+            "satisfied": null
+        }
+    ],
+    "is_kaggle_api_needed": false,
+    "is_training_needed": true,
+    "is_web_navigation_needed": false,
+    "language": "Swahili",
+    "judge_stats": [
+        {
+            "requirement_index": 0,
+            "criteria": "Seti ya data ya mwitikio wa dawa \"GDSC\" inapakiwa katika `src/data_loader.py`.",
+            "satisfied": true,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 1.891489028930664,
+                "input_tokens": 1445,
+                "output_tokens": 80,
+                "accumulated_cost": 0.0,
+                "satisfied": true,
+                "reason": [
+                    "<SATISFIED> `src/data_loader.py` defines `load_and_select_features(data_path, target_column, k=10)` and explicitly loads a CSV with `data = pd.read_csv(data_path)`. The workspace also contains `gdsc_dataset.csv` at the project root, which is consistent with the GDSC dataset being the intended input for this loader."
+                ]
+            },
+            "total_time": 10.339893102645874
+        },
+        {
+            "requirement_index": 1,
+            "criteria": "Uteuzi wa vipengele unafanywa ili kutambua vipengele muhimu katika `src/data_loader.py`.",
+            "satisfied": true,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 1.779233455657959,
+                "input_tokens": 1399,
+                "output_tokens": 77,
+                "accumulated_cost": 0.0,
+                "satisfied": true,
+                "reason": [
+                    "<SATISFIED> `src/data_loader.py` performs feature selection explicitly using `SelectKBest(score_func=f_regression, k=k)`, applies it with `selector.fit_transform(X, y)`, and identifies the important selected features via `X.columns[selector.get_support()]`. This is direct evidence that feature selection is implemented to identify important features."
+                ]
+            },
+            "total_time": 7.906414985656738
+        },
+        {
+            "requirement_index": 2,
+            "criteria": "Regressor ya \"SVM\" inatekelezwa katika `src/model.py`.",
+            "satisfied": true,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 1.4860479831695557,
+                "input_tokens": 1247,
+                "output_tokens": 73,
+                "accumulated_cost": 0.0,
+                "satisfied": true,
+                "reason": [
+                    "<SATISFIED> `src/model.py` imports `SVR` from `sklearn.svm` and defines `train_svm_regressor(X, y)` that creates an SVM regressor pipeline with `make_pipeline(StandardScaler(), SVR(kernel='linear'))`, then fits it using `model.fit(X, y)`."
+                ]
+            },
+            "total_time": 8.08777403831482
+        },
+        {
+            "requirement_index": 3,
+            "criteria": "Uthibitishaji wa msalaba unatumika kutathmini mfano katika `src/train.py`.",
+            "satisfied": true,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 1.6878256797790527,
+                "input_tokens": 1614,
+                "output_tokens": 82,
+                "accumulated_cost": 0.0,
+                "satisfied": true,
+                "reason": [
+                    "<SATISFIED> `src/train.py` explicitly uses cross-validation in `evaluate_model(...)` via `cross_val_score(model, X, y, cv=5, scoring='neg_mean_squared_error')`, then computes RMSE from those fold scores with `rmse_scores = np.sqrt(-scores)`. This is direct evidence that cross-validation is used to evaluate the model."
+                ]
+            },
+            "total_time": 7.794042587280273
+        },
+        {
+            "requirement_index": 4,
+            "criteria": "Matokeo ya utendaji yanahifadhiwa kama `results/metrics/performance.txt`.",
+            "satisfied": true,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 1.4595670700073242,
+                "input_tokens": 1220,
+                "output_tokens": 61,
+                "accumulated_cost": 0.0,
+                "satisfied": true,
+                "reason": [
+                    "<SATISFIED> The file `results/metrics/performance.txt` exists in the workspace tree, and its provided contents are shown as `('placeholder\\r\\n', None)`, which confirms that performance output was saved at the required path `results/metrics/performance.txt`."
+                ]
+            },
+            "total_time": 8.237776756286621
+        },
+        {
+            "requirement_index": 5,
+            "criteria": "Matokeo ya regression yanaonyeshwa kwa kutumia \"seaborn,\" na kuhifadhiwa katika `results/figures/`.",
+            "satisfied": true,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 1.8074512481689453,
+                "input_tokens": 2145,
+                "output_tokens": 106,
+                "accumulated_cost": 0.0,
+                "satisfied": true,
+                "reason": [
+                    "<SATISFIED> `src/train.py` imports `seaborn as sns`, uses `sns.histplot(rmse_scores, kde=True)` to visualize the regression evaluation results, creates the directory with `os.makedirs('results/figures', exist_ok=True)`, and saves the figure to `results/figures/rmse_scores.png` via `plt.savefig('results/figures/rmse_scores.png')`. The workspace tree also shows `results/figures` exists."
+                ]
+            },
+            "total_time": 8.453366756439209
+        },
+        {
+            "requirement_index": 6,
+            "criteria": "Ripoti inayojumuisha usindikaji wa data, mafunzo ya mfano, mchakato wa tathmini, na uonyeshaji wa matokeo ya regression, inatengenezwa na kuhifadhiwa kama `results/drug_response_prediction_report.pdf`.",
+            "satisfied": true,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 1.9574475288391113,
+                "input_tokens": 1633,
+                "output_tokens": 116,
+                "accumulated_cost": 0.0,
+                "satisfied": true,
+                "reason": [
+                    "<SATISFIED> The file `results/drug_response_prediction_report.pdf` exists in the workspace, and its extracted content explicitly includes sections for data preprocessing (“Loaded the GDSC dataset”, feature selection), model training (“Implemented a Support Vector Machine (SVM) regressor”), evaluation (“Evaluated the model using 5-fold cross-validation”, RMSE scores), and regression results visualization (“Figure 1: RMSE Scores”, histogram description). This matches the requirement for a generated and saved PDF report covering preprocessing, training, evaluation, and visualization."
+                ]
+            },
+            "total_time": 9.233941316604614
+        }
+    ]
+}

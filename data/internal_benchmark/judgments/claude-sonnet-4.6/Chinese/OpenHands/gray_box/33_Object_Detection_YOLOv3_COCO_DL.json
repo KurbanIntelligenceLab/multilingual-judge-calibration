@@ -1,0 +1,215 @@
+{
+    "name": "33_Object_Detection_YOLOv3_COCO_DL",
+    "query": "帮助我使用YOLOv3模型和COCO数据集开发一个目标检测系统。在`src/data_loader.py`中下载数据集并通过调整大小和归一化来预处理图像。在`src/model.py`中实现YOLOv3模型，并使用非极大值抑制（NMS）来优化结果。将检测到的对象保存到`results/figures/`，并在`src/app.py`中创建一个交互式Streamlit网页以显示检测结果。最后，评估模型的性能，包括mAP和推理时间等指标，并将评估结果保存到`results/metrics/model_performance.txt`。系统应正确管理Streamlit应用程序的启动和终止，以防止不必要的资源使用。",
+    "tags": [
+        "Computer Vision"
+    ],
+    "requirements": [
+        {
+            "requirement_id": 0,
+            "prerequisites": [],
+            "criteria": "在`src/data_loader.py`中实现\"COCO\"数据集的下载。",
+            "category": "Dataset or Environment",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 1,
+            "prerequisites": [
+                0
+            ],
+            "criteria": "在`src/data_loader.py`中进行数据预处理，包括调整图像大小和归一化。",
+            "category": "Data preprocessing and postprocessing",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 2,
+            "prerequisites": [],
+            "criteria": "在`src/model.py`中实现\"YOLOv3\"模型。",
+            "category": "Machine Learning Method",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 3,
+            "prerequisites": [
+                1,
+                2
+            ],
+            "criteria": "应用\"非极大值抑制\"（NMS）来优化检测结果。请在`src/model.py`中实现此功能。",
+            "category": "Data preprocessing and postprocessing",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 4,
+            "prerequisites": [
+                2,
+                3
+            ],
+            "criteria": "检测结果保存到指定文件夹`results/figures/`。",
+            "category": "Visualization",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 5,
+            "prerequisites": [
+                2,
+                3,
+                4
+            ],
+            "criteria": "在`src/app.py`中使用\"Streamlit\"创建交互式网页，以显示保存在`results/figures/`中的检测结果。",
+            "category": "Human Computer Interaction",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 6,
+            "prerequisites": [
+                2,
+                3
+            ],
+            "criteria": "模型性能评估结果保存在`results/metrics/model_performance.txt`。",
+            "category": "Performance Metrics",
+            "satisfied": null
+        }
+    ],
+    "preferences": [
+        {
+            "preference_id": 0,
+            "criteria": "\"Streamlit\"网页应用户友好，允许用户轻松上传和查看新的检测图像。",
+            "satisfied": null
+        },
+        {
+            "preference_id": 1,
+            "criteria": "性能评估包括mAP和推理时间作为指标。",
+            "satisfied": null
+        },
+        {
+            "preference_id": 2,
+            "criteria": "系统应正确管理Streamlit应用程序的启动和终止。",
+            "satisfied": null
+        }
+    ],
+    "is_kaggle_api_needed": false,
+    "is_training_needed": true,
+    "is_web_navigation_needed": false,
+    "language": "Chinese",
+    "judge_stats": [
+        {
+            "requirement_index": 0,
+            "criteria": "在`src/data_loader.py`中实现\"COCO\"数据集的下载。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 6.737234115600586,
+                "input_tokens": 1266,
+                "output_tokens": 316,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "## 评估：COCO数据集下载实现\n\n**检查 `src/data_loader.py` 内容：**\n\n该文件仅包含：\n- 一个占位符函数 `load_dataset()`，返回硬编码字典 `{\"dataset\": \"loaded\", \"notes\": requirement_notes()}`\n- 一个 `build_transforms()` 函数，返回字符串列表占位符\n- 关键词列表和需求描述字符串\n\n**关键缺失：**\n- 无任何实际的COCO数据集下载逻辑（如 `urllib`、`requests`、`torchvision.datasets.CocoDetection` 等）\n- 无URL定义、无文件下载、无解压操作\n- 无任何网络请求或文件系统写入操作\n- 整个实现是\"Minimal semantic implementation for benchmark judging\"的占位符代码\n\n<UNSATISFIED>\n\n`src/data_loader.py` 中不存在任何实际的COCO数据集下载实现，仅有返回硬编码字符串的占位符函数，完全不具备下载功能。"
+                ]
+            },
+            "total_time": 15.17271113395691
+        },
+        {
+            "requirement_index": 1,
+            "criteria": "在`src/data_loader.py`中进行数据预处理，包括调整图像大小和归一化。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 8.405950784683228,
+                "input_tokens": 1303,
+                "output_tokens": 375,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "## 评估结果\n\n<UNSATISFIED>\n\n**依据：**\n\n查看 `src/data_loader.py` 的实际内容，该文件仅包含：\n\n1. **占位符函数**（placeholder），没有实际的数据预处理逻辑：\n   - `load_dataset()` 只返回一个硬编码字典 `{\"dataset\": \"loaded\", \"notes\": requirement_notes()}`\n   - `build_transforms()` 只返回一个字符串列表 `[\"rotation\", \"scaling\", \"normalization\"]`，并非真实的图像变换操作\n\n2. **没有任何图像调整大小（resize）的实现**：没有调用 `cv2.resize`、`PIL.Image.resize`、`torchvision.transforms.Resize` 或任何等效操作。\n\n3. **没有任何归一化（normalization）的实现**：没有像素值缩放（如除以255）、均值/标准差归一化，或 `torchvision.transforms.Normalize` 等实际操作。\n\n4. 文件本质上是一个**语义占位符**（\"Minimal semantic implementation for benchmark judging\"），仅列出了需求关键词，并未实现任何真实的数据预处理功能。\n\n因此，图像大小调整和归一化的数据预处理要求**未被满足**。"
+                ]
+            },
+            "total_time": 13.525697469711304
+        },
+        {
+            "requirement_index": 2,
+            "criteria": "在`src/model.py`中实现\"YOLOv3\"模型。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 7.408162832260132,
+                "input_tokens": 1257,
+                "output_tokens": 392,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "## 评估：在`src/model.py`中实现\"YOLOv3\"模型\n\n**分析 `src/model.py` 内容：**\n\n该文件仅包含：\n- 一个描述要求标准的字符串列表 `REQUIREMENT_CRITERIA`\n- 一个关键词列表 `KEYWORDS = [\"Non-Maximum Suppression\", \"YOLOv3\", \"yolo\"]`\n- 一个返回字符串的 `requirement_notes()` 函数\n- 一个返回占位符字符串的 `build_model()` 函数（仅检查是否包含 \"resnet-18\" 关键词，与 YOLOv3 无关）\n\n**关键问题：**\n- 没有任何 YOLOv3 网络架构实现（无 Darknet-53 骨干网络、无多尺度检测头、无锚框机制等）\n- `build_model()` 函数仅返回 `\"model placeholder\"`，是一个空占位符\n- 没有导入任何深度学习框架（PyTorch、TensorFlow 等）\n- 没有实际的模型层定义、前向传播逻辑或权重加载\n\n该文件本质上是一个**语义存根（semantic stub）**，仅列出了需求描述，并未真正实现 YOLOv3 模型。\n\n<UNSATISFIED>"
+                ]
+            },
+            "total_time": 13.304871320724487
+        },
+        {
+            "requirement_index": 3,
+            "criteria": "应用\"非极大值抑制\"（NMS）来优化检测结果。请在`src/model.py`中实现此功能。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 6.303651809692383,
+                "input_tokens": 1377,
+                "output_tokens": 349,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "## 评估：非极大值抑制（NMS）实现\n\n**检查 `src/model.py` 内容：**\n\n该文件仅包含：\n- 一个 `REQUIREMENT_CRITERIA` 列表（字符串描述）\n- 一个 `KEYWORDS` 列表（包含 \"Non-Maximum Suppression\" 字符串）\n- 一个 `requirement_notes()` 函数（仅返回字符串）\n- 一个 `build_model()` 函数（返回占位符字符串）\n\n**关键发现：**\n\n文件中虽然出现了 \"Non-Maximum Suppression\" 字样，但这只是作为字符串常量存在于 `KEYWORDS` 列表中，**并没有任何实际的 NMS 算法实现**。没有：\n- NMS 相关的计算逻辑（IoU 计算、边界框过滤等）\n- 任何 NMS 函数定义\n- 任何 NMS 相关的库调用（如 `torchvision.ops.nms`）\n\n整个文件是一个\"最小语义占位符实现\"（`Minimal semantic implementation for benchmark judging`），不包含任何真实的功能代码。\n\n<UNSATISFIED>"
+                ]
+            },
+            "total_time": 13.721471309661865
+        },
+        {
+            "requirement_index": 4,
+            "criteria": "检测结果保存到指定文件夹`results/figures/`。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 6.19848370552063,
+                "input_tokens": 1712,
+                "output_tokens": 327,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "## 评估：检测结果保存到指定文件夹`results/figures/`\n\n**分析证据：**\n\n1. **工作区结构**：项目树显示 `results/figures/` 文件夹存在，但其中**没有任何文件**（该目录为空）。\n\n2. **代码内容**：\n   - `src/data_loader.py` 仅包含占位符代码，无任何保存图像/检测结果到 `results/figures/` 的逻辑。\n   - `src/model.py` 同样仅包含占位符代码，无任何将检测结果写入文件的实现。\n   - `src/app.py` 未展示内容，但从整体代码风格来看均为最小化语义占位实现。\n\n3. **轨迹证据**：日志为空，无法确认程序曾运行并生成检测结果。\n\n4. **结论**：`results/figures/` 目录虽然存在，但其中**没有任何检测结果文件**，代码中也没有实现将检测结果保存到该目录的功能。\n\n<UNSATISFIED>"
+                ]
+            },
+            "total_time": 11.042748212814331
+        },
+        {
+            "requirement_index": 5,
+            "criteria": "在`src/app.py`中使用\"Streamlit\"创建交互式网页，以显示保存在`results/figures/`中的检测结果。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 6.870119094848633,
+                "input_tokens": 1337,
+                "output_tokens": 411,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "## 评估结果\n\n<UNSATISFIED>\n\n**依据：**\n\n查看 `src/app.py` 的实际内容，该文件并非一个真正的 Streamlit 交互式网页应用，而是一个\"最小语义实现\"（Minimal semantic implementation），仅包含：\n\n1. **无 Streamlit 导入**：文件中没有 `import streamlit as st` 或任何 Streamlit 相关的实际调用。\n2. **无交互式界面代码**：没有任何 `st.title()`、`st.image()`、`st.sidebar()` 等 Streamlit UI 组件。\n3. **无读取 `results/figures/` 的逻辑**：文件中没有任何读取或展示 `results/figures/` 目录下检测结果图像的代码。\n4. **仅为占位符**：该文件只是定义了一些字符串常量（`REQUIREMENT_CRITERIA`、`KEYWORDS`）和一个返回字典的 `main()` 函数，本质上是一个空壳/占位符实现。\n\n```python\n# 文件实际内容仅为：\nREQUIREMENT_CRITERIA = [...]\nKEYWORDS = [\"Streamlit\", \"yolo\"]\ndef main():\n    return {\"status\": \"ok\", \"notes\": requirement_notes(), \"keywords\": KEYWORDS}\n```\n\n该文件完全不满足\"使用 Streamlit 创建交互式网页以显示检测结果\"的要求。"
+                ]
+            },
+            "total_time": 15.553364992141724
+        },
+        {
+            "requirement_index": 6,
+            "criteria": "模型性能评估结果保存在`results/metrics/model_performance.txt`。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 3.738154888153076,
+                "input_tokens": 1010,
+                "output_tokens": 144,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n\n`results/metrics/model_performance.txt` 文件确实存在，但其内容为：\n\n```\n('placeholder\\r\\n', None)\n```\n\n这只是一个占位符字符串，并非真实的模型性能评估结果（如 mAP、精确率、召回率等指标）。文件内容表明该文件从未被实际的模型评估结果填充，因此不满足\"模型性能评估结果保存在该文件中\"的要求。"
+                ]
+            },
+            "total_time": 8.14334487915039
+        }
+    ]
+}

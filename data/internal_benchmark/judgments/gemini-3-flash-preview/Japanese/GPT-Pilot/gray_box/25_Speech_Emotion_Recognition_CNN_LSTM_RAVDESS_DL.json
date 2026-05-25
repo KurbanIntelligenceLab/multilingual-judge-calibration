@@ -1,0 +1,211 @@
+{
+    "name": "25_Speech_Emotion_Recognition_CNN_LSTM_RAVDESS_DL",
+    "query": "CNN-LSTMモデルを使用した音声感情認識プロジェクトを探しています。このプロジェクトでは、RAVDESSデータセットを使用し、Kaggleまたは[このHugging Faceリンク](https://huggingface.co/datasets/xbgoose/ravdess)からダウンロードする必要があります。プロジェクトはデータセットをロードし、堅牢なオーディオ前処理（ノイズ除去と正規化）およびMFCC特徴抽出を行い、`src/data_loader.py`に実装されるべきです。CNN-LSTMモデルは`src/model.py`に実装されるべきです。認識精度は`results/metrics/recognition_accuracy.txt`に保存され、混同行列は生成されて`results/figures/confusion_matrix.png`として保存されるべきです。さらに、ユーザーが音声ファイルをアップロードして感情認識結果を受け取ることができるようにするために、Flaskを使用してユーザーフレンドリーなローカルAPIを作成し、その実装を`src/hci.py`に含めるべきです。",
+    "tags": [
+        "Audio Processing",
+        "Classification"
+    ],
+    "requirements": [
+        {
+            "requirement_id": 0,
+            "prerequisites": [],
+            "criteria": "\"RAVDESS\"データセットは`src/data_loader.py`でロードされ、Kaggleまたは[このHugging Faceリンク](https://huggingface.co/datasets/xbgoose/ravdess)からダウンロードされます。",
+            "category": "Dataset or Environment",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 1,
+            "prerequisites": [
+                0
+            ],
+            "criteria": "ノイズ除去と正規化を含むオーディオ前処理は`src/data_loader.py`に実装されています。",
+            "category": "Data preprocessing and postprocessing",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 2,
+            "prerequisites": [
+                0,
+                1
+            ],
+            "criteria": "MFCC特徴抽出は`src/data_loader.py`に実装されています。",
+            "category": "Data preprocessing and postprocessing",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 3,
+            "prerequisites": [],
+            "criteria": "\"CNN-LSTM\"モデルは`src/model.py`に実装されています。",
+            "category": "Machine Learning Method",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 4,
+            "prerequisites": [
+                2,
+                3
+            ],
+            "criteria": "認識精度は`results/metrics/recognition_accuracy.txt`に保存されます。",
+            "category": "Performance Metrics",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 5,
+            "prerequisites": [
+                2,
+                3,
+                4
+            ],
+            "criteria": "混同行列は生成され、`results/figures/confusion_matrix.png`として保存されます。",
+            "category": "Visualization",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 6,
+            "prerequisites": [
+                2,
+                3
+            ],
+            "criteria": "ユーザーが音声ファイルをアップロードして感情認識結果を受け取ることができるようにするために、\"Flask\"を使用してローカルAPIが作成されます。実装は`src/hci.py`に含めるべきです。",
+            "category": "Human Computer Interaction",
+            "satisfied": null
+        }
+    ],
+    "preferences": [
+        {
+            "preference_id": 0,
+            "criteria": "オーディオ前処理ステップは堅牢であり、音声信号の完全性を保ちながらノイズを効果的に低減するべきです。",
+            "satisfied": null
+        },
+        {
+            "preference_id": 1,
+            "criteria": "ローカルAPIはユーザーフレンドリーであり、ファイルのアップロードと結果の解釈に関する明確な指示を提供するべきです。",
+            "satisfied": null
+        }
+    ],
+    "is_kaggle_api_needed": true,
+    "is_training_needed": true,
+    "is_web_navigation_needed": true,
+    "language": "Japanese",
+    "judge_stats": [
+        {
+            "requirement_index": 0,
+            "criteria": "\"RAVDESS\"データセットは`src/data_loader.py`でロードされ、Kaggleまたは[このHugging Faceリンク](https://huggingface.co/datasets/xbgoose/ravdess)からダウンロードされます。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.085988759994507,
+                "input_tokens": 1269,
+                "output_tokens": 99,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>: 提供された `src/data_loader.py` のコードには、データセットをロードまたはダウンロードするための具体的なロジック（Hugging Face APIの呼び出しやKaggleからの取得処理など）が実装されておらず、プレースホルダー関数 `load_dataset()` が定義されているのみです。また、実行ログ（Trajectory Evidence）においても、ネットワークエラーによりダウンロードに失敗し、データセットのロードが完了していないことが示されています。"
+                ]
+            },
+            "total_time": 8.40873384475708
+        },
+        {
+            "requirement_index": 1,
+            "criteria": "ノイズ除去と正規化を含むオーディオ前処理は`src/data_loader.py`に実装されています。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.0929880142211914,
+                "input_tokens": 1276,
+                "output_tokens": 85,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED> 提供された `src/data_loader.py` のソースコードには、ノイズ除去（noise removal）や正規化（normalization）の具体的なロジックが実装されておらず、プレースホルダ関数と要件の記述のみが含まれています。軌跡情報（Trajectory Evidence）にはテストの成功記録がありますが、実際のコードファイル内でそれらの処理を確認することができません。"
+                ]
+            },
+            "total_time": 6.692002058029175
+        },
+        {
+            "requirement_index": 2,
+            "criteria": "MFCC特徴抽出は`src/data_loader.py`に実装されています。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 1.982245683670044,
+                "input_tokens": 1260,
+                "output_tokens": 83,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED> 提供された `src/data_loader.py` のコード内容を確認したところ、MFCC特徴抽出の具体的なロジック（`librosa.feature.mfcc` の呼び出しなど）は実装されておらず、要件が記載された文字列とプレースホルダー関数（`load_dataset`, `build_transforms`）のみが含まれているためです。"
+                ]
+            },
+            "total_time": 6.331543684005737
+        },
+        {
+            "requirement_index": 3,
+            "criteria": "\"CNN-LSTM\"モデルは`src/model.py`に実装されています。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 1.913564920425415,
+                "input_tokens": 1184,
+                "output_tokens": 84,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>: 提供された `src/model.py` のファイル内容には、実際の `CNN-LSTM` モデルのクラス定義や実装が含まれておらず、`build_model` 関数とプレースホルダーの文字列のみが記述されています。トラジェディ（実行履歴）にはテスト成功の記録がありますが、提出されたソースコード自体に要件を満たす具体的な実装が確認できません。"
+                ]
+            },
+            "total_time": 6.384630441665649
+        },
+        {
+            "requirement_index": 4,
+            "criteria": "認識精度は`results/metrics/recognition_accuracy.txt`に保存されます。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.1631951332092285,
+                "input_tokens": 870,
+                "output_tokens": 67,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>: `results/metrics/recognition_accuracy.txt` というファイル自体は存在していますが、その内容は `('placeholder\\r\\n', None)` となっており、実際の認識精度（数値データなど）が保存されていません。これは評価指標が正しく記録されている状態とは言えません。"
+                ]
+            },
+            "total_time": 5.9262964725494385
+        },
+        {
+            "requirement_index": 5,
+            "criteria": "混同行列は生成され、`results/figures/confusion_matrix.png`として保存されます。",
+            "satisfied": true,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 1.8815820217132568,
+                "input_tokens": 1095,
+                "output_tokens": 105,
+                "accumulated_cost": 0.0,
+                "satisfied": true,
+                "reason": [
+                    "<SATISFIED>: ワークスペースの構造（Project Tree）において、`results/figures/confusion_matrix.png` が存在していることが確認できます。また、トラジェディのステップ12および13の記録から、評価プロセス中に混同行列が計算され、当該パスに正常に保存されたことが示されています。画像ファイルの内容読み取り時にエラーが発生していますが、これは評価システムの制約によるものであり、ファイル自体が生成・保存されているという要件は満たされています。"
+                ]
+            },
+            "total_time": 7.186620473861694
+        },
+        {
+            "requirement_index": 6,
+            "criteria": "ユーザーが音声ファイルをアップロードして感情認識結果を受け取ることができるようにするために、\"Flask\"を使用してローカルAPIが作成されます。実装は`src/hci.py`に含めるべきです。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 1.8082046508789062,
+                "input_tokens": 1204,
+                "output_tokens": 98,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>: 提供された `src/hci.py` のソースコードには、Flask インポート、ルート定義（`@app.route`）、音声ファイルのアップロード処理、または感情認識ロジックが含まれておらず、単にメタデータを返す最小限の関数のみが記述されています。トラジェディ（実行履歴）では Flask の動作が示唆されていますが、提出された最終的なファイル内容自体が要件を満たす実装になっていません。"
+                ]
+            },
+            "total_time": 5.133837461471558
+        }
+    ]
+}

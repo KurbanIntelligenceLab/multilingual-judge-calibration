@@ -1,0 +1,165 @@
+{
+    "name": "01_Image_Classification_ResNet18_Fashion_MNIST_DL",
+    "query": "你好！你能帮我设置一个系统来使用PyTorch中的ResNet-18模型对Fashion-MNIST数据集的图像进行分类吗？Fashion-MNIST数据集应该在`src/data_loader.py`中加载。我希望系统在`src/train.py`的训练循环中使用tqdm库显示训练进度，并使用`torchvision.transforms`进行一些数据增强（如旋转和缩放），以提高模型的鲁棒性。后者应该在`src/data_loader.py`中实现，ResNet-18模型应该从PyTorch导入到`src/model.py`中。训练完成后，请将训练好的模型保存为`fashionnet.pt`，放在`models/saved_models/`目录中。如果训练过程能够尽可能高效，那就太好了。另外，请尝试以易于理解和维护的风格编写代码。如果可以的话，提供一些关于模型可解释性的见解也会很棒，比如使用Grad-CAM或类似的方法。非常感谢！",
+    "tags": [
+        "Classification",
+        "Computer Vision",
+        "Supervised Learning"
+    ],
+    "requirements": [
+        {
+            "requirement_id": 0,
+            "prerequisites": [],
+            "criteria": "在`src/data_loader.py`中加载\"Fashion-MNIST\"数据集。",
+            "category": "Dataset or Environment",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 1,
+            "prerequisites": [
+                0
+            ],
+            "criteria": "使用`torchvision.transforms`进行数据增强，包括旋转、缩放等。实现位于`src/data_loader.py`。",
+            "category": "Data preprocessing and postprocessing",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 2,
+            "prerequisites": [],
+            "criteria": "在`src/model.py`中从\"PyTorch\"导入\"ResNet-18\"模型。",
+            "category": "Machine Learning Method",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 3,
+            "prerequisites": [
+                0,
+                1,
+                2
+            ],
+            "criteria": "在`src/train.py`的主训练循环中使用\"tqdm\"库显示训练进度。",
+            "category": "Visualization",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 4,
+            "prerequisites": [
+                0,
+                1,
+                2,
+                3
+            ],
+            "criteria": "训练好的模型以文件名`fashionnet.pt`保存在`models/saved_models/`中。",
+            "category": "Save Trained Model",
+            "satisfied": null
+        }
+    ],
+    "preferences": [
+        {
+            "preference_id": 0,
+            "criteria": "代码应以清晰、易懂和易维护的风格编写，并附有适当的注释。",
+            "satisfied": null
+        },
+        {
+            "preference_id": 1,
+            "criteria": "训练过程应高效。",
+            "satisfied": null
+        },
+        {
+            "preference_id": 2,
+            "criteria": "应提供模型可解释性的见解，例如使用Grad-CAM等技术进行可视化。",
+            "satisfied": null
+        }
+    ],
+    "is_kaggle_api_needed": false,
+    "is_training_needed": true,
+    "is_web_navigation_needed": false,
+    "language": "Chinese",
+    "judge_stats": [
+        {
+            "requirement_index": 0,
+            "criteria": "在`src/data_loader.py`中加载\"Fashion-MNIST\"数据集。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 91.54361343383789,
+                "input_tokens": 854,
+                "output_tokens": 2048,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n依据：`src/data_loader.py` 中的 `load_dataset()` "
+                ]
+            },
+            "total_time": 223.79495787620544
+        },
+        {
+            "requirement_index": 1,
+            "criteria": "使用`torchvision.transforms`进行数据增强，包括旋转、缩放等。实现位于`src/data_loader.py`。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 31.209855318069458,
+                "input_tokens": 862,
+                "output_tokens": 1439,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n依据：代码中未实际导入或使用 `torchvision.transforms`。在 `src/data_loader.py` 中，`build_transforms()` 函数仅返回字符串列表 `[\"rotation\", \"scaling\", \"normalization\"]`，而非实际的变换对象或应用逻辑。文件缺少 `import torchvision.transforms` 及具体的增强实现，仅为占位符代码。"
+                ]
+            },
+            "total_time": 124.74499249458313
+        },
+        {
+            "requirement_index": 2,
+            "criteria": "在`src/model.py`中从\"PyTorch\"导入\"ResNet-18\"模型。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 36.876715421676636,
+                "input_tokens": 844,
+                "output_tokens": 2048,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    ""
+                ]
+            },
+            "total_time": 118.38214588165283
+        },
+        {
+            "requirement_index": 3,
+            "criteria": "在`src/train.py`的主训练循环中使用\"tqdm\"库显示训练进度。",
+            "satisfied": true,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 22.007863759994507,
+                "input_tokens": 931,
+                "output_tokens": 1166,
+                "accumulated_cost": 0.0,
+                "satisfied": true,
+                "reason": [
+                    "<SATISFIED>\n代码在 `src/train.py` 中导入了 `tqdm` 库 (`from tqdm import tqdm`)，并在 `train` 函数（主训练循环）中通过 `iterator = tqdm(range(num_steps), desc='training progress')` 显式使用了该库来显示训练进度。"
+                ]
+            },
+            "total_time": 98.67788457870483
+        },
+        {
+            "requirement_index": 4,
+            "criteria": "训练好的模型以文件名`fashionnet.pt`保存在`models/saved_models/`中。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 25.943363428115845,
+                "input_tokens": 1638,
+                "output_tokens": 1493,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n依据：代码 `src/train.py` 中 `save_expected_artifacts(Path('.'))` 将文件保存至项目根目录，而非 `models/saved_models/`。Workspace Structure 显示 `fashionnet.pt` 位于根目录 `.` 下，与要求的 `models/saved_models/` 路径不符。"
+                ]
+            },
+            "total_time": 166.44460272789001
+        }
+    ]
+}

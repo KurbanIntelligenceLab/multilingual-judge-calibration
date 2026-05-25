@@ -1,0 +1,166 @@
+{
+    "name": "04_Text_Generation_GPT2_Prompts_DL",
+    "query": "请构建一个文本生成系统，通过自动下载预训练的GPT-2模型并将其缓存到`models/saved_models/`中。系统应通过加载名为`data/prompt.txt`的文本文件的当前内容来接收提示，为了演示目的，该文件中应仅包含文本\"who are you?\"。在读取`data/prompt.txt`时，应自动纠正遇到的任何拼写错误。确保生成的文本限制在最多200个字符，并且程序应将生成的文本保存到`results/generated_text.txt`中。实现后处理以清理生成的文本，去除多余的空格并纠正常见的拼写错误。理想情况下，系统能够高效处理不同变体的输入提示，即使有轻微的拼写错误。此外，保存文件中用户友好的输出格式（可能带有时间戳或提示标识符）会很不错。",
+    "tags": [
+        "Generative Models",
+        "Natural Language Processing"
+    ],
+    "requirements": [
+        {
+            "requirement_id": 0,
+            "prerequisites": [],
+            "criteria": "预训练的\"GPT-2\"模型被下载并缓存到`models/saved_models/`中。",
+            "category": "Machine Learning Method",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 1,
+            "prerequisites": [],
+            "criteria": "提示从名为`data/prompt.txt`的文本文件中读取并输入到模型中。",
+            "category": "Human Computer Interaction",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 2,
+            "prerequisites": [
+                0,
+                1
+            ],
+            "criteria": "生成长度限制在最多200个字符。",
+            "category": "Other",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 3,
+            "prerequisites": [
+                0,
+                1,
+                2
+            ],
+            "criteria": "实施后处理以清理文本，包括去除多余的空格和纠正常见的拼写错误。",
+            "category": "Data preprocessing and postprocessing",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 4,
+            "prerequisites": [
+                0,
+                1,
+                2,
+                3
+            ],
+            "criteria": "生成的文本保存在`results/generated_text.txt`中。",
+            "category": "Other",
+            "satisfied": null
+        }
+    ],
+    "preferences": [
+        {
+            "preference_id": 0,
+            "criteria": "系统应高效处理不同的输入提示并纠正轻微的拼写错误。",
+            "satisfied": null
+        },
+        {
+            "preference_id": 1,
+            "criteria": "系统应高效运行，在文本生成期间保持最低延迟。",
+            "satisfied": null
+        },
+        {
+            "preference_id": 2,
+            "criteria": "保存文件中应使用用户友好的输出格式，可能带有时间戳或提示标识符。",
+            "satisfied": null
+        }
+    ],
+    "is_kaggle_api_needed": false,
+    "is_training_needed": false,
+    "is_web_navigation_needed": false,
+    "hint": "There is only one prompt to read. However, requirment 1 says \"Prompts\".",
+    "language": "Chinese",
+    "judge_stats": [
+        {
+            "requirement_index": 0,
+            "criteria": "预训练的\"GPT-2\"模型被下载并缓存到`models/saved_models/`中。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 10.249510049819946,
+                "input_tokens": 615,
+                "output_tokens": 232,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n\n依据：\n1.  项目结构显示 `models/saved_models` 目录存在，但未提供任何证据（如文件列表）表明其中有已下载的 GPT-2 模型文件。\n2.  轨迹证据表明，代码执行了 `model.save_pretrained(\"models/saved_models/\")` 操作，但环境反馈提示该目录已存在 (`\"models/saved_models/\" already exists`)。这仅能证明代码尝试将**一个已加载的模型**保存到该目录，并不能证明该目录中已缓存了从网络下载的预训练模型。保存操作可能是将内存中的模型副本写入磁盘，而非下载。\n3.  要求明确是“预训练的'GPT-2'模型被**下载并缓存**到`models/saved_models/`中”。现有证据只能证明模型被加载（可能来自Hugging Face的默认缓存路径）并随后被保存到指定目录，但无法区分该模型是本次运行中新下载的，还是利用了系统中已有的缓存。因此，无法断定要求被完全满足。"
+                ]
+            },
+            "total_time": 30.70998454093933
+        },
+        {
+            "requirement_index": 1,
+            "criteria": "提示从名为`data/prompt.txt`的文本文件中读取并输入到模型中。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.560645341873169,
+                "input_tokens": 782,
+                "output_tokens": 104,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n\n依据：提供的文件内容显示 `data/prompt.txt` 的内容为 `('placeholder\\r\\n', None)`，这并非一个有效的、可被模型直接处理的文本提示，而更像是一个表示占位符的元组或数据结构。虽然轨迹证据表明文件被成功读取且内容被传递给了模型，但输入的内容本身不符合“从文本文件中读取提示”这一要求的实质，即读取一个可用的文本提示。因此，该要求未被满足。"
+                ]
+            },
+            "total_time": 18.231937170028687
+        },
+        {
+            "requirement_index": 2,
+            "criteria": "生成长度限制在最多200个字符。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 8.446869134902954,
+                "input_tokens": 508,
+                "output_tokens": 71,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n依据：根据提供的轨迹证据，程序在执行 `main.py` 时因 `config.json` 文件格式错误（JSONDecodeError）而中断，导致相关功能无法执行。因此，无法确认“生成长度限制在最多200个字符”这一要求是否在程序运行中被满足。"
+                ]
+            },
+            "total_time": 18.023635864257812
+        },
+        {
+            "requirement_index": 3,
+            "criteria": "实施后处理以清理文本，包括去除多余的空格和纠正常见的拼写错误。",
+            "satisfied": true,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 7.574486255645752,
+                "input_tokens": 595,
+                "output_tokens": 88,
+                "accumulated_cost": 0.0,
+                "satisfied": true,
+                "reason": [
+                    "<SATISFIED>\n\n依据：轨迹证据显示 `post_processing.py` 脚本成功运行，其输出日志明确报告“文本后处理完成，共处理了 X 条记录”，并确认了清理空格和拼写纠错功能已执行。同时，主要流程中 `clean_text(text)` 函数被正常调用且无异常，表明后处理功能已实施并集成到数据处理流程中。"
+                ]
+            },
+            "total_time": 18.158089637756348
+        },
+        {
+            "requirement_index": 4,
+            "criteria": "生成的文本保存在`results/generated_text.txt`中。",
+            "satisfied": true,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 4.29794979095459,
+                "input_tokens": 669,
+                "output_tokens": 71,
+                "accumulated_cost": 0.0,
+                "satisfied": true,
+                "reason": [
+                    "<SATISFIED>\n\n依据：根据提供的文件内容证据，`results/generated_text.txt` 文件确实存在并包含生成的文本内容 `('placeholder\\r\\n', None)`，这满足了“生成的文本保存在`results/generated_text.txt`中”的要求。轨迹证据也确认了该文件在最终步骤中被成功写入。"
+                ]
+            },
+            "total_time": 17.99541187286377
+        }
+    ]
+}

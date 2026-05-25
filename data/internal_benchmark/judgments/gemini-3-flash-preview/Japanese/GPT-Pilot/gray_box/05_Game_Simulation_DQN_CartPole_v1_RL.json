@@ -1,0 +1,156 @@
+{
+    "name": "05_Game_Simulation_DQN_CartPole_v1_RL",
+    "query": "PyTorchを使用して、CartPole-v1のようなOpenAI Gym環境でDQNエージェントをトレーニングする信頼性のあるシステムを作成してください。DQNは`src/model.py`でPyTorchを使用して実装してください。環境はメインファイル`src/main.py`でインスタンス化されるべきです。Gym環境IDが変更された場合のように、DQNと環境の間で次元の不一致が発生した場合は、エラーをログに記録してください。また、各エピソード後にリターンを`results/metrics/`にログし、新しいエピソードが終了するたびに更新してください。エピソード曲線上の最終リターンを`results/figures/return_over_time.png`として保存し、最終的にトレーニングされたモデルを`models/saved_models/dqn_model.pt`として保存してください。可能であれば、エピソード曲線上のリターンに注釈を追加して、重要なマイルストーンを示してください。",
+    "tags": [
+        "Reinforcement Learning"
+    ],
+    "requirements": [
+        {
+            "requirement_id": 0,
+            "prerequisites": [],
+            "criteria": "\"DQN\"アルゴリズムはPyTorchを使用して実装され、`src/model.py`に保存されます。",
+            "category": "Machine Learning Method",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 1,
+            "prerequisites": [],
+            "criteria": "\"OpenAI Gym\"環境は`src/main.py`でインスタンス化されます。",
+            "category": "Dataset or Environment",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 2,
+            "prerequisites": [
+                0,
+                1
+            ],
+            "criteria": "時間経過に伴うリターン曲線がプロットされ、各エピソードのリターンが記録され、`results/figures/reward_over_time.png`として保存されます。",
+            "category": "Visualization",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 3,
+            "prerequisites": [
+                0,
+                1
+            ],
+            "criteria": "トレーニングされたモデルは`models/saved_models/dqn_model.pt`として保存されます。",
+            "category": "Save Trained Model",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 4,
+            "prerequisites": [
+                0,
+                1
+            ],
+            "criteria": "各エピソードのリターンは`results/metrics/`にログされ、各エピソード終了後に更新されます。",
+            "category": "Performance Metrics",
+            "satisfied": null
+        }
+    ],
+    "preferences": [
+        {
+            "preference_id": 0,
+            "criteria": "システムは次元の不一致を処理し、デバッグを容易にするために問題をログに記録するべきです。",
+            "satisfied": null
+        },
+        {
+            "preference_id": 1,
+            "criteria": "エピソード曲線上のリターンには重要なマイルストーンが注釈として追加されています。",
+            "satisfied": null
+        }
+    ],
+    "is_kaggle_api_needed": false,
+    "is_training_needed": true,
+    "is_web_navigation_needed": false,
+    "language": "Japanese",
+    "judge_stats": [
+        {
+            "requirement_index": 0,
+            "criteria": "\"DQN\"アルゴリズムはPyTorchを使用して実装され、`src/model.py`に保存されます。",
+            "satisfied": true,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 3.1599128246307373,
+                "input_tokens": 1163,
+                "output_tokens": 102,
+                "accumulated_cost": 0.0,
+                "satisfied": true,
+                "reason": [
+                    "<SATISFIED>: `src/model.py` が作成されており、Trajectory Evidence（ステップ11および12）において、PyTorchを用いた `DQN` クラスおよび `ReplayBuffer` の定義が正常に書き込まれ、インポートエラーなく動作することが確認されています。また、プロジェクト構造内に学習済みモデル `models/saved_models/dqn_model.pt` が存在することも、アルゴリズムが適切に実装・実行されたことを裏付けています。"
+                ]
+            },
+            "total_time": 10.690138578414917
+        },
+        {
+            "requirement_index": 1,
+            "criteria": "\"OpenAI Gym\"環境は`src/main.py`でインスタンス化されます。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.0754058361053467,
+                "input_tokens": 1091,
+                "output_tokens": 82,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>: 提供された `src/main.py` のソースコードを確認したところ、要件に関するメタデータ（`REQUIREMENT_CRITERIA`）の定義は含まれていますが、実際に `gym.make()` などの OpenAI Gym 環境をインスタンス化する実行コードが含まれておらず、単に辞書を返す `main` 関数のみが実装されています。"
+                ]
+            },
+            "total_time": 5.898271799087524
+        },
+        {
+            "requirement_index": 2,
+            "criteria": "時間経過に伴うリターン曲線がプロットされ、各エピソードのリターンが記録され、`results/figures/reward_over_time.png`として保存されます。",
+            "satisfied": true,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.2614951133728027,
+                "input_tokens": 1156,
+                "output_tokens": 97,
+                "accumulated_cost": 0.0,
+                "satisfied": true,
+                "reason": [
+                    "<SATISFIED>: プロジェクト構造において `results/figures/reward_over_time.png` が存在しており、実行ログ（ステップ12および13）から、トレーニング中の各エピソードのリターンが処理され、プロット関数がエラーなく実行されて指定のパスに保存されたことが確認できます。画像ファイル自体の読み込みエラーはAPI側の制約によるものであり、ファイルが生成・保存されたという事実を否定するものではありません。"
+                ]
+            },
+            "total_time": 7.8180201053619385
+        },
+        {
+            "requirement_index": 3,
+            "criteria": "トレーニングされたモデルは`models/saved_models/dqn_model.pt`として保存されます。",
+            "satisfied": true,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 1.8268544673919678,
+                "input_tokens": 1002,
+                "output_tokens": 53,
+                "accumulated_cost": 0.0,
+                "satisfied": true,
+                "reason": [
+                    "<SATISFIED>: プロジェクト構造において `models/saved_models/dqn_model.pt` の存在が確認されており、実行ログ（ステップ14および15）からもトレーニング完了後にモデルが正常に保存されたことが示されています。"
+                ]
+            },
+            "total_time": 5.83603572845459
+        },
+        {
+            "requirement_index": 4,
+            "criteria": "各エピソードのリターンは`results/metrics/`にログされ、各エピソード終了後に更新されます。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.4822237491607666,
+                "input_tokens": 1433,
+                "output_tokens": 128,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>: 提供されたファイル（`src/main.py`, `src/model.py`）のソースコードには、`results/metrics/` ディレクトリへのログ出力やファイル書き込みに関する実装が一切含まれていません。また、ワークスペース構造には `results/metrics/` ディレクトリが存在していますが、その中にログファイル（例：`episode_returns.csv`）が生成されている証拠も確認できません。軌跡（Trajectory Evidence）には書き込み処理の言及がありますが、実際のコード実体による裏付けがないため、要件を満たしているとは判断できません。"
+                ]
+            },
+            "total_time": 6.063646554946899
+        }
+    ]
+}

@@ -1,0 +1,269 @@
+{
+    "name": "17_Heart_Disease_Prediction_XGBoost_UCI_ML",
+    "query": "UCI Heart Disease डेटासेट का उपयोग करके XGBoost मॉडल के साथ हृदय रोग की भविष्यवाणी करने के लिए एक प्रोजेक्ट बनाएं, जिसे [इस लिंक](https://archive.ics.uci.edu/dataset/45/heart+disease) से डाउनलोड किया जा सकता है। डेटासेट को `src/data_loader.py` में लोड करें। `src/data_loader.py` में फीचर चयन और डेटा मानकीकरण लागू करें। फीचर महत्व को समझाने के लिए SHAP मानों का उपयोग करें, और परिणामों को `results/figures/shap_importance.png` के रूप में सहेजें। XGBoost मॉडल को `src/model.py` में लागू करें। फिर, फीचर महत्व को समझाने के लिए SHAP मानों का उपयोग करें, और परिणामों को `results/shap_importance.png` के रूप में सहेजें। ROC कर्व को `results/figures/roc_curve.png` में सहेजें। अंत में, सभी परिणामों और विज़ुअलाइज़ेशन को शामिल करते हुए एक HTML रिपोर्ट जनरेट करें, और इसे `results/report.html` के रूप में सहेजें। सुनिश्चित करें कि SHAP विज़ुअलाइज़ेशन सबसे प्रभावशाली विशेषताओं को स्पष्ट रूप से उजागर करते हैं। XGBoost मॉडल की मजबूती को सत्यापित करने के लिए एक अन्य मॉडल, जैसे Logistic Regression, के साथ प्रदर्शन की तुलना शामिल करें। XGBoost मॉडल को `models/saved_models/` के अंतर्गत सहेजें।",
+    "tags": [
+        "Classification",
+        "Medical Analysis",
+        "Supervised Learning"
+    ],
+    "requirements": [
+        {
+            "requirement_id": 0,
+            "prerequisites": [],
+            "criteria": "\"UCI Heart Disease\" डेटासेट का उपयोग किया जाता है, जिसे [इस लिंक](https://archive.ics.uci.edu/dataset/45/heart+disease) से डाउनलोड किया जा सकता है। डेटासेट को `src/data_loader.py` में लोड करें।",
+            "category": "Dataset or Environment",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 1,
+            "prerequisites": [
+                0
+            ],
+            "criteria": "फीचर चयन `src/data_loader.py` में लागू किया गया है।",
+            "category": "Data preprocessing and postprocessing",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 2,
+            "prerequisites": [
+                0
+            ],
+            "criteria": "डेटा मानकीकरण, जो सुनिश्चित करता है कि फीचर मान समान रेंज में हैं, `src/data_loader.py` में लागू किया गया है।",
+            "category": "Data preprocessing and postprocessing",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 3,
+            "prerequisites": [],
+            "criteria": "\"XGBoost\" मॉडल `src/model.py` में लागू किया गया है।",
+            "category": "Machine Learning Method",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 4,
+            "prerequisites": [
+                0,
+                1,
+                2,
+                3
+            ],
+            "criteria": "\"SHAP\" मानों का उपयोग फीचर महत्व की व्याख्या के लिए किया जाता है, और परिणाम `results/figures/shap_importance.png` के रूप में सहेजे जाते हैं।",
+            "category": "Visualization",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 5,
+            "prerequisites": [
+                0,
+                1,
+                2,
+                3
+            ],
+            "criteria": "ROC कर्व `results/figures/roc_curve.png` के रूप में सहेजा गया है।",
+            "category": "Visualization",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 6,
+            "prerequisites": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5
+            ],
+            "criteria": "परिणामों और विज़ुअलाइज़ेशन को शामिल करते हुए एक HTML रिपोर्ट जनरेट की जाती है, जिसे `results/report.html` के रूप में सहेजा जाता है।",
+            "category": "Visualization",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 7,
+            "prerequisites": [
+                1,
+                2,
+                3
+            ],
+            "criteria": "XGBoost मॉडल की मजबूती को सत्यापित करने के लिए एक अन्य मॉडल (जैसे, Logistic Regression) के साथ प्रदर्शन की तुलना शामिल की जाती है।",
+            "category": "Other",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 8,
+            "prerequisites": [
+                1,
+                2,
+                3
+            ],
+            "criteria": "XGBoost मॉडल को `models/saved_models/` के अंतर्गत सहेजा जाता है।",
+            "category": "Save Trained Model",
+            "satisfied": null
+        }
+    ],
+    "preferences": [
+        {
+            "preference_id": 0,
+            "criteria": "SHAP विज़ुअलाइज़ेशन स्पष्ट होने चाहिए और सबसे प्रभावशाली विशेषताओं को उजागर करना चाहिए, जिससे परिणामों को समझना आसान हो।",
+            "satisfied": null
+        }
+    ],
+    "is_kaggle_api_needed": false,
+    "is_training_needed": true,
+    "is_web_navigation_needed": true,
+    "language": "Hindi",
+    "judge_stats": [
+        {
+            "requirement_index": 0,
+            "criteria": "\"UCI Heart Disease\" डेटासेट का उपयोग किया जाता है, जिसे [इस लिंक](https://archive.ics.uci.edu/dataset/45/heart+disease) से डाउनलोड किया जा सकता है। डेटासेट को `src/data_loader.py` में लोड करें।",
+            "satisfied": true,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 1.5658600330352783,
+                "input_tokens": 1154,
+                "output_tokens": 47,
+                "accumulated_cost": 0.0,
+                "satisfied": true,
+                "reason": [
+                    "<SATISFIED>: The requirement is satisfied as the \"UCI Heart Disease\" dataset is successfully loaded using `src/data_loader.py`, as evidenced by Step 27 in the trajectory, which confirms the successful execution without errors."
+                ]
+            },
+            "total_time": 5.868049621582031
+        },
+        {
+            "requirement_index": 1,
+            "criteria": "फीचर चयन `src/data_loader.py` में लागू किया गया है।",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 1.418367624282837,
+                "input_tokens": 1131,
+                "output_tokens": 73,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>: The content of `src/data_loader.py` does not show any implementation of feature selection. The file contains placeholder functions like `load_dataset()` and `build_transforms()`, but there is no evidence of feature selection logic being implemented. Additionally, the trajectory evidence does not mention any specific feature selection process being executed or verified."
+                ]
+            },
+            "total_time": 3.819369316101074
+        },
+        {
+            "requirement_index": 2,
+            "criteria": "डेटा मानकीकरण, जो सुनिश्चित करता है कि फीचर मान समान रेंज में हैं, `src/data_loader.py` में लागू किया गया है।",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 1.288071870803833,
+                "input_tokens": 1151,
+                "output_tokens": 50,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>: The evidence indicates that while standardization was attempted, there were warnings about \"Feature range mismatch\" and \"non-uniform scaling factors,\" suggesting that the implementation does not ensure feature values are within the same range consistently."
+                ]
+            },
+            "total_time": 4.98099160194397
+        },
+        {
+            "requirement_index": 3,
+            "criteria": "\"XGBoost\" मॉडल `src/model.py` में लागू किया गया है।",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.336263418197632,
+                "input_tokens": 1002,
+                "output_tokens": 108,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>: The requirement states that the \"XGBoost\" model should be implemented in `src/model.py`. However, the content of `model.py` does not show any implementation of the XGBoost model. Instead, it contains a placeholder function `build_model()` that returns a string \"model placeholder\". Additionally, there was a `ModuleNotFoundError` for the 'xgboost' module, indicating that the module was not initially present, further suggesting that the XGBoost model was not implemented."
+                ]
+            },
+            "total_time": 5.33155369758606
+        },
+        {
+            "requirement_index": 4,
+            "criteria": "\"SHAP\" मानों का उपयोग फीचर महत्व की व्याख्या के लिए किया जाता है, और परिणाम `results/figures/shap_importance.png` के रूप में सहेजे जाते हैं।",
+            "satisfied": true,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 1.402313470840454,
+                "input_tokens": 683,
+                "output_tokens": 63,
+                "accumulated_cost": 0.0,
+                "satisfied": true,
+                "reason": [
+                    "<SATISFIED>: SHAP मानों का उपयोग फीचर महत्व की व्याख्या के लिए किया गया है, और परिणाम सफलतापूर्वक `results/figures/shap_importance.png` के रूप में सहेजे गए हैं, जैसा कि Step 53 में बताया गया है।"
+                ]
+            },
+            "total_time": 3.6457347869873047
+        },
+        {
+            "requirement_index": 5,
+            "criteria": "ROC कर्व `results/figures/roc_curve.png` के रूप में सहेजा गया है।",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 1.2422316074371338,
+                "input_tokens": 899,
+                "output_tokens": 54,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>: Although the trajectory evidence suggests that the ROC curve was saved without errors, the content of the file indicates an error in reading the image file, suggesting that the ROC curve was not successfully saved or is not accessible in a valid format."
+                ]
+            },
+            "total_time": 4.470682621002197
+        },
+        {
+            "requirement_index": 6,
+            "criteria": "परिणामों और विज़ुअलाइज़ेशन को शामिल करते हुए एक HTML रिपोर्ट जनरेट की जाती है, जिसे `results/report.html` के रूप में सहेजा जाता है।",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 1.6812901496887207,
+                "input_tokens": 807,
+                "output_tokens": 63,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>: Although the trajectory evidence suggests that `results/report.html` was generated successfully without errors or warnings, the content of the file is shown as `('', None)`, indicating that it is empty. This means that the HTML report does not actually include the results and visualizations as required."
+                ]
+            },
+            "total_time": 4.162037134170532
+        },
+        {
+            "requirement_index": 7,
+            "criteria": "XGBoost मॉडल की मजबूती को सत्यापित करने के लिए एक अन्य मॉडल (जैसे, Logistic Regression) के साथ प्रदर्शन की तुलना शामिल की जाती है।",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 1.2563002109527588,
+                "input_tokens": 1085,
+                "output_tokens": 55,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>: While the evidence indicates that both the Logistic Regression and XGBoost models were executed, there is no explicit evidence or documentation provided that confirms a performance comparison between the two models was conducted to verify the robustness of the XGBoost model."
+                ]
+            },
+            "total_time": 5.448166370391846
+        },
+        {
+            "requirement_index": 8,
+            "criteria": "XGBoost मॉडल को `models/saved_models/` के अंतर्गत सहेजा जाता है।",
+            "satisfied": true,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 1.0207443237304688,
+                "input_tokens": 787,
+                "output_tokens": 42,
+                "accumulated_cost": 0.0,
+                "satisfied": true,
+                "reason": [
+                    "<SATISFIED>: The evidence indicates that the XGBoost model was successfully saved to `models/saved_models/xgboost_model_v1.pkl` as per Step 46 in the trajectory."
+                ]
+            },
+            "total_time": 3.0792641639709473
+        }
+    ]
+}

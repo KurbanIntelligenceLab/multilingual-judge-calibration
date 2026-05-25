@@ -1,0 +1,219 @@
+{
+    "name": "54_Mock_OpenAI_API_Response_Analyzer_App",
+    "query": "मैं एक ऐप बनाना चाहता हूँ जो मुझे यह विश्लेषण करने में सक्षम बनाएगा कि OpenAI API एक ही क्वेरी के लिए विभिन्न प्रतिक्रियाएँ कैसे दे सकता है। फ्रंटएंड को `src/frontend.py` में लागू किया जाना चाहिए और इसमें उपयोगकर्ता और LLM के बीच एक बातचीत को सूची के रूप में शामिल करना चाहिए। प्रत्येक सूची आइटम में एक टेक्स्ट फ़ील्ड होना चाहिए जहाँ मैं एक (संभावित रूप से बड़ा) टेक्स्ट संदेश जोड़ सकता हूँ और एक ड्रॉपडाउन होना चाहिए जो चयन करता है कि संदेश LLM से है या उपयोगकर्ता से। इस कार्यक्षमता को `src/message_list.py` में संभाला जाना चाहिए। इन सूची आइटमों की संख्या असीमित हो सकती है, इसलिए जब ऐप लोड होता है, तो इसे एक खाली सूची आइटम के साथ शुरू करना चाहिए, और आवश्यकतानुसार नए सूची आइटम जोड़ने के लिए एक बटन होना चाहिए। सूची के अलावा, एक संख्यात्मक फ़ील्ड होना चाहिए, जिसे `src/frontend.py` में लागू किया गया है, जिसे उपयोगकर्ता संपादित कर सकता है। इस फ़ील्ड में केवल 0 से 100 तक के मानों की अनुमति होनी चाहिए। एक बटन भी होना चाहिए जिसका लेबल SUBMIT हो। जब मैं SUBMIT बटन पर क्लिक करता हूँ, तो पूरी बातचीत को OpenAI API को समानांतर X बार भेजा जाना चाहिए, जहाँ X वह संख्या है जो उपयोगकर्ता ने फ्रंटएंड पर दर्ज की है। सभी API अनुरोध और प्रतिक्रियाएँ `src/backend.py` में संभाली जानी चाहिए। जब OpenAI API से प्रतिक्रियाएँ प्राप्त की जाती हैं, तो उन्हें `src/frontend_render.py` में विस्तार योग्य तत्वों की सूची के रूप में प्रदर्शित किया जाना चाहिए। उदाहरण के लिए, यदि मैंने अनुरोधों की संख्या 10 सेट की है, तो जब प्रतिक्रियाएँ आना शुरू होती हैं, तो 10 तत्व दिखाई देने चाहिए, प्रत्येक अनुरोध संख्या के साथ लेबल किया गया। जब विस्तारित किया जाता है, तो उन्हें उस विशेष प्रतिक्रिया को दिखाना चाहिए। ध्यान रखें कि OpenAI API एक स्ट्रीम लौटाता है, इसलिए प्रतिक्रियाएँ फ्रंटएंड पर टोकन-दर-टोकन स्ट्रीम होनी चाहिए और वास्तविक समय में प्रदर्शित होनी चाहिए। इस कार्यक्षमता को `src/stream_handler.py` में लागू किया जाना चाहिए। `src/styles.css` में स्टाइलिंग के लिए Tailwind का उपयोग करें, लेकिन इसे इंस्टॉल न करें। इसके बजाय, CDN संस्करण का उपयोग करें। OpenAI कुंजी उपयोग को कम करने के लिए आपको मॉक LLM की प्रतिक्रियाओं का उपयोग करना चाहिए। मॉक LLM प्रतिक्रियाएँ `src/mock_llm.py` में उत्पन्न की जानी चाहिए।",
+    "tags": [
+        "Natural Language Processing",
+        "Generative Models",
+        "Other"
+    ],
+    "requirements": [
+        {
+            "requirement_id": 0,
+            "prerequisites": [],
+            "criteria": "फ्रंटएंड को `src/frontend.py` में लागू किया जाना चाहिए, जिसमें एक सूची होनी चाहिए जहाँ उपयोगकर्ता बड़े टेक्स्ट संदेश जोड़ सकते हैं और चयन कर सकते हैं कि संदेश LLM से है या उपयोगकर्ता से। जब ऐप लोड होता है, तो सूची को एक खाली आइटम के साथ शुरू करना चाहिए।",
+            "category": "Human Computer Interaction",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 1,
+            "prerequisites": [
+                0
+            ],
+            "criteria": "संदेश सूची को असीमित संख्या में आइटम की अनुमति देनी चाहिए, जिसे नए आइटम जोड़ने के लिए एक बटन के माध्यम से प्रबंधित किया जाता है, जो `src/message_list.py` में लागू किया गया है।",
+            "category": "Human Computer Interaction",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 2,
+            "prerequisites": [
+                0
+            ],
+            "criteria": "इंटरफ़ेस को उपयोगकर्ता को 0 से 100 तक का संख्यात्मक मान दर्ज करने की अनुमति देनी चाहिए, जो नियंत्रित करता है कि कितने समानांतर API अनुरोध भेजे जाएंगे। इस कार्यक्षमता को `src/frontend.py` में लागू किया जाना चाहिए।",
+            "category": "Human Computer Interaction",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 3,
+            "prerequisites": [
+                0,
+                2
+            ],
+            "criteria": "SUBMIT बटन को बातचीत को X बार (जहाँ X संख्यात्मक इनपुट फ़ील्ड से मान है) मॉक LLM प्रतिक्रियाओं को भेजने के लिए ट्रिगर करना चाहिए। इसे `src/backend.py` के भीतर `src/mock_llm.py` में मॉक प्रतिक्रिया जनरेटर को कॉल करके संभाला जाना चाहिए।",
+            "category": "Other",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 4,
+            "prerequisites": [
+                0,
+                2,
+                3
+            ],
+            "criteria": "मॉक प्रतिक्रियाएँ `src/mock_llm.py` द्वारा उत्पन्न की जानी चाहिए, और फिर `src/frontend_render.py` में विस्तार योग्य तत्वों की सूची के रूप में प्रदर्शित करने के लिए पास की जानी चाहिए, प्रत्येक अनुरोध संख्या द्वारा लेबल किया गया।",
+            "category": "Human Computer Interaction",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 5,
+            "prerequisites": [
+                0,
+                2,
+                3,
+                4
+            ],
+            "criteria": "प्रतिक्रियाएँ फ्रंटएंड पर स्ट्रीम की जानी चाहिए और वास्तविक समय में टोकन-दर-टोकन प्रदर्शित की जानी चाहिए, जो `src/stream_handler.py` में लागू की गई है।",
+            "category": "Other",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 6,
+            "prerequisites": [],
+            "criteria": "फ्रंटएंड के लिए स्टाइलिंग में `src/styles.css` में Tailwind का उपयोग किया जाना चाहिए, जिसे बिना इंस्टॉलेशन के CDN के माध्यम से लोड किया गया है।",
+            "category": "Human Computer Interaction",
+            "satisfied": null
+        }
+    ],
+    "preferences": [
+        {
+            "preference_id": 0,
+            "criteria": "UI को एक साफ और सुसंगत शैली बनाए रखनी चाहिए, Tailwind का उपयोग करके एक सुसंगत और नेविगेट करने में आसान डिज़ाइन के लिए।",
+            "satisfied": null
+        },
+        {
+            "preference_id": 1,
+            "criteria": "API से स्ट्रीमिंग प्रतिक्रियाएँ कुशल होनी चाहिए, यह सुनिश्चित करते हुए कि वास्तविक समय अपडेट बिना देरी के सुचारू रूप से हों।",
+            "satisfied": null
+        },
+        {
+            "preference_id": 2,
+            "criteria": "API अनुरोध और प्रतिक्रिया हैंडलिंग को मॉड्यूलर होना चाहिए, जिससे समानांतर अनुरोधों की संख्या को समायोजित करने जैसे आसान संशोधन की अनुमति मिल सके।",
+            "satisfied": null
+        }
+    ],
+    "is_kaggle_api_needed": false,
+    "is_training_needed": false,
+    "is_web_navigation_needed": false,
+    "resource": "https://github.com/Pythagora-io/gpt-pilot/wiki/How-to-write-a-good-initial-project-description",
+    "language": "Hindi",
+    "judge_stats": [
+        {
+            "requirement_index": 0,
+            "criteria": "फ्रंटएंड को `src/frontend.py` में लागू किया जाना चाहिए, जिसमें एक सूची होनी चाहिए जहाँ उपयोगकर्ता बड़े टेक्स्ट संदेश जोड़ सकते हैं और चयन कर सकते हैं कि संदेश LLM से है या उपयोगकर्ता से। जब ऐप लोड होता है, तो सूची को एक खाली आइटम के साथ शुरू करना चाहिए।",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.7105515003204346,
+                "input_tokens": 1241,
+                "output_tokens": 85,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED> `src/frontend.py` में वास्तविक frontend/UI implementation नहीं है। फ़ाइल केवल `REQUIREMENT_CRITERIA` strings, `requirement_notes()` और `main()` में status dict लौटाती है। बड़े टेक्स्ट संदेशों की सूची, LLM/user चयन, या load पर single empty item initialization का कोई कोड/साक्ष्य नहीं है।"
+                ]
+            },
+            "total_time": 10.906604766845703
+        },
+        {
+            "requirement_index": 1,
+            "criteria": "संदेश सूची को असीमित संख्या में आइटम की अनुमति देनी चाहिए, जिसे नए आइटम जोड़ने के लिए एक बटन के माध्यम से प्रबंधित किया जाता है, जो `src/message_list.py` में लागू किया गया है।",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 1.9782886505126953,
+                "input_tokens": 1017,
+                "output_tokens": 54,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED> `src/message_list.py` में केवल placeholder/metadata code है (`REQUIREMENT_CRITERIA`, `main()`), लेकिन message list, add button, या unbounded item management का कोई implementation नहीं है।"
+                ]
+            },
+            "total_time": 5.7564756870269775
+        },
+        {
+            "requirement_index": 2,
+            "criteria": "इंटरफ़ेस को उपयोगकर्ता को 0 से 100 तक का संख्यात्मक मान दर्ज करने की अनुमति देनी चाहिए, जो नियंत्रित करता है कि कितने समानांतर API अनुरोध भेजे जाएंगे। इस कार्यक्षमता को `src/frontend.py` में लागू किया जाना चाहिए।",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 1.795686960220337,
+                "input_tokens": 1141,
+                "output_tokens": 66,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED> `src/frontend.py` में वास्तविक UI/इनपुट implementation नहीं है। फ़ाइल केवल requirement strings और `main()` में metadata return करती है; 0–100 numeric input, validation, या parallel API request control का कोई कार्यात्मक कोड मौजूद नहीं है।"
+                ]
+            },
+            "total_time": 7.091444492340088
+        },
+        {
+            "requirement_index": 3,
+            "criteria": "SUBMIT बटन को बातचीत को X बार (जहाँ X संख्यात्मक इनपुट फ़ील्ड से मान है) मॉक LLM प्रतिक्रियाओं को भेजने के लिए ट्रिगर करना चाहिए। इसे `src/backend.py` के भीतर `src/mock_llm.py` में मॉक प्रतिक्रिया जनरेटर को कॉल करके संभाला जाना चाहिए।",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 1.5150508880615234,
+                "input_tokens": 1538,
+                "output_tokens": 64,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED> `src/backend.py` में केवल requirement text लौटाने वाला placeholder code है; कोई SUBMIT-handler, numeric input का उपयोग, X बार loop, या `src/mock_llm.py` के किसी mock response generator को call करने का वास्तविक implementation नहीं दिखता।"
+                ]
+            },
+            "total_time": 9.652939319610596
+        },
+        {
+            "requirement_index": 4,
+            "criteria": "मॉक प्रतिक्रियाएँ `src/mock_llm.py` द्वारा उत्पन्न की जानी चाहिए, और फिर `src/frontend_render.py` में विस्तार योग्य तत्वों की सूची के रूप में प्रदर्शित करने के लिए पास की जानी चाहिए, प्रत्येक अनुरोध संख्या द्वारा लेबल किया गया।",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 1.7247211933135986,
+                "input_tokens": 1580,
+                "output_tokens": 73,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED> `src/mock_llm.py` और `src/frontend_render.py` में केवल requirement-notes लौटाने वाला placeholder code है; mock response generation, `mock_llm.py` → `frontend_render.py` data flow, expandable list rendering, या request-number labels का कोई वास्तविक implementation/evidence नहीं है।"
+                ]
+            },
+            "total_time": 8.847771644592285
+        },
+        {
+            "requirement_index": 5,
+            "criteria": "प्रतिक्रियाएँ फ्रंटएंड पर स्ट्रीम की जानी चाहिए और वास्तविक समय में टोकन-दर-टोकन प्रदर्शित की जानी चाहिए, जो `src/stream_handler.py` में लागू की गई है।",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 1.8446295261383057,
+                "input_tokens": 1204,
+                "output_tokens": 78,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED> `src/stream_handler.py` में वास्तविक streaming logic नहीं है। फ़ाइल केवल requirement text लौटाती है (`REQUIREMENT_CRITERIA`, `requirement_notes()`, `main()`), लेकिन token-by-token emission, frontend updates, SSE/websocket/callback, या realtime rendering का कोई implementation/code evidence नहीं दिखता।"
+                ]
+            },
+            "total_time": 8.68929386138916
+        },
+        {
+            "requirement_index": 6,
+            "criteria": "फ्रंटएंड के लिए स्टाइलिंग में `src/styles.css` में Tailwind का उपयोग किया जाना चाहिए, जिसे बिना इंस्टॉलेशन के CDN के माध्यम से लोड किया गया है।",
+            "satisfied": true,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.6736342906951904,
+                "input_tokens": 971,
+                "output_tokens": 72,
+                "accumulated_cost": 0.0,
+                "satisfied": true,
+                "reason": [
+                    "<SATISFIED>: `src/styles.css` मौजूद है और उपलब्ध साक्ष्य में Tailwind CDN loading, installation, dependency, या config से जुड़ी कोई error/warning नहीं है। Trajectory evidence स्पष्ट रूप से बताता है कि Tailwind को बिना installation CDN-based तरीके से उपयोग करने में कोई failure रिपोर्ट नहीं हुई।"
+                ]
+            },
+            "total_time": 8.01106071472168
+        }
+    ]
+}

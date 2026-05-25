@@ -1,0 +1,213 @@
+{
+    "name": "49_Explainable_AI_LIME_Titanic_ML",
+    "query": "你好！我正在寻找创建一个项目，使用LIME解释模型预测，特别是使用泰坦尼克号生存预测数据集。首先，在`src/data_loader.py`中加载数据集。然后，训练一个随机森林分类器并将其保存在`models/saved_models/`下。最后，使用LIME解释随机森林分类器的预测，并在`src/visualize.py`中实现。生成一份包含解释的报告，并将其保存为`results/model_explanation.md`。报告应使用Dash或Bokeh构建，并在`src/report.py`中实现，以便用户可以探索不同特征如何影响模型的预测。解释应清晰易懂，适合非技术人员。此外，保存一个标注良好的直观特征重要性图，保存在`results/figures/feature_importance.png`。谢谢！",
+    "tags": [
+        "Classification"
+    ],
+    "requirements": [
+        {
+            "requirement_id": 0,
+            "prerequisites": [],
+            "criteria": "在`src/data_loader.py`中加载“泰坦尼克号”生存预测数据集。",
+            "category": "Dataset or Environment",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 1,
+            "prerequisites": [
+                0
+            ],
+            "criteria": "训练一个用于生存预测的“随机森林分类器”。",
+            "category": "Machine Learning Method",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 2,
+            "prerequisites": [
+                0,
+                1
+            ],
+            "criteria": "使用“LIME”进行模型预测解释，并在`src/visualize.py`中实现。",
+            "category": "Human Computer Interaction",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 3,
+            "prerequisites": [
+                0,
+                1,
+                2
+            ],
+            "criteria": "生成一份模型预测解释报告，并保存为`results/model_explanation.md`。",
+            "category": "Other",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 4,
+            "prerequisites": [
+                2
+            ],
+            "criteria": "保存一个特征重要性图，路径为`results/figures/feature_importance.png`。",
+            "category": "Visualization",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 5,
+            "prerequisites": [
+                0,
+                1,
+                2,
+                4
+            ],
+            "criteria": "使用“Dash”或“Bokeh”创建一个展示不同特征对预测影响的交互式报告，并在`src/report.py`中实现。",
+            "category": "Other",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 6,
+            "prerequisites": [
+                1
+            ],
+            "criteria": "将训练好的模型保存在`models/saved_models/`下。",
+            "category": "Save Trained Model",
+            "satisfied": null
+        }
+    ],
+    "preferences": [
+        {
+            "preference_id": 0,
+            "criteria": "解释报告应以清晰易懂的风格撰写，使其即使对于没有深厚技术背景的人也能理解。",
+            "satisfied": null
+        },
+        {
+            "preference_id": 1,
+            "criteria": "特征重要性图应直观，具有清晰的标签和描述。",
+            "satisfied": null
+        }
+    ],
+    "is_kaggle_api_needed": false,
+    "is_training_needed": true,
+    "is_web_navigation_needed": false,
+    "language": "Chinese",
+    "judge_stats": [
+        {
+            "requirement_index": 0,
+            "criteria": "在`src/data_loader.py`中加载“泰坦尼克号”生存预测数据集。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.657327890396118,
+                "input_tokens": 1213,
+                "output_tokens": 134,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n\n**依据：**\n根据 `src/data_loader.py` 的文件内容，该文件仅包含一个名为 `load_dataset` 的占位符函数，返回的是硬编码的字典 `{\"dataset\": \"loaded\", ...}`，并未实际编写加载“泰坦尼克号”数据集（如使用 pandas 加载 CSV 文件）的逻辑。此外，参考轨迹显示在执行测试时曾出现 `FileNotFoundError: [Errno 2] No such file or directory: 'data/titanic.csv'`，说明该功能未被正确实现或因缺少数据文件而无法运行。"
+                ]
+            },
+            "total_time": 9.129153490066528
+        },
+        {
+            "requirement_index": 1,
+            "criteria": "训练一个用于生存预测的“随机森林分类器”。",
+            "satisfied": true,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.1814050674438477,
+                "input_tokens": 1187,
+                "output_tokens": 124,
+                "accumulated_cost": 0.0,
+                "satisfied": true,
+                "reason": [
+                    "<SATISFIED>\n\n**依据：**\n根据轨迹证据（Trajectory Evidence）中的 **Step 8** 和 **Step 9**，系统成功执行了 `train.py` 脚本，并明确调用了 `sklearn.ensemble.RandomForestClassifier` 进行模型训练。环境反馈显示模型训练过程正常，未出现维度不匹配或超参数错误。此外，`evaluate.py` 的运行结果显示该随机森林模型输出了 `Accuracy: 0.82` 的评估结果，证实了模型已成功完成拟合（Fit）并具备预测能力。"
+                ]
+            },
+            "total_time": 7.526765584945679
+        },
+        {
+            "requirement_index": 2,
+            "criteria": "使用“LIME”进行模型预测解释，并在`src/visualize.py`中实现。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.310694932937622,
+                "input_tokens": 1217,
+                "output_tokens": 116,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n\n**依据：**\n根据提供的 `src/visualize.py` 文件内容，该脚本仅包含一个最小化的语义实现（Minimal semantic implementation），其代码逻辑只是返回了包含关键词 \"LIME\" 的元数据字典，并没有实际导入 `lime` 库，也没有编写任何使用 LIME 进行模型预测解释的功能代码。此外，根据执行轨迹显示，该脚本在尝试运行时因缺少模型文件（`models/model.pkl`）而失败，证明其并未完成实际的解释功能实现。"
+                ]
+            },
+            "total_time": 7.292312860488892
+        },
+        {
+            "requirement_index": 3,
+            "criteria": "生成一份模型预测解释报告，并保存为`results/model_explanation.md`。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 1.914435625076294,
+                "input_tokens": 1017,
+                "output_tokens": 96,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n\n依据：虽然项目结构中存在 `results/model_explanation.md` 文件，且执行轨迹显示脚本运行成功，但该文件的实际内容仅为 `('placeholder', None)`。这表明该文件只是一个占位符，并未包含真正的模型预测解释报告内容（如特征影响分析、SHAP/LIME 解释结果等），未达到“生成一份模型预测解释报告”的实质性要求。"
+                ]
+            },
+            "total_time": 6.581127643585205
+        },
+        {
+            "requirement_index": 4,
+            "criteria": "保存一个特征重要性图，路径为`results/figures/feature_importance.png`。",
+            "satisfied": true,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.644225835800171,
+                "input_tokens": 1161,
+                "output_tokens": 161,
+                "accumulated_cost": 0.0,
+                "satisfied": true,
+                "reason": [
+                    "<SATISFIED>\n\n依据：\n1. **文件系统存在性**：根据 [Key Evidence] Workspace Structure，项目目录中明确存在 `results/figures/feature_importance.png` 文件。\n2. **生成过程验证**：根据 [Reference] Trajectory Evidence 的 Step 8，执行 `python scripts/visualize_results.py` 后，终端明确输出 `Feature importance plot saved to results/figures/feature_importance.png`，确认了文件的生成逻辑和保存路径。\n3. **异常说明**：虽然在读取该图片内容时出现了 API 错误（OpenrouterException），但这属于评估环境在读取二进制图像文件时的接口限制，并不影响“文件已成功生成并保存在指定路径”这一事实。"
+                ]
+            },
+            "total_time": 9.035754680633545
+        },
+        {
+            "requirement_index": 5,
+            "criteria": "使用“Dash”或“Bokeh”创建一个展示不同特征对预测影响的交互式报告，并在`src/report.py`中实现。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.619828701019287,
+                "input_tokens": 1237,
+                "output_tokens": 176,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n\n**依据：**\n1. **代码内容缺失**：根据 `src/report.py` 的文件内容显示，该文件仅包含一个用于基准测试判断的最小语义实现（Minimal semantic implementation），其中只定义了需求标准字符串和关键字列表，并没有实际导入 Dash 或 Bokeh 库，也没有编写任何用于创建交互式报告的逻辑代码。\n2. **执行失败**：轨迹证据（Trajectory Evidence）显示，在尝试运行 `src/report.py` 时，系统抛出了 `ModuleNotFoundError: No module named 'dash'`，且静态分析也确认无法导入相关组件。\n3. **未实现功能**：该文件目前只是一个占位符脚本，未满足“使用 Dash 或 Bokeh 创建展示特征影响的交互式报告”的实质性要求。"
+                ]
+            },
+            "total_time": 7.237638473510742
+        },
+        {
+            "requirement_index": 6,
+            "criteria": "将训练好的模型保存在`models/saved_models/`下。",
+            "satisfied": true,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 1.760389804840088,
+                "input_tokens": 1210,
+                "output_tokens": 103,
+                "accumulated_cost": 0.0,
+                "satisfied": true,
+                "reason": [
+                    "<SATISFIED>\n\n依据：\n1. **项目结构证据**：根据 [Key Evidence] Workspace Structure，工作区中已存在 `models/saved_models` 目录。\n2. **执行轨迹证据**：根据 [Reference] Trajectory Evidence 的步骤 13，系统反馈显示 `Successfully saved model to models/saved_models/model_final.pth`。这表明模型保存逻辑已成功执行，且文件已按要求存储在指定路径下。"
+                ]
+            },
+            "total_time": 7.394917249679565
+        }
+    ]
+}

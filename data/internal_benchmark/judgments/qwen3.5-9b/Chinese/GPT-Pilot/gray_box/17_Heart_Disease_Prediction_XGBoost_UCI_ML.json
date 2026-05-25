@@ -1,0 +1,269 @@
+{
+    "name": "17_Heart_Disease_Prediction_XGBoost_UCI_ML",
+    "query": "创建一个项目，使用XGBoost模型预测心脏病，使用UCI心脏病数据集，该数据集可以从[此链接](https://archive.ics.uci.edu/dataset/45/heart+disease)下载。在`src/data_loader.py`中加载数据集。在`src/data_loader.py`中实现特征选择和数据标准化。使用SHAP值解释特征重要性，并将结果保存为`results/figures/shap_importance.png`。在`src/model.py`中实现XGBoost模型。然后，使用SHAP值解释特征重要性，并将结果保存为`results/shap_importance.png`。将ROC曲线保存到`results/figures/roc_curve.png`。最后，生成一个包含所有结果和可视化的HTML报告，并将其保存为`results/report.html`。确保SHAP可视化清晰地突出显示最具影响力的特征。包括与其他模型（如Logistic Regression）的性能比较，以验证XGBoost模型的稳健性。将XGBoost模型保存在`models/saved_models/`下。",
+    "tags": [
+        "Classification",
+        "Medical Analysis",
+        "Supervised Learning"
+    ],
+    "requirements": [
+        {
+            "requirement_id": 0,
+            "prerequisites": [],
+            "criteria": "使用\"UCI心脏病\"数据集，可能从[此链接](https://archive.ics.uci.edu/dataset/45/heart+disease)下载。在`src/data_loader.py`中加载数据集。",
+            "category": "Dataset or Environment",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 1,
+            "prerequisites": [
+                0
+            ],
+            "criteria": "在`src/data_loader.py`中实现特征选择。",
+            "category": "Data preprocessing and postprocessing",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 2,
+            "prerequisites": [
+                0
+            ],
+            "criteria": "在`src/data_loader.py`中实现数据标准化，确保特征值在同一范围内。",
+            "category": "Data preprocessing and postprocessing",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 3,
+            "prerequisites": [],
+            "criteria": "在`src/model.py`中实现\"XGBoost\"模型。",
+            "category": "Machine Learning Method",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 4,
+            "prerequisites": [
+                0,
+                1,
+                2,
+                3
+            ],
+            "criteria": "使用\"SHAP\"值进行特征重要性解释，结果保存为`results/figures/shap_importance.png`。",
+            "category": "Visualization",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 5,
+            "prerequisites": [
+                0,
+                1,
+                2,
+                3
+            ],
+            "criteria": "ROC曲线保存为`results/figures/roc_curve.png`。",
+            "category": "Visualization",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 6,
+            "prerequisites": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5
+            ],
+            "criteria": "生成包含结果和可视化的HTML报告，保存为`results/report.html`。",
+            "category": "Visualization",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 7,
+            "prerequisites": [
+                1,
+                2,
+                3
+            ],
+            "criteria": "包括与其他模型（例如Logistic Regression）的性能比较，以验证XGBoost模型的稳健性。",
+            "category": "Other",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 8,
+            "prerequisites": [
+                1,
+                2,
+                3
+            ],
+            "criteria": "将XGBoost模型保存在`models/saved_models/`下。",
+            "category": "Save Trained Model",
+            "satisfied": null
+        }
+    ],
+    "preferences": [
+        {
+            "preference_id": 0,
+            "criteria": "SHAP可视化应清晰并突出显示最具影响力的特征，使结果易于解释。",
+            "satisfied": null
+        }
+    ],
+    "is_kaggle_api_needed": false,
+    "is_training_needed": true,
+    "is_web_navigation_needed": true,
+    "language": "Chinese",
+    "judge_stats": [
+        {
+            "requirement_index": 0,
+            "criteria": "使用\"UCI心脏病\"数据集，可能从[此链接](https://archive.ics.uci.edu/dataset/45/heart+disease)下载。在`src/data_loader.py`中加载数据集。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 20.66350293159485,
+                "input_tokens": 927,
+                "output_tokens": 1402,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n依据：`src/data_loader.py` 中的 `load_dataset()` 函数仅返回占位符字典 `{\"dataset\": \"loaded\", ...}`，并未包含实际读取 UCI Heart Disease 数据集的逻辑（如读取 CSV 文件或下载数据），无法满足“在 `src/data_loader.py` 中加载数据集”的要求。"
+                ]
+            },
+            "total_time": 81.48689699172974
+        },
+        {
+            "requirement_index": 1,
+            "criteria": "在`src/data_loader.py`中实现特征选择。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 12.435807943344116,
+                "input_tokens": 894,
+                "output_tokens": 1627,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n代码中 `load_dataset` 和 `build_transforms` 函数仅为占位符（placeholder），分别返回字典 `{\"dataset\": \"loaded\", ...}` 和字符串列表 `[\"rotation\", \"scaling\", \"normalization\"]`，未包含任何实际的特征选择逻辑（如 `SelectKBest`、方差阈值或相关性分析）。`REQUIREMENT_CRITERIA` 中仅以字符串形式声明了该要求，并未在代码中实现具体功能。"
+                ]
+            },
+            "total_time": 45.04368853569031
+        },
+        {
+            "requirement_index": 2,
+            "criteria": "在`src/data_loader.py`中实现数据标准化，确保特征值在同一范围内。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 10.403068542480469,
+                "input_tokens": 900,
+                "output_tokens": 1356,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n依据：`src/data_loader.py` 中的代码仅为占位符（placeholder）实现。`load_dataset` 函数仅返回一个包含字符串的字典 `{\"dataset\": \"loaded\", ...}`，并未加载真实数据或执行标准化逻辑。`build_transforms` 函数返回的是字符串列表 `[\"rotation\", \"scaling\", \"normalization\"]`，且注释表明这是针对 `torchvision.transforms` 的占位符，而非针对表格数据的实际标准化处理。虽然 `REQUIREMENT_CRITERIA` 变量中列出了该要求，但代码中未包含任何实际的数据标准化实现（如使用 `StandardScaler` 或 `MinMaxScaler`）。"
+                ]
+            },
+            "total_time": 63.13764834403992
+        },
+        {
+            "requirement_index": 3,
+            "criteria": "在`src/model.py`中实现\"XGBoost\"模型。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 10.236552953720093,
+                "input_tokens": 815,
+                "output_tokens": 1227,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n依据：`src/model.py` 文件中未实际实现 XGBoost 模型。代码仅包含元数据定义（如 `REQUIREMENT_CRITERIA`、`KEYWORDS`）和返回占位符字符串 `\"model placeholder\"` 的 `build_model()` 函数，缺少 `import xgboost` 及任何模型实例化或训练逻辑。"
+                ]
+            },
+            "total_time": 42.01669359207153
+        },
+        {
+            "requirement_index": 4,
+            "criteria": "使用\"SHAP\"值进行特征重要性解释，结果保存为`results/figures/shap_importance.png`。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 9.238379955291748,
+                "input_tokens": 863,
+                "output_tokens": 1064,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n虽然文件路径 `results/figures/shap_importance.png` 存在于目录结构中，但文件内容显示为错误日志（`litellm.BadRequestError: ... One of the image(s) could not be processed`），表明图像生成失败或文件损坏，未成功保存有效的 SHAP 特征重要性可视化结果。"
+                ]
+            },
+            "total_time": 42.628830432891846
+        },
+        {
+            "requirement_index": 5,
+            "criteria": "ROC曲线保存为`results/figures/roc_curve.png`。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 907.9568512439728,
+                "input_tokens": 1367,
+                "output_tokens": 1782,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    ""
+                ]
+            },
+            "total_time": 954.6050081253052
+        },
+        {
+            "requirement_index": 6,
+            "criteria": "生成包含结果和可视化的HTML报告，保存为`results/report.html`。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 9.681808710098267,
+                "input_tokens": 636,
+                "output_tokens": 1318,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n虽然项目结构中存在 `results/report.html` 文件，但其内容仅为 `('', None)`，并非有效的 HTML 代码，也未包含任何结果或可视化内容，因此未满足生成包含结果和可视化的 HTML 报告的要求。\n</UNSATISFIED>"
+                ]
+            },
+            "total_time": 70.77233123779297
+        },
+        {
+            "requirement_index": 7,
+            "criteria": "包括与其他模型（例如Logistic Regression）的性能比较，以验证XGBoost模型的稳健性。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 16.905214309692383,
+                "input_tokens": 1205,
+                "output_tokens": 1285,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n提供的代码中 `src/data_loader.py` 和 `src/model.py` 仅包含占位符实现（例如 `return \"model placeholder\"`），未实际构建 XGBoost 模型或训练流程。代码中完全缺失与其他模型（如 Logistic Regression）的性能比较逻辑、评估指标计算及结果输出，无法验证模型稳健性。"
+                ]
+            },
+            "total_time": 111.65506434440613
+        },
+        {
+            "requirement_index": 8,
+            "criteria": "将XGBoost模型保存在`models/saved_models/`下。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 9.42642879486084,
+                "input_tokens": 1199,
+                "output_tokens": 1346,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n依据：提供的 `src/model.py` 中 `build_model()` 函数仅返回字符串占位符（\"model placeholder\"），并未实际实现 XGBoost 模型逻辑。此外，代码中没有任何保存模型到 `models/saved_models/` 目录的操作（如 `joblib.dump` 或 `pickle.dump`）。虽然目录结构存在，但功能未实现。"
+                ]
+            },
+            "total_time": 51.306567668914795
+        }
+    ]
+}

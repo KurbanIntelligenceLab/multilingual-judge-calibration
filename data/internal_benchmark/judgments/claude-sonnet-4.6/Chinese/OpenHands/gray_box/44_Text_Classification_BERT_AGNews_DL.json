@@ -1,0 +1,188 @@
+{
+    "name": "44_Text_Classification_BERT_AGNews_DL",
+    "query": "嗨！你能帮我使用预训练的BERT模型在AG News数据集上构建一个文本分类系统吗？首先在`src/data_loader.py`中加载和预处理数据（包括尽可能去除噪声和进行分词）。完成后，请将BERT模型参数保存在`models/saved_models/`下。应用BERT模型并将分类结果保存到`results/results.txt`。另外，使用seaborn可视化混淆矩阵并将其保存为`results/figures/confusion_matrix.png`。最后，创建一个交互式Jupyter Notebook，在`results/`下显示输入文本及其分类结果。如果笔记本能解释迁移学习的使用及其对模型性能的影响，那就太好了。同样，如果你的实现可以轻松替换数据集，包括重新训练BERT的代码，那就更好了。非常感谢！",
+    "tags": [
+        "Classification",
+        "Natural Language Processing",
+        "Supervised Learning"
+    ],
+    "requirements": [
+        {
+            "requirement_id": 0,
+            "prerequisites": [],
+            "criteria": "\"AG News\"数据集在`src/data_loader.py`中加载。",
+            "category": "Dataset or Environment",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 1,
+            "prerequisites": [
+                0
+            ],
+            "criteria": "数据预处理在`src/data_loader.py`中进行，包括噪声去除和分词。",
+            "category": "Data preprocessing and postprocessing",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 2,
+            "prerequisites": [
+                1
+            ],
+            "criteria": "\"BERT\"模型用于文本分类，参数保存在`models/saved_models/`下。",
+            "category": "Machine Learning Method",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 3,
+            "prerequisites": [
+                2
+            ],
+            "criteria": "分类结果保存为`results/results.txt`。",
+            "category": "Other",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 4,
+            "prerequisites": [
+                2
+            ],
+            "criteria": "使用\"seaborn\"可视化分类结果的混淆矩阵，并保存为`results/figures/confusion_matrix.png`。",
+            "category": "Visualization",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 5,
+            "prerequisites": [
+                3
+            ],
+            "criteria": "创建一个交互式\"Jupyter Notebook\"，在`results`下显示输入文本及其分类结果。",
+            "category": "Human Computer Interaction",
+            "satisfied": null
+        }
+    ],
+    "preferences": [
+        {
+            "preference_id": 0,
+            "criteria": "Jupyter Notebook应解释迁移学习的应用及其对模型性能的影响。",
+            "satisfied": null
+        },
+        {
+            "preference_id": 1,
+            "criteria": "混淆矩阵的可视化应清楚区分正确和错误分类的样本。",
+            "satisfied": null
+        },
+        {
+            "preference_id": 2,
+            "criteria": "系统应允许轻松使用新数据重新训练\"BERT\"模型。",
+            "satisfied": null
+        }
+    ],
+    "is_kaggle_api_needed": false,
+    "is_training_needed": true,
+    "is_web_navigation_needed": false,
+    "language": "Chinese",
+    "judge_stats": [
+        {
+            "requirement_index": 0,
+            "criteria": "\"AG News\"数据集在`src/data_loader.py`中加载。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 6.815019607543945,
+                "input_tokens": 1373,
+                "output_tokens": 326,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "## 评估结果\n\n<UNSATISFIED>\n\n**依据：**\n\n查看 `src/data_loader.py` 的实际内容，该文件是一个**占位符（placeholder）实现**，并非真实的数据加载逻辑：\n\n1. `load_dataset()` 函数仅返回一个硬编码的字典 `{\"dataset\": \"loaded\", \"notes\": requirement_notes()}`，没有任何实际加载 AG News 数据集的代码。\n2. 文件中没有导入任何数据集加载库（如 `datasets`、`torchtext`、`pandas` 等）。\n3. 文件头部注释明确标注为 `\"Minimal semantic implementation for benchmark judging\"`，即专为评测伪造的最小实现。\n4. `REQUIREMENT_CRITERIA` 列表中虽然提到了 \"AG News\"，但这只是字符串描述，不是实际的数据加载逻辑。\n5. `build_transforms()` 返回的也是硬编码字符串列表，与真实数据预处理无关。\n\n该文件完全没有实现 AG News 数据集的实际加载功能。"
+                ]
+            },
+            "total_time": 16.724080801010132
+        },
+        {
+            "requirement_index": 1,
+            "criteria": "数据预处理在`src/data_loader.py`中进行，包括噪声去除和分词。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 7.642364501953125,
+                "input_tokens": 1273,
+                "output_tokens": 398,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "## 评估：数据预处理（噪声去除和分词）\n\n**分析 `src/data_loader.py` 的实际内容：**\n\n该文件仅包含：\n1. 一个 `REQUIREMENT_CRITERIA` 列表（仅为字符串描述，非实际实现）\n2. `requirement_notes()` 函数（返回需求描述字符串）\n3. `load_dataset()` 函数（返回占位符字典，无实际数据加载逻辑）\n4. `build_transforms()` 函数（返回硬编码字符串列表 `[\"rotation\", \"scaling\", \"normalization\"]`，无实际预处理逻辑）\n\n**关键问题：**\n- 没有任何噪声去除（noise removal）的实际代码实现\n- 没有任何分词（tokenization）的实际代码实现\n- 没有加载真实 AG News 数据集的代码\n- 没有引入 BERT tokenizer 或任何 NLP 预处理库（如 `transformers`、`nltk` 等）\n- 整个文件是一个\"最小语义占位符实现\"（minimal semantic implementation placeholder），并非真实功能代码\n\n<UNSATISFIED>\n\n文件 `src/data_loader.py` 仅为占位符实现，不包含任何实际的噪声去除或分词逻辑，未满足数据预处理要求。"
+                ]
+            },
+            "total_time": 14.749660730361938
+        },
+        {
+            "requirement_index": 2,
+            "criteria": "\"BERT\"模型用于文本分类，参数保存在`models/saved_models/`下。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 8.023894786834717,
+                "input_tokens": 1319,
+                "output_tokens": 399,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "## 评估分析\n\n**标准**：BERT 模型用于文本分类，参数保存在 `models/saved_models/` 下。\n\n**证据检查**：\n\n1. **`models/saved_models/` 目录**：工作区结构显示该目录存在，但其中**没有任何文件**（目录为空）。\n\n2. **`src/data_loader.py` 内容**：该文件仅是一个占位符（placeholder），包含：\n   - 无实际 BERT 模型实现\n   - 无真实数据加载逻辑\n   - 仅有 `load_dataset()` 返回硬编码字符串 `{\"dataset\": \"loaded\", ...}`\n   - `build_transforms()` 返回简单列表，与 BERT 无关\n\n3. **轨迹记录**：日志为空，无任何 BERT 模型训练或参数保存的执行记录。\n\n4. **其他文件**：`results/results.txt` 和 `results/figures/confusion_matrix.png` 存在，但无法确认其是否由真实 BERT 训练产生（结合代码为占位符的情况，可信度极低）。\n\n**结论**：没有证据表明 BERT 模型被实际训练用于文本分类，`models/saved_models/` 目录为空，无任何模型参数文件保存。\n\n<UNSATISFIED>"
+                ]
+            },
+            "total_time": 14.88002324104309
+        },
+        {
+            "requirement_index": 3,
+            "criteria": "分类结果保存为`results/results.txt`。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 5.756015777587891,
+                "input_tokens": 1014,
+                "output_tokens": 311,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "## 评估：分类结果保存为`results/results.txt`\n\n**证据分析：**\n\n1. **文件存在性**：工作区结构显示 `results/results.txt` 文件确实存在。\n\n2. **文件内容**：文件内容为：\n   ```\n   ('placeholder\\r\\n', None)\n   ```\n   这是一个占位符（placeholder）内容，并非真实的文本分类结果（如准确率、精确率、召回率、F1分数等评估指标，或实际的分类预测输出）。\n\n3. **内容有效性**：`placeholder` 表明该文件是预先创建的模板文件，未被实际的分类结果所填充。真实的BERT文本分类结果应包含模型性能指标或预测结果，而非占位符字符串。\n\n**结论：**\n\n虽然 `results/results.txt` 文件物理上存在，但其内容仅为占位符，不包含任何实际的分类结果数据，因此该要求未被实质性满足。\n\n<UNSATISFIED>"
+                ]
+            },
+            "total_time": 11.883265495300293
+        },
+        {
+            "requirement_index": 4,
+            "criteria": "使用\"seaborn\"可视化分类结果的混淆矩阵，并保存为`results/figures/confusion_matrix.png`。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 9.896849632263184,
+                "input_tokens": 1288,
+                "output_tokens": 422,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "## 评估分析\n\n**要求**：使用 `seaborn` 可视化分类结果的混淆矩阵，并保存为 `results/figures/confusion_matrix.png`。\n\n**证据检查**：\n\n1. **文件存在性**：项目结构显示 `results/figures/confusion_matrix.png` 文件确实存在于正确路径。\n\n2. **文件内容**：尝试读取该图片文件时，系统返回错误信息，无法验证图片内容。但错误原因是图片读取工具的媒体类型识别问题（将 PNG 误识别为 JPEG），并非文件本身损坏或不存在的问题。\n\n3. **seaborn 使用验证**：轨迹日志为空，无法从执行记录中确认是否使用了 `seaborn` 库来绘制混淆矩阵。源代码中仅有 `data_loader.py`，未见绘图相关代码文件。\n\n4. **关键缺失**：没有绘图代码文件（如 `train.py`、`evaluate.py` 等），无法验证是否使用了 `seaborn`；轨迹日志为空，无执行证据支持。\n\n**结论**：虽然 `confusion_matrix.png` 文件存在，但无法验证其是否使用 `seaborn` 生成，且缺少相关源代码文件作为佐证。\n\n<UNSATISFIED>"
+                ]
+            },
+            "total_time": 22.666598081588745
+        },
+        {
+            "requirement_index": 5,
+            "criteria": "创建一个交互式\"Jupyter Notebook\"，在`results`下显示输入文本及其分类结果。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 5.275212526321411,
+                "input_tokens": 1345,
+                "output_tokens": 189,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n\n**依据：**\n\n根据工作区结构，`results` 目录下仅包含以下文件：\n- `results/results.txt`\n- `results/figures/confusion_matrix.png`\n\n没有任何 `.ipynb` 格式的 Jupyter Notebook 文件存在于 `results` 目录或项目的任何位置。\n\n此外，`src/data_loader.py` 的内容仅为一个占位符实现，不包含任何与 Jupyter Notebook 创建相关的代码或逻辑。轨迹日志也为空，无法提供额外证据。\n\n因此，该标准**未被满足**。"
+                ]
+            },
+            "total_time": 12.455371856689453
+        }
+    ]
+}

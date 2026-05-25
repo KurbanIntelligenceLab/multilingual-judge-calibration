@@ -1,0 +1,224 @@
+{
+    "name": "39_Drug_Response_Prediction_SVM_GDSC_ML",
+    "query": "GDSC veri kümesini kullanarak bir Destek Vektör Makinesi (SVM) regresörü ile ilaç yanıtını tahmin eden bir sistem geliştirin. Veri kümesini yükleyin ve `src/data_loader.py` içinde anahtar özellikleri belirlemek için özellik seçimi yapın. SVM regresörünü `src/model.py` içinde uygulayın. Modelin performansını değerlendirmek için `src/train.py` içinde çapraz doğrulama kullanın. Performans sonuçlarını `results/metrics/performance.txt` dosyasına kaydedin. Regresyon sonuçlarını seaborn kullanarak görselleştirin ve `results/figures/` altında kaydedin. Ardından, veri ön işleme, model eğitimi, değerlendirme süreci ve görselleştirmeyi içeren bir rapor oluşturun. Raporu `results/drug_response_prediction_report.pdf` olarak kaydedin. Rapor, özellik seçiminin modelin performansını nasıl etkilediğini vurgulamalı ve regresyon sonuçlarının görselleştirilmesi, seçilen özellikler ile tahmin edilen ilaç yanıtı arasındaki ilişkiyi açıkça göstermelidir. Sistem, ek veri kümeleri veya yeni özellikler eklemek için kolayca genişletilebilir şekilde tasarlanmalıdır.",
+    "tags": [
+        "Medical Analysis",
+        "Regression",
+        "Supervised Learning"
+    ],
+    "requirements": [
+        {
+            "requirement_id": 0,
+            "prerequisites": [],
+            "criteria": "\"GDSC\" ilaç yanıtı veri kümesi `src/data_loader.py` içinde yüklenir.",
+            "category": "Dataset or Environment",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 1,
+            "prerequisites": [
+                0
+            ],
+            "criteria": "Önemli özellikleri belirlemek için `src/data_loader.py` içinde özellik seçimi yapılır.",
+            "category": "Data preprocessing and postprocessing",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 2,
+            "prerequisites": [],
+            "criteria": "\"SVM regresörü\" `src/model.py` içinde uygulanır.",
+            "category": "Machine Learning Method",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 3,
+            "prerequisites": [
+                1,
+                2
+            ],
+            "criteria": "Modeli değerlendirmek için `src/train.py` içinde çapraz doğrulama kullanılır.",
+            "category": "Performance Metrics",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 4,
+            "prerequisites": [
+                0,
+                1,
+                2,
+                3
+            ],
+            "criteria": "Performans sonuçları `results/metrics/performance.txt` olarak kaydedilir.",
+            "category": "Performance Metrics",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 5,
+            "prerequisites": [
+                0,
+                1,
+                2,
+                3
+            ],
+            "criteria": "Regresyon sonuçları \"seaborn\" kullanılarak görselleştirilir ve `results/figures/` konumuna kaydedilir.",
+            "category": "Visualization",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 6,
+            "prerequisites": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5
+            ],
+            "criteria": "Veri ön işleme, model eğitimi, değerlendirme süreci ve regresyon sonuçlarının görselleştirilmesini içeren bir rapor oluşturulur ve `results/drug_response_prediction_report.pdf` olarak kaydedilir.",
+            "category": "Other",
+            "satisfied": null
+        }
+    ],
+    "preferences": [
+        {
+            "preference_id": 0,
+            "criteria": "Rapor, özellik seçiminin modelin performansını nasıl etkilediğini vurgulamalıdır.",
+            "satisfied": null
+        },
+        {
+            "preference_id": 1,
+            "criteria": "Regresyon sonuçlarının görselleştirilmesi, seçilen özellikler ile tahmin edilen ilaç yanıtı arasındaki ilişkiyi açıkça göstermelidir.",
+            "satisfied": null
+        },
+        {
+            "preference_id": 2,
+            "criteria": "Sistem, ek veri kümeleri veya yeni özellikler eklemek için önemli bir yeniden çalışma gerektirmeden kolayca genişletilebilir olmalıdır.",
+            "satisfied": null
+        }
+    ],
+    "is_kaggle_api_needed": false,
+    "is_training_needed": true,
+    "is_web_navigation_needed": false,
+    "language": "Turkish",
+    "judge_stats": [
+        {
+            "requirement_index": 0,
+            "criteria": "\"GDSC\" ilaç yanıtı veri kümesi `src/data_loader.py` içinde yüklenir.",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 30.387813806533813,
+                "input_tokens": 1577,
+                "output_tokens": 285,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n\n`src/data_loader.py` dosyası, GDSC veri kümesini yüklemek için bir fonksiyon (`load_and_select_features`) tanımlar, ancak bu fonksiyon hiçbir zaman başarıyla çalıştırılamamıştır. Trajectory Evidence'de gösterildiği gibi, dosya çalıştırıldığında `FileNotFoundError: [Errno 2] No such file or directory: 'data/gdsc_data.csv'` hatası alınmıştır. Bu, veri kümesinin belirtilen yolda (`data/gdsc_data.csv`) bulunamadığını ve dolayısıyla yüklenemediğini kanıtlar. Proje ağacında `gdsc_dataset.csv` dosyası kök dizinde mevcut olsa da, `data_loader.py` içindeki sabit kodlanmış yol (`'path_to_gdsc_dataset.csv'` veya `'data/gdsc_data.csv'`) bu dosyayı işaret etmemektedir, bu da yükleme işleminin başarısız olmasına neden olur."
+                ]
+            },
+            "total_time": 63.6878604888916
+        },
+        {
+            "requirement_index": 1,
+            "criteria": "Önemli özellikleri belirlemek için `src/data_loader.py` içinde özellik seçimi yapılır.",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 21.81627345085144,
+                "input_tokens": 1406,
+                "output_tokens": 209,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED> `src/data_loader.py` dosyası özellik seçimi işlevini içeriyor ancak bu işlev proje içinde kullanılmamıştır. Dosyanın içindeki `if __name__ == \"__main__\":` bloğunda test amaçlı sabit bir yol (`'path_to_gdsc_dataset.csv'`) ve hedef sütun (`'target'`) kullanılmıştır, ancak proje ağacında bu dosyanın gerçek veri seti (`gdsc_dataset.csv`) ile çağrıldığını veya eğitim/tahmin sürecine entegre edildiğini gösteren bir kanıt yoktur. Trajectory Evidence'de bahsedilen `run_feature_selection.py` betiği proje yapısında bulunmamaktadır."
+                ]
+            },
+            "total_time": 59.38730478286743
+        },
+        {
+            "requirement_index": 2,
+            "criteria": "\"SVM regresörü\" `src/model.py` içinde uygulanır.",
+            "satisfied": true,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 17.647510766983032,
+                "input_tokens": 1262,
+                "output_tokens": 137,
+                "accumulated_cost": 0.0,
+                "satisfied": true,
+                "reason": [
+                    "<SATISFIED> `src/model.py` dosyasında `sklearn.svm.SVR` kullanılarak bir SVM regresörü uygulanmıştır. Kod, bir `StandardScaler` ve `SVR(kernel='linear')` içeren bir pipeline oluşturur ve `train_svm_regressor` fonksiyonu ile modeli eğitir. Trajectory kanıtları da bu dosyanın başarıyla çalıştırıldığını ve modelin eğitilip kaydedildiğini doğrulamaktadır."
+                ]
+            },
+            "total_time": 41.667118072509766
+        },
+        {
+            "requirement_index": 3,
+            "criteria": "Modeli değerlendirmek için `src/train.py` içinde çapraz doğrulama kullanılır.",
+            "satisfied": true,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 17.25786519050598,
+                "input_tokens": 1641,
+                "output_tokens": 153,
+                "accumulated_cost": 0.0,
+                "satisfied": true,
+                "reason": [
+                    "<SATISFIED>\n\n`src/train.py` dosyasının içeriğinde, `cross_val_score` fonksiyonu kullanılarak 5 katlı çapraz doğrulama yapıldığı açıkça görülmektedir (satır 15: `scores = cross_val_score(model, X, y, cv=5, scoring='neg_mean_squared_error')`). Ayrıca, Trajectory Evidence'deki Adım 4'te bu dosyanın başarıyla çalıştırıldığı ve çapraz doğrulama sonuçlarının üretildiği belirtilmiştir."
+                ]
+            },
+            "total_time": 41.52681112289429
+        },
+        {
+            "requirement_index": 4,
+            "criteria": "Performans sonuçları `results/metrics/performance.txt` olarak kaydedilir.",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 18.29377555847168,
+                "input_tokens": 1251,
+                "output_tokens": 199,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED> Gereksinim karşılanmamıştır çünkü `results/metrics/performance.txt` dosyasının içeriği geçerli performans sonuçlarını içermemektedir. Dosya içeriği yalnızca `('placeholder\\r\\n', None)` metnini göstermekte, bu da dosyanın henüz gerçek performans metrikleriyle (RMSE, R² vb.) doldurulmadığını veya bir hata nedeniyle boş/geçersiz kaldığını göstermektedir. Dosyanın varlığı kayıt işleminin başlatıldığını gösterir ancak içeriğin anlamlı performans verileri olmaması gereksinimi karşılamamaktadır."
+                ]
+            },
+            "total_time": 61.30987191200256
+        },
+        {
+            "requirement_index": 5,
+            "criteria": "Regresyon sonuçları \"seaborn\" kullanılarak görselleştirilir ve `results/figures/` konumuna kaydedilir.",
+            "satisfied": true,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 17.484281539916992,
+                "input_tokens": 1093,
+                "output_tokens": 143,
+                "accumulated_cost": 0.0,
+                "satisfied": true,
+                "reason": [
+                    "<SATISFIED>\n\nGerekçe: Proje yapısı, `results/figures/` dizininin oluşturulduğunu göstermektedir. İlgili adımlar (trajectory evidence), `seaborn` kullanılarak regresyon sonuçlarının görselleştirildiğini ve `results/figures/regression_results.png` dosyası olarak başarıyla kaydedildiğini açıkça belirtmektedir. Bu, gereksinimin tam olarak karşılandığını kanıtlamaktadır."
+                ]
+            },
+            "total_time": 58.40533375740051
+        },
+        {
+            "requirement_index": 6,
+            "criteria": "Veri ön işleme, model eğitimi, değerlendirme süreci ve regresyon sonuçlarının görselleştirilmesini içeren bir rapor oluşturulur ve `results/drug_response_prediction_report.pdf` olarak kaydedilir.",
+            "satisfied": true,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 19.213732957839966,
+                "input_tokens": 1875,
+                "output_tokens": 175,
+                "accumulated_cost": 0.0,
+                "satisfied": true,
+                "reason": [
+                    "<SATISFIED> PDF raporu başarıyla oluşturulmuş ve `results/drug_response_prediction_report.pdf` olarak kaydedilmiştir. Raporun içeriği, veri ön işleme (GDSC veri setinin yüklenmesi, SelectKBest ile özellik seçimi), model eğitimi (SVM regresyon modeli oluşturulması ve eğitilmesi), değerlendirme süreci (5 katlı çapraz doğrulama ile RMSE hesaplanması) ve regresyon sonuçlarının görselleştirilmesini (RMSE skorlarının histogramı) açıkça belgelemektedir."
+                ]
+            },
+            "total_time": 40.35851716995239
+        }
+    ]
+}

@@ -1,0 +1,223 @@
+{
+    "name": "36_Music_Emotion_Classification_SVM_GTZAN_ML",
+    "query": "मुझे GTZAN डेटासेट का उपयोग करके SVM मॉडल के साथ संगीत भावना वर्गीकरण के लिए एक प्रोजेक्ट विकसित करने में मदद करें। प्रोजेक्ट में शोर हटाने और सामान्यीकरण के लिए librosa का उपयोग करके ऑडियो पूर्वप्रसंस्करण, 13 गुणांक के साथ MFCC फीचर निष्कर्षण, और हाइपरपैरामीटर ट्यूनिंग के साथ एक रैखिक SVM वर्गीकरणकर्ता का उपयोग शामिल होना चाहिए। डेटासेट लोडिंग, ऑडियो पूर्वप्रसंस्करण, जिसमें शोर हटाना और सामान्यीकरण शामिल है, और MFCC फीचर निष्कर्षण को `src/data_loader.py` में लागू किया जाना चाहिए। SVM वर्गीकरणकर्ता को `src/model.py` में लागू करें। वर्गीकरण परिणामों को `results/predictions.txt` में सहेजें, librosa के साथ ऑडियो स्पेक्ट्रोग्राम को दृश्य बनाएं (उन्हें `results/figures/` में सहेजें), और `src/app.py` में Streamlit के साथ एक इंटरैक्टिव वेबपेज बनाएं जो वास्तविक समय में ऑडियो फ़ाइल अपलोड की अनुमति देता है और `results/figures/` में दोनों वर्गीकरण परिणाम और स्पेक्ट्रोग्राम प्रदर्शित करता है। Streamlit वेबपेज के लॉन्च और समाप्ति के स्वचालित प्रबंधन पर ध्यान देकर संसाधन प्रबंधन को कुशल बनाएं।",
+    "tags": [
+        "Audio Processing",
+        "Classification"
+    ],
+    "requirements": [
+        {
+            "requirement_id": 0,
+            "prerequisites": [],
+            "criteria": "\"GTZAN\" संगीत भावना को `src/data_loader.py` में लोड किया गया है।",
+            "category": "Dataset or Environment",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 1,
+            "prerequisites": [
+                0
+            ],
+            "criteria": "ऑडियो पूर्वप्रसंस्करण, जिसमें शोर हटाना और सामान्यीकरण शामिल है, `src/data_loader.py` में किया जाता है।",
+            "category": "Data preprocessing and postprocessing",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 2,
+            "prerequisites": [
+                0,
+                1
+            ],
+            "criteria": "MFCC फीचर निष्कर्षण `src/data_loader.py` में लागू किया गया है।",
+            "category": "Data preprocessing and postprocessing",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 3,
+            "prerequisites": [
+                1,
+                2
+            ],
+            "criteria": "\"SVM वर्गीकरणकर्ता\" को `src/model.py` में लागू किया गया है।",
+            "category": "Machine Learning Method",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 4,
+            "prerequisites": [
+                3
+            ],
+            "criteria": "वर्गीकरण परिणाम `results/predictions.txt` में सहेजे जाते हैं।",
+            "category": "Other",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 5,
+            "prerequisites": [
+                0,
+                1,
+                2,
+                3
+            ],
+            "criteria": "ऑडियो स्पेक्ट्रोग्राम को \"librosa\" के साथ दृश्य बनाया जाता है और `results/figures/` में सहेजा जाता है।",
+            "category": "Visualization",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 6,
+            "prerequisites": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5
+            ],
+            "criteria": "एक इंटरैक्टिव वेब पेज `src/app.py` में \"Streamlit\" का उपयोग करके बनाया गया है जो `results/figures/` में वर्गीकरण परिणाम और स्पेक्ट्रोग्राम प्रदर्शित करता है।",
+            "category": "Human Computer Interaction",
+            "satisfied": null
+        }
+    ],
+    "preferences": [
+        {
+            "preference_id": 0,
+            "criteria": "\"Streamlit\" वेबपेज उपयोगकर्ताओं को नई ऑडियो फ़ाइलें अपलोड करने और वास्तविक समय में वर्गीकरण परिणाम देखने की अनुमति देनी चाहिए।",
+            "satisfied": null
+        },
+        {
+            "preference_id": 1,
+            "criteria": "स्पेक्ट्रोग्राम दृश्य में गहराई से विश्लेषण के लिए आवृत्ति सीमा और समय संकल्प को समायोजित करने के विकल्प शामिल होने चाहिए।",
+            "satisfied": null
+        },
+        {
+            "preference_id": 2,
+            "criteria": "सिस्टम को विशेष रूप से Streamlit वेबपेज के लॉन्च और समाप्ति के प्रबंधन पर कुशल संसाधन प्रबंधन करना चाहिए।",
+            "satisfied": null
+        }
+    ],
+    "is_kaggle_api_needed": false,
+    "is_training_needed": true,
+    "is_web_navigation_needed": false,
+    "language": "Hindi",
+    "judge_stats": [
+        {
+            "requirement_index": 0,
+            "criteria": "\"GTZAN\" संगीत भावना को `src/data_loader.py` में लोड किया गया है।",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 4.59378981590271,
+                "input_tokens": 1488,
+                "output_tokens": 142,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n\n`src/data_loader.py` में GTZAN dataset को वास्तव में लोड करने का कोई implementation नहीं है। फ़ाइल में केवल एक placeholder function `load_dataset()` है जो `{\"dataset\": \"loaded\", \"notes\": requirement_notes()}` return करता है — यह सिर्फ एक dummy dictionary है, न कि actual GTZAN dataset loading। कोई file path reading, audio file parsing, या real dataset loading logic मौजूद नहीं है।"
+                ]
+            },
+            "total_time": 14.460160493850708
+        },
+        {
+            "requirement_index": 1,
+            "criteria": "ऑडियो पूर्वप्रसंस्करण, जिसमें शोर हटाना और सामान्यीकरण शामिल है, `src/data_loader.py` में किया जाता है।",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 4.23002028465271,
+                "input_tokens": 1657,
+                "output_tokens": 160,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n\n`src/data_loader.py` में केवल placeholder code है। `build_transforms()` function में `[\"rotation\", \"scaling\", \"normalization\"]` की एक string list return की गई है, जो कि actual audio preprocessing नहीं है। शोर हटाने (noise removal) और normalization के लिए कोई वास्तविक implementation (जैसे `librosa`, `scipy`, या किसी audio processing library का उपयोग) मौजूद नहीं है। यह फ़ाइल केवल benchmark judging के लिए minimal semantic placeholder है।"
+                ]
+            },
+            "total_time": 13.820859432220459
+        },
+        {
+            "requirement_index": 2,
+            "criteria": "MFCC फीचर निष्कर्षण `src/data_loader.py` में लागू किया गया है।",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 3.9456427097320557,
+                "input_tokens": 1518,
+                "output_tokens": 189,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n\n`src/data_loader.py` में MFCC feature extraction का कोई वास्तविक implementation नहीं है। फ़ाइल में केवल placeholder functions (`load_dataset()`, `build_transforms()`) हैं जो सिर्फ dummy data return करते हैं। MFCC extraction के लिए आवश्यक libraries (जैसे `librosa`, `scipy`) का कोई import नहीं है और न ही कोई actual MFCC computation code मौजूद है। `REQUIREMENT_CRITERIA` list में MFCC का उल्लेख केवल string के रूप में है, न कि functional code के रूप में।"
+                ]
+            },
+            "total_time": 10.815597295761108
+        },
+        {
+            "requirement_index": 3,
+            "criteria": "\"SVM वर्गीकरणकर्ता\" को `src/model.py` में लागू किया गया है।",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 4.872359991073608,
+                "input_tokens": 1632,
+                "output_tokens": 190,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n\n`src/model.py` की सामग्री देखने पर स्पष्ट है कि यह केवल एक **placeholder/stub** फ़ाइल है। इसमें:\n- कोई वास्तविक SVM classifier implement नहीं किया गया है\n- `sklearn.svm.SVC` या कोई अन्य SVM library import नहीं की गई\n- `build_model()` फ़ंक्शन केवल एक string `\"model placeholder\"` return करता है\n- फ़ाइल में केवल `KEYWORDS = [\"SVM classifier\", \"svm\"]` जैसी metadata है, न कि actual implementation"
+                ]
+            },
+            "total_time": 13.023926734924316
+        },
+        {
+            "requirement_index": 4,
+            "criteria": "वर्गीकरण परिणाम `results/predictions.txt` में सहेजे जाते हैं।",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 3.563417673110962,
+                "input_tokens": 1242,
+                "output_tokens": 127,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n\n`results/predictions.txt` फ़ाइल मौजूद है, लेकिन इसमें केवल `('placeholder\\r\\n', None)` लिखा है — यह वास्तविक वर्गीकरण परिणाम नहीं है, बल्कि एक placeholder मान है। फ़ाइल में कोई actual SVM predictions या music emotion classification results नहीं हैं।"
+                ]
+            },
+            "total_time": 10.336020231246948
+        },
+        {
+            "requirement_index": 5,
+            "criteria": "ऑडियो स्पेक्ट्रोग्राम को \"librosa\" के साथ दृश्य बनाया जाता है और `results/figures/` में सहेजा जाता है।",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 3.146573066711426,
+                "input_tokens": 2151,
+                "output_tokens": 152,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n\n**कारण:** कोड फ़ाइलों (`data_loader.py`, `model.py`, `app.py`) में `librosa` का उपयोग करके spectrogram visualization का कोई implementation नहीं है। `results/figures/` directory खाली है (कोई figure files नहीं)। `data_loader.py` में केवल placeholder functions हैं जो MFCC का उल्लेख करती हैं लेकिन actual `librosa` spectrogram code अनुपस्थित है।"
+                ]
+            },
+            "total_time": 13.61672306060791
+        },
+        {
+            "requirement_index": 6,
+            "criteria": "एक इंटरैक्टिव वेब पेज `src/app.py` में \"Streamlit\" का उपयोग करके बनाया गया है जो `results/figures/` में वर्गीकरण परिणाम और स्पेक्ट्रोग्राम प्रदर्शित करता है।",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 3.2816598415374756,
+                "input_tokens": 1679,
+                "output_tokens": 143,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n\n`src/app.py` में वास्तविक Streamlit कोड नहीं है। फ़ाइल में केवल एक minimal stub/placeholder है जो सिर्फ requirement criteria और keywords को string के रूप में define करता है। इसमें कोई `import streamlit`, `st.` calls, spectrogram display logic, या `results/figures/` से files load करने का कोई कोड नहीं है। यह एक functional Streamlit web app नहीं है।"
+                ]
+            },
+            "total_time": 13.510347127914429
+        }
+    ]
+}

@@ -1,0 +1,157 @@
+{
+    "name": "02_Maze_Solver_Q_Learning_Gridworld_RL",
+    "query": "¿Puedes ayudarme a crear un sistema para resolver tareas de Gridworld tipo laberinto utilizando el algoritmo de Q-learning? El sistema debe usar numpy para hacer los cálculos principales más eficientes y matplotlib para las visualizaciones. El algoritmo de Q-learning debe implementarse en `src/train.py`, y el entorno Gridworld, apropiadamente nombrado, debe implementarse en `src/env.py` de tal manera que se pueda especificar el tamaño de la cuadrícula y las posiciones de inicio/fin al instanciarlo. El sistema necesita registrar la curva de aprendizaje durante el entrenamiento, rastreando episodios y sus retornos correspondientes, y guardarla como `results/figures/learning_curve.png`. Además, me gustaría que visualices y guardes los caminos tomados por el agente en cada episodio en un archivo llamado `results/figures/path_changes.gif`, y guardes el modelo entrenado como `models/saved_models/q_learning_model.npy`. Sería genial tener algún tipo de retroalimentación en tiempo real durante el entrenamiento, como ver el progreso u obtener actualizaciones sobre cómo está aprendiendo el modelo. También, si puedes, por favor intenta escribir el código de una manera que sea fácil de modificar o extender más adelante.",
+    "tags": [
+        "Reinforcement Learning"
+    ],
+    "requirements": [
+        {
+            "requirement_id": 0,
+            "prerequisites": [],
+            "criteria": "El algoritmo \"Q-learning\" se utiliza en `src/train.py`.",
+            "category": "Machine Learning Method",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 1,
+            "prerequisites": [],
+            "criteria": "El entorno \"Gridworld\" se define en `src/env.py` con la capacidad para que un usuario especifique un tamaño de cuadrícula y posiciones de inicio/fin.",
+            "category": "Dataset or Environment",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 2,
+            "prerequisites": [
+                0,
+                1
+            ],
+            "criteria": "Las curvas de aprendizaje se registran durante el entrenamiento y se guardan como `results/figures/learning_curve.png`. Se registran episodios y retornos.",
+            "category": "Visualization",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 3,
+            "prerequisites": [
+                0,
+                1,
+                2
+            ],
+            "criteria": "El modelo aprendido se guarda como `models/saved_models/q_learning_model.npy`.",
+            "category": "Save Trained Model",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 4,
+            "prerequisites": [
+                0,
+                1
+            ],
+            "criteria": "Los caminos tomados durante el aprendizaje se visualizan y guardan como `results/figures/path_changes.gif`.",
+            "category": "Visualization",
+            "satisfied": null
+        }
+    ],
+    "preferences": [
+        {
+            "preference_id": 0,
+            "criteria": "Se debe mostrar algún progreso o retroalimentación en tiempo real durante el proceso de entrenamiento.",
+            "satisfied": null
+        },
+        {
+            "preference_id": 1,
+            "criteria": "El código debe escribirse de una manera que sea fácil de modificar o extender más adelante.",
+            "satisfied": null
+        }
+    ],
+    "is_kaggle_api_needed": false,
+    "is_training_needed": true,
+    "is_web_navigation_needed": false,
+    "language": "Spanish",
+    "judge_stats": [
+        {
+            "requirement_index": 0,
+            "criteria": "El algoritmo \"Q-learning\" se utiliza en `src/train.py`.",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.3108139038085938,
+                "input_tokens": 1424,
+                "output_tokens": 108,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED> `src/train.py` does not implement or invoke a Q-learning algorithm. The `train()` function only iterates over `range(num_steps)` and sums `score += step`, with no Q-table, state/action updates, Bellman update, policy selection, or environment interaction. The only mentions of “Q-learning” appear in string literals such as `REQUIREMENT_CRITERIA` and the artifact filename `q_learning_model.npy`, which are not evidence of actual algorithm use."
+                ]
+            },
+            "total_time": 10.89109492301941
+        },
+        {
+            "requirement_index": 1,
+            "criteria": "El entorno \"Gridworld\" se define en `src/env.py` con la capacidad para que un usuario especifique un tamaño de cuadrícula y posiciones de inicio/fin.",
+            "satisfied": true,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 1.7295007705688477,
+                "input_tokens": 1189,
+                "output_tokens": 106,
+                "accumulated_cost": 0.0,
+                "satisfied": true,
+                "reason": [
+                    "<SATISFIED> `src/env.py` defines a `Gridworld` class, and its constructor explicitly allows user-specified `grid_size`, `start`, and `end` parameters: `def __init__(self, grid_size=(5, 5), start=(0, 0), end=(4, 4))`. These values are stored as `self.grid_size`, `self.start`, and `self.end`, which satisfies the requirement for configurable grid size and start/end positions."
+                ]
+            },
+            "total_time": 6.4603354930877686
+        },
+        {
+            "requirement_index": 2,
+            "criteria": "Las curvas de aprendizaje se registran durante el entrenamiento y se guardan como `results/figures/learning_curve.png`. Se registran episodios y retornos.",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.3430697917938232,
+                "input_tokens": 1245,
+                "output_tokens": 119,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED> The evidence indicates this requirement is not reliably met: the latest relevant test run (`pytest tests/test_training.py -q`) failed with `AssertionError: Training should log total rewards or episode rewards` and `AssertionError: Training should plot and save learning curve`. Although a file exists at `results/figures/learning_curve.png`, it could not be read as a valid image (`\"does not represent a valid image\"`), so there is no solid evidence that episodes/returns were logged correctly or that a valid learning curve was saved."
+                ]
+            },
+            "total_time": 8.885990381240845
+        },
+        {
+            "requirement_index": 3,
+            "criteria": "El modelo aprendido se guarda como `models/saved_models/q_learning_model.npy`.",
+            "satisfied": true,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 1.7101268768310547,
+                "input_tokens": 972,
+                "output_tokens": 48,
+                "accumulated_cost": 0.0,
+                "satisfied": true,
+                "reason": [
+                    "<SATISFIED> The workspace tree explicitly shows the file `models/saved_models/q_learning_model.npy` present under `models\\saved_models`, which matches the required save path and filename for the learned model."
+                ]
+            },
+            "total_time": 5.704535245895386
+        },
+        {
+            "requirement_index": 4,
+            "criteria": "Los caminos tomados durante el aprendizaje se visualizan y guardan como `results/figures/path_changes.gif`.",
+            "satisfied": true,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 1.638159990310669,
+                "input_tokens": 1439,
+                "output_tokens": 50,
+                "accumulated_cost": 0.0,
+                "satisfied": true,
+                "reason": [
+                    "<SATISFIED>: The workspace contains the file `results/figures/path_changes.gif`, and the trajectory evidence explicitly states that the visualization of paths taken during learning was generated and saved at that exact location without reported errors."
+                ]
+            },
+            "total_time": 12.53102445602417
+        }
+    ]
+}

@@ -1,0 +1,215 @@
+{
+    "name": "27_Image_Generation_DCGAN_MNIST_DL",
+    "query": "I need to create a system for image generation using a DCGAN model with the MNIST`dataset. Load the MNIST dataset in `src/data_loader.py` and implement the DCGAN model in `src/model.py`. The system should ensure the use of the correct DCGAN architecture, save the generated images to `results/figures/`, monitor the model training by recording training loss under `results/metrics/` and generated images under `results/figures/`, and perform a hyperparameter search on the generation parameters such as noise vector dimensions and learning rate in `src/train.py` to improve performance. Additionally, create and save a GIF animation of the generated images to `results/figures/generated_images.gif`, present the training process and results in a well-structured Jupyter Notebook, and convert the Notebook into a polished PDF report saved as `results/training_report.pdf`. The DCGAN model architecture should be clearly documented in the Notebook to avoid confusion with other GAN variants.",
+    "tags": [
+        "Computer Vision",
+        "Generative Models"
+    ],
+    "requirements": [
+        {
+            "requirement_id": 0,
+            "prerequisites": [],
+            "criteria": "The \"MNIST\" dataset is loaded in `src/data_loader.py`.",
+            "category": "Dataset or Environment",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 1,
+            "prerequisites": [],
+            "criteria": "The \"DCGAN\" model, not a standard GAN, is implemented in `src/model.py`.",
+            "category": "Machine Learning Method",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 2,
+            "prerequisites": [
+                0,
+                1
+            ],
+            "criteria": "Generated images are saved to the specified folder `results/figures/`.",
+            "category": "Save Trained Model",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 3,
+            "prerequisites": [
+                0,
+                1
+            ],
+            "criteria": "The model training is monitored by recording training loss saved under `results/metrics/`",
+            "category": "Performance Metrics",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 4,
+            "prerequisites": [
+                0,
+                1
+            ],
+            "criteria": "A hyperparameter search method to search parameters such as noise vector dimensions and learning rate is implemented in `src/train.py` to improve model performance.",
+            "category": "Machine Learning Method",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 5,
+            "prerequisites": [
+                1,
+                2,
+                3,
+                4
+            ],
+            "criteria": "A GIF animation of generated images is created and saved as `results/figures/generated_images.gif`.",
+            "category": "Visualization",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 6,
+            "prerequisites": [
+                1,
+                2,
+                3,
+                4
+            ],
+            "criteria": "The training process and results are presented in a Jupyter Notebook, and converted to a PDF report, and saved as `results/training_report.pdf`.",
+            "category": "Visualization",
+            "satisfied": null
+        }
+    ],
+    "preferences": [
+        {
+            "preference_id": 0,
+            "criteria": "The DCGAN model architecture should be clearly documented in the Notebook to avoid confusion with other GAN variants.",
+            "satisfied": null
+        },
+        {
+            "preference_id": 1,
+            "criteria": "The PDF report should be well-structured, with clear sections for model architecture, training process, results, and future improvements.",
+            "satisfied": null
+        }
+    ],
+    "is_kaggle_api_needed": false,
+    "is_training_needed": true,
+    "is_web_navigation_needed": false,
+    "hint": "Saving figures is mentioned twice, i.e., once in requirement 2 and once in requirement 3.",
+    "judge_stats": [
+        {
+            "requirement_index": 0,
+            "criteria": "The \"MNIST\" dataset is loaded in `src/data_loader.py`.",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 4.108675003051758,
+                "input_tokens": 1395,
+                "output_tokens": 163,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n\nThe `src/data_loader.py` file does not actually load the MNIST dataset. Instead, it contains a placeholder/stub implementation that only defines metadata strings and dummy functions. The `load_dataset()` function simply returns a hardcoded dictionary `{\"dataset\": \"loaded\", \"notes\": requirement_notes()}` without any actual MNIST data loading logic. There is no import of torchvision datasets, no `torchvision.datasets.MNIST(...)` call, no DataLoader instantiation, and no actual data pipeline. The file appears to be a minimal semantic placeholder that references \"MNIST\" only in comment strings and a `KEYWORDS` list, not in functional code that actually loads the dataset."
+                ]
+            },
+            "total_time": 14.195442914962769
+        },
+        {
+            "requirement_index": 1,
+            "criteria": "The \"DCGAN\" model, not a standard GAN, is implemented in `src/model.py`.",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 6.152806520462036,
+                "input_tokens": 1401,
+                "output_tokens": 161,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n\nThe `src/model.py` file does not implement a DCGAN model. Instead, it contains only a minimal placeholder/stub implementation with no actual neural network architecture. The file defines a `REQUIREMENT_CRITERIA` list and a `build_model()` function that simply returns a string placeholder (\"model placeholder\") rather than any actual DCGAN architecture. There are no PyTorch/TensorFlow layers, no Generator or Discriminator classes with convolutional/transposed convolutional layers (which are the defining characteristics of DCGAN), and no actual model implementation whatsoever. The file appears to be a fake stub created to superficially reference the DCGAN keyword without implementing the actual architecture."
+                ]
+            },
+            "total_time": 13.221593618392944
+        },
+        {
+            "requirement_index": 2,
+            "criteria": "Generated images are saved to the specified folder `results/figures/`.",
+            "satisfied": true,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 4.679947137832642,
+                "input_tokens": 2314,
+                "output_tokens": 177,
+                "accumulated_cost": 0.0,
+                "satisfied": true,
+                "reason": [
+                    "<SATISFIED>\n\nThe file `results/figures/generated_images.gif` exists in the project structure (confirmed in the workspace tree). The `train.py` file contains a `save_expected_artifacts` function that explicitly creates and writes to `results/figures/generated_images.gif`:\n\n```python\ntarget = root / Path(\"results/figures/generated_images.gif\")\ntarget.parent.mkdir(parents=True, exist_ok=True)\nif not target.exists():\n    target.write_text('generated by minimal semantic train.py\\n', encoding='utf-8')\n```\n\nThe workspace structure confirms the file was created at `results\\figures\\generated_images.gif`, satisfying the requirement that generated images are saved to the `results/figures/` folder."
+                ]
+            },
+            "total_time": 11.861666202545166
+        },
+        {
+            "requirement_index": 3,
+            "criteria": "The model training is monitored by recording training loss saved under `results/metrics/`",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 4.663680076599121,
+                "input_tokens": 2346,
+                "output_tokens": 191,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n\nThe project structure shows that `results/metrics/` directory exists but contains no files. Examining the source code:\n\n- `train.py` only implements a minimal training loop (`train()`) that accumulates a score but does not record any training loss metrics\n- The `save_expected_artifacts()` function in `train.py` only creates `results/figures/generated_images.gif` and `results/training_report.pdf` — no metrics files are saved to `results/metrics/`\n- Neither `model.py` nor `data_loader.py` contain any loss monitoring or metrics logging functionality\n- The `results/metrics/` directory is empty (no files listed in the workspace structure)\n\nThere is no code that records training loss and saves it under `results/metrics/`, and no such files exist in that directory."
+                ]
+            },
+            "total_time": 11.90705919265747
+        },
+        {
+            "requirement_index": 4,
+            "criteria": "A hyperparameter search method to search parameters such as noise vector dimensions and learning rate is implemented in `src/train.py` to improve model performance.",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 5.324438571929932,
+                "input_tokens": 1649,
+                "output_tokens": 203,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n\nThe `src/train.py` file contains only a minimal stub implementation that does not implement any hyperparameter search method. The code consists of:\n\n1. A trivial `train()` function that simply iterates and accumulates a sum (`score += step`) with no actual DCGAN training logic.\n2. A `save_expected_artifacts()` function that creates placeholder text files.\n3. No hyperparameter search logic whatsoever — no grid search, random search, Bayesian optimization, or any framework (e.g., Optuna, Ray Tune, Keras Tuner) for searching parameters like noise vector dimensions or learning rate.\n\nThe file explicitly labels itself as a \"Minimal semantic implementation for benchmark judging,\" confirming it is not a real implementation. The requirement for a hyperparameter search method to tune parameters such as noise vector dimensions and learning rate is completely absent."
+                ]
+            },
+            "total_time": 13.03905725479126
+        },
+        {
+            "requirement_index": 5,
+            "criteria": "A GIF animation of generated images is created and saved as `results/figures/generated_images.gif`.",
+            "satisfied": true,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 5.027037620544434,
+                "input_tokens": 1422,
+                "output_tokens": 145,
+                "accumulated_cost": 0.0,
+                "satisfied": true,
+                "reason": [
+                    "<SATISFIED>\n\nThe file `results/figures/generated_images.gif` exists in the workspace, as confirmed by the project tree structure showing `results\\figures\\generated_images.gif`. The file is present at the expected path. The error in the file content reading is due to the evaluation tool attempting to read the GIF as a JPEG image (a tool-side error: \"The image was specified using the image/jpeg media type, but the image appears to be a image/gif image\"), not an indication that the file is missing or corrupt. The GIF file was successfully created and saved at the required location `results/figures/generated_images.gif`."
+                ]
+            },
+            "total_time": 15.20236325263977
+        },
+        {
+            "requirement_index": 6,
+            "criteria": "The training process and results are presented in a Jupyter Notebook, and converted to a PDF report, and saved as `results/training_report.pdf`.",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 3.7476601600646973,
+                "input_tokens": 1143,
+                "output_tokens": 106,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n\nThe file `results/training_report.pdf` exists in the workspace, but when attempting to read it, the error message states: \"Cannot read an empty file.\" This indicates the PDF file is empty and contains no actual content. Therefore, while the file path is correct, the requirement that the training process and results be presented in a Jupyter Notebook and converted to a meaningful PDF report is not fulfilled — the resulting PDF is an empty file with no training content."
+                ]
+            },
+            "total_time": 10.215027570724487
+        }
+    ]
+}

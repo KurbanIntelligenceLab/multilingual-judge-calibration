@@ -1,0 +1,215 @@
+{
+    "name": "33_Object_Detection_YOLOv3_COCO_DL",
+    "query": "帮助我使用YOLOv3模型和COCO数据集开发一个目标检测系统。在`src/data_loader.py`中下载数据集并通过调整大小和归一化来预处理图像。在`src/model.py`中实现YOLOv3模型，并使用非极大值抑制（NMS）来优化结果。将检测到的对象保存到`results/figures/`，并在`src/app.py`中创建一个交互式Streamlit网页以显示检测结果。最后，评估模型的性能，包括mAP和推理时间等指标，并将评估结果保存到`results/metrics/model_performance.txt`。系统应正确管理Streamlit应用程序的启动和终止，以防止不必要的资源使用。",
+    "tags": [
+        "Computer Vision"
+    ],
+    "requirements": [
+        {
+            "requirement_id": 0,
+            "prerequisites": [],
+            "criteria": "在`src/data_loader.py`中实现\"COCO\"数据集的下载。",
+            "category": "Dataset or Environment",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 1,
+            "prerequisites": [
+                0
+            ],
+            "criteria": "在`src/data_loader.py`中进行数据预处理，包括调整图像大小和归一化。",
+            "category": "Data preprocessing and postprocessing",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 2,
+            "prerequisites": [],
+            "criteria": "在`src/model.py`中实现\"YOLOv3\"模型。",
+            "category": "Machine Learning Method",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 3,
+            "prerequisites": [
+                1,
+                2
+            ],
+            "criteria": "应用\"非极大值抑制\"（NMS）来优化检测结果。请在`src/model.py`中实现此功能。",
+            "category": "Data preprocessing and postprocessing",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 4,
+            "prerequisites": [
+                2,
+                3
+            ],
+            "criteria": "检测结果保存到指定文件夹`results/figures/`。",
+            "category": "Visualization",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 5,
+            "prerequisites": [
+                2,
+                3,
+                4
+            ],
+            "criteria": "在`src/app.py`中使用\"Streamlit\"创建交互式网页，以显示保存在`results/figures/`中的检测结果。",
+            "category": "Human Computer Interaction",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 6,
+            "prerequisites": [
+                2,
+                3
+            ],
+            "criteria": "模型性能评估结果保存在`results/metrics/model_performance.txt`。",
+            "category": "Performance Metrics",
+            "satisfied": null
+        }
+    ],
+    "preferences": [
+        {
+            "preference_id": 0,
+            "criteria": "\"Streamlit\"网页应用户友好，允许用户轻松上传和查看新的检测图像。",
+            "satisfied": null
+        },
+        {
+            "preference_id": 1,
+            "criteria": "性能评估包括mAP和推理时间作为指标。",
+            "satisfied": null
+        },
+        {
+            "preference_id": 2,
+            "criteria": "系统应正确管理Streamlit应用程序的启动和终止。",
+            "satisfied": null
+        }
+    ],
+    "is_kaggle_api_needed": false,
+    "is_training_needed": true,
+    "is_web_navigation_needed": false,
+    "language": "Chinese",
+    "judge_stats": [
+        {
+            "requirement_index": 0,
+            "criteria": "在`src/data_loader.py`中实现\"COCO\"数据集的下载。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.058258056640625,
+                "input_tokens": 1280,
+                "output_tokens": 89,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n\n依据：根据提供的 `src/data_loader.py` 文件内容，该文件目前仅包含占位符函数（如 `load_dataset` 和 `build_transforms`），并没有实现任何实际的 COCO 数据集下载逻辑。虽然轨迹证据（Trajectory Evidence）提到曾尝试执行 `download_coco()` 函数，但在当前提供的源代码文件中并未看到该函数的具体实现代码。"
+                ]
+            },
+            "total_time": 10.610007524490356
+        },
+        {
+            "requirement_index": 1,
+            "criteria": "在`src/data_loader.py`中进行数据预处理，包括调整图像大小和归一化。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.452800750732422,
+                "input_tokens": 1248,
+                "output_tokens": 168,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n\n**依据：**\n1. **代码实现缺失**：在提供的 `src/data_loader.py` 源代码中，`build_transforms` 函数仅返回了一个包含字符串的列表 `[\"rotation\", \"scaling\", \"normalization\"]`，并没有实际调用 `torchvision.transforms` 或其他库来实现图像的调整大小（Resize）和归一化（Normalization）逻辑。\n2. **执行轨迹反馈失败**：根据轨迹证据（Trajectory Evidence），在之前的执行尝试中，调整大小操作触发了 `RuntimeError: output size is too small`，且归一化操作未能通过数值校验（`AssertionError: Normalization check failed`）。这表明该功能在逻辑上存在错误或尚未正确实现，无法满足预处理的要求。"
+                ]
+            },
+            "total_time": 8.136789321899414
+        },
+        {
+            "requirement_index": 2,
+            "criteria": "在`src/model.py`中实现\"YOLOv3\"模型。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.406841993331909,
+                "input_tokens": 1285,
+                "output_tokens": 131,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n\n依据：\n1. **代码内容缺失**：根据提供的 `src/model.py` 文件内容，该文件仅包含一个简单的占位符函数 `build_model()` 和一些元数据字符串，并没有实际的 YOLOv3 模型架构实现代码。\n2. **运行轨迹反馈**：参考轨迹显示，虽然曾尝试运行该文件，但由于 `RuntimeError`（权重维度不匹配）和 `ImportError`（缺少 `utils.layers` 模块）导致执行失败。这表明模型定义不完整且处于不可用状态，未达成有效的模型实现。"
+                ]
+            },
+            "total_time": 8.06050992012024
+        },
+        {
+            "requirement_index": 3,
+            "criteria": "应用\"非极大值抑制\"（NMS）来优化检测结果。请在`src/model.py`中实现此功能。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.2081644535064697,
+                "input_tokens": 1214,
+                "output_tokens": 127,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n\n**依据：**\n在提供的 `src/model.py` 文件内容中，代码仅包含一个返回字符串占位符的 `build_model` 函数以及相关的元数据定义（如 `REQUIREMENT_CRITERIA` 和 `KEYWORDS`）。文件中完全没有实现“非极大值抑制”（NMS）的具体算法逻辑、函数定义或对相关库（如 `torchvision.ops.nms`）的调用。虽然轨迹证据（Trajectory Evidence）提到了测试通过，但根据实际读取到的文件内容，该功能在代码层面并未真正实现。"
+                ]
+            },
+            "total_time": 8.009696960449219
+        },
+        {
+            "requirement_index": 4,
+            "criteria": "检测结果保存到指定文件夹`results/figures/`。",
+            "satisfied": true,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.6314001083374023,
+                "input_tokens": 1500,
+                "output_tokens": 147,
+                "accumulated_cost": 0.0,
+                "satisfied": true,
+                "reason": [
+                    "<SATISFIED>\n\n**依据：**\n1. **目录结构证据**：根据 [Key Evidence] Workspace Structure，项目根目录下已存在 `results/figures` 文件夹，这证明了目标路径已被创建并用于存储。\n2. **执行轨迹证据**：[Reference] Trajectory Evidence 明确指出，在执行检测脚本时，系统输出了 `Saving results to results/figures/...` 的确认信息，且未出现路径不存在或权限错误的异常。\n3. **综合判断**：虽然 `src/` 下的占位代码较为简略，但工作区物理结构和执行日志的一致性证实了检测结果保存到指定文件夹的功能已实现。"
+                ]
+            },
+            "total_time": 7.130990266799927
+        },
+        {
+            "requirement_index": 5,
+            "criteria": "在`src/app.py`中使用\"Streamlit\"创建交互式网页，以显示保存在`results/figures/`中的检测结果。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.4268081188201904,
+                "input_tokens": 1277,
+                "output_tokens": 161,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n\n**依据：**\n1. **代码内容不符合要求**：查看 `src/app.py` 的实际内容，该文件仅包含一段用于基准测试评审的元数据（Minimal semantic implementation），并没有实现任何 Streamlit 网页逻辑或加载 `results/figures/` 图片的代码。\n2. **环境执行失败**：根据轨迹证据（Trajectory Evidence）步骤 12，尝试运行该文件时报错 `ModuleNotFoundError: No module named 'streamlit'`，说明环境中未安装必要依赖。\n3. **功能未实现**：虽然轨迹中提到曾尝试写入逻辑，但最终代码库中的 `src/app.py` 只是一个占位符脚本，无法提供交互式网页功能。"
+                ]
+            },
+            "total_time": 8.031761884689331
+        },
+        {
+            "requirement_index": 6,
+            "criteria": "模型性能评估结果保存在`results/metrics/model_performance.txt`。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.0690548419952393,
+                "input_tokens": 957,
+                "output_tokens": 98,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n\n依据：虽然项目结构中存在 `results/metrics/model_performance.txt` 文件，但根据文件内容读取结果，该文件仅包含 `('placeholder\\r\\n', None)`，即仅有占位符内容，并未包含实际的模型性能评估指标（如 Accuracy, F1-score 等）。尽管轨迹证据显示脚本执行成功，但最终生成的文件内容并未达到“保存评估结果”的实质要求。"
+                ]
+            },
+            "total_time": 6.836700916290283
+        }
+    ]
+}

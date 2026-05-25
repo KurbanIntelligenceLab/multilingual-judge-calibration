@@ -1,0 +1,211 @@
+{
+    "name": "25_Speech_Emotion_Recognition_CNN_LSTM_RAVDESS_DL",
+    "query": "أبحث عن مشروع للتعرف على العواطف في الكلام باستخدام نموذج CNN-LSTM مع مجموعة بيانات RAVDESS، والتي يجب تنزيلها من Kaggle أو [هذا الرابط من Hugging Face](https://huggingface.co/datasets/xbgoose/ravdess). يجب أن يقوم المشروع بتحميل مجموعة البيانات وتنفيذ معالجة صوتية قوية (إزالة الضوضاء والتطبيع) واستخراج ميزات MFCC، يتم تنفيذها في `src/data_loader.py`. يجب تنفيذ نموذج CNN-LSTM في `src/model.py`. يجب حفظ دقة التعرف في `results/metrics/recognition_accuracy.txt`، ويجب إنشاء مصفوفة ارتباك وحفظها كـ `results/figures/confusion_matrix.png`. بالإضافة إلى ذلك، يجب إنشاء واجهة برمجة تطبيقات محلية سهلة الاستخدام باستخدام Flask للسماح للمستخدمين بتحميل ملفات الصوت والحصول على نتائج التعرف على العواطف، مع تضمين التنفيذ في `src/hci.py`.",
+    "tags": [
+        "Audio Processing",
+        "Classification"
+    ],
+    "requirements": [
+        {
+            "requirement_id": 0,
+            "prerequisites": [],
+            "criteria": "يتم تحميل مجموعة البيانات \"RAVDESS\" في `src/data_loader.py`، والتي يتم تنزيلها من Kaggle أو [هذا الرابط من Hugging Face](https://huggingface.co/datasets/xbgoose/ravdess).",
+            "category": "Dataset or Environment",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 1,
+            "prerequisites": [
+                0
+            ],
+            "criteria": "يتم تنفيذ معالجة الصوت المسبق، بما في ذلك إزالة الضوضاء والتطبيع، في `src/data_loader.py`.",
+            "category": "Data preprocessing and postprocessing",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 2,
+            "prerequisites": [
+                0,
+                1
+            ],
+            "criteria": "يتم تنفيذ استخراج ميزات MFCC في `src/data_loader.py`.",
+            "category": "Data preprocessing and postprocessing",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 3,
+            "prerequisites": [],
+            "criteria": "يتم تنفيذ نموذج \"CNN-LSTM\" في `src/model.py`.",
+            "category": "Machine Learning Method",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 4,
+            "prerequisites": [
+                2,
+                3
+            ],
+            "criteria": "يتم حفظ دقة التعرف في `results/metrics/recognition_accuracy.txt`.",
+            "category": "Performance Metrics",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 5,
+            "prerequisites": [
+                2,
+                3,
+                4
+            ],
+            "criteria": "يتم توليد مصفوفة الالتباس وحفظها كـ `results/figures/confusion_matrix.png`.",
+            "category": "Visualization",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 6,
+            "prerequisites": [
+                2,
+                3
+            ],
+            "criteria": "يتم إنشاء واجهة برمجة تطبيقات محلية باستخدام \"Flask\" للسماح للمستخدمين بتحميل ملفات الصوت واستلام نتائج التعرف على العواطف. يجب تضمين التنفيذ في `src/hci.py`.",
+            "category": "Human Computer Interaction",
+            "satisfied": null
+        }
+    ],
+    "preferences": [
+        {
+            "preference_id": 0,
+            "criteria": "يجب أن تكون خطوة معالجة الصوت قوية، تقلل الضوضاء بشكل فعال مع الحفاظ على سلامة إشارات الكلام.",
+            "satisfied": null
+        },
+        {
+            "preference_id": 1,
+            "criteria": "يجب أن تكون واجهة برمجة التطبيقات المحلية سهلة الاستخدام، مع تعليمات واضحة لتحميل الملفات وتفسير النتائج.",
+            "satisfied": null
+        }
+    ],
+    "is_kaggle_api_needed": true,
+    "is_training_needed": true,
+    "is_web_navigation_needed": true,
+    "language": "Arabic",
+    "judge_stats": [
+        {
+            "requirement_index": 0,
+            "criteria": "يتم تحميل مجموعة البيانات \"RAVDESS\" في `src/data_loader.py`، والتي يتم تنزيلها من Kaggle أو [هذا الرابط من Hugging Face](https://huggingface.co/datasets/xbgoose/ravdess).",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 6.061182260513306,
+                "input_tokens": 1450,
+                "output_tokens": 130,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\nيحتوي ملف `src/data_loader.py` على دالة `load_dataset()` هي مجرد عنصر نائب (placeholder) تُرجع قاموسًا نصيًا ولا تحتوي على أي كود فعلي لتحميل مجموعة بيانات RAVDESS من Kaggle أو Hugging Face. كما تشير أدلة المسار (Trajectory Evidence) إلى حدوث خطأ `ModuleNotFoundError` متعلق بمكتبة `datasets` عند محاولة تحميل مجموعة البيانات، مما يؤكد أن عملية التحميل الفعلية لم تنجح."
+                ]
+            },
+            "total_time": 24.52034854888916
+        },
+        {
+            "requirement_index": 1,
+            "criteria": "يتم تنفيذ معالجة الصوت المسبق، بما في ذلك إزالة الضوضاء والتطبيع، في `src/data_loader.py`.",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.955338954925537,
+                "input_tokens": 1340,
+                "output_tokens": 104,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\nيحتوي ملف `src/data_loader.py` على دالة `load_dataset()` و `build_transforms()`، لكنه لا يحتوي على أي تنفيذ فعلي لمعالجة الصوت المسبق مثل إزالة الضوضاء أو التطبيع. الكود المقدم هو مجرد \"placeholder\" (نائب) مع ملاحظات نصية ولا ينفذ أي معالجة فعلية للبيانات الصوتية."
+                ]
+            },
+            "total_time": 23.763684272766113
+        },
+        {
+            "requirement_index": 2,
+            "criteria": "يتم تنفيذ استخراج ميزات MFCC في `src/data_loader.py`.",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 15.863533020019531,
+                "input_tokens": 1321,
+                "output_tokens": 181,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\nالمحتوى المقدم لملف `src/data_loader.py` هو تنفيذ دلالي بسيط (minimal semantic implementation) يحتوي على نصوص وهمية (placeholders) مثل `load_dataset()` و `build_transforms()`. لا يوجد في محتوى الملف أي كود فعلي لاستخراج ميزات MFCC (مثل استخدام `librosa.feature.mfcc` أو مكتبة مماثلة). تم ذكر الكلمة المفتاحية \"lstm\" في المتغير `KEYWORDS`، ولكن هذا لا يشكل تنفيذًا للمتطلب. لا توجد أدلة من بنية المشروع أو محتوى الملفات تشير إلى وجود تنفيذ حقيقي لاستخراج ميزات MFCC داخل الملف المحدد."
+                ]
+            },
+            "total_time": 25.568180322647095
+        },
+        {
+            "requirement_index": 3,
+            "criteria": "يتم تنفيذ نموذج \"CNN-LSTM\" في `src/model.py`.",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 6.448500871658325,
+                "input_tokens": 1252,
+                "output_tokens": 152,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\nالمحتوى المقدم لملف `src/model.py` لا يحتوي على تنفيذ فعلي لنموذج CNN-LSTM. الملف يحتوي فقط على نص تعريف للمتطلبات ووظيفة `build_model()` التي تُرجع \"model placeholder\" أو نصًا عن ResNet-18. لا توجد طبقات CNN أو LSTM محددة، ولا بنية نموذج، ولا استيراد لمكتبات التعلم العميق ذات الصلة (مثل TensorFlow/PyTorch) لبناء النموذج. الأدلة المرجعية تشير إلى أن التنفيذ تم، لكن المحتوى الفعلي للملف لا يدعم ذلك."
+                ]
+            },
+            "total_time": 16.9457848072052
+        },
+        {
+            "requirement_index": 4,
+            "criteria": "يتم حفظ دقة التعرف في `results/metrics/recognition_accuracy.txt`.",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 3.562839984893799,
+                "input_tokens": 1048,
+                "output_tokens": 82,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\nيحتوي ملف `results/metrics/recognition_accuracy.txt` على النص `('placeholder\\r\\n', None)`، مما يشير إلى أنه لم يتم حفظ قيمة دقة التعرف الفعلية فيه، بل تم حفظ نص بديل (placeholder). لذلك، لم يتم استيفاء متطلب حفظ دقة التعرف في الملف المحدد."
+                ]
+            },
+            "total_time": 11.586201429367065
+        },
+        {
+            "requirement_index": 5,
+            "criteria": "يتم توليد مصفوفة الالتباس وحفظها كـ `results/figures/confusion_matrix.png`.",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 6.080091953277588,
+                "input_tokens": 1063,
+                "output_tokens": 130,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\nالمتطلب غير متحقق لأن محاولة قراءة ملف `confusion_matrix.png` أرجعت خطأ 404 يشير إلى أن الملف غير موجود أو أن نقطة النهاية لا تدعم إدخال الصور. بينما تشير خطوات المسار إلى أن الملف تم إنشاؤه وحفظه بنجاح، فإن الدليل المقدم (خطأ في قراءة الملف) لا يؤكد وجود الملف فعلياً أو أنه تم حفظه بشكل صحيح في المسار المحدد `results/figures/confusion_matrix.png`."
+                ]
+            },
+            "total_time": 14.247298240661621
+        },
+        {
+            "requirement_index": 6,
+            "criteria": "يتم إنشاء واجهة برمجة تطبيقات محلية باستخدام \"Flask\" للسماح للمستخدمين بتحميل ملفات الصوت واستلام نتائج التعرف على العواطف. يجب تضمين التنفيذ في `src/hci.py`.",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 7.296990394592285,
+                "input_tokens": 1235,
+                "output_tokens": 175,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\nالمحتوى المقدم لملف `src/hci.py` لا ينفذ واجهة برمجة تطبيقات (API) باستخدام Flask. الملف يحتوي فقط على تنفيذ دلالي بسيط (minimal semantic implementation) لأغراض التحكيم، ويحدد المتطلبات والكلمات المفتاحية في متغيرات، ولكنه لا يحتوي على أي كود لإنشاء خادم Flask، أو نقاط نهاية (endpoints) لتحميل الملفات، أو معالجة الصوت، أو إرجاع نتائج التعرف على العواطف. الكلمات المفتاحية \"Flask\" و\"lstm\" مذكورة كنص في قائمة، ولكن لا يوجد تنفيذ فعلي لها."
+                ]
+            },
+            "total_time": 15.586758852005005
+        }
+    ]
+}

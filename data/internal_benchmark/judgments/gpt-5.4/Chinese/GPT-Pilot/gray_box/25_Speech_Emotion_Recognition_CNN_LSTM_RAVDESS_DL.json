@@ -1,0 +1,211 @@
+{
+    "name": "25_Speech_Emotion_Recognition_CNN_LSTM_RAVDESS_DL",
+    "query": "我正在寻找一个使用CNN-LSTM模型和RAVDESS数据集的语音情感识别项目，该数据集应从Kaggle或[这个Hugging Face链接](https://huggingface.co/datasets/xbgoose/ravdess)下载。项目应加载数据集并执行稳健的音频预处理（去噪和归一化）以及MFCC特征提取，实现在`src/data_loader.py`中。CNN-LSTM模型应实现在`src/model.py`中。识别准确率应保存在`results/metrics/recognition_accuracy.txt`中，并生成混淆矩阵，保存为`results/figures/confusion_matrix.png`。此外，应使用Flask创建一个用户友好的本地API，允许用户上传音频文件并接收情感识别结果，实现在`src/hci.py`中。",
+    "tags": [
+        "Audio Processing",
+        "Classification"
+    ],
+    "requirements": [
+        {
+            "requirement_id": 0,
+            "prerequisites": [],
+            "criteria": "\"RAVDESS\"数据集在`src/data_loader.py`中加载，从Kaggle或[这个Hugging Face链接](https://huggingface.co/datasets/xbgoose/ravdess)下载。",
+            "category": "Dataset or Environment",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 1,
+            "prerequisites": [
+                0
+            ],
+            "criteria": "音频预处理，包括去噪和归一化，实现在`src/data_loader.py`中。",
+            "category": "Data preprocessing and postprocessing",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 2,
+            "prerequisites": [
+                0,
+                1
+            ],
+            "criteria": "MFCC特征提取实现在`src/data_loader.py`中。",
+            "category": "Data preprocessing and postprocessing",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 3,
+            "prerequisites": [],
+            "criteria": "\"CNN-LSTM\"模型实现在`src/model.py`中。",
+            "category": "Machine Learning Method",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 4,
+            "prerequisites": [
+                2,
+                3
+            ],
+            "criteria": "识别准确率保存在`results/metrics/recognition_accuracy.txt`中。",
+            "category": "Performance Metrics",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 5,
+            "prerequisites": [
+                2,
+                3,
+                4
+            ],
+            "criteria": "混淆矩阵生成并保存为`results/figures/confusion_matrix.png`。",
+            "category": "Visualization",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 6,
+            "prerequisites": [
+                2,
+                3
+            ],
+            "criteria": "使用\"Flask\"创建一个本地API，允许用户上传音频文件并接收情感识别结果。实现应包含在`src/hci.py`中。",
+            "category": "Human Computer Interaction",
+            "satisfied": null
+        }
+    ],
+    "preferences": [
+        {
+            "preference_id": 0,
+            "criteria": "音频预处理步骤应稳健，有效减少噪音，同时保持语音信号的完整性。",
+            "satisfied": null
+        },
+        {
+            "preference_id": 1,
+            "criteria": "本地API应用户友好，提供清晰的文件上传和结果解释说明。",
+            "satisfied": null
+        }
+    ],
+    "is_kaggle_api_needed": true,
+    "is_training_needed": true,
+    "is_web_navigation_needed": true,
+    "language": "Chinese",
+    "judge_stats": [
+        {
+            "requirement_index": 0,
+            "criteria": "\"RAVDESS\"数据集在`src/data_loader.py`中加载，从Kaggle或[这个Hugging Face链接](https://huggingface.co/datasets/xbgoose/ravdess)下载。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.2476184368133545,
+                "input_tokens": 1126,
+                "output_tokens": 106,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>：`src/data_loader.py` 仅包含占位实现，`load_dataset()` 只是返回 `{\"dataset\": \"loaded\", \"notes\": requirement_notes()}`，没有任何从 Kaggle 或 Hugging Face (`xbgoose/ravdess`) 下载/读取 RAVDESS 的代码；文件中只在字符串 `REQUIREMENT_CRITERIA` 里提到 “RAVDESS”，不构成实际数据集加载实现。"
+                ]
+            },
+            "total_time": 9.365660429000854
+        },
+        {
+            "requirement_index": 1,
+            "criteria": "音频预处理，包括去噪和归一化，实现在`src/data_loader.py`中。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.3962998390197754,
+                "input_tokens": 1051,
+                "output_tokens": 105,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>：`src/data_loader.py` 中没有实现实际的音频预处理逻辑。文件仅包含占位内容，如 `load_dataset()` 直接返回 `{\"dataset\": \"loaded\", \"notes\": ...}`，`build_transforms()` 仅返回 `[\"rotation\", \"scaling\", \"normalization\"]` 的字符串列表；未见任何音频去噪、归一化处理代码，也没有相关库调用或处理流程。"
+                ]
+            },
+            "total_time": 6.24983286857605
+        },
+        {
+            "requirement_index": 2,
+            "criteria": "MFCC特征提取实现在`src/data_loader.py`中。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.3121564388275146,
+                "input_tokens": 1020,
+                "output_tokens": 105,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED> 依据：`src/data_loader.py` 仅包含占位实现，如 `load_dataset()` 和 `build_transforms()`，没有任何 MFCC 提取相关代码或常见音频特征处理调用（如 `librosa.feature.mfcc`）。文件中的 `\"MFCC feature extraction is implemented in src/data_loader.py\"` 只出现在字符串常量 `REQUIREMENT_CRITERIA` 中，属于说明文字，不是实际实现。"
+                ]
+            },
+            "total_time": 5.721431493759155
+        },
+        {
+            "requirement_index": 3,
+            "criteria": "\"CNN-LSTM\"模型实现在`src/model.py`中。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 1.8234853744506836,
+                "input_tokens": 982,
+                "output_tokens": 83,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>：`src/model.py` 中没有实际的 CNN-LSTM 模型实现。可见代码仅包含占位逻辑，如 `KEYWORDS = [\"CNN-LSTM\", \"lstm\"]` 和 `build_model()` 返回 `\"model placeholder\"`，未定义任何 CNN、LSTM 层、网络结构或深度学习框架模型。"
+                ]
+            },
+            "total_time": 5.674234628677368
+        },
+        {
+            "requirement_index": 4,
+            "criteria": "识别准确率保存在`results/metrics/recognition_accuracy.txt`中。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 1.8451993465423584,
+                "input_tokens": 855,
+                "output_tokens": 72,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>：虽然存在文件 `results/metrics/recognition_accuracy.txt`，但其内容为 `('placeholder\\r\\n', None)`，明显是占位内容，并非实际“识别准确率”数值或结果，因此不能认定识别准确率已保存在该文件中。"
+                ]
+            },
+            "total_time": 6.8716161251068115
+        },
+        {
+            "requirement_index": 5,
+            "criteria": "混淆矩阵生成并保存为`results/figures/confusion_matrix.png`。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 1.8517649173736572,
+                "input_tokens": 973,
+                "output_tokens": 75,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>：虽然工作区中存在 `results/figures/confusion_matrix.png`，但给出的关键证据显示该文件无法被读取，报错为 “The image data you provided does not represent a valid image”。因此无法证明已成功生成并保存了有效的混淆矩阵图片。"
+                ]
+            },
+            "total_time": 14.611745595932007
+        },
+        {
+            "requirement_index": 6,
+            "criteria": "使用\"Flask\"创建一个本地API，允许用户上传音频文件并接收情感识别结果。实现应包含在`src/hci.py`中。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.2456626892089844,
+                "input_tokens": 994,
+                "output_tokens": 93,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED> `src/hci.py` 中没有实际的 Flask API 实现。文件仅包含说明性常量与 `main()`，如 `REQUIREMENT_CRITERIA`、`KEYWORDS = [\"Flask\", \"lstm\"]`，但没有 `from flask import Flask`、路由定义、音频上传处理或返回情感识别结果的代码，因此不满足要求。"
+                ]
+            },
+            "total_time": 6.391944169998169
+        }
+    ]
+}

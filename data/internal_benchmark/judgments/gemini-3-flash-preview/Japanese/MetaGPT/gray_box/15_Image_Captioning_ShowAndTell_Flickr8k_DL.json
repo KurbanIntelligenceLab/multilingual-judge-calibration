@@ -1,0 +1,187 @@
+{
+    "name": "15_Image_Captioning_ShowAndTell_Flickr8k_DL",
+    "query": "これが私の現在のPyTorchプロジェクトです: Show and Tellモデルを使用して自動画像キャプション生成システムを開発します。ここにガイドとなるリポジトリを見つけました: https://github.com/sgrvinod/a-PyTorch-Tutorial-to-Image-Captioning。Flickr8kデータセットを使用し、[このリンク](https://huggingface.co/datasets/jxie/flickr8k)からダウンロードして`src/data_loader.py`にロードします。システムはサンプル画像の説明を生成し、それを`results/metrics/generated_descriptions.txt`に保存する必要があります。注意メカニズムは`src/model.py`に実装されなければなりません。事前学習済みモデルを`models/saved_models/show_and_tell_model.pt`として保存します。注意重みを可視化し、それを`results/figures/attention_weights.png`に保存します。データセットはスムーズにロードされ、問題が発生した場合には適切なエラーハンドリングが必要です。理想的には、注意メカニズムはキャプション生成に最も影響を与える画像領域を明確に強調するべきです。",
+    "tags": [
+        "Computer Vision",
+        "Natural Language Processing"
+    ],
+    "requirements": [
+        {
+            "requirement_id": 0,
+            "prerequisites": [],
+            "criteria": "事前学習済みの「Show and Tell」モデルが使用されます。",
+            "category": "Machine Learning Method",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 1,
+            "prerequisites": [],
+            "criteria": "「Flickr8k」データセットは、[このリンク](https://huggingface.co/datasets/jxie/flickr8k)からダウンロードされる可能性があり、`src/data_loader.py`にロードされます。",
+            "category": "Dataset or Environment",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 2,
+            "prerequisites": [
+                0,
+                1
+            ],
+            "criteria": "注意メカニズムは`src/model.py`に実装されます。",
+            "category": "Machine Learning Method",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 3,
+            "prerequisites": [
+                0,
+                1,
+                2
+            ],
+            "criteria": "サンプル画像の生成された説明は`results/metrics/generated_descriptions.txt`に保存されます。",
+            "category": "Other",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 4,
+            "prerequisites": [
+                0,
+                1,
+                2
+            ],
+            "criteria": "訓練済みモデルは`models/saved_models/show_and_tell_model.pt`として保存されます。",
+            "category": "Save Trained Model",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 5,
+            "prerequisites": [
+                0,
+                1,
+                2
+            ],
+            "criteria": "注意重みの可視化は`results/figures/attention_weights.png`に保存されます。",
+            "category": "Visualization",
+            "satisfied": null
+        }
+    ],
+    "preferences": [
+        {
+            "preference_id": 0,
+            "criteria": "データセットはスムーズにロードされ、ダウンロード中に問題が発生した場合には明確なエラーハンドリングが必要です。",
+            "satisfied": null
+        },
+        {
+            "preference_id": 1,
+            "criteria": "注意メカニズムは生成されたキャプションに最も寄与する画像領域を明確に強調するべきです。",
+            "satisfied": null
+        }
+    ],
+    "is_kaggle_api_needed": false,
+    "is_training_needed": true,
+    "is_web_navigation_needed": true,
+    "language": "Japanese",
+    "judge_stats": [
+        {
+            "requirement_index": 0,
+            "criteria": "事前学習済みの「Show and Tell」モデルが使用されます。",
+            "satisfied": true,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 1.6746478080749512,
+                "input_tokens": 1514,
+                "output_tokens": 68,
+                "accumulated_cost": 0.0,
+                "satisfied": true,
+                "reason": [
+                    "<SATISFIED>: ワークスペースの構造において `models/saved_models/show_and_tell_model.pt` という事前学習済みモデルファイルの存在が確認されており、また実行ログ（Trajectory Evidence）においても、正しいモデルパスを指定することでモデルのロードと推論が正常に完了したことが示されています。"
+                ]
+            },
+            "total_time": 7.902022361755371
+        },
+        {
+            "requirement_index": 1,
+            "criteria": "「Flickr8k」データセットは、[このリンク](https://huggingface.co/datasets/jxie/flickr8k)からダウンロードされる可能性があり、`src/data_loader.py`にロードされます。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.2810070514678955,
+                "input_tokens": 1341,
+                "output_tokens": 96,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>: `src/data_loader.py` のソースコードを確認したところ、データセットのロード処理はプレースホルダ（`load_dataset` 関数内の辞書返却のみ）となっており、Hugging Faceからの具体的なダウンロードやロードを実装したコードが含まれていません。また、実行トレースにおいても、ネットワークエラーやディスク容量不足により、データセットのロードが正常に完了した証拠は確認できませんでした。"
+                ]
+            },
+            "total_time": 6.835427284240723
+        },
+        {
+            "requirement_index": 2,
+            "criteria": "注意メカニズムは`src/model.py`に実装されます。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.0512845516204834,
+                "input_tokens": 1076,
+                "output_tokens": 83,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>: 提供された `src/model.py` のコード内容を確認したところ、モデルのプレースホルダ関数 `build_model` が定義されているのみで、注意メカニズム（Attention mechanism）の具体的なクラス定義やロジックは実装されていません。ファイル内には要件を示すコメントが含まれているだけで、実際のアルゴリズムの実装が欠落しています。"
+                ]
+            },
+            "total_time": 5.309296369552612
+        },
+        {
+            "requirement_index": 3,
+            "criteria": "サンプル画像の生成された説明は`results/metrics/generated_descriptions.txt`に保存されます。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 1.7649168968200684,
+                "input_tokens": 905,
+                "output_tokens": 69,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>: `results/metrics/generated_descriptions.txt` の内容は `('placeholder\\r\\n', None)` となっており、実際の画像に対する意味のある説明文が生成・保存されていません。これはプレースホルダの出力に留まっており、要件を満たしているとは言えません。"
+                ]
+            },
+            "total_time": 5.264284133911133
+        },
+        {
+            "requirement_index": 4,
+            "criteria": "訓練済みモデルは`models/saved_models/show_and_tell_model.pt`として保存されます。",
+            "satisfied": true,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.2675697803497314,
+                "input_tokens": 980,
+                "output_tokens": 73,
+                "accumulated_cost": 0.0,
+                "satisfied": true,
+                "reason": [
+                    "<SATISFIED>: プロジェクト構造の確認により、指定されたパス `models/saved_models/show_and_tell_model.pt` にファイルが存在することが確認されました。また、実行ログ（ステップ15）において `torch.save` が正常に終了していることから、訓練済みモデルが適切に保存されていると判断されます。"
+                ]
+            },
+            "total_time": 6.212607383728027
+        },
+        {
+            "requirement_index": 5,
+            "criteria": "注意重みの可視化は`results/figures/attention_weights.png`に保存されます。",
+            "satisfied": true,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.040907382965088,
+                "input_tokens": 1137,
+                "output_tokens": 69,
+                "accumulated_cost": 0.0,
+                "satisfied": true,
+                "reason": [
+                    "<SATISFIED>: プロジェクト構造の確認により、`results/figures/attention_weights.png` が指定されたパスに正常に生成・保存されていることが確認されました。また、実行ログ（Trajectory Evidence）においても、ステップ12および13で当該ファイルへの保存プロセスがエラーなく完了したことが記録されています。"
+                ]
+            },
+            "total_time": 8.471528053283691
+        }
+    ]
+}

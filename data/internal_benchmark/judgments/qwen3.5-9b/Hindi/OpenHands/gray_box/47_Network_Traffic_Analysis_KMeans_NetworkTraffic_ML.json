@@ -1,0 +1,212 @@
+{
+    "name": "47_Network_Traffic_Analysis_KMeans_NetworkTraffic_ML",
+    "query": "Kaggle से Network Intrusion dataset (CIC-IDS-2017) का उपयोग करके K-means क्लस्टरिंग एल्गोरिदम के साथ एक नेटवर्क ट्रैफिक विश्लेषण प्रणाली विकसित करें। `src/data_loader.py` में डेटासेट लोड करें और डेटा को मानकीकृत करें ताकि फीचर मान समान रेंज में हों। `src/model.py` में K-means क्लस्टरिंग एल्गोरिदम को लागू करें। क्लस्टर्स का मूल्यांकन सिल्हूट गुणांक का उपयोग करके करें और मूल्यांकन परिणामों को `results/metrics/` के अंतर्गत सहेजें। क्लस्टरिंग परिणामों को `results/clustering_results.txt` के रूप में सहेजें। क्लस्टरिंग परिणामों को विज़ुअलाइज़ करें और विज़ुअल्स को `results/figures/network_traffic_visualization.png` के रूप में सहेजें। क्लस्टरिंग परिणामों का पता लगाने के लिए Dash या Bokeh के साथ एक इंटरैक्टिव डैशबोर्ड बनाएं, और डैशबोर्ड को `results/` के अंतर्गत सहेजें। सुनिश्चित करें कि प्रणाली मॉड्यूलर है ताकि उपयोगकर्ता क्लस्टरिंग एल्गोरिदम को जल्दी से बदल सके।",
+    "tags": [
+        "Unsupervised Learning"
+    ],
+    "requirements": [
+        {
+            "requirement_id": 0,
+            "prerequisites": [],
+            "criteria": "Kaggle से \"Network Intrusion dataset (CIC-IDS-2017)\" `src/data_loader.py` में लोड किया गया है।",
+            "category": "Dataset or Environment",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 1,
+            "prerequisites": [
+                0
+            ],
+            "criteria": "डेटा को मानकीकृत किया गया है ताकि फीचर मान समान रेंज में हों `src/data_loader.py` में।",
+            "category": "Data preprocessing and postprocessing",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 2,
+            "prerequisites": [],
+            "criteria": "\"K-means\" क्लस्टरिंग एल्गोरिदम `src/model.py` में लागू किया गया है।",
+            "category": "Machine Learning Method",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 3,
+            "prerequisites": [
+                1,
+                2
+            ],
+            "criteria": "\"सिल्हूट गुणांक\" का उपयोग मूल्यांकन के लिए किया गया है। मूल्यांकन परिणाम `results/metrics/` के अंतर्गत सहेजे गए हैं।",
+            "category": "Performance Metrics",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 4,
+            "prerequisites": [
+                1,
+                2
+            ],
+            "criteria": "क्लस्टरिंग परिणामों को प्रिंट और `results/clustering_results.txt` के रूप में सहेजा गया है।",
+            "category": "Other",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 5,
+            "prerequisites": [
+                4
+            ],
+            "criteria": "नेटवर्क ट्रैफिक क्लस्टरिंग को विज़ुअलाइज़ किया गया है और `results/figures/network_traffic_visualization.png` के रूप में सहेजा गया है।",
+            "category": "Visualization",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 6,
+            "prerequisites": [
+                4
+            ],
+            "criteria": "\"Dash\" या \"Bokeh\" का उपयोग करके एक इंटरैक्टिव डैशबोर्ड बनाया गया है जो क्लस्टरिंग परिणामों को प्रदर्शित करता है और `results/` के अंतर्गत सहेजा गया है।",
+            "category": "Visualization",
+            "satisfied": null
+        }
+    ],
+    "preferences": [
+        {
+            "preference_id": 0,
+            "criteria": "डैशबोर्ड उपयोगकर्ताओं को विशिष्ट क्लस्टर्स के लिए फ़िल्टर और गहराई से विश्लेषण करने की अनुमति देनी चाहिए।",
+            "satisfied": null
+        },
+        {
+            "preference_id": 1,
+            "criteria": "विज़ुअलाइज़ेशन को विभिन्न क्लस्टर्स के बीच स्पष्ट अंतर करना चाहिए, जिससे नेटवर्क ट्रैफिक डेटा में पैटर्न की पहचान करना आसान हो सके।",
+            "satisfied": null
+        },
+        {
+            "preference_id": 2,
+            "criteria": "परियोजना मॉड्यूलर होनी चाहिए, जिससे उपयोगकर्ता आसानी से क्लस्टरिंग एल्गोरिदम को बदल सके।",
+            "satisfied": null
+        }
+    ],
+    "is_kaggle_api_needed": true,
+    "is_training_needed": true,
+    "is_web_navigation_needed": false,
+    "language": "Hindi",
+    "judge_stats": [
+        {
+            "requirement_index": 0,
+            "criteria": "Kaggle से \"Network Intrusion dataset (CIC-IDS-2017)\" `src/data_loader.py` में लोड किया गया है।",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 13.62550139427185,
+                "input_tokens": 959,
+                "output_tokens": 1389,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n`load_dataset()` फ़ंक्शन में वास्तविक डेटा लोडिंग लॉजिक नहीं है; यह केवल एक प्लेसहोल्डर है जो `{\"dataset\": \"loaded\"}` लौटाता है।"
+                ]
+            },
+            "total_time": 85.84042167663574
+        },
+        {
+            "requirement_index": 1,
+            "criteria": "डेटा को मानकीकृत किया गया है ताकि फीचर मान समान रेंज में हों `src/data_loader.py` में।",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 26.25441813468933,
+                "input_tokens": 959,
+                "output_tokens": 1827,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n`src/data_loader.py` में डेटा मानकीकरण (standardization) की कोई वास्तविक कार्यात्मकता नहीं है। कोड केवल आवश्यकताओं को परिभाषित करता है (`REQUIREMENT_CRITERIA`) और प्लेसहोल्डर फ़ंक्शन्स (`load_dataset`, `build_transforms`) वास्तविक डेटा प्रोसेसिंग लागू नहीं करते हैं।"
+                ]
+            },
+            "total_time": 78.17859172821045
+        },
+        {
+            "requirement_index": 2,
+            "criteria": "\"K-means\" क्लस्टरिंग एल्गोरिदम `src/model.py` में लागू किया गया है।",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 31.30677366256714,
+                "input_tokens": 897,
+                "output_tokens": 2006,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\nकारण: `src/model.py` में वास्तविक K-means एल्गोरिदम का कोड नहीं है। फ़ाइल में केवल `model placeholder` लौटाने वाला स्ट्रक्चर और आवश्यकताओं की जाँच करने वाला मेटाडेटा मौजूद है। कोई क्लस्टरिंग लॉजिक या लाइब्रेरी (जैसे `sklearn`) का उपयोग नहीं किया गया है।"
+                ]
+            },
+            "total_time": 96.61755037307739
+        },
+        {
+            "requirement_index": 3,
+            "criteria": "\"सिल्हूट गुणांक\" का उपयोग मूल्यांकन के लिए किया गया है। मूल्यांकन परिणाम `results/metrics/` के अंतर्गत सहेजे गए हैं।",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 23.646758556365967,
+                "input_tokens": 1262,
+                "output_tokens": 1678,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\nकोड फाइलें (`data_loader.py`, `model.py`) प्लेसहोल्डर हैं और सिल्हूट गुणांक की गणना करने वाला कोई लॉजिक नहीं है। `results/metrics/` फोल्डर में कोई परिणाम फाइल नहीं दिखाई गई है।"
+                ]
+            },
+            "total_time": 84.30671572685242
+        },
+        {
+            "requirement_index": 4,
+            "criteria": "क्लस्टरिंग परिणामों को प्रिंट और `results/clustering_results.txt` के रूप में सहेजा गया है।",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 17.313167333602905,
+                "input_tokens": 732,
+                "output_tokens": 1136,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\nफ़ाइल `results/clustering_results.txt` मौजूद है, लेकिन इसमें वास्तविक क्लस्टरिंग आउटपुट नहीं है, बल्कि केवल `('placeholder\\r\\n', None)` जैसा प्लेसहोल्डर डेटा मौजूद है।"
+                ]
+            },
+            "total_time": 83.1396996974945
+        },
+        {
+            "requirement_index": 5,
+            "criteria": "नेटवर्क ट्रैफिक क्लस्टरिंग को विज़ुअलाइज़ किया गया है और `results/figures/network_traffic_visualization.png` के रूप में सहेजा गया है।",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 15.071357727050781,
+                "input_tokens": 945,
+                "output_tokens": 774,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\nफ़ाइल `results/figures/network_traffic_visualization.png` मौजूद है, लेकिन इसमें कोई वैध इमेज नहीं है। कंटेंट में `litellm.BadRequestError` और `Supplied image did not pass validation checks` जैसा एरर मैसेज है, जो दर्शाता है कि विज़ुअलाइज़ेशन सफलतापूर्वक नहीं बनाया गया या सहेजा गया।"
+                ]
+            },
+            "total_time": 71.17644119262695
+        },
+        {
+            "requirement_index": 6,
+            "criteria": "\"Dash\" या \"Bokeh\" का उपयोग करके एक इंटरैक्टिव डैशबोर्ड बनाया गया है जो क्लस्टरिंग परिणामों को प्रदर्शित करता है और `results/` के अंतर्गत सहेजा गया है।",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 14.607258081436157,
+                "input_tokens": 1275,
+                "output_tokens": 1447,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\nप्रदान किए गए कोड (`data_loader.py`, `model.py`) में Dash या Bokeh का कोई उल्लेख नहीं है। `results/` फ़ोल्डर में केवल स्थैतिक फ़ाइलें (txt, png) हैं, कोई इंटरैक्टिव डैशबोर्ड नहीं।"
+                ]
+            },
+            "total_time": 79.6792688369751
+        }
+    ]
+}

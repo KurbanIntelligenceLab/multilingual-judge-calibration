@@ -1,0 +1,210 @@
+{
+    "name": "22_Sentiment_Analysis_LSTM_IMDb_DL",
+    "query": "هل يمكنك مساعدتي في إعداد مشروع لتحليل المشاعر باستخدام نموذج LSTM ومجموعة بيانات IMDb؟ يرجى تنفيذ تنظيف البيانات في `src/data_loader.py`، بما في ذلك إزالة الكلمات التوقف وعلامات الترقيم. استخدم تضمينات الكلمات لتحويل النص إلى صيغة رقمية واحفظ هذه التضمينات تحت `models/saved_models/`. ثم استخدم هذه التضمينات كمدخل لنموذج LSTM، والذي يجب تنفيذه في `src/model.py`. احفظ تقرير التصنيف في `results/metrics/classification_report.txt`. أنشئ دفتر Jupyter محفوظًا باسم `results/report.ipynb` مع تصور بنية النموذج وعملية التدريب. أيضًا، احفظ منحنيات خسارة التدريب والدقة في `results/figures/training_curves.png`. يفضل استخدام التضمينات المدربة مسبقًا (مثل Word2Vec أو GloVe) لتعزيز أداء النموذج.",
+    "tags": [
+        "Natural Language Processing",
+        "Supervised Learning"
+    ],
+    "requirements": [
+        {
+            "requirement_id": 0,
+            "prerequisites": [],
+            "criteria": "يتم استخدام مجموعة بيانات مراجعات الأفلام \"IMDb\".",
+            "category": "Dataset or Environment",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 1,
+            "prerequisites": [
+                0
+            ],
+            "criteria": "يتم تنفيذ تنظيف البيانات في `src/data_loader.py`، بما في ذلك إزالة الكلمات الشائعة وعلامات الترقيم.",
+            "category": "Data preprocessing and postprocessing",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 2,
+            "prerequisites": [
+                0,
+                1
+            ],
+            "criteria": "تُستخدم تمثيلات الكلمات لتحويل النص إلى صيغة رقمية ويتم حفظها تحت `models/saved_models/`.",
+            "category": "Data preprocessing and postprocessing",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 3,
+            "prerequisites": [],
+            "criteria": "يتم استخدام نموذج \"LSTM\" لتحليل المشاعر ويجب تنفيذه في `src/model.py`.",
+            "category": "Machine Learning Method",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 4,
+            "prerequisites": [
+                2,
+                3
+            ],
+            "criteria": "يتم حفظ تقرير التصنيف كـ `results/metrics/classification_report.txt`.",
+            "category": "Performance Metrics",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 5,
+            "prerequisites": [
+                2,
+                3
+            ],
+            "criteria": "يتم إنشاء دفتر Jupyter يحتوي على بنية النموذج وتصور عملية التدريب وحفظه كـ `results/report.ipynb`.",
+            "category": "Visualization",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 6,
+            "prerequisites": [
+                2,
+                3
+            ],
+            "criteria": "يتم إنشاء منحنيات خسارة التدريب والدقة وحفظها كـ `results/figures/training_curves.png`.",
+            "category": "Visualization",
+            "satisfied": null
+        }
+    ],
+    "preferences": [
+        {
+            "preference_id": 0,
+            "criteria": "يجب أن تكون تضمينات الكلمات مدربة مسبقًا (مثل Word2Vec أو GloVe) للاستفادة من المعرفة الدلالية الموجودة.",
+            "satisfied": null
+        },
+        {
+            "preference_id": 1,
+            "criteria": "يجب أن يكون دفتر Jupyter موثقًا جيدًا، مما يسهل على الآخرين فهم بنية النموذج وعملية التدريب.",
+            "satisfied": null
+        }
+    ],
+    "is_kaggle_api_needed": false,
+    "is_training_needed": true,
+    "is_web_navigation_needed": false,
+    "language": "Arabic",
+    "judge_stats": [
+        {
+            "requirement_index": 0,
+            "criteria": "يتم استخدام مجموعة بيانات مراجعات الأفلام \"IMDb\".",
+            "satisfied": true,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.4563114643096924,
+                "input_tokens": 1697,
+                "output_tokens": 101,
+                "accumulated_cost": 0.0,
+                "satisfied": true,
+                "reason": [
+                    "<SATISFIED> بناءً على مسار العمل (Trajectory Evidence)، تم التأكد من استدعاء الدالة `load_dataset('imdb')` بنجاح، واكتمال تحميل المقاطع (splits) الخاصة بالتدريب والاختبار. كما أظهرت سجلات التنفيذ أن عمليات المعالجة المسبقة والتوكنات تمت على أعمدة `text` و `label` الخاصة بمجموعة بيانات IMDb، مما يؤكد استخدامها الفعلي في المشروع."
+                ]
+            },
+            "total_time": 9.8962984085083
+        },
+        {
+            "requirement_index": 1,
+            "criteria": "يتم تنفيذ تنظيف البيانات في `src/data_loader.py`، بما في ذلك إزالة الكلمات الشائعة وعلامات الترقيم.",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.4052252769470215,
+                "input_tokens": 1333,
+                "output_tokens": 107,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED> عند فحص محتوى الملف `src/data_loader.py` المقدم، تبين أنه يحتوي فقط على دوال فارغة (Placeholders) مثل `load_dataset` و `build_transforms` ولا يتضمن أي كود برمي فعلي لتنفيذ تنظيف البيانات، أو إزالة الكلمات الشائعة (stop words)، أو إزالة علامات الترقيم (punctuation). الملف يحتوي فقط على نصوص تصف المتطلبات دون تنفيذها برمجياً."
+                ]
+            },
+            "total_time": 7.275085687637329
+        },
+        {
+            "requirement_index": 2,
+            "criteria": "تُستخدم تمثيلات الكلمات لتحويل النص إلى صيغة رقمية ويتم حفظها تحت `models/saved_models/`.",
+            "satisfied": true,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.551990270614624,
+                "input_tokens": 1684,
+                "output_tokens": 113,
+                "accumulated_cost": 0.0,
+                "satisfied": true,
+                "reason": [
+                    "<SATISFIED> بناءً على مسار التنفيذ (Trajectory Evidence)، تم التأكيد على نجاح عملية الكتابة النهائية لتمثيلات الكلمات (Word Embeddings) في المسار المحدد `models/saved_models/`. كما أكدت ملاحظات البيئة في مرحلة الاختبار أن عملية تحويل النص إلى متجهات رقمية (Vectorization) تمت بنجاح، مع التحقق من سلامة الملفات المحفوظة وظيفياً وقدرة النظام على تحميل الأوزان من ذلك المسار دون فقدان للبيانات."
+                ]
+            },
+            "total_time": 8.783170223236084
+        },
+        {
+            "requirement_index": 3,
+            "criteria": "يتم استخدام نموذج \"LSTM\" لتحليل المشاعر ويجب تنفيذه في `src/model.py`.",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.897697925567627,
+                "input_tokens": 1321,
+                "output_tokens": 146,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n\nبناءً على مراجعة محتوى الملف `src/model.py` المقدم، يتبين أن الملف لا يحتوي على تنفيذ فعلي لنموذج **LSTM**. بدلاً من ذلك، يحتوي الملف على \"نص نائب\" (placeholder) وقائمة بالكلمات المفتاحية ومعايير المتطلبات فقط، دون وجود أي كود برمجي لبناء طبقات LSTM باستخدام مكتبات مثل TensorFlow أو PyTorch. بالإضافة إلى ذلك، تشير سجلات المسار (Trajectory Evidence) إلى وجود أخطاء في التنفيذ (AssertionError) وفشل في معالجة البيانات، مما يؤكد عدم وجود نموذج وظيفي مكتمل في الملف المحدد."
+                ]
+            },
+            "total_time": 7.294819593429565
+        },
+        {
+            "requirement_index": 4,
+            "criteria": "يتم حفظ تقرير التصنيف كـ `results/metrics/classification_report.txt`.",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.0304336547851562,
+                "input_tokens": 1090,
+                "output_tokens": 87,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED> على الرغم من وجود الملف في المسار المحدد `results/metrics/classification_report.txt` وفقاً لهيكل المشروع، إلا أن محتوى الملف الفعلي هو مجرد نص نائب `('placeholder\\r\\n', None)` ولا يحتوي على تقرير تصنيف حقيقي (مثل الدقة، الاستدعاء، أو مقياس F1) الناتج عن عملية تقييم النموذج."
+                ]
+            },
+            "total_time": 6.524726152420044
+        },
+        {
+            "requirement_index": 5,
+            "criteria": "يتم إنشاء دفتر Jupyter يحتوي على بنية النموذج وتصور عملية التدريب وحفظه كـ `results/report.ipynb`.",
+            "satisfied": true,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.1682827472686768,
+                "input_tokens": 1193,
+                "output_tokens": 109,
+                "accumulated_cost": 0.0,
+                "satisfied": true,
+                "reason": [
+                    "<SATISFIED> لقد تم التحقق من وجود الملف `results/report.ipynb` ضمن هيكل المشروع (Project Tree) في المسار المحدد. كما تؤكد سجلات مسار العمل (Trajectory Evidence) أن دفتر Jupyter قد تم تنفيذه بنجاح، حيث تضمن مخرجات الخلايا بنية النموذج، وسجلات التدريب، وتوليد الرسوم البيانية (Matplotlib/Seaborn)، مع تأكيد نجاح عملية الحفظ النهائي للملف في المجلد المستهدف دون أخطاء."
+                ]
+            },
+            "total_time": 6.815520286560059
+        },
+        {
+            "requirement_index": 6,
+            "criteria": "يتم إنشاء منحنيات خسارة التدريب والدقة وحفظها كـ `results/figures/training_curves.png`.",
+            "satisfied": true,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.6095640659332275,
+                "input_tokens": 1288,
+                "output_tokens": 134,
+                "accumulated_cost": 0.0,
+                "satisfied": true,
+                "reason": [
+                    "<SATISFIED> تم التحقق من استيفاء هذا المتطلب بناءً على هيكل المشروع (Project Tree) الذي يظهر بوضوح وجود الملف في المسار المحدد `results/figures/training_curves.png`. كما تؤكد سجلات التنفيذ (Trajectory Evidence) أن عملية الرسم والحفظ تمت بنجاح دون أخطاء في المكتبات البرمجية، وأن النظام سجل عملية الحفظ النهائية للملف في المجلد المخصص له. أما الخطأ الوارد في قراءة محتوى الصورة فهو ناتج عن أداة العرض (Provider error) وليس دليلاً على عدم وجود الملف أو فشل إنشائه."
+                ]
+            },
+            "total_time": 8.621490716934204
+        }
+    ]
+}

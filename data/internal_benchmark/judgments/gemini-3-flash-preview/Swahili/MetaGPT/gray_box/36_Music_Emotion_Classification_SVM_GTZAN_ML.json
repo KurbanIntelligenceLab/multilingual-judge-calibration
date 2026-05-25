@@ -1,0 +1,223 @@
+{
+    "name": "36_Music_Emotion_Classification_SVM_GTZAN_ML",
+    "query": "Nisaidie kuendeleza mradi wa uainishaji wa hisia za muziki kwa kutumia mfano wa SVM na seti ya data ya GTZAN. Mradi unapaswa kujumuisha usindikaji wa sauti kwa kutumia librosa kwa kuondoa kelele na kusawazisha, uchimbaji wa vipengele vya MFCC na viwango 13, na matumizi ya kisanidi cha SVM cha mstari na urekebishaji wa hyperparameter. Upakiaji wa seti ya data, usindikaji wa sauti, ikiwa ni pamoja na kuondoa kelele na kusawazisha, na uchimbaji wa vipengele vya MFCC lazima utekelezwe katika `src/data_loader.py`. Tekeleza kisanidi cha SVM katika `src/model.py`. Hifadhi matokeo ya uainishaji katika `results/predictions.txt`, onyesha taswira za sauti za spectrogram kwa kutumia librosa (kuhifadhi katika `results/figures/`), na unda ukurasa wa wavuti wa maingiliano katika `src/app.py` kwa kutumia Streamlit ambao unaruhusu upakiaji wa faili za sauti kwa wakati halisi na kuonyesha matokeo ya uainishaji na spectrogram katika `results/figures/`. Hakikisha usimamizi mzuri wa rasilimali kwa kuzingatia usimamizi wa moja kwa moja wa uzinduzi na kumaliza kwa ukurasa wa wavuti wa Streamlit.",
+    "tags": [
+        "Audio Processing",
+        "Classification"
+    ],
+    "requirements": [
+        {
+            "requirement_id": 0,
+            "prerequisites": [],
+            "criteria": "Hisia za muziki za \"GTZAN\" zimepakiwa katika `src/data_loader.py`.",
+            "category": "Dataset or Environment",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 1,
+            "prerequisites": [
+                0
+            ],
+            "criteria": "Usindikaji wa sauti, ikiwa ni pamoja na kuondoa kelele na kusawazisha, unafanywa katika `src/data_loader.py`.",
+            "category": "Data preprocessing and postprocessing",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 2,
+            "prerequisites": [
+                0,
+                1
+            ],
+            "criteria": "Uchimbaji wa vipengele vya MFCC umetekelezwa katika `src/data_loader.py`.",
+            "category": "Data preprocessing and postprocessing",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 3,
+            "prerequisites": [
+                1,
+                2
+            ],
+            "criteria": "Kisanidi cha \"SVM classifier\" kimetekelezwa katika `src/model.py`.",
+            "category": "Machine Learning Method",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 4,
+            "prerequisites": [
+                3
+            ],
+            "criteria": "Matokeo ya uainishaji yamehifadhiwa katika `results/predictions.txt`.",
+            "category": "Other",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 5,
+            "prerequisites": [
+                0,
+                1,
+                2,
+                3
+            ],
+            "criteria": "Taswira za sauti za spectrogram zimeonyeshwa kwa kutumia \"librosa\" na zimehifadhiwa katika `results/figures/`.",
+            "category": "Visualization",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 6,
+            "prerequisites": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5
+            ],
+            "criteria": "Ukurasa wa wavuti wa maingiliano umeundwa katika `src/app.py` kwa kutumia \"Streamlit\" kuonyesha matokeo ya uainishaji na spectrogram katika `results/figures/`.",
+            "category": "Human Computer Interaction",
+            "satisfied": null
+        }
+    ],
+    "preferences": [
+        {
+            "preference_id": 0,
+            "criteria": "Ukurasa wa wavuti wa \"Streamlit\" unapaswa kuruhusu watumiaji kupakia faili mpya za sauti na kuona matokeo ya uainishaji kwa wakati halisi.",
+            "satisfied": null
+        },
+        {
+            "preference_id": 1,
+            "criteria": "Taswira za spectrogram zinapaswa kujumuisha chaguo za kurekebisha safu ya masafa na azimio la muda kwa uchambuzi wa kina.",
+            "satisfied": null
+        },
+        {
+            "preference_id": 2,
+            "criteria": "Mfumo unapaswa kufanya usimamizi mzuri wa rasilimali hasa katika kusimamia uzinduzi na kumaliza kwa ukurasa wa wavuti wa Streamlit.",
+            "satisfied": null
+        }
+    ],
+    "is_kaggle_api_needed": false,
+    "is_training_needed": true,
+    "is_web_navigation_needed": false,
+    "language": "Swahili",
+    "judge_stats": [
+        {
+            "requirement_index": 0,
+            "criteria": "Hisia za muziki za \"GTZAN\" zimepakiwa katika `src/data_loader.py`.",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 3.260082721710205,
+                "input_tokens": 1574,
+                "output_tokens": 310,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n\nKulingana na uchambuzi wa faili ya `src/data_loader.py` na taarifa za utekelezaji (trajectory evidence), hitaji hili halijatimizwa kwa sababu zifuatazo:\n\n1.  **Msimbo wa Kichocheo (Placeholder Code):** Faili ya `src/data_loader.py` haina mantiki halisi ya kupakia data. Badala yake, ina kazi ya `load_dataset()` ambayo inarudisha tu kamusi ya placeholder (`{\"dataset\": \"loaded\", ...}`) bila kutekeleza mchakato wowote wa kusoma faili za GTZAN kutoka kwenye diski.\n2.  **Makosa ya Utekelezaji (Runtime Errors):** Taarifa za trajekta zinaonyesha kuwa jaribio la kupakia seti ya data lilishindwa na `FileNotFoundError`, ikimaanisha mfumo haukuweza kupata saraka ya muziki.\n3.  **Kushindwa kwa Usomaji wa Data:** Kulikuwa na `ValueError` wakati wa kutumia maktaba ya `librosa` na operesheni ya `io.load` ilisitishwa kabla ya kukamilika, jambo linalothibitisha kuwa data ya hisia za muziki haikupakiwa kikamilifu kwenye kumbukumbu (RAM) kwa ajili ya matumizi ya modeli."
+                ]
+            },
+            "total_time": 11.437508821487427
+        },
+        {
+            "requirement_index": 1,
+            "criteria": "Usindikaji wa sauti, ikiwa ni pamoja na kuondoa kelele na kusawazisha, unafanywa katika `src/data_loader.py`.",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 3.025118827819824,
+                "input_tokens": 1673,
+                "output_tokens": 309,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n\nKulingana na ushahidi uliotolewa, faili ya `src/data_loader.py` haitekelezi usindikaji wa sauti (kuondoa kelele na kusawazisha). \n\n1. **Uchambuzi wa Msimbo:** Msimbo uliopo kwenye `src/data_loader.py` ni kishika-nafasi tu (placeholder) ambacho hakina mantiki yoyote ya usindikaji wa sauti. Kazi ya `load_dataset()` inarudisha tu kamusi yenye maelezo ya mahitaji badala ya kutekeleza usindikaji halisi.\n2. **Trajectory Evidence:** Ingawa kumbukumbu ya utekelezaji inaonyesha majaribio ya kufanya usindikaji, inathibitisha kuwa mchakato huo ulishindwa (`ImportError: No module named 'noisereduce'`) na kulikuwa na matatizo ya kiufundi (`Audio clipping detected`). \n3. **Hali ya Sasa:** Kama ilivyoelezwa kwenye muhtasari wa mradi, faili hiyo kwa sasa haifanyi kazi kikamilifu kwa ajili ya usindikaji wa sauti kutokana na kukosekana kwa maktaba tegemezi na msimbo thabiti wa kushughulikia kelele na kusawazisha sauti."
+                ]
+            },
+            "total_time": 8.594159603118896
+        },
+        {
+            "requirement_index": 2,
+            "criteria": "Uchimbaji wa vipengele vya MFCC umetekelezwa katika `src/data_loader.py`.",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.4996962547302246,
+                "input_tokens": 1636,
+                "output_tokens": 157,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n\nIngawa maelezo ya mradi na trajekta ya utekelezaji yanadai kuwa uchimbaji wa MFCC umetekelezwa, maudhui halisi ya faili ya `src/data_loader.py` yaliyotolewa yanaonyesha kuwa ni \"placeholder\" tu. Hakuna msimbo halisi wa maktaba kama `librosa` au `torchaudio` uliotumika kutekeleza uchimbaji wa MFCC; badala yake, faili ina orodha ya vigezo vya mahitaji (`REQUIREMENT_CRITERIA`) na kazi ya `load_dataset()` ambayo hairudishi data yoyote ya sauti iliyochakatwa."
+                ]
+            },
+            "total_time": 8.27673888206482
+        },
+        {
+            "requirement_index": 3,
+            "criteria": "Kisanidi cha \"SVM classifier\" kimetekelezwa katika `src/model.py`.",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.1311519145965576,
+                "input_tokens": 1588,
+                "output_tokens": 124,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n\nThe requirement is not met. Upon inspection of the provided content of `src/model.py`, the file does not contain an actual implementation of an \"SVM classifier\" using libraries such as `scikit-learn`. Instead, it contains a minimal placeholder script with a function `build_model()` that returns a string (\"model placeholder\"). Although the trajectory evidence suggests successful execution in a previous environment, the actual code provided in the file content lacks the necessary imports (e.g., `from sklearn.svm import SVC`) and the logic required to instantiate or configure an SVM model."
+                ]
+            },
+            "total_time": 7.384838342666626
+        },
+        {
+            "requirement_index": 4,
+            "criteria": "Matokeo ya uainishaji yamehifadhiwa katika `results/predictions.txt`.",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.248934030532837,
+                "input_tokens": 1357,
+                "output_tokens": 152,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n\nIngawa faili ya `results/predictions.txt` ipo katika muundo wa mradi, maudhui yake yanaonyesha kuwa hitaji halijatimizwa kikamilifu. Maudhui ya faili hiyo ni `('placeholder\\r\\n', None)`, jambo ambalo linaashiria kuwa matokeo halisi ya uainishaji (classification results) hayakuhifadhiwa, badala yake kuna kiashiria tu cha nafasi (placeholder). Licha ya kuwa trajectory inaonyesha mchakato wa uandishi ulifanikiwa kiufundi, data halisi ya utabiri wa hisia za muziki haipo kwenye faili husika."
+                ]
+            },
+            "total_time": 7.121874094009399
+        },
+        {
+            "requirement_index": 5,
+            "criteria": "Taswira za sauti za spectrogram zimeonyeshwa kwa kutumia \"librosa\" na zimehifadhiwa katika `results/figures/`.",
+            "satisfied": true,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.269313335418701,
+                "input_tokens": 1898,
+                "output_tokens": 154,
+                "accumulated_cost": 0.0,
+                "satisfied": true,
+                "reason": [
+                    "<SATISFIED>\n\nUshahidi kutoka kwa \"Trajectory Evidence\" unathibitisha kuwa mchakato wa kuzalisha spectrograms kwa kutumia maktaba ya `librosa` na `matplotlib` ulikamilika kwa mafanikio bila hitilafu (exit code 0). Aidha, kumbukumbu za utekelezaji (I/O operations) zinathibitisha kuwa picha hizo zilihifadhiwa katika folda iliyokusudiwa ya `results/figures/`. Muundo wa mradi (Project Tree) pia unaonyesha uwepo wa folda hiyo ya `results/figures/`, ambayo inaendana na maelezo ya utekelezaji yaliyotolewa."
+                ]
+            },
+            "total_time": 7.2795116901397705
+        },
+        {
+            "requirement_index": 6,
+            "criteria": "Ukurasa wa wavuti wa maingiliano umeundwa katika `src/app.py` kwa kutumia \"Streamlit\" kuonyesha matokeo ya uainishaji na spectrogram katika `results/figures/`.",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.0205867290496826,
+                "input_tokens": 1611,
+                "output_tokens": 154,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n\nMaelezo: Ingawa muundo wa mradi unaonyesha kuwepo kwa faili ya `src/app.py` na saraka ya `results/figures/`, maudhui halisi ya `src/app.py` yaliyotolewa ni msimbo wa \"minimal semantic implementation\" pekee ambao hauna mantiki ya Streamlit (kama vile `import streamlit as st`). Msimbo uliopo unafafanua tu vigezo vya mahitaji bila kutekeleza kiolesura cha wavuti, uonyeshaji wa matokeo ya uainishaji, au upakiaji wa picha za spectrogram kutoka kwenye saraka husika."
+                ]
+            },
+            "total_time": 7.023602247238159
+        }
+    ]
+}

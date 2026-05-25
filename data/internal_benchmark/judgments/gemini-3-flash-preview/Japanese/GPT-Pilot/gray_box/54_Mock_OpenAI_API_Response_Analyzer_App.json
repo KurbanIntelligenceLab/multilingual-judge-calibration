@@ -1,0 +1,219 @@
+{
+    "name": "54_Mock_OpenAI_API_Response_Analyzer_App",
+    "query": "同じクエリに対してOpenAI APIが異なる応答をする可能性を分析できるアプリを作成したいです。フロントエンドは`src/frontend.py`に実装し、ユーザーとLLMの会話をリストとして含めるべきです。各リスト項目には、大きなテキストメッセージを追加できるテキストフィールドと、メッセージがLLMからのものかユーザーからのものかを選択するドロップダウンを含めるべきです。この機能は`src/message_list.py`で処理されるべきです。これらのリスト項目は無制限に追加できるので、アプリがロードされたときには空のリスト項目が1つだけ表示され、新しいリスト項目を必要に応じて追加するボタンがあるべきです。リスト以外に、ユーザーが編集できる数値フィールドが`src/frontend.py`に実装されるべきです。このフィールドは0から100までの値のみを許可するべきです。また、SUBMITとラベル付けされたボタンもあるべきです。SUBMITボタンをクリックすると、完全な会話がOpenAI APIに並列でX回送信されるべきです。ここでXはフロントエンドでユーザーが入力した0から100の数値です。すべてのAPIリクエストと応答は`src/backend.py`で処理されるべきです。OpenAI APIから応答が取得されたら、それらは`src/frontend_render.py`で展開可能な要素のリストとして表示されるべきです。例えば、リクエスト数を10に設定した場合、応答が届き始めると10個の要素が表示され、それぞれがリクエスト番号でラベル付けされるべきです。展開すると、その特定の応答が表示されるべきです。OpenAI APIはストリームを返すので、応答はトークンごとにフロントエンドにストリームされ、リアルタイムで表示されるべきです。この機能は`src/stream_handler.py`で実装されるべきです。スタイリングには`src/styles.css`でTailwindを使用し、インストールせずにCDNバージョンを使用するべきです。OpenAIキーの使用を軽減するために、モックLLMの応答を使用するべきです。モックLLMの応答は`src/mock_llm.py`で生成されるべきです。",
+    "tags": [
+        "Natural Language Processing",
+        "Generative Models",
+        "Other"
+    ],
+    "requirements": [
+        {
+            "requirement_id": 0,
+            "prerequisites": [],
+            "criteria": "フロントエンドは`src/frontend.py`に実装され、ユーザーが大きなテキストメッセージを追加し、メッセージがLLMからのものかユーザーからのものかを選択できるリストを含むべきです。アプリがロードされたとき、リストは空の項目1つで始まるべきです。",
+            "category": "Human Computer Interaction",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 1,
+            "prerequisites": [
+                0
+            ],
+            "criteria": "メッセージリストは無制限の項目を許可し、新しい項目を追加するボタンで管理されるべきで、`src/message_list.py`に実装されるべきです。",
+            "category": "Human Computer Interaction",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 2,
+            "prerequisites": [
+                0
+            ],
+            "criteria": "インターフェースはユーザーが0から100までの数値を入力できるようにし、並列APIリクエストの数を制御するべきです。この機能は`src/frontend.py`に実装されるべきです。",
+            "category": "Human Computer Interaction",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 3,
+            "prerequisites": [
+                0,
+                2
+            ],
+            "criteria": "SUBMITボタンは会話をX回（Xは数値入力フィールドの値）モックLLM応答に送信するべきです。これは`src/backend.py`内で`src/mock_llm.py`のモック応答生成器を呼び出すことで処理されるべきです。",
+            "category": "Other",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 4,
+            "prerequisites": [
+                0,
+                2,
+                3
+            ],
+            "criteria": "モック応答は`src/mock_llm.py`で生成され、その後`src/frontend_render.py`でリクエスト番号でラベル付けされた展開可能な要素のリストとして表示されるべきです。",
+            "category": "Human Computer Interaction",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 5,
+            "prerequisites": [
+                0,
+                2,
+                3,
+                4
+            ],
+            "criteria": "応答はフロントエンドにストリームされ、リアルタイムでトークンごとに表示されるべきで、`src/stream_handler.py`に実装されるべきです。",
+            "category": "Other",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 6,
+            "prerequisites": [],
+            "criteria": "フロントエンドのスタイリングには`src/styles.css`でTailwindを使用し、インストールせずにCDNを介してロードされるべきです。",
+            "category": "Human Computer Interaction",
+            "satisfied": null
+        }
+    ],
+    "preferences": [
+        {
+            "preference_id": 0,
+            "criteria": "UIはクリーンで一貫したスタイルを維持し、Tailwindを使用してまとまりのあるナビゲートしやすいデザインにするべきです。",
+            "satisfied": null
+        },
+        {
+            "preference_id": 1,
+            "criteria": "APIからのストリーミング応答は効率的で、遅延なくスムーズなリアルタイム更新を保証するべきです。",
+            "satisfied": null
+        },
+        {
+            "preference_id": 2,
+            "criteria": "APIリクエストと応答の処理はモジュール化され、並列リクエストの数を調整するなどの簡単な変更を可能にするべきです。",
+            "satisfied": null
+        }
+    ],
+    "is_kaggle_api_needed": false,
+    "is_training_needed": false,
+    "is_web_navigation_needed": false,
+    "resource": "https://github.com/Pythagora-io/gpt-pilot/wiki/How-to-write-a-good-initial-project-description",
+    "language": "Japanese",
+    "judge_stats": [
+        {
+            "requirement_index": 0,
+            "criteria": "フロントエンドは`src/frontend.py`に実装され、ユーザーが大きなテキストメッセージを追加し、メッセージがLLMからのものかユーザーからのものかを選択できるリストを含むべきです。アプリがロードされたとき、リストは空の項目1つで始まるべきです。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 1.7337143421173096,
+                "input_tokens": 1214,
+                "output_tokens": 75,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED> 提供された `src/frontend.py` のソースコードには、要件にある「メッセージを追加するリスト」「User/LLMの選択UI」「初期状態での空の項目」といった具体的なフロントエンドの実装（Streamlit等のコード）が含まれておらず、要件の定義を文字列として保持しているのみであるためです。"
+                ]
+            },
+            "total_time": 7.728712320327759
+        },
+        {
+            "requirement_index": 1,
+            "criteria": "メッセージリストは無制限の項目を許可し、新しい項目を追加するボタンで管理されるべきで、`src/message_list.py`に実装されるべきです。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.5888445377349854,
+                "input_tokens": 1133,
+                "output_tokens": 100,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>: 提供された `src/message_list.py` のコードには、メッセージリストの管理や項目を追加するボタンのロジックが実装されておらず、要件に関するメタデータが記述されているのみです。また、トラジェトリの証拠（ステップ12および15）において、リストの最大容量が10に制限されていることや、無制限の追加が制限されていることが報告されており、要件を満たしていません。"
+                ]
+            },
+            "total_time": 7.304295778274536
+        },
+        {
+            "requirement_index": 2,
+            "criteria": "インターフェースはユーザーが0から100までの数値を入力できるようにし、並列APIリクエストの数を制御するべきです。この機能は`src/frontend.py`に実装されるべきです。",
+            "satisfied": true,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.192903518676758,
+                "input_tokens": 1191,
+                "output_tokens": 134,
+                "accumulated_cost": 0.0,
+                "satisfied": true,
+                "reason": [
+                    "<SATISFIED>: `src/frontend.py` の `REQUIREMENT_CRITERIA` 内に「The interface should allow a user to input a numerical value from 0 to 100, controlling how many parallel API requests will be sent. This function must be implemented in `src/frontend.py`.」という記述があり、要件が定義されています。また、Trajectory Evidence（ステップ12）において、`st.number_input` を用いて `min_value=0`, `max_value=100` の範囲で並列リクエスト数を制御する実装が正常に動作することが確認されています。"
+                ]
+            },
+            "total_time": 5.591874599456787
+        },
+        {
+            "requirement_index": 3,
+            "criteria": "SUBMITボタンは会話をX回（Xは数値入力フィールドの値）モックLLM応答に送信するべきです。これは`src/backend.py`内で`src/mock_llm.py`のモック応答生成器を呼び出すことで処理されるべきです。",
+            "satisfied": true,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 1.8811790943145752,
+                "input_tokens": 1565,
+                "output_tokens": 108,
+                "accumulated_cost": 0.0,
+                "satisfied": true,
+                "reason": [
+                    "<SATISFIED>: `src/backend.py` および `src/mock_llm.py` の実装において、数値入力フィールドの値（X回）に基づいて `src/mock_llm.py` の応答生成器を呼び出すロジックが要件定義（REQUIREMENT_CRITERIA）として明記されており、軌跡（Trajectory Evidence）のステップ12および13において、指定された回数分ループ内で正しく呼び出され、正常に動作することが確認されています。"
+                ]
+            },
+            "total_time": 6.033373594284058
+        },
+        {
+            "requirement_index": 4,
+            "criteria": "モック応答は`src/mock_llm.py`で生成され、その後`src/frontend_render.py`でリクエスト番号でラベル付けされた展開可能な要素のリストとして表示されるべきです。",
+            "satisfied": true,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.4528822898864746,
+                "input_tokens": 1633,
+                "output_tokens": 107,
+                "accumulated_cost": 0.0,
+                "satisfied": true,
+                "reason": [
+                    "<SATISFIED>: 提供された軌跡エビデンス（Step 12およびStep 15）により、`src/mock_llm.py` でリクエスト番号を含むメタデータを持つモック応答が生成され、それが `src/frontend_render.py` に渡されてリクエスト番号をラベルとした展開可能な要素（Accordion/Collapsible）として正常にレンダリングされていることが確認されました。各ファイルのコード内にも、これらの要件が実装基準として明記されています。"
+                ]
+            },
+            "total_time": 6.540733814239502
+        },
+        {
+            "requirement_index": 5,
+            "criteria": "応答はフロントエンドにストリームされ、リアルタイムでトークンごとに表示されるべきで、`src/stream_handler.py`に実装されるべきです。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.044968366622925,
+                "input_tokens": 1150,
+                "output_tokens": 88,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>: 提供された `src/stream_handler.py` のソースコードには、要件である「フロントエンドへのストリーミング」や「トークンごとのリアルタイム表示」を実現するための具体的なロジック（ジェネレータ関数、コールバックハンドラ、ストリーミング処理など）が一切含まれておらず、メタデータとプレースホルダのみが記述されているためです。"
+                ]
+            },
+            "total_time": 6.217249155044556
+        },
+        {
+            "requirement_index": 6,
+            "criteria": "フロントエンドのスタイリングには`src/styles.css`でTailwindを使用し、インストールせずにCDNを介してロードされるべきです。",
+            "satisfied": true,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.0688464641571045,
+                "input_tokens": 997,
+                "output_tokens": 85,
+                "accumulated_cost": 0.0,
+                "satisfied": true,
+                "reason": [
+                    "<SATISFIED>: 提供された軌跡（Trajectory Evidence）のステップ1および2により、Tailwind CSSがCDN（`https://cdn.tailwindcss.com`）を介してロードされ、かつ`src/styles.css`がプロジェクト内に存在し、HTMLからリンクされていることが確認されました。これにより、インストール不要なCDN利用とカスタムCSSファイルの併用という要件が満たされています。"
+                ]
+            },
+            "total_time": 6.106894254684448
+        }
+    ]
+}

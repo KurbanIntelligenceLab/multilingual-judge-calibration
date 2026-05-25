@@ -1,0 +1,184 @@
+{
+    "name": "09_Recommendation_System_NCF_MovieLens_ML",
+    "query": "मुझे उपयोगकर्ता रेटिंग्स के आधार पर मूवी की सिफारिश करने के लिए एक प्रणाली विकसित करने में मदद करें, जो MovieLens डेटासेट का उपयोग करके Neural Collaborative Filtering (NCF) दृष्टिकोण पर आधारित हो। पहले, डेटासेट को लोड करें और इसे `src/data_loader.py` में प्रशिक्षण और परीक्षण सेट में विभाजित करें। इसके बाद, `src/model.py` में NCF दृष्टिकोण और एक मैट्रिक्स फैक्टराइजेशन बेसलाइन को लागू करें। इनका उपयोग करके, परीक्षण उपयोगकर्ता के लिए NCF दृष्टिकोण और बेसलाइन के शीर्ष 10 सिफारिशों का एक उदाहरण प्रिंट करें और उन्हें `results/metrics/top_10_recommendations.txt` में सहेजें। यह अच्छा होगा यदि ये नमूना सिफारिशें परीक्षण उपयोगकर्ता को ध्यान में रखते हुए सार्थक हों। प्रणाली के प्रदर्शन का मूल्यांकन RMSE, MAE, आदि का उपयोग करके करें, और इस मूल्यांकन के परिणामों को `results/metrics/evaluation_metrics.txt` में सहेजें। यह सुनिश्चित करने का प्रयास करें कि फाइलें सहेजते समय गायब निर्देशिकाओं जैसी चीजों से निपटने के लिए मजबूत पथ हैंडलिंग हो।",
+    "tags": [
+        "Recommender Systems",
+        "Supervised Learning"
+    ],
+    "requirements": [
+        {
+            "requirement_id": 0,
+            "prerequisites": [],
+            "criteria": "\"Neural Collaborative Filtering (NCF)\" एल्गोरिदम `src/model.py` में लागू किया गया है।",
+            "category": "Machine Learning Method",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 1,
+            "prerequisites": [],
+            "criteria": "\"MovieLens\" डेटासेट 'src/data_loader.py' में लोड किया गया है।",
+            "category": "Dataset or Environment",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 2,
+            "prerequisites": [
+                1
+            ],
+            "criteria": "डेटा को `src/data_loader.py` में प्रशिक्षण और परीक्षण सेट में विभाजित किया गया है।",
+            "category": "Data preprocessing and postprocessing",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 3,
+            "prerequisites": [],
+            "criteria": "एक मैट्रिक्स फैक्टराइजेशन बेसलाइन `src/model.py` में लागू की गई है।",
+            "category": "Machine Learning Method",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 4,
+            "prerequisites": [
+                0,
+                1,
+                2,
+                3
+            ],
+            "criteria": "\"NCF\" दृष्टिकोण और बेसलाइन के तहत परीक्षण उपयोगकर्ता के लिए शीर्ष 10 सिफारिशें `results/metrics/top_10_recommendations.txt` में सहेजी गई हैं।",
+            "category": "Other",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 5,
+            "prerequisites": [
+                0,
+                1,
+                2,
+                3
+            ],
+            "criteria": "सिफारिश प्रणाली का प्रदर्शन मूल्यांकित किया गया है, जिसमें \"RMSE\" और \"MAE\" शामिल हैं, और परिणाम `results/metrics/evaluation_metrics.txt` के रूप में सहेजे गए हैं।",
+            "category": "Performance Metrics",
+            "satisfied": null
+        }
+    ],
+    "preferences": [
+        {
+            "preference_id": 0,
+            "criteria": "गायब निर्देशिकाओं जैसी चीजों से निपटने के लिए मजबूत पथ हैंडलिंग लागू की गई है।",
+            "satisfied": null
+        },
+        {
+            "preference_id": 1,
+            "criteria": "शीर्ष 10 सिफारिशें स्पष्ट और नमूना उपयोगकर्ता की प्राथमिकताओं के लिए प्रासंगिक होनी चाहिए।",
+            "satisfied": null
+        }
+    ],
+    "is_kaggle_api_needed": false,
+    "is_training_needed": true,
+    "is_web_navigation_needed": false,
+    "language": "Hindi",
+    "judge_stats": [
+        {
+            "requirement_index": 0,
+            "criteria": "\"Neural Collaborative Filtering (NCF)\" एल्गोरिदम `src/model.py` में लागू किया गया है।",
+            "satisfied": true,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.2210545539855957,
+                "input_tokens": 1257,
+                "output_tokens": 129,
+                "accumulated_cost": 0.0,
+                "satisfied": true,
+                "reason": [
+                    "<SATISFIED>\n\n**तर्क:**\nप्रदान किए गए साक्ष्यों (Trajectory Evidence) के अनुसार, `src/model.py` में `NCF` क्लास को सफलतापूर्वक लोड और निष्पादित किया गया है। फीडबैक पुष्टि करता है कि इसमें Embedding layers और Multi-Layer Perceptron (MLP) का लॉजिक सही ढंग से काम कर रहा है, और ट्रेनिंग के दौरान `Binary Cross Entropy` लॉस में गिरावट देखी गई। इसके अतिरिक्त, `Hit Ratio` और `NDCG` जैसे मेट्रिक्स की गणना सफल रही, जो NCF एल्गोरिदम के पूर्ण कार्यान्वयन को सिद्ध करती है।"
+                ]
+            },
+            "total_time": 9.803694725036621
+        },
+        {
+            "requirement_index": 1,
+            "criteria": "\"MovieLens\" डेटासेट 'src/data_loader.py' में लोड किया गया है।",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.273266315460205,
+                "input_tokens": 1426,
+                "output_tokens": 111,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n\n**कारण:** `src/data_loader.py` की सामग्री की समीक्षा करने पर पता चलता है कि इसमें \"MovieLens\" डेटासेट को लोड करने के लिए कोई वास्तविक कोड या लॉजिक मौजूद नहीं है। फ़ाइल में केवल एक `load_dataset()` प्लेसहोल्डर फंक्शन है जो एक डमी डिक्शनरी रिटर्न करता है। यद्यपि प्रक्षेपवक्र (trajectory) में सफल निष्पादन का उल्लेख है, लेकिन वास्तविक कोड साक्ष्य में डेटासेट लोडिंग की कार्यात्मक कमी है।"
+                ]
+            },
+            "total_time": 6.515624761581421
+        },
+        {
+            "requirement_index": 2,
+            "criteria": "डेटा को `src/data_loader.py` में प्रशिक्षण और परीक्षण सेट में विभाजित किया गया है।",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.047555923461914,
+                "input_tokens": 1055,
+                "output_tokens": 110,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n\n**कारण:** `src/data_loader.py` की सामग्री की समीक्षा करने पर पता चलता है कि इसमें डेटा विभाजन (train/test split) के लिए कोई वास्तविक कोड मौजूद नहीं है। फ़ाइल में केवल `load_dataset` और `build_transforms` जैसे प्लेसहोल्डर (placeholder) फंक्शन हैं, जिनमें डेटा को विभाजित करने का कोई लॉजिक या कार्यान्वयन नहीं दिया गया है। केवल `REQUIREMENT_CRITERIA` स्ट्रिंग में इसका उल्लेख होने से आवश्यकता पूरी नहीं होती।"
+                ]
+            },
+            "total_time": 6.769964218139648
+        },
+        {
+            "requirement_index": 3,
+            "criteria": "एक मैट्रिक्स फैक्टराइजेशन बेसलाइन `src/model.py` में लागू की गई है।",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.231696367263794,
+                "input_tokens": 1234,
+                "output_tokens": 114,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n\n**कारण:** प्रदान की गई `src/model.py` फ़ाइल की सामग्री में मैट्रिक्स फैक्टराइजेशन (Matrix Factorization) का कोई वास्तविक कार्यान्वयन (implementation) नहीं है। फ़ाइल में केवल एक प्लेसहोल्डर फंक्शन `build_model()` है जो \"model placeholder\" स्ट्रिंग लौटाता है। यद्यपि प्रक्षेपवक्र (trajectory) साक्ष्य सफल निष्पादन का संकेत देते हैं, लेकिन वास्तविक कोड फ़ाइल में बेसलाइन मॉडल का कोई लॉजिक, क्लास या गणितीय संरचना मौजूद नहीं है।"
+                ]
+            },
+            "total_time": 6.769686937332153
+        },
+        {
+            "requirement_index": 4,
+            "criteria": "\"NCF\" दृष्टिकोण और बेसलाइन के तहत परीक्षण उपयोगकर्ता के लिए शीर्ष 10 सिफारिशें `results/metrics/top_10_recommendations.txt` में सहेजी गई हैं।",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 1.9171245098114014,
+                "input_tokens": 1076,
+                "output_tokens": 96,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n\n**कारण:** साक्ष्य के अनुसार, `results/metrics/top_10_recommendations.txt` फ़ाइल की सामग्री केवल `'placeholder\\r\\n'` है। इसमें NCF या बेसलाइन मॉडल की शीर्ष 10 सिफारिशों का कोई वास्तविक डेटा मौजूद नहीं है। यद्यपि प्रक्षेपवक्र (trajectory) सफल लेखन का संकेत देता है, लेकिन फ़ाइल की वास्तविक स्थिति आवश्यकता को पूरा नहीं करती है।"
+                ]
+            },
+            "total_time": 7.044166326522827
+        },
+        {
+            "requirement_index": 5,
+            "criteria": "सिफारिश प्रणाली का प्रदर्शन मूल्यांकित किया गया है, जिसमें \"RMSE\" और \"MAE\" शामिल हैं, और परिणाम `results/metrics/evaluation_metrics.txt` के रूप में सहेजे गए हैं।",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.0180091857910156,
+                "input_tokens": 976,
+                "output_tokens": 93,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n\n**कारण:** यद्यपि प्रक्षेपवक्र (trajectory) यह संकेत देता है कि गणना सफल रही थी, लेकिन `results/metrics/evaluation_metrics.txt` फ़ाइल की वास्तविक सामग्री केवल `'placeholder\\r\\n'` है। इसमें अपेक्षित \"RMSE\" और \"MAE\" के वास्तविक मान (values) मौजूद नहीं हैं। आवश्यकता के अनुसार परिणामों का सही ढंग से सहेजा जाना प्रमाणित नहीं होता है।"
+                ]
+            },
+            "total_time": 6.653048276901245
+        }
+    ]
+}

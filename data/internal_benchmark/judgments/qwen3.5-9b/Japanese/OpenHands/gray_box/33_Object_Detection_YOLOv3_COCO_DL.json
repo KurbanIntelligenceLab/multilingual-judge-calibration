@@ -1,0 +1,215 @@
+{
+    "name": "33_Object_Detection_YOLOv3_COCO_DL",
+    "query": "YOLOv3モデルとCOCOデータセットを使用して物体検出システムを開発するのを手伝ってください。データセットをダウンロードし、`src/data_loader.py`で画像をリサイズと正規化によって前処理します。YOLOv3モデルを実装し、`src/model.py`で結果を洗練するためにNon-Maximum Suppression (NMS)を使用します。検出されたオブジェクトを`results/figures/`に保存し、`src/app.py`で検出結果を表示するインタラクティブなStreamlitウェブページを作成します。最後に、mAPや推論時間などの指標を含むモデルのパフォーマンスを評価し、評価結果を`results/metrics/model_performance.txt`に保存します。システムは、Streamlitアプリケーションの起動と終了を適切に管理し、不要なリソースの使用を防ぐ必要があります。",
+    "tags": [
+        "Computer Vision"
+    ],
+    "requirements": [
+        {
+            "requirement_id": 0,
+            "prerequisites": [],
+            "criteria": "\"COCO\"データセットのダウンロードは`src/data_loader.py`で実装されています。",
+            "category": "Dataset or Environment",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 1,
+            "prerequisites": [
+                0
+            ],
+            "criteria": "画像のリサイズと正規化を含むデータ前処理は`src/data_loader.py`で行われます。",
+            "category": "Data preprocessing and postprocessing",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 2,
+            "prerequisites": [],
+            "criteria": "\"YOLOv3\"モデルは`src/model.py`で実装されています。",
+            "category": "Machine Learning Method",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 3,
+            "prerequisites": [
+                1,
+                2
+            ],
+            "criteria": "検出結果を洗練するために\"Non-Maximum Suppression\" (NMS)が適用されます。これを`src/model.py`で実装してください。",
+            "category": "Data preprocessing and postprocessing",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 4,
+            "prerequisites": [
+                2,
+                3
+            ],
+            "criteria": "検出結果は指定されたフォルダ`results/figures/`に保存されます。",
+            "category": "Visualization",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 5,
+            "prerequisites": [
+                2,
+                3,
+                4
+            ],
+            "criteria": "`src/app.py`でインタラクティブな\"Streamlit\"ウェブページが作成され、`results/figures/`に保存された検出結果を表示します。",
+            "category": "Human Computer Interaction",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 6,
+            "prerequisites": [
+                2,
+                3
+            ],
+            "criteria": "モデルのパフォーマンス評価結果は`results/metrics/model_performance.txt`に保存されます。",
+            "category": "Performance Metrics",
+            "satisfied": null
+        }
+    ],
+    "preferences": [
+        {
+            "preference_id": 0,
+            "criteria": "\"Streamlit\"ウェブページはユーザーフレンドリーであり、ユーザーが新しい画像を簡単にアップロードして検出できるようにするべきです。",
+            "satisfied": null
+        },
+        {
+            "preference_id": 1,
+            "criteria": "パフォーマンス評価にはmAPと推論時間が指標として含まれます。",
+            "satisfied": null
+        },
+        {
+            "preference_id": 2,
+            "criteria": "システムはStreamlitアプリケーションの起動と終了を適切に管理する必要があります。",
+            "satisfied": null
+        }
+    ],
+    "is_kaggle_api_needed": false,
+    "is_training_needed": true,
+    "is_web_navigation_needed": false,
+    "language": "Japanese",
+    "judge_stats": [
+        {
+            "requirement_index": 0,
+            "criteria": "\"COCO\"データセットのダウンロードは`src/data_loader.py`で実装されています。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 5.5772318840026855,
+                "input_tokens": 937,
+                "output_tokens": 633,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n\n**根拠:**\n\n`src/data_loader.py` の `load_dataset()` 関数は、実際の COCO データセットダウンロードの実装が含まれていません。\n\n```python\ndef load_dataset():\n    \"\"\"Minimal dataset loader placeholder.\"\"\"\n    return {\"dataset\": \"loaded\", \"notes\": requirement_notes()}\n```\n\nこの関数は明示的に「placeholder」として記述されており、以下のような実際のダウンロードロジックが含まれていません:\n- データセットソースからの取得（例：`torchvision.datasets.CocoDetection` など）\n- ダウンロード処理（例：`requests`, `urllib`, `wget` など）\n- ファイル保存処理\n\n要件「COCO データセットのダウンロードは `src/data_loader.py` で実装されています」は、単なるプレースホルダー実装であり、実際のダウンロード機能の実装がないため満たされていません。"
+                ]
+            },
+            "total_time": 70.4987211227417
+        },
+        {
+            "requirement_index": 1,
+            "criteria": "画像のリサイズと正規化を含むデータ前処理は`src/data_loader.py`で行われます。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 7.981865882873535,
+                "input_tokens": 938,
+                "output_tokens": 1273,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n`src/data_loader.py` 内の `build_transforms` 関数は、実際の画像リサイズや正規化処理を実行するコードではなく、単に文字列リスト `[\"rotation\", \"scaling\", \"normalization\"]` を返すプレースホルダーである。また、`load_dataset` 関数も実際のデータ読み込みロジックを持たず、ダミーデータを返しているため、要件を満たしていない。"
+                ]
+            },
+            "total_time": 76.71260356903076
+        },
+        {
+            "requirement_index": 2,
+            "criteria": "\"YOLOv3\"モデルは`src/model.py`で実装されています。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 10.538933038711548,
+                "input_tokens": 947,
+                "output_tokens": 552,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n\n`src/model.py` には YOLOv3 モデルの実際の実装コードが含まれていません。提供されたコードを確認すると：\n\n1. `build_model()` 関数は `\"model placeholder\"` という文字列を返すのみで、実際のモデルインスタンスや実装を生成していません\n2. YOLOv3 関連のライブラリ（`torchvision`, `ultralytics`, `yolo` など）のインポートがありません\n3. 検出ロジックやモデルアーキテクチャの実装コードが存在しません\n4. ファイルは「ベンチマーク判定用」というドキュメントから、実装ではなく評価用のプレースホルダーであることが明確です\n\n要件「YOLOv3 モデルは `src/model.py` で実装されています」は、実際のコード実装が存在しないため満たされていません。"
+                ]
+            },
+            "total_time": 72.25430727005005
+        },
+        {
+            "requirement_index": 3,
+            "criteria": "検出結果を洗練するために\"Non-Maximum Suppression\" (NMS)が適用されます。これを`src/model.py`で実装してください。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 9.757233142852783,
+                "input_tokens": 952,
+                "output_tokens": 686,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED> 要件が満たされていません。`src/model.py` には NMS の実装コードが含まれていません。ファイルには要件の記述（`REQUIREMENT_CRITERIA`）やキーワード定義はありますが、実際の NMS アルゴリズムの実装、YOLOv3 モデルの実装、または検出結果を洗練させるための機能コードは一切存在しません。`build_model()` 関数は単にプレースホルダー文字列を返すのみであり、要件を満たす実装ではありません。"
+                ]
+            },
+            "total_time": 33.137160539627075
+        },
+        {
+            "requirement_index": 4,
+            "criteria": "検出結果は指定されたフォルダ`results/figures/`に保存されます。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 6.44366455078125,
+                "input_tokens": 1259,
+                "output_tokens": 353,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>: 検出結果を `results/figures/` フォルダに保存する実装がコードに含まれていません。`data_loader.py` と `model.py` の両方ともプレースホルダー実装のみであり、検出結果の保存ロジック（ファイル書き込み、パス指定など）が実装されていません。"
+                ]
+            },
+            "total_time": 57.39309120178223
+        },
+        {
+            "requirement_index": 5,
+            "criteria": "`src/app.py`でインタラクティブな\"Streamlit\"ウェブページが作成され、`results/figures/`に保存された検出結果を表示します。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 4.442885160446167,
+                "input_tokens": 906,
+                "output_tokens": 655,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n\n**根拠:**\n\n`src/app.py` の実際のコード内容を確認したところ、以下の問題があります:\n\n1. **Streamlit のインポートがない**: コードに `import streamlit` や `from streamlit import` などの記述が存在しない\n2. **ウェブページの作成ロジックがない**: `st.write()`, `st.image()`, `st.sidebar` などの Streamlit 関数の使用がない\n3. **検出結果の表示ロジックがない**: `results/figures/` ディレクトリから画像を読み込み、表示するコードが含まれていない\n4. **実装が記述のみ**: 要件定義は `REQUIREMENT_CRITERIA` 変数に文字列として記述されているだけで、実際の機能実装は行われていない\n\nこのコードは要件を記述するだけの「メタ情報」であり、実際にインタラクティブな Streamlit ウェブページを作成する機能は実装されていません。"
+                ]
+            },
+            "total_time": 45.04897975921631
+        },
+        {
+            "requirement_index": 6,
+            "criteria": "モデルのパフォーマンス評価結果は`results/metrics/model_performance.txt`に保存されます。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.383477210998535,
+                "input_tokens": 730,
+                "output_tokens": 282,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>: The file `results/metrics/model_performance.txt` exists in the project structure, but its content contains only placeholder data `('placeholder\\r\\n', None)` instead of actual performance evaluation results. The requirement specifies that model performance evaluation results should be saved to this file, but the current content does not contain any meaningful performance metrics or evaluation data."
+                ]
+            },
+            "total_time": 50.87272882461548
+        }
+    ]
+}

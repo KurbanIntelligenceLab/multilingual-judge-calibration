@@ -1,0 +1,219 @@
+{
+    "name": "54_Mock_OpenAI_API_Response_Analyzer_App",
+    "query": "أريد إنشاء تطبيق يمكنني من تحليل الاستجابات المختلفة التي قد يقدمها OpenAI API لنفس الاستعلام. يجب تنفيذ الواجهة الأمامية في `src/frontend.py` ويجب أن تحتوي على محادثة بين المستخدم و LLM كقائمة. يجب أن يحتوي كل عنصر في القائمة على حقل نصي حيث يمكنني إضافة رسالة نصية (قد تكون كبيرة) وقائمة منسدلة تحدد ما إذا كانت الرسالة من LLM أو المستخدم. يجب التعامل مع هذه الوظيفة في `src/message_list.py`. يمكن أن يكون هناك عدد غير محدود من عناصر القائمة هذه، لذا عند تحميل التطبيق، يجب أن يبدأ بعنصر قائمة فارغ واحد، ويجب أن يكون هناك زر لإضافة عناصر قائمة جديدة حسب الحاجة. بخلاف القائمة، يجب أن يكون هناك حقل رقمي، يتم تنفيذه في `src/frontend.py`، يمكن للمستخدم تحريره. يجب أن يسمح هذا الحقل فقط بالقيم من 0 إلى 100. يجب أن يكون هناك أيضًا زر يحمل اسم SUBMIT. عندما أنقر على زر SUBMIT، يجب إرسال المحادثة الكاملة إلى OpenAI API بالتوازي X عدد من المرات، حيث X هو قيمة الرقم من 0 إلى 100 الذي أدخله المستخدم في الواجهة الأمامية. يجب التعامل مع جميع طلبات API والاستجابات في `src/backend.py`. عندما يتم جلب الاستجابات من OpenAI API، يجب عرضها كقائمة من العناصر القابلة للتوسيع في `src/frontend_render.py`. على سبيل المثال، إذا قمت بتعيين عدد الطلبات إلى 10، عندما تبدأ الاستجابات في الوصول، يجب أن تظهر 10 عناصر، كل منها يحمل رقم الطلب. عند التوسيع، يجب أن تظهر تلك الاستجابة المحددة. ضع في اعتبارك أن OpenAI API يعيد تدفقًا، لذا يجب أن تتدفق الاستجابات إلى الواجهة الأمامية رمزًا برمز وتعرض في الوقت الفعلي. يجب تنفيذ هذه الوظيفة في `src/stream_handler.py`. استخدم Tailwind للتصميم في `src/styles.css`، ولكن لا تقم بتثبيته. بدلاً من ذلك، استخدم نسخة CDN. يجب عليك استخدام استجابات LLM الوهمية لتخفيف استخدام مفتاح OpenAI. يجب توليد استجابات LLM الوهمية في `src/mock_llm.py`.",
+    "tags": [
+        "Natural Language Processing",
+        "Generative Models",
+        "Other"
+    ],
+    "requirements": [
+        {
+            "requirement_id": 0,
+            "prerequisites": [],
+            "criteria": "يجب تنفيذ الواجهة الأمامية في `src/frontend.py`، تحتوي على قائمة حيث يمكن للمستخدم إضافة رسائل نصية كبيرة واختيار ما إذا كانت الرسالة من LLM أو من المستخدم. عند تحميل التطبيق، يجب أن تبدأ القائمة بعنصر فارغ واحد.",
+            "category": "Human Computer Interaction",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 1,
+            "prerequisites": [
+                0
+            ],
+            "criteria": "يجب أن تسمح قائمة الرسائل بعدد غير محدود من العناصر، يتم إدارتها من خلال زر لإضافة عناصر جديدة، يتم تنفيذها في `src/message_list.py`.",
+            "category": "Human Computer Interaction",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 2,
+            "prerequisites": [
+                0
+            ],
+            "criteria": "يجب أن تسمح الواجهة للمستخدم بإدخال قيمة رقمية من 0 إلى 100، للتحكم في عدد طلبات API المتوازية التي سيتم إرسالها. يجب تنفيذ هذه الوظيفة في `src/frontend.py`.",
+            "category": "Human Computer Interaction",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 3,
+            "prerequisites": [
+                0,
+                2
+            ],
+            "criteria": "يجب أن يؤدي زر الإرسال إلى إرسال المحادثة X مرات (حيث X هو القيمة من حقل الإدخال الرقمي) إلى استجابات LLM الوهمية. يجب التعامل مع ذلك عن طريق استدعاء مولد الاستجابة الوهمية في `src/mock_llm.py` من داخل `src/backend.py`.",
+            "category": "Other",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 4,
+            "prerequisites": [
+                0,
+                2,
+                3
+            ],
+            "criteria": "يجب أن يتم توليد الاستجابات الوهمية بواسطة `src/mock_llm.py`، ثم تمريرها إلى `src/frontend_render.py` لعرضها كقائمة من العناصر القابلة للتوسيع، كل منها معلم برقم الطلب.",
+            "category": "Human Computer Interaction",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 5,
+            "prerequisites": [
+                0,
+                2,
+                3,
+                4
+            ],
+            "criteria": "يجب أن يتم بث الاستجابات إلى الواجهة الأمامية وعرضها رمزًا برمز في الوقت الحقيقي، يتم تنفيذها في `src/stream_handler.py`.",
+            "category": "Other",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 6,
+            "prerequisites": [],
+            "criteria": "يجب استخدام Tailwind لتنسيق الواجهة الأمامية في `src/styles.css`، يتم تحميلها عبر CDN بدون تثبيت.",
+            "category": "Human Computer Interaction",
+            "satisfied": null
+        }
+    ],
+    "preferences": [
+        {
+            "preference_id": 0,
+            "criteria": "يجب أن تحافظ واجهة المستخدم على نمط نظيف ومتسق، باستخدام Tailwind لتصميم متماسك وسهل التنقل.",
+            "satisfied": null
+        },
+        {
+            "preference_id": 1,
+            "criteria": "يجب أن تكون استجابات التدفق من API فعالة، مما يضمن تحديثات في الوقت الفعلي بسلاسة دون تأخير.",
+            "satisfied": null
+        },
+        {
+            "preference_id": 2,
+            "criteria": "يجب أن يكون التعامل مع طلبات واستجابات API بشكل معياري، مما يسمح بتعديلات سهلة، مثل تعديل عدد الطلبات المتوازية.",
+            "satisfied": null
+        }
+    ],
+    "is_kaggle_api_needed": false,
+    "is_training_needed": false,
+    "is_web_navigation_needed": false,
+    "resource": "https://github.com/Pythagora-io/gpt-pilot/wiki/How-to-write-a-good-initial-project-description",
+    "language": "Arabic",
+    "judge_stats": [
+        {
+            "requirement_index": 0,
+            "criteria": "يجب تنفيذ الواجهة الأمامية في `src/frontend.py`، تحتوي على قائمة حيث يمكن للمستخدم إضافة رسائل نصية كبيرة واختيار ما إذا كانت الرسالة من LLM أو من المستخدم. عند تحميل التطبيق، يجب أن تبدأ القائمة بعنصر فارغ واحد.",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.8275773525238037,
+                "input_tokens": 1440,
+                "output_tokens": 127,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n\nبناءً على محتوى الملف `src/frontend.py` المقدم في الأدلة، تبين أن الملف يحتوي فقط على نصوص برمجية وصفية (Metadata) وقائمة بالمتطلبات كتعليقات نصية، ولا يحتوي على أي تنفيذ فعلي للكود البرمجي (مثل استخدام مكتبة Streamlit أو أي إطار عمل آخر) لإنشاء القائمة المطلوبة، أو منطق إضافة الرسائل، أو تهيئة العنصر الفارغ الأول. الملف الحالي هو مجرد هيكل فارغ لا يؤدي الوظائف البرمجية المطلوبة."
+                ]
+            },
+            "total_time": 9.731971979141235
+        },
+        {
+            "requirement_index": 1,
+            "criteria": "يجب أن تسمح قائمة الرسائل بعدد غير محدود من العناصر، يتم إدارتها من خلال زر لإضافة عناصر جديدة، يتم تنفيذها في `src/message_list.py`.",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.4070732593536377,
+                "input_tokens": 1506,
+                "output_tokens": 124,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED> بناءً على محتوى الملف `src/message_list.py` المقدم في الأدلة، يتبين أن الملف لا يحتوي على أي كود برمجى فعلي (Implementation) لتنفيذ قائمة الرسائل أو الزر المطلوب لإضافة العناصر. الملف يحتوي فقط على نصوص وصفية للمتطلبات (REQUIREMENT_CRITERIA) ودالة `main` ترجع حالة \"ok\" دون وجود منطق برمجى للواجهة أو إدارة البيانات، مما يعني أن المتطلب الوظيفي لم يتم تنفيذه برمجياً في الملف المحدد."
+                ]
+            },
+            "total_time": 7.674968004226685
+        },
+        {
+            "requirement_index": 2,
+            "criteria": "يجب أن تسمح الواجهة للمستخدم بإدخال قيمة رقمية من 0 إلى 100، للتحكم في عدد طلبات API المتوازية التي سيتم إرسالها. يجب تنفيذ هذه الوظيفة في `src/frontend.py`.",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.5902645587921143,
+                "input_tokens": 1599,
+                "output_tokens": 166,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED> بناءً على فحص محتوى الملف `src/frontend.py` المقدم، تبين أن الملف يحتوي فقط على نصوص وصفية للمتطلبات (REQUIREMENT_CRITERIA) ودالة `main` ترجع حالة \"ok\" دون وجود أي تنفيذ برمجى فعلي لواجهة المستخدم أو منطق يسمح بإدخال قيم رقمية. بالإضافة إلى ذلك، أكدت ملاحظات مسار العمل (Trajectory Evidence) وجود خلل في \"منطق القيد\" (Constraint Logic)، حيث لم يتم تقييد القيمة بحد أقصى 100، كما أن إدخال القيمة \"0\" يؤدي إلى تعليق النظام (Hang)، مما يعني أن الوظيفة لم تُنفذ بالشكل الصحيح والمطلوب."
+                ]
+            },
+            "total_time": 8.443604230880737
+        },
+        {
+            "requirement_index": 3,
+            "criteria": "يجب أن يؤدي زر الإرسال إلى إرسال المحادثة X مرات (حيث X هو القيمة من حقل الإدخال الرقمي) إلى استجابات LLM الوهمية. يجب التعامل مع ذلك عن طريق استدعاء مولد الاستجابة الوهمية في `src/mock_llm.py` من داخل `src/backend.py`.",
+            "satisfied": true,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.3888206481933594,
+                "input_tokens": 1882,
+                "output_tokens": 109,
+                "accumulated_cost": 0.0,
+                "satisfied": true,
+                "reason": [
+                    "<SATISFIED> تم التحقق من استيفاء المعيار بناءً على مسار العمل (Trajectory) الذي أكد وجود حلقة تكرارية في `src/backend.py` تقوم باستدعاء الدالة المستوردة من `src/mock_llm.py` بعدد مرات مطابق للقيمة المدخلة من واجهة المستخدم. كما أكدت سجلات التنفيذ (Logs) توليد الاستجابات بالتسلسل المطلوب دون أخطاء برمجية عند النقر على زر الإرسال."
+                ]
+            },
+            "total_time": 12.492093086242676
+        },
+        {
+            "requirement_index": 4,
+            "criteria": "يجب أن يتم توليد الاستجابات الوهمية بواسطة `src/mock_llm.py`، ثم تمريرها إلى `src/frontend_render.py` لعرضها كقائمة من العناصر القابلة للتوسيع، كل منها معلم برقم الطلب.",
+            "satisfied": true,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 3.5322468280792236,
+                "input_tokens": 1799,
+                "output_tokens": 118,
+                "accumulated_cost": 0.0,
+                "satisfied": true,
+                "reason": [
+                    "<SATISFIED> تم التحقق من استيفاء المتطلب بناءً على سجلات التنفيذ (Trajectory Evidence) التي أكدت أن `src/mock_llm.py` قام بتوليد كائنات الاستجابة مع معرفات الطلبات بنجاح، كما رصدت سجلات الواجهة الأمامية في `src/frontend_render.py` استلام هذه البيانات ومعالجتها وتحويلها إلى عناصر قابلة للتوسيع (Expandable elements) مع ظهور \"رقم الطلب\" كعنوان لكل عنصر دون أخطاء تقنية."
+                ]
+            },
+            "total_time": 9.039891242980957
+        },
+        {
+            "requirement_index": 5,
+            "criteria": "يجب أن يتم بث الاستجابات إلى الواجهة الأمامية وعرضها رمزًا برمز في الوقت الحقيقي، يتم تنفيذها في `src/stream_handler.py`.",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.521580934524536,
+                "input_tokens": 1364,
+                "output_tokens": 149,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED> بناءً على محتوى الملف `src/stream_handler.py` المقدم، يتبين أن الملف يحتوي فقط على هيكل نصي (Minimal semantic implementation) ولا يتضمن أي منطق برمجي فعلي لتنفيذ عملية البث (Streaming) أو معالجة الرموز (Tokens) في الوقت الحقيقي. بالإضافة إلى ذلك، تشير أدلة مسار العمل (Trajectory Evidence) إلى وجود مشاكل تقنية في التنفيذ الفعلي، حيث أن البيانات لا يتم عمل `flush` لها بشكل فوري مما يؤدي لعرضها ككتلة واحدة بدلاً من \"رمز برمز\"، مع وجود أخطاء في إدارة دورة حياة التدفق مثل `GeneratorExit`."
+                ]
+            },
+            "total_time": 7.372705698013306
+        },
+        {
+            "requirement_index": 6,
+            "criteria": "يجب استخدام Tailwind لتنسيق الواجهة الأمامية في `src/styles.css`، يتم تحميلها عبر CDN بدون تثبيت.",
+            "satisfied": true,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.6111528873443604,
+                "input_tokens": 1118,
+                "output_tokens": 133,
+                "accumulated_cost": 0.0,
+                "satisfied": true,
+                "reason": [
+                    "<SATISFIED>\n\nبناءً على الأدلة المتوفرة في مسار العمل (Trajectory Evidence)، تم التأكيد على أن تنسيقات الواجهة الأمامية تعتمد على رابط CDN الخاص بـ Tailwind CSS المدرج داخل ملف CSS. كما أكدت سجلات التنفيذ عدم وجود محاولات لتثبيت المكتبة محلياً عبر `npm` أو وجود مجلد `node_modules` في هيكل المشروع (Project Tree)، مما يثبت الاعتماد الكلي على التحميل المباشر عبر CDN لتطبيق التنسيقات دون الحاجة لتثبيت محلي، وهو ما يطابق المتطلب تماماً."
+                ]
+            },
+            "total_time": 7.478510856628418
+        }
+    ]
+}

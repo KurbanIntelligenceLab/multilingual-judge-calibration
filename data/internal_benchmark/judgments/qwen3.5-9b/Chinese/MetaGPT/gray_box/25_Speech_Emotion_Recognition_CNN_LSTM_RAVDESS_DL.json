@@ -1,0 +1,211 @@
+{
+    "name": "25_Speech_Emotion_Recognition_CNN_LSTM_RAVDESS_DL",
+    "query": "我正在寻找一个使用CNN-LSTM模型和RAVDESS数据集的语音情感识别项目，该数据集应从Kaggle或[这个Hugging Face链接](https://huggingface.co/datasets/xbgoose/ravdess)下载。项目应加载数据集并执行稳健的音频预处理（去噪和归一化）以及MFCC特征提取，实现在`src/data_loader.py`中。CNN-LSTM模型应实现在`src/model.py`中。识别准确率应保存在`results/metrics/recognition_accuracy.txt`中，并生成混淆矩阵，保存为`results/figures/confusion_matrix.png`。此外，应使用Flask创建一个用户友好的本地API，允许用户上传音频文件并接收情感识别结果，实现在`src/hci.py`中。",
+    "tags": [
+        "Audio Processing",
+        "Classification"
+    ],
+    "requirements": [
+        {
+            "requirement_id": 0,
+            "prerequisites": [],
+            "criteria": "\"RAVDESS\"数据集在`src/data_loader.py`中加载，从Kaggle或[这个Hugging Face链接](https://huggingface.co/datasets/xbgoose/ravdess)下载。",
+            "category": "Dataset or Environment",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 1,
+            "prerequisites": [
+                0
+            ],
+            "criteria": "音频预处理，包括去噪和归一化，实现在`src/data_loader.py`中。",
+            "category": "Data preprocessing and postprocessing",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 2,
+            "prerequisites": [
+                0,
+                1
+            ],
+            "criteria": "MFCC特征提取实现在`src/data_loader.py`中。",
+            "category": "Data preprocessing and postprocessing",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 3,
+            "prerequisites": [],
+            "criteria": "\"CNN-LSTM\"模型实现在`src/model.py`中。",
+            "category": "Machine Learning Method",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 4,
+            "prerequisites": [
+                2,
+                3
+            ],
+            "criteria": "识别准确率保存在`results/metrics/recognition_accuracy.txt`中。",
+            "category": "Performance Metrics",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 5,
+            "prerequisites": [
+                2,
+                3,
+                4
+            ],
+            "criteria": "混淆矩阵生成并保存为`results/figures/confusion_matrix.png`。",
+            "category": "Visualization",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 6,
+            "prerequisites": [
+                2,
+                3
+            ],
+            "criteria": "使用\"Flask\"创建一个本地API，允许用户上传音频文件并接收情感识别结果。实现应包含在`src/hci.py`中。",
+            "category": "Human Computer Interaction",
+            "satisfied": null
+        }
+    ],
+    "preferences": [
+        {
+            "preference_id": 0,
+            "criteria": "音频预处理步骤应稳健，有效减少噪音，同时保持语音信号的完整性。",
+            "satisfied": null
+        },
+        {
+            "preference_id": 1,
+            "criteria": "本地API应用户友好，提供清晰的文件上传和结果解释说明。",
+            "satisfied": null
+        }
+    ],
+    "is_kaggle_api_needed": true,
+    "is_training_needed": true,
+    "is_web_navigation_needed": true,
+    "language": "Chinese",
+    "judge_stats": [
+        {
+            "requirement_index": 0,
+            "criteria": "\"RAVDESS\"数据集在`src/data_loader.py`中加载，从Kaggle或[这个Hugging Face链接](https://huggingface.co/datasets/xbgoose/ravdess)下载。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 27.157524585723877,
+                "input_tokens": 914,
+                "output_tokens": 2048,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n依据：`src/data_loader.py` 中的 `load_dataset()` 函数仅返回占位符字典 `{\"dataset\": \"loaded\", \"notes\": requirement_notes()}`，并未实现从 Kaggle 或 Hugging Face 链接实际"
+                ]
+            },
+            "total_time": 93.95481204986572
+        },
+        {
+            "requirement_index": 1,
+            "criteria": "音频预处理，包括去噪和归一化，实现在`src/data_loader.py`中。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 15.705044269561768,
+                "input_tokens": 888,
+                "output_tokens": 1115,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n代码中 `src/data_loader.py` 仅包含占位符实现。`load_dataset` 函数返回静态字典 `{\"dataset\": \"loaded\", ...}`，`build_transforms` 函数返回字符串列表 `[\"rotation\", \"scaling\", \"normalization\"]`，并未包含实际的音频去噪和归一化处理逻辑（如调用信号处理库或具体算法）。要求仅存在于 `REQUIREMENT_CRITERIA` 字符串列表中，未真正实现。"
+                ]
+            },
+            "total_time": 79.65883469581604
+        },
+        {
+            "requirement_index": 2,
+            "criteria": "MFCC特征提取实现在`src/data_loader.py`中。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 28.38800883293152,
+                "input_tokens": 881,
+                "output_tokens": 1661,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n依据：`src/data_loader.py` 中的代码仅为占位符实现（Placeholder），文件头部明确标注为 \"Minimal semantic implementation for benchmark judging\"。虽然 `REQUIREMENT_CRITERIA` 列表中声明了 MFCC 特征提取的要求，但实际代码中的 `load_dataset` 和 `build_transforms` 函数仅返回字典或字符串列表，未包含任何实际的 MFCC 特征提取逻辑（如导入 `librosa` 或 `torchaudio` 并调用相关函数）。\n代码片段：`def load_dataset(): return {\"dataset\": \"loaded\", \"notes\": requirement_notes()}`"
+                ]
+            },
+            "total_time": 96.6349790096283
+        },
+        {
+            "requirement_index": 3,
+            "criteria": "\"CNN-LSTM\"模型实现在`src/model.py`中。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 29.020118474960327,
+                "input_tokens": 801,
+                "output_tokens": 2048,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    ""
+                ]
+            },
+            "total_time": 108.74637579917908
+        },
+        {
+            "requirement_index": 4,
+            "criteria": "识别准确率保存在`results/metrics/recognition_accuracy.txt`中。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 22.472867727279663,
+                "input_tokens": 631,
+                "output_tokens": 1564,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n依据文件内容证据，`results/metrics/recognition_accuracy.txt` 中的内容为 `('placeholder\\r\\n', None)`，这是占位符而非实际的识别准确率数值，因此未满足保存准确率的要求。"
+                ]
+            },
+            "total_time": 85.80660963058472
+        },
+        {
+            "requirement_index": 5,
+            "criteria": "混淆矩阵生成并保存为`results/figures/confusion_matrix.png`。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 9.415701150894165,
+                "input_tokens": 825,
+                "output_tokens": 1250,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n依据：虽然文件 `results/figures/confusion_matrix.png` 存在于目录结构中，但其内容显示为错误日志（`litellm.BadRequestError... \"Supplied image did not pass validation checks.\"`），而非有效的图像二进制数据。这表明混淆矩阵未能成功生成或保存为有效的图片文件。"
+                ]
+            },
+            "total_time": 43.184300899505615
+        },
+        {
+            "requirement_index": 6,
+            "criteria": "使用\"Flask\"创建一个本地API，允许用户上传音频文件并接收情感识别结果。实现应包含在`src/hci.py`中。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 17.244840145111084,
+                "input_tokens": 820,
+                "output_tokens": 2048,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    ""
+                ]
+            },
+            "total_time": 75.76792311668396
+        }
+    ]
+}

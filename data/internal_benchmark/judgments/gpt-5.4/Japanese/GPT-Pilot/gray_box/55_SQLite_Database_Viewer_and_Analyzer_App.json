@@ -1,0 +1,429 @@
+{
+    "name": "55_SQLite_Database_Viewer_and_Analyzer_App",
+    "query": "ユーザーがSQLiteデータベースに保存されたAI開発データを閲覧および分析できるアプリを作成したいです。フロントエンド（`src/frontend.py`に実装）では、ユーザーはデバイスからファイルを選択してAIモデルのトレーニングログやプロンプト-レスポンスデータを含む新しいSQLiteデータベースをアップロードするか、`src/cache.py`にキャッシュされた以前にアップロードしたデータベースを選択することができます。これにより、ユーザーはデータベースを分析するたびにアップロードする必要がなくなります。新しいデータベースがアップロードされた場合、ユーザーはそれに名前を付けることができ、ファイルはバックエンド（`src/backend.py`）に送信され、将来の使用のために保存されます。データベースがアップロードされると、ユーザーはそれと対話できます。ユーザーは`app`テーブルからAIモデルやアプリのリストを確認することができ、1つのアプリを選択して`development_planning`テーブルからその開発タスクを表示できます。タスクを選択した後、そのタスクに関連するすべての開発ステップを表示できます。最後に、ステップを選択すると、`prompt_path`、`messages`、`llm_response`、`prompt_data`などの詳細データが表示され、適切な情報がフロントエンド（`src/frontend_render.py`）にレンダリングされます。\nSQLiteデータベースは常にこの構造に従います：`app`テーブルにはデータベースに保存されたすべてのアプリが含まれています。各アプリには、`development_planning`テーブルの`development_plan`キーの下に配列として保存された複数の開発タスクがあります。各配列項目は、`description`、`user_review_goal`、`programming_goal`の3つのキーと値のペアを持つJSONオブジェクトです。各開発タスクには多くの開発ステップが含まれており、これらは`development_steps`テーブルに保存され、`app_id`フィールドを使用して`app`テーブルにリンクされています。\n課題は、開発タスクと開発ステップの間に直接的な接続がないことです。そのため、`src/backend_logic.py`では、すべての開発ステップを取得し、`prompt_path`フィールドで分割する必要があります。すべての開発タスクは`prompt_path`値`development/task/breakdown.prompt`で始まるため、開発ステップを小さなリストに分割し、それぞれのリストが`prompt_path`が`development/task/breakdown.prompt`に等しいステップで始まるようにグループ化できます。これにより、各タスクに対する正しい開発ステップのセットが得られます。\n各開発ステップには、フロントエンド（`src/frontend_render.py`）に表示する必要がある以下の値が含まれています：\n- `prompt_path`: 文字列。\n- `messages`: JSONオブジェクトの配列。\n- `llm_response`: JSONオブジェクト。\n- `prompt_data`: JSONオブジェクト。\n`messages`配列には常に`content`と`role`のキーを持つJSONオブジェクトが含まれます。フロントエンドでは、`content`を大きなテキストフィールドに表示し、`role`をラベルとして表示する必要があります。`llm_response`オブジェクトには常に`text`キーがあり、長い文字列を表示するためにテキストエリアとして表示する必要があります。`prompt_data`オブジェクトにはさまざまなキーと値のペアが含まれる可能性があり、それぞれを適切な形式でユーザーに表示する必要があります。",
+    "tags": [
+        "Other"
+    ],
+    "requirements": [
+        {
+            "requirement_id": 0,
+            "prerequisites": [],
+            "criteria": "フロントエンドは`src/frontend.py`に実装されており、ユーザーが新しいSQLiteデータベースをアップロードするか、`src/cache.py`から以前にキャッシュされたものを選択できるようにします。選択されたファイルは保存され、将来の使用のためにアクセス可能であるべきです。",
+            "category": "Human Computer Interaction",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 1,
+            "prerequisites": [
+                0
+            ],
+            "criteria": "新しいデータベースがアップロードされると、ユーザーはそれに名前を付けることができ、ファイルはバックエンド（`src/backend.py`）に送信され、将来の使用のために保存されます。",
+            "category": "Other",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 2,
+            "prerequisites": [
+                0,
+                1
+            ],
+            "criteria": "以前にアップロードされたデータベースは`src/cache.py`にキャッシュされており、再アップロードせずに選択できます。",
+            "category": "Dataset or Environment",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 3,
+            "prerequisites": [
+                0,
+                1,
+                2
+            ],
+            "criteria": "データベースがアップロードまたは選択されると、ユーザーはデータベース内の`app`テーブルからAIモデルやアプリのリストを表示できます。",
+            "category": "Other",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 4,
+            "prerequisites": [
+                0,
+                1,
+                2,
+                3
+            ],
+            "criteria": "ユーザーはアプリを選択し、`development_planning`テーブルからその開発タスクを表示できます。",
+            "category": "Other",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 5,
+            "prerequisites": [
+                0,
+                1,
+                2,
+                3,
+                4
+            ],
+            "criteria": "タスクを選択した後、ユーザーは関連するすべての開発ステップを表示でき、これらは`src/frontend_render.py`に実装されたフロントエンドに表示されます。",
+            "category": "Human Computer Interaction",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 6,
+            "prerequisites": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5
+            ],
+            "criteria": "開発ステップを選択すると、`prompt_path`、`messages`、`llm_response`、`prompt_data`を含む詳細データが表示され、フロントエンド（`src/frontend_render.py`）に適切にレンダリングされます。",
+            "category": "Human Computer Interaction",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 7,
+            "prerequisites": [],
+            "criteria": "`src/backend_logic.py`では、`development_steps`テーブルからすべての開発ステップを取得し、`prompt_path`フィールドを使用して開発タスクごとにグループ化します。`development/task/breakdown.prompt`で始まります。",
+            "category": "Other",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 8,
+            "prerequisites": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6
+            ],
+            "criteria": "`messages`配列はフロントエンド（`src/frontend_render.py`）に表示され、各メッセージの`content`を大きなテキストフィールドに、`role`をラベルとして表示します。",
+            "category": "Human Computer Interaction",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 9,
+            "prerequisites": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6
+            ],
+            "criteria": "`llm_response`オブジェクトの`text`キーは、長い文字列を収容するためにテキストエリアに表示されます（`src/frontend_render.py`）。",
+            "category": "Human Computer Interaction",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 10,
+            "prerequisites": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6
+            ],
+            "criteria": "`prompt_data`オブジェクトは、そのキーと値のペアが適切な形式でフロントエンド（`src/frontend_render.py`）に表示されます。",
+            "category": "Human Computer Interaction",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 11,
+            "prerequisites": [],
+            "criteria": "SQLiteデータベースは、プロジェクトクエリで説明されているように、`app`、`development_planning`、`development_steps`テーブルを含む指定された構造に従います。",
+            "category": "Dataset or Environment",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 12,
+            "prerequisites": [
+                11
+            ],
+            "criteria": "`app`テーブルの各アプリには、`development_planning`テーブルの`development_plan`キーの下に配列として保存された複数の開発タスクがあります。",
+            "category": "Dataset or Environment",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 13,
+            "prerequisites": [
+                11
+            ],
+            "criteria": "各開発タスクには、`development_steps`テーブルに保存され、`app_id`フィールドを使用して`app`テーブルにリンクされた多くの開発ステップが含まれています。",
+            "category": "Dataset or Environment",
+            "satisfied": null
+        }
+    ],
+    "preferences": [
+        {
+            "preference_id": 0,
+            "criteria": "フロントエンドインターフェースは、データベースとの簡単な対話を可能にし、ユーザーがアプリ、タスク、ステップ間をスムーズに移動できるようにするべきです。",
+            "satisfied": null
+        },
+        {
+            "preference_id": 1,
+            "criteria": "システムは大規模なSQLiteデータベースを効率的に処理し、大規模なデータセットでもパフォーマンスが維持されるべきです。",
+            "satisfied": null
+        },
+        {
+            "preference_id": 2,
+            "criteria": "情報は直感的でユーザーフレンドリーな方法でフロントエンドにレンダリングされ、対話のしやすさを確保するべきです。",
+            "satisfied": null
+        },
+        {
+            "preference_id": 3,
+            "criteria": "開発ステップのグループ化は、`src/backend_logic.py`に実装されたロジックに従って、各タスクに対する正しいステップのセットを正確に反映するべきです。",
+            "satisfied": null
+        }
+    ],
+    "is_kaggle_api_needed": false,
+    "is_training_needed": false,
+    "is_web_navigation_needed": false,
+    "resource": "https://github.com/Pythagora-io/gpt-pilot/wiki/How-to-write-a-good-initial-project-description",
+    "language": "Japanese",
+    "judge_stats": [
+        {
+            "requirement_index": 0,
+            "criteria": "フロントエンドは`src/frontend.py`に実装されており、ユーザーが新しいSQLiteデータベースをアップロードするか、`src/cache.py`から以前にキャッシュされたものを選択できるようにします。選択されたファイルは保存され、将来の使用のためにアクセス可能であるべきです。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.3114216327667236,
+                "input_tokens": 1848,
+                "output_tokens": 86,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED> `src/frontend.py` and `src/cache.py` only contain placeholder text (`REQUIREMENT_CRITERIA`, `requirement_notes()`, `main()`) and no actual frontend, upload handling, cached database selection, or file persistence logic. There is no evidence that users can upload SQLite files, select cached ones, or that selected files are saved for future access."
+                ]
+            },
+            "total_time": 10.568496465682983
+        },
+        {
+            "requirement_index": 1,
+            "criteria": "新しいデータベースがアップロードされると、ユーザーはそれに名前を付けることができ、ファイルはバックエンド（`src/backend.py`）に送信され、将来の使用のために保存されます。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 1.8020925521850586,
+                "input_tokens": 1329,
+                "output_tokens": 64,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED> `src/backend.py` only contains a placeholder that returns requirement text via `main()` and does not implement any upload handling, database naming, backend receiving logic, or persistent file storage. No evidence shows a file being sent to the backend or saved for future use."
+                ]
+            },
+            "total_time": 5.903281211853027
+        },
+        {
+            "requirement_index": 2,
+            "criteria": "以前にアップロードされたデータベースは`src/cache.py`にキャッシュされており、再アップロードせずに選択できます。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.731281042098999,
+                "input_tokens": 1480,
+                "output_tokens": 68,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED> `src/cache.py` contains only benchmark metadata (`REQUIREMENT_CRITERIA`, `requirement_notes`, `main`) and no cache storage, retrieval logic, or database list management. There is also no execution evidence showing previously uploaded SQLite files can be selected without re-uploading."
+                ]
+            },
+            "total_time": 8.305498361587524
+        },
+        {
+            "requirement_index": 3,
+            "criteria": "データベースがアップロードまたは選択されると、ユーザーはデータベース内の`app`テーブルからAIモデルやアプリのリストを表示できます。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.526085615158081,
+                "input_tokens": 2223,
+                "output_tokens": 113,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED> 提示された `src/backend.py`, `src/backend_logic.py`, `src/frontend.py`, `src/frontend_render.py` はいずれも要件説明文字列を返すだけの最小実装で、SQLite データベース接続、`app` テーブルの読取、AIモデル/アプリ一覧の取得・表示処理が存在しません。参照ログにも `app` テーブル取得や一覧表示の実行証拠はありません。"
+                ]
+            },
+            "total_time": 7.313294887542725
+        },
+        {
+            "requirement_index": 4,
+            "criteria": "ユーザーはアプリを選択し、`development_planning`テーブルからその開発タスクを表示できます。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.56772518157959,
+                "input_tokens": 2161,
+                "output_tokens": 147,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED> 提供された `src/backend.py`、`src/backend_logic.py`、`src/frontend.py`、`src/frontend_render.py` はいずれも要件説明を文字列で返すだけの最小実装であり、ユーザーがアプリを選択するUIや、`development_planning` テーブルを読み取って開発タスクを表示する処理は確認できません。特に `backend_logic.py` でも参照しているのは `development_steps` テーブルに関する説明のみで、`development_planning` テーブルの取得・表示実装の証拠がありません。"
+                ]
+            },
+            "total_time": 6.625870943069458
+        },
+        {
+            "requirement_index": 5,
+            "criteria": "タスクを選択した後、ユーザーは関連するすべての開発ステップを表示でき、これらは`src/frontend_render.py`に実装されたフロントエンドに表示されます。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 1.8382289409637451,
+                "input_tokens": 1553,
+                "output_tokens": 68,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED> `src/frontend_render.py` contains only a minimal stub that defines `REQUIREMENT_CRITERIA` and returns `{\"status\": \"ok\", \"notes\": ...}` from `main()`. There is no frontend logic to load a selected task or display all associated development steps."
+                ]
+            },
+            "total_time": 8.655917644500732
+        },
+        {
+            "requirement_index": 6,
+            "criteria": "開発ステップを選択すると、`prompt_path`、`messages`、`llm_response`、`prompt_data`を含む詳細データが表示され、フロントエンド（`src/frontend_render.py`）に適切にレンダリングされます。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.0664291381835938,
+                "input_tokens": 1629,
+                "output_tokens": 88,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED> `src/frontend_render.py` only contains a minimal benchmark stub that returns requirement notes via `main()` and does not implement any frontend rendering logic for selected development steps. There is no code displaying `prompt_path`, `messages`, `llm_response`, or `prompt_data`; these fields appear only as plain text inside `REQUIREMENT_CRITERIA`, not as rendered UI data."
+                ]
+            },
+            "total_time": 8.62955617904663
+        },
+        {
+            "requirement_index": 7,
+            "criteria": "`src/backend_logic.py`では、`development_steps`テーブルからすべての開発ステップを取得し、`prompt_path`フィールドを使用して開発タスクごとにグループ化します。`development/task/breakdown.prompt`で始まります。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 1.9644427299499512,
+                "input_tokens": 1614,
+                "output_tokens": 77,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED> `src/backend_logic.py` only contains a placeholder implementation with `REQUIREMENT_CRITERIA` text and a `main()` returning metadata; it does not query any `development_steps` table, does not read or process `prompt_path`, and does not group steps for paths starting with `development/task/breakdown.prompt`."
+                ]
+            },
+            "total_time": 6.716291189193726
+        },
+        {
+            "requirement_index": 8,
+            "criteria": "`messages`配列はフロントエンド（`src/frontend_render.py`）に表示され、各メッセージの`content`を大きなテキストフィールドに、`role`をラベルとして表示します。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.4913275241851807,
+                "input_tokens": 1627,
+                "output_tokens": 79,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED> `src/frontend_render.py` contains only a minimal stub that returns requirement notes (`main()` returns `{\"status\": \"ok\", \"notes\": ...}`) and does not implement any frontend rendering logic for a `messages` array, nor display each message’s `content` in a large text field and `role` as a label."
+                ]
+            },
+            "total_time": 7.641111850738525
+        },
+        {
+            "requirement_index": 9,
+            "criteria": "`llm_response`オブジェクトの`text`キーは、長い文字列を収容するためにテキストエリアに表示されます（`src/frontend_render.py`）。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 1.9836914539337158,
+                "input_tokens": 1495,
+                "output_tokens": 77,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED> `src/frontend_render.py` contains only a minimal stub returning requirement notes and does not implement any frontend rendering logic. Although the criteria string mentions that `llm_response.text` should be shown in a text area, there is no code that displays `llm_response`, accesses its `text` key, or renders a textarea."
+                ]
+            },
+            "total_time": 5.769344091415405
+        },
+        {
+            "requirement_index": 10,
+            "criteria": "`prompt_data`オブジェクトは、そのキーと値のペアが適切な形式でフロントエンド（`src/frontend_render.py`）に表示されます。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.105297088623047,
+                "input_tokens": 1605,
+                "output_tokens": 63,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED> `src/frontend_render.py` does not implement any frontend rendering for `prompt_data`; it only defines requirement text and returns metadata in `main()`. There is no code that reads a `prompt_data` object or displays its key-value pairs in any format."
+                ]
+            },
+            "total_time": 8.474482536315918
+        },
+        {
+            "requirement_index": 11,
+            "criteria": "SQLiteデータベースは、プロジェクトクエリで説明されているように、`app`、`development_planning`、`development_steps`テーブルを含む指定された構造に従います。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 3.3586599826812744,
+                "input_tokens": 1883,
+                "output_tokens": 161,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED> 提供された証拠には SQLite データベースの実体、スキーマ定義、`CREATE TABLE` 文、または `app`・`development_planning`・`development_steps` テーブルの存在確認結果がありません。`src/*.py` は要件文を返すだけの最小実装で、DB 構造を実装・検証している証拠になっていません。さらに参照ログでも「SQLite DB 構造に直接関係する最新の実行・読込・保存ステップは特定できない」とされており、指定構造に従うと判断する根拠が不足しています。"
+                ]
+            },
+            "total_time": 10.286794900894165
+        },
+        {
+            "requirement_index": 12,
+            "criteria": "`app`テーブルの各アプリには、`development_planning`テーブルの`development_plan`キーの下に配列として保存された複数の開発タスクがあります。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.8008337020874023,
+                "input_tokens": 1216,
+                "output_tokens": 142,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED> 提示された証拠では、`app`テーブルの各アプリに対して、`development_planning`テーブルの`development_plan`キー配下へ複数の開発タスクが配列として保存されていることを確認できません。ワークスペースには `app`、`development_planning`、`development_plan` という項目名はありますが、実データ内容・SQLiteスキーマ・保存結果・クエリ出力が示されておらず、要件充足を裏付ける具体的証拠が不足しています。"
+                ]
+            },
+            "total_time": 7.495675563812256
+        },
+        {
+            "requirement_index": 13,
+            "criteria": "各開発タスクには、`development_steps`テーブルに保存され、`app_id`フィールドを使用して`app`テーブルにリンクされた多くの開発ステップが含まれています。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.014336347579956,
+                "input_tokens": 1094,
+                "output_tokens": 109,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED> 提示された証拠には実際のデータベーススキーマ、`development_steps` テーブル定義、`app_id` 外部キー連携、または各開発タスクに複数ステップが保存されていることを示すコード・データ例がありません。参照情報でも「特定できない」と明記されており、この要件を満たした証拠は確認できません。"
+                ]
+            },
+            "total_time": 6.0375096797943115
+        }
+    ]
+}

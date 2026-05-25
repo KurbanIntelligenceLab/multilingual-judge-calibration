@@ -1,0 +1,156 @@
+{
+    "name": "05_Game_Simulation_DQN_CartPole_v1_RL",
+    "query": "CartPole-v1 gibi bir OpenAI Gym ortamında PyTorch kullanarak bir DQN ajanı eğitmek için güvenilir bir sistem oluşturun. DQN'yi PyTorch kullanarak `src/model.py` içinde uygulayın. Ortam, `src/main.py` ana dosyasında başlatılmalıdır. DQN ve ortam arasındaki boyut uyumsuzluklarını (örneğin, Gym ortam kimliği değişirse) bir hata kaydederek ele alın. Ayrıca, her bölümden sonra getiriyi `results/metrics/` dosyasına kaydedin ve her yeni bölüm tamamlandığında güncelleyin. Bölüm eğrisi üzerindeki son getiriyi `results/figures/return_over_time.png` olarak ve son eğitilmiş modeli `models/saved_models/dqn_model.pt` olarak kaydedin. Mümkünse, bölüm eğrisi üzerindeki getiriyi önemli kilometre taşlarını göstermek için açıklamalar ekleyin.",
+    "tags": [
+        "Reinforcement Learning"
+    ],
+    "requirements": [
+        {
+            "requirement_id": 0,
+            "prerequisites": [],
+            "criteria": "\"DQN\" algoritması PyTorch kullanılarak uygulanır ve `src/model.py` içinde kaydedilir.",
+            "category": "Machine Learning Method",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 1,
+            "prerequisites": [],
+            "criteria": "Bir \"OpenAI Gym\" ortamı `src/main.py` içinde başlatılır.",
+            "category": "Dataset or Environment",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 2,
+            "prerequisites": [
+                0,
+                1
+            ],
+            "criteria": "Zamanla getiri eğrisi çizilir, her bölümün getirisi kaydedilir ve `results/figures/reward_over_time.png` olarak kaydedilir.",
+            "category": "Visualization",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 3,
+            "prerequisites": [
+                0,
+                1
+            ],
+            "criteria": "Eğitilmiş model `models/saved_models/dqn_model.pt` olarak kaydedilir.",
+            "category": "Save Trained Model",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 4,
+            "prerequisites": [
+                0,
+                1
+            ],
+            "criteria": "Her bölümün getirisi `results/metrics/` dosyasına kaydedilir ve her bölüm tamamlandığında güncellenir.",
+            "category": "Performance Metrics",
+            "satisfied": null
+        }
+    ],
+    "preferences": [
+        {
+            "preference_id": 0,
+            "criteria": "Sistem, boyut uyumsuzluklarını ele almalı ve sorunları kolay hata ayıklama için kaydetmelidir.",
+            "satisfied": null
+        },
+        {
+            "preference_id": 1,
+            "criteria": "Bölüm eğrisi üzerindeki getiri, önemli kilometre taşlarıyla açıklanmıştır.",
+            "satisfied": null
+        }
+    ],
+    "is_kaggle_api_needed": false,
+    "is_training_needed": true,
+    "is_web_navigation_needed": false,
+    "language": "Turkish",
+    "judge_stats": [
+        {
+            "requirement_index": 0,
+            "criteria": "\"DQN\" algoritması PyTorch kullanılarak uygulanır ve `src/model.py` içinde kaydedilir.",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.772613048553467,
+                "input_tokens": 1280,
+                "output_tokens": 126,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>: `src/model.py` içinde `import torch` bulunsa da dosya gerçek bir DQN uygulaması içermiyor. Görünen içerik yalnızca `build_model()` fonksiyonunda `\"model placeholder\"` döndürüyor; `nn.Module` tabanlı bir `DQN` sınıfı, katman tanımları veya eğitim mantığı yok. Bu nedenle “DQN algoritması PyTorch kullanılarak uygulanır ve `src/model.py` içinde kaydedilir” ölçütü mevcut dosya içeriğiyle karşılanmıyor."
+                ]
+            },
+            "total_time": 12.117844820022583
+        },
+        {
+            "requirement_index": 1,
+            "criteria": "Bir \"OpenAI Gym\" ortamı `src/main.py` içinde başlatılır.",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.0865817070007324,
+                "input_tokens": 1194,
+                "output_tokens": 100,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>: `src/main.py` içeriğinde `gym` importu veya `gym.make(...)` çağrısı yok. Dosya yalnızca `Path` ve `torch` import ediyor ve `main()` içinde `{\"status\": \"ok\", ...}` sözlüğü döndürüyor. Bu nedenle `src/main.py` içinde bir OpenAI Gym ortamının başlatıldığına dair doğrudan kod kanıtı bulunmuyor."
+                ]
+            },
+            "total_time": 7.8505377769470215
+        },
+        {
+            "requirement_index": 2,
+            "criteria": "Zamanla getiri eğrisi çizilir, her bölümün getirisi kaydedilir ve `results/figures/reward_over_time.png` olarak kaydedilir.",
+            "satisfied": true,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 3.1464333534240723,
+                "input_tokens": 1243,
+                "output_tokens": 127,
+                "accumulated_cost": 0.0,
+                "satisfied": true,
+                "reason": [
+                    "<SATISFIED>: `results/figures/reward_over_time.png` dosyası proje ağacında mevcut. Ayrıca verilen iz kayıtlarında eğitim/çizim kodunda `episode_rewards.append(total_reward)` ile her bölüm getirisinin toplandığı ve `plt.savefig('results/figures/reward_over_time.png')` ile zamanla getiri eğrisinin bu yola kaydedildiği açıkça belirtilmiş. Görsel dosya içeriği burada okunamasa da, ölçütte istenen kayıt ve kaydetme davranışına dair somut kanıt mevcut."
+                ]
+            },
+            "total_time": 10.263497114181519
+        },
+        {
+            "requirement_index": 3,
+            "criteria": "Eğitilmiş model `models/saved_models/dqn_model.pt` olarak kaydedilir.",
+            "satisfied": true,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 1.8080987930297852,
+                "input_tokens": 957,
+                "output_tokens": 72,
+                "accumulated_cost": 0.0,
+                "satisfied": true,
+                "reason": [
+                    "<SATISFIED>: Proje ağacında `models/saved_models/dqn_model.pt` dosyası açıkça mevcut. Ayrıca trajectory kanıtında eğitim sonunda modelin `models/saved_models/dqn_model.pt` yoluna başarıyla kaydedildiğine dair log bilgisi bulunduğu ve hata izi olmadığı belirtilmiş."
+                ]
+            },
+            "total_time": 6.657256603240967
+        },
+        {
+            "requirement_index": 4,
+            "criteria": "Her bölümün getirisi `results/metrics/` dosyasına kaydedilir ve her bölüm tamamlandığında güncellenir.",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.588355302810669,
+                "input_tokens": 1446,
+                "output_tokens": 118,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>: `src/main.py` yalnızca `main()` içinde `{\"status\": \"ok\", ...}` döndürüyor; bölüm döngüsü, getiri hesaplama veya `results/metrics/` altına yazma işlemi yok. Proje ağacında `results/metrics` klasörü var ama içinde herhangi bir metrik dosyası gösterilmemiş. Verilen trajektori kanıtı da `results/metrics/` yoluna her bölüm sonunda güncelleme yapıldığını doğrulayamıyor."
+                ]
+            },
+            "total_time": 8.194697380065918
+        }
+    ]
+}

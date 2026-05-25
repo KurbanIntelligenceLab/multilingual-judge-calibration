@@ -1,0 +1,166 @@
+{
+    "name": "04_Text_Generation_GPT2_Prompts_DL",
+    "query": "事前にトレーニングされたGPT-2モデルを自動的にダウンロードし、それを`models/saved_models/`にキャッシュすることで、テキスト生成システムを構築してください。システムは、`data/prompt.txt`という名前のテキストファイルの現在の内容を読み込むことでプロンプトを受け取る必要があります。デモンストレーションの目的で、実装ではこのファイルに「who are you?」というテキストのみを含めるべきです。`data/prompt.txt`を読み込む際に遭遇するタイプミスを自動的に修正してください。生成されるテキストは最大200文字に制限し、生成されたテキストを`results/generated_text.txt`に保存する必要があります。生成されたテキストをクリーンアップするために、余分なスペースを削除し、一般的なスペルミスを修正する後処理を実装してください。システムが異なるバリエーションの入力プロンプトを効率的に処理できると理想的です。さらに、保存されたファイルにユーザーフレンドリーな出力形式（例えば、タイムスタンプやプロンプト識別子を含む）があると良いでしょう。",
+    "tags": [
+        "Generative Models",
+        "Natural Language Processing"
+    ],
+    "requirements": [
+        {
+            "requirement_id": 0,
+            "prerequisites": [],
+            "criteria": "事前にトレーニングされた「GPT-2」モデルがダウンロードされ、`models/saved_models/`にキャッシュされる。",
+            "category": "Machine Learning Method",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 1,
+            "prerequisites": [],
+            "criteria": "プロンプトは`data/prompt.txt`という名前のテキストファイルから読み込まれ、モデルに入力される。",
+            "category": "Human Computer Interaction",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 2,
+            "prerequisites": [
+                0,
+                1
+            ],
+            "criteria": "生成の長さは最大200文字に制限される。",
+            "category": "Other",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 3,
+            "prerequisites": [
+                0,
+                1,
+                2
+            ],
+            "criteria": "余分なスペースを削除し、一般的なスペルミスを修正するための後処理が実装される。",
+            "category": "Data preprocessing and postprocessing",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 4,
+            "prerequisites": [
+                0,
+                1,
+                2,
+                3
+            ],
+            "criteria": "生成されたテキストは`results/generated_text.txt`に保存される。",
+            "category": "Other",
+            "satisfied": null
+        }
+    ],
+    "preferences": [
+        {
+            "preference_id": 0,
+            "criteria": "システムは異なる入力プロンプトを効率的に処理し、軽微なタイプミスを修正するべきである。",
+            "satisfied": null
+        },
+        {
+            "preference_id": 1,
+            "criteria": "システムは効率的に動作し、テキスト生成中の遅延を最小限に抑えるべきである。",
+            "satisfied": null
+        },
+        {
+            "preference_id": 2,
+            "criteria": "保存されたファイルには、タイムスタンプやプロンプト識別子を含むユーザーフレンドリーな出力形式を使用するべきである。",
+            "satisfied": null
+        }
+    ],
+    "is_kaggle_api_needed": false,
+    "is_training_needed": false,
+    "is_web_navigation_needed": false,
+    "hint": "There is only one prompt to read. However, requirment 1 says \"Prompts\".",
+    "language": "Japanese",
+    "judge_stats": [
+        {
+            "requirement_index": 0,
+            "criteria": "事前にトレーニングされた「GPT-2」モデルがダウンロードされ、`models/saved_models/`にキャッシュされる。",
+            "satisfied": true,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.0686733722686768,
+                "input_tokens": 900,
+                "output_tokens": 65,
+                "accumulated_cost": 0.0,
+                "satisfied": true,
+                "reason": [
+                    "<SATISFIED> Trajectory evidence shows `scripts/download_models.py` downloaded a pretrained GPT-2 model and used `models/saved_models/` as the save/cache destination; the workspace also contains the `models/saved_models/` directory, and no errors or write failures were recorded."
+                ]
+            },
+            "total_time": 8.608837604522705
+        },
+        {
+            "requirement_index": 1,
+            "criteria": "プロンプトは`data/prompt.txt`という名前のテキストファイルから読み込まれ、モデルに入力される。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.08841609954834,
+                "input_tokens": 965,
+                "output_tokens": 79,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED> Workspace evidence does not show any code or execution proving that `data/prompt.txt` was read and used as model input. The project tree only contains `models/`, `models/saved_models/`, and `results/generated_text.txt`, and the trajectory explicitly states there is no log confirming loading or use of `data/prompt.txt`."
+                ]
+            },
+            "total_time": 5.854887962341309
+        },
+        {
+            "requirement_index": 2,
+            "criteria": "生成の長さは最大200文字に制限される。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 1.5395259857177734,
+                "input_tokens": 714,
+                "output_tokens": 79,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED> 根拠となるコードや設定ファイルが提示されておらず、確認できる成果物は `results/generated_text.txt` の存在のみです。生成長が「最大200文字」に制限されていることを示す実装・設定・出力検証の証拠がありません。"
+                ]
+            },
+            "total_time": 3.926658868789673
+        },
+        {
+            "requirement_index": 3,
+            "criteria": "余分なスペースを削除し、一般的なスペルミスを修正するための後処理が実装される。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.456599712371826,
+                "input_tokens": 916,
+                "output_tokens": 88,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED> 提供された証拠にはコードや処理内容がなく、確認できるのは `results/generated_text.txt` の存在のみです。余分なスペース削除や一般的なスペルミス修正の後処理が実装されていることを示す実装・ログ・出力例が提示されていません。"
+                ]
+            },
+            "total_time": 6.142652988433838
+        },
+        {
+            "requirement_index": 4,
+            "criteria": "生成されたテキストは`results/generated_text.txt`に保存される。",
+            "satisfied": true,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 1.884225606918335,
+                "input_tokens": 922,
+                "output_tokens": 55,
+                "accumulated_cost": 0.0,
+                "satisfied": true,
+                "reason": [
+                    "<SATISFIED> `results/generated_text.txt` exists in the workspace and contains output data: `('placeholder\\r\\n', None)`. This shows generated text was saved to the specified file, even though execution-trace evidence is not available."
+                ]
+            },
+            "total_time": 4.7862396240234375
+        }
+    ]
+}

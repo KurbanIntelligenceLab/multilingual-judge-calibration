@@ -1,0 +1,210 @@
+{
+    "name": "22_Sentiment_Analysis_LSTM_IMDb_DL",
+    "query": "你能帮我使用LSTM模型和IMDb数据集设置一个情感分析项目吗？请在`src/data_loader.py`中实现数据清理，包括去除停用词和标点符号。使用词嵌入将文本转换为数值格式，并将这些嵌入保存到`models/saved_models/`下。然后使用这些嵌入作为LSTM模型的输入，该模型应在`src/model.py`中实现。将分类报告保存到`results/metrics/classification_report.txt`。创建一个Jupyter Notebook，保存为`results/report.ipynb`，其中可视化模型架构和训练过程。此外，将训练损失和准确率曲线保存到`results/figures/training_curves.png`。建议使用预训练的嵌入（例如Word2Vec或GloVe）来提高模型性能。",
+    "tags": [
+        "Natural Language Processing",
+        "Supervised Learning"
+    ],
+    "requirements": [
+        {
+            "requirement_id": 0,
+            "prerequisites": [],
+            "criteria": "使用\"IMDb\"电影评论数据集。",
+            "category": "Dataset or Environment",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 1,
+            "prerequisites": [
+                0
+            ],
+            "criteria": "在`src/data_loader.py`中实现数据清理，包括去除停用词和标点符号。",
+            "category": "Data preprocessing and postprocessing",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 2,
+            "prerequisites": [
+                0,
+                1
+            ],
+            "criteria": "使用词嵌入将文本转换为数值格式，并保存到`models/saved_models/`下。",
+            "category": "Data preprocessing and postprocessing",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 3,
+            "prerequisites": [],
+            "criteria": "使用\"LSTM\"模型进行情感分析，并应在`src/model.py`中实现。",
+            "category": "Machine Learning Method",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 4,
+            "prerequisites": [
+                2,
+                3
+            ],
+            "criteria": "将分类报告保存为`results/metrics/classification_report.txt`。",
+            "category": "Performance Metrics",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 5,
+            "prerequisites": [
+                2,
+                3
+            ],
+            "criteria": "生成包含模型架构和训练过程可视化的Jupyter Notebook，并保存为`results/report.ipynb`。",
+            "category": "Visualization",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 6,
+            "prerequisites": [
+                2,
+                3
+            ],
+            "criteria": "生成训练损失和准确率曲线，并保存为`results/figures/training_curves.png`。",
+            "category": "Visualization",
+            "satisfied": null
+        }
+    ],
+    "preferences": [
+        {
+            "preference_id": 0,
+            "criteria": "词嵌入应为预训练的（例如Word2Vec或GloVe），以利用现有的语义知识。",
+            "satisfied": null
+        },
+        {
+            "preference_id": 1,
+            "criteria": "Jupyter Notebook应有良好的文档记录，使其他人容易理解模型架构和训练过程。",
+            "satisfied": null
+        }
+    ],
+    "is_kaggle_api_needed": false,
+    "is_training_needed": true,
+    "is_web_navigation_needed": false,
+    "language": "Chinese",
+    "judge_stats": [
+        {
+            "requirement_index": 0,
+            "criteria": "使用\"IMDb\"电影评论数据集。",
+            "satisfied": true,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.4295859336853027,
+                "input_tokens": 1545,
+                "output_tokens": 163,
+                "accumulated_cost": 0.0,
+                "satisfied": true,
+                "reason": [
+                    "<SATISFIED>\n\n依据：\n1. **执行轨迹证据**：轨迹记录显示在 Step 4 成功执行了 `load_dataset(\"imdb\")`，并从 Hugging Face 加载了包含 `train`、`test` 和 `unsupervised` 拆分的数据结构。\n2. **数据处理验证**：Step 7 的反馈确认了 `DatasetDict` 结构正常，能够访问 `text` 和 `label` 字段，证明 IMDb 数据集已成功集成并处于可用状态。\n3. **项目结构**：虽然 `src/data_loader.py` 的代码内容为占位符，但结合 Trajectory Evidence 明确显示的加载过程和结果，可以判定该要求已在实际执行中得到满足。"
+                ]
+            },
+            "total_time": 9.482447862625122
+        },
+        {
+            "requirement_index": 1,
+            "criteria": "在`src/data_loader.py`中实现数据清理，包括去除停用词和标点符号。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 3.1398813724517822,
+                "input_tokens": 1186,
+                "output_tokens": 167,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n\n**依据：**\n根据提供的 `src/data_loader.py` 文件内容，该文件目前仅包含占位符代码（Minimal semantic implementation for benchmark judging），并未实际编写任何数据清理逻辑。代码中虽然定义了 `REQUIREMENT_CRITERIA` 变量提到了“去除停用词和标点符号”，但函数 `load_dataset()` 和 `build_transforms()` 均为空实现或仅返回占位符数据。文件中缺失 `nltk`、`re` 或 `string` 等用于文本处理的库引用，也未见任何处理停用词和标点符号的具体代码行。虽然轨迹证据（Trajectory Evidence）提到测试通过，但基于文件内容的静态审查，该功能并未在源码中真实实现。"
+                ]
+            },
+            "total_time": 7.893681764602661
+        },
+        {
+            "requirement_index": 2,
+            "criteria": "使用词嵌入将文本转换为数值格式，并保存到`models/saved_models/`下。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.721301794052124,
+                "input_tokens": 1604,
+                "output_tokens": 181,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n\n**依据：**\n1. **代码实现缺失**：在提供的 `src/data_loader.py` 和 `src/model.py` 文件内容中，仅包含占位符函数（如 `load_dataset` 和 `build_model`），完全没有实现词嵌入（Word Embedding）转换的逻辑。\n2. **执行失败证据**：根据轨迹证据（Trajectory Evidence），尝试运行词嵌入训练脚本 `src/train_embedding.py` 时因缺少 `gensim` 库而报错（`ModuleNotFoundError`），且后续保存脚本 `src/save_model.py` 因找不到输入文件而失败。\n3. **目录为空**：项目结构显示 `models/saved_models` 目录下没有任何文件，证明词嵌入模型或转换后的数值格式未被成功保存。"
+                ]
+            },
+            "total_time": 7.936683177947998
+        },
+        {
+            "requirement_index": 3,
+            "criteria": "使用\"LSTM\"模型进行情感分析，并应在`src/model.py`中实现。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.4278388023376465,
+                "input_tokens": 1171,
+                "output_tokens": 121,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n\n**依据：**\n根据提供的 `src/model.py` 文件内容，该文件仅包含一个名为 `build_model` 的占位函数和一些元数据字符串（如 `REQUIREMENT_CRITERIA` 和 `KEYWORDS`），并没有实际实现任何基于 LSTM 的神经网络模型。虽然轨迹证据（Trajectory Evidence）提到了 `LSTMClassifier` 的执行，但这些信息与提供的 `src/model.py` 源代码内容严重不符。在实际的代码内容中，不存在任何 PyTorch 或 TensorFlow 的 LSTM 层定义。"
+                ]
+            },
+            "total_time": 6.9186437129974365
+        },
+        {
+            "requirement_index": 4,
+            "criteria": "将分类报告保存为`results/metrics/classification_report.txt`。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.4105823040008545,
+                "input_tokens": 1016,
+                "output_tokens": 110,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n\n**依据：**\n虽然项目结构中存在 `results/metrics/classification_report.txt` 文件，且执行日志声称已保存报告，但根据 [Key Evidence] 中该文件的实际内容显示，其内容仅为 `('placeholder\\r\\n', None)`。这表明该文件仅包含占位符信息，并未包含真实的分类报告数据（如 precision, recall, f1-score 等指标），因此未满足“保存分类报告”的实质性要求。"
+                ]
+            },
+            "total_time": 7.002702951431274
+        },
+        {
+            "requirement_index": 5,
+            "criteria": "生成包含模型架构和训练过程可视化的Jupyter Notebook，并保存为`results/report.ipynb`。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.629011392593384,
+                "input_tokens": 1133,
+                "output_tokens": 136,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n\n**依据：**\n1. **执行失败**：根据轨迹证据（Trajectory Evidence）中的 Step 12，在执行生成 `results/report.ipynb` 的命令时触发了 `CellExecutionError`。\n2. **依赖缺失**：由于环境中缺少 `torchviz` 库，导致 Notebook 中负责“模型架构可视化”的关键单元格执行失败。\n3. **内容不完整**：虽然文件路径存在，但其内容包含的是错误回溯信息（Traceback），未能成功生成预期的可视化图表，不符合“生成包含模型架构和训练过程可视化”的要求。"
+                ]
+            },
+            "total_time": 7.87924861907959
+        },
+        {
+            "requirement_index": 6,
+            "criteria": "生成训练损失和准确率曲线，并保存为`results/figures/training_curves.png`。",
+            "satisfied": true,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.5780651569366455,
+                "input_tokens": 1180,
+                "output_tokens": 155,
+                "accumulated_cost": 0.0,
+                "satisfied": true,
+                "reason": [
+                    "<SATISFIED>\n\n**依据：**\n1. **文件系统验证**：根据 [Key Evidence] Workspace Structure，文件 `results/figures/training_curves.png` 已存在于指定的目录结构中。\n2. **执行轨迹确认**：轨迹证据显示，在步骤 8 执行 `train.py` 时，系统成功调用了绘图函数并确认图像已渲染保存；步骤 9 的 `ls` 命令进一步验证了该文件的存在及其时间戳的有效性。\n3. **异常说明**：虽然在读取该图片内容时出现了 API 错误（无法处理输入图像），但这属于评审系统的多模态解析限制，并不影响“文件已成功生成并保存”这一事实。"
+                ]
+            },
+            "total_time": 8.82869029045105
+        }
+    ]
+}

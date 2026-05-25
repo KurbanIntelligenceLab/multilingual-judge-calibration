@@ -1,0 +1,211 @@
+{
+    "name": "25_Speech_Emotion_Recognition_CNN_LSTM_RAVDESS_DL",
+    "query": "RAVDESS veri kümesini kullanarak CNN-LSTM modeli ile bir konuşma duygu tanıma projesi arıyorum, bu veri kümesi Kaggle'dan veya [bu Hugging Face bağlantısından](https://huggingface.co/datasets/xbgoose/ravdess) indirilmeli. Proje, veri kümesini yüklemeli ve sağlam bir ses ön işleme (gürültü giderme ve normalizasyon) ve MFCC özellik çıkarımı gerçekleştirmeli, `src/data_loader.py` içinde uygulanmalı. CNN-LSTM modeli `src/model.py` içinde uygulanmalı. Tanıma doğruluğu `results/metrics/recognition_accuracy.txt` dosyasına kaydedilmeli ve bir karışıklık matrisi oluşturulup `results/figures/confusion_matrix.png` olarak kaydedilmeli. Ayrıca, kullanıcıların ses dosyalarını yükleyip duygu tanıma sonuçlarını alabilmeleri için Flask kullanarak kullanıcı dostu bir yerel API oluşturulmalı ve uygulama `src/hci.py` içinde yer almalı.",
+    "tags": [
+        "Audio Processing",
+        "Classification"
+    ],
+    "requirements": [
+        {
+            "requirement_id": 0,
+            "prerequisites": [],
+            "criteria": "\"RAVDESS\" veri kümesi, Kaggle'dan veya [bu Hugging Face bağlantısından](https://huggingface.co/datasets/xbgoose/ravdess) indirilen `src/data_loader.py` içinde yüklenir.",
+            "category": "Dataset or Environment",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 1,
+            "prerequisites": [
+                0
+            ],
+            "criteria": "Gürültü giderme ve normalizasyon dahil ses ön işleme `src/data_loader.py` içinde uygulanır.",
+            "category": "Data preprocessing and postprocessing",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 2,
+            "prerequisites": [
+                0,
+                1
+            ],
+            "criteria": "MFCC özellik çıkarımı `src/data_loader.py` içinde uygulanır.",
+            "category": "Data preprocessing and postprocessing",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 3,
+            "prerequisites": [],
+            "criteria": "\"CNN-LSTM\" modeli `src/model.py` içinde uygulanır.",
+            "category": "Machine Learning Method",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 4,
+            "prerequisites": [
+                2,
+                3
+            ],
+            "criteria": "Tanıma doğruluğu `results/metrics/recognition_accuracy.txt` dosyasına kaydedilir.",
+            "category": "Performance Metrics",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 5,
+            "prerequisites": [
+                2,
+                3,
+                4
+            ],
+            "criteria": "Karışıklık matrisi oluşturulup `results/figures/confusion_matrix.png` olarak kaydedilir.",
+            "category": "Visualization",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 6,
+            "prerequisites": [
+                2,
+                3
+            ],
+            "criteria": "Kullanıcıların ses dosyalarını yükleyip duygu tanıma sonuçlarını alabilmeleri için \"Flask\" kullanarak bir yerel API oluşturulur. Uygulama `src/hci.py` içinde yer almalıdır.",
+            "category": "Human Computer Interaction",
+            "satisfied": null
+        }
+    ],
+    "preferences": [
+        {
+            "preference_id": 0,
+            "criteria": "Ses ön işleme adımı sağlam olmalı, gürültüyü etkili bir şekilde azaltırken konuşma sinyallerinin bütünlüğünü korumalıdır.",
+            "satisfied": null
+        },
+        {
+            "preference_id": 1,
+            "criteria": "Yerel API kullanıcı dostu olmalı, dosya yükleme ve sonuçları yorumlama konusunda net talimatlar içermelidir.",
+            "satisfied": null
+        }
+    ],
+    "is_kaggle_api_needed": true,
+    "is_training_needed": true,
+    "is_web_navigation_needed": true,
+    "language": "Turkish",
+    "judge_stats": [
+        {
+            "requirement_index": 0,
+            "criteria": "\"RAVDESS\" veri kümesi, Kaggle'dan veya [bu Hugging Face bağlantısından](https://huggingface.co/datasets/xbgoose/ravdess) indirilen `src/data_loader.py` içinde yüklenir.",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.2074592113494873,
+                "input_tokens": 1400,
+                "output_tokens": 124,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED> `src/data_loader.py` içinde gerçek bir RAVDESS indirme/yükleme uygulanmamış. Dosyada yalnızca yer tutucu bir `load_dataset()` var ve bu fonksiyon `{\"dataset\": \"loaded\", \"notes\": requirement_notes()}` döndürüyor; Kaggle API, Hugging Face `datasets` kullanımı veya RAVDESS dosyalarını okuyan bir akış yok. Trajectory notları da verinin uzak kaynaktan indirilmesi yerine yerel klasörden beklenerek işlendiğini söylüyor."
+                ]
+            },
+            "total_time": 12.48781681060791
+        },
+        {
+            "requirement_index": 1,
+            "criteria": "Gürültü giderme ve normalizasyon dahil ses ön işleme `src/data_loader.py` içinde uygulanır.",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 3.342376232147217,
+                "input_tokens": 1254,
+                "output_tokens": 116,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>: `src/data_loader.py` içinde ses ön işleme uygulanmamış. Dosyada yalnızca yer tutucu fonksiyonlar var: `load_dataset()` sadece `{\"dataset\": \"loaded\", \"notes\": requirement_notes()}` döndürüyor, `build_transforms()` ise `[\"rotation\", \"scaling\", \"normalization\"]` adlı bir liste döndürüyor. Gürültü giderme, ses sinyali işleme veya gerçek normalizasyon mantığına dair herhangi bir kod bulunmuyor."
+                ]
+            },
+            "total_time": 8.248862743377686
+        },
+        {
+            "requirement_index": 2,
+            "criteria": "MFCC özellik çıkarımı `src/data_loader.py` içinde uygulanır.",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 3.4742379188537598,
+                "input_tokens": 1220,
+                "output_tokens": 155,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>: `src/data_loader.py` içinde MFCC hesaplayan herhangi bir kod yok. Dosyada yalnızca yer tutucu yapılar bulunuyor: `load_dataset()` sabit bir sözlük döndürüyor ve `build_transforms()` `[\"rotation\", \"scaling\", \"normalization\"]` listesi veriyor. `librosa.feature.mfcc`, `python_speech_features`, spektral işlem ya da ses sinyalinden özellik çıkarımına dair bir uygulama görünmüyor. Ayrıca dosyadaki `REQUIREMENT_CRITERIA` içinde “MFCC feature extraction is implemented...” ifadesi sadece metin olarak yer alıyor; bu, gerçek bir uygulama kanıtı değil."
+                ]
+            },
+            "total_time": 8.332027912139893
+        },
+        {
+            "requirement_index": 3,
+            "criteria": "\"CNN-LSTM\" modeli `src/model.py` içinde uygulanır.",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 1.7476387023925781,
+                "input_tokens": 1125,
+                "output_tokens": 94,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED> `src/model.py` içinde gerçek bir CNN-LSTM mimarisi uygulanmamış. Dosyada yalnızca `KEYWORDS = [\"CNN-LSTM\", \"lstm\"]` ve `build_model()` içinde `\"model placeholder\"` döndüren minimal bir yer tutucu var; herhangi bir CNN/LSTM katmanı, derin öğrenme kütüphanesi importu veya model tanımı bulunmuyor."
+                ]
+            },
+            "total_time": 6.321715831756592
+        },
+        {
+            "requirement_index": 4,
+            "criteria": "Tanıma doğruluğu `results/metrics/recognition_accuracy.txt` dosyasına kaydedilir.",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 1.9351983070373535,
+                "input_tokens": 957,
+                "output_tokens": 91,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED> `results/metrics/recognition_accuracy.txt` mevcut, ancak içeriği `('placeholder\\r\\n', None)` şeklinde; bu, tanıma doğruluğu için sayısal bir accuracy değerinin kaydedildiğini göstermiyor. Ayrıca verilen kanıtlarda bu dosyaya gerçek `recognition_accuracy` değerinin yazıldığına dair doğrulanmış bir kayıt da yok."
+                ]
+            },
+            "total_time": 7.203229904174805
+        },
+        {
+            "requirement_index": 5,
+            "criteria": "Karışıklık matrisi oluşturulup `results/figures/confusion_matrix.png` olarak kaydedilir.",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.3023242950439453,
+                "input_tokens": 1138,
+                "output_tokens": 119,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED> `results/figures/confusion_matrix.png` yolu altında dosya görünse de, verilen kanıtta dosya içeriği geçerli bir görsel olarak okunamıyor: `\"The image data you provided does not represent a valid image\"`. Ayrıca paylaşılan yürütme izlerinde bu dosyanın başarıyla oluşturulup kaydedildiğini doğrulayan bir kayıt da yok. Bu nedenle karışıklık matrisinin oluşturulup geçerli bir PNG olarak kaydedildiği kanıtlanmamış."
+                ]
+            },
+            "total_time": 9.068945407867432
+        },
+        {
+            "requirement_index": 6,
+            "criteria": "Kullanıcıların ses dosyalarını yükleyip duygu tanıma sonuçlarını alabilmeleri için \"Flask\" kullanarak bir yerel API oluşturulur. Uygulama `src/hci.py` içinde yer almalıdır.",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.2578039169311523,
+                "input_tokens": 1155,
+                "output_tokens": 110,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED> `src/hci.py` içinde Flask tabanlı bir API uygulanmamış. Dosya yalnızca `REQUIREMENT_CRITERIA`, `KEYWORDS` ve `main()` ile bir sözlük döndürüyor; `from flask import Flask`, route tanımı, dosya yükleme işleme mantığı veya duygu tanıma yanıtı yok. Ayrıca proje kanıtlarında çalışan bir yerel API’ye ait istek/yanıt çıktısı da bulunmuyor."
+                ]
+            },
+            "total_time": 6.710249662399292
+        }
+    ]
+}

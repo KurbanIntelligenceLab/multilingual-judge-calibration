@@ -1,0 +1,219 @@
+{
+    "name": "54_Mock_OpenAI_API_Response_Analyzer_App",
+    "query": "我想创建一个应用程序，使我能够分析OpenAI API对同一查询可能给出的不同响应。前端应在`src/frontend.py`中实现，并应包含用户与LLM之间的对话作为列表。每个列表项应包含一个文本字段，我可以在其中添加（可能很大）文本消息，并有一个下拉菜单选择消息是来自LLM还是用户。此功能应在`src/message_list.py`中处理。这些列表项的数量可以是无限的，因此当应用程序加载时，应从一个空列表项开始，并且应有一个按钮以根据需要添加新的列表项。除了列表之外，还应有一个数值字段，在`src/frontend.py`中实现，用户可以编辑。此字段应仅允许0到100之间的值。还应有一个标记为SUBMIT的按钮。当我点击SUBMIT按钮时，完整的对话应并行发送到OpenAI API X次，其中X是用户在前端输入的0到100的数值。所有API请求和响应应在`src/backend.py`中处理。当从OpenAI API获取响应时，应在`src/frontend_render.py`中显示为可展开元素的列表。例如，如果我将请求数量设置为10，当响应开始到来时，应出现10个元素，每个元素标记为请求编号。展开时，它们应显示特定响应。请记住，OpenAI API返回的是流，因此响应应逐个令牌流向前端并实时显示。此功能应在`src/stream_handler.py`中实现。使用Tailwind在`src/styles.css`中进行样式设计，但不要安装它。相反，使用CDN版本。您应该使用模拟LLM的响应来减少OpenAI密钥的使用。模拟LLM响应应在`src/mock_llm.py`中生成。",
+    "tags": [
+        "Natural Language Processing",
+        "Generative Models",
+        "Other"
+    ],
+    "requirements": [
+        {
+            "requirement_id": 0,
+            "prerequisites": [],
+            "criteria": "前端应在`src/frontend.py`中实现，包含一个列表，用户可以在其中添加大文本消息并选择消息是来自LLM还是用户。当应用程序加载时，列表应从一个空项开始。",
+            "category": "Human Computer Interaction",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 1,
+            "prerequisites": [
+                0
+            ],
+            "criteria": "消息列表应允许无限数量的项目，通过一个按钮管理以添加新项目，在`src/message_list.py`中实现。",
+            "category": "Human Computer Interaction",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 2,
+            "prerequisites": [
+                0
+            ],
+            "criteria": "界面应允许用户输入0到100的数值，控制将发送多少并行API请求。此功能必须在`src/frontend.py`中实现。",
+            "category": "Human Computer Interaction",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 3,
+            "prerequisites": [
+                0,
+                2
+            ],
+            "criteria": "SUBMIT按钮应触发将对话发送X次（其中X是数值输入字段的值）到模拟LLM响应。这应通过在`src/backend.py`中调用`src/mock_llm.py`中的模拟响应生成器来处理。",
+            "category": "Other",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 4,
+            "prerequisites": [
+                0,
+                2,
+                3
+            ],
+            "criteria": "模拟响应应由`src/mock_llm.py`生成，然后传递给`src/frontend_render.py`以显示为可展开元素的列表，每个元素标记为请求编号。",
+            "category": "Human Computer Interaction",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 5,
+            "prerequisites": [
+                0,
+                2,
+                3,
+                4
+            ],
+            "criteria": "响应应流向前端并实时逐个令牌显示，在`src/stream_handler.py`中实现。",
+            "category": "Other",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 6,
+            "prerequisites": [],
+            "criteria": "Tailwind应用于在`src/styles.css`中对前端进行样式设计，通过CDN加载而无需安装。",
+            "category": "Human Computer Interaction",
+            "satisfied": null
+        }
+    ],
+    "preferences": [
+        {
+            "preference_id": 0,
+            "criteria": "UI应保持干净和一致的风格，使用Tailwind实现统一且易于导航的设计。",
+            "satisfied": null
+        },
+        {
+            "preference_id": 1,
+            "criteria": "从API流式传输的响应应高效，确保实时更新流畅无延迟。",
+            "satisfied": null
+        },
+        {
+            "preference_id": 2,
+            "criteria": "API请求和响应处理应是模块化的，允许轻松修改，例如调整并行请求的数量。",
+            "satisfied": null
+        }
+    ],
+    "is_kaggle_api_needed": false,
+    "is_training_needed": false,
+    "is_web_navigation_needed": false,
+    "resource": "https://github.com/Pythagora-io/gpt-pilot/wiki/How-to-write-a-good-initial-project-description",
+    "language": "Chinese",
+    "judge_stats": [
+        {
+            "requirement_index": 0,
+            "criteria": "前端应在`src/frontend.py`中实现，包含一个列表，用户可以在其中添加大文本消息并选择消息是来自LLM还是用户。当应用程序加载时，列表应从一个空项开始。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 48.12466502189636,
+                "input_tokens": 850,
+                "output_tokens": 1938,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n依据 `src/frontend.py` 的内容，该文件仅定义了需求标准变量 `REQUIREMENT_CRITERIA` 和返回状态的主函数，并未包含实际的前端实现代码（如 UI 组件、列表操作逻辑）。代码中不存在初始化空列表或处理用户添加消息/选择来源的功能，因此未满足实现要求。"
+                ]
+            },
+            "total_time": 145.93503332138062
+        },
+        {
+            "requirement_index": 1,
+            "criteria": "消息列表应允许无限数量的项目，通过一个按钮管理以添加新项目，在`src/message_list.py`中实现。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 35.309332847595215,
+                "input_tokens": 770,
+                "output_tokens": 1665,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n文件 `src/message_list.py` 的内容仅定义了 `REQUIREMENT_CRITERIA` 变量来陈述需求，并未包含实现消息列表、按钮或添加项目逻辑的实际代码。代码中缺少 UI 组件、列表数据结构及交互功能，无法满足“实现”的要求。"
+                ]
+            },
+            "total_time": 123.40509676933289
+        },
+        {
+            "requirement_index": 2,
+            "criteria": "界面应允许用户输入0到100的数值，控制将发送多少并行API请求。此功能必须在`src/frontend.py`中实现。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 41.9042022228241,
+                "input_tokens": 840,
+                "output_tokens": 1791,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n代码未实现用户界面及输入控制功能。`src/frontend.py` 仅包含需求描述字符串（`REQUIREMENT_CRITERIA`）和返回静态字典的 `main()` 函数（见代码片段 `return {\"status\": \"ok\", \"notes\": requirement_notes(), \"keywords\": KEYWORDS}`），缺乏构建界面、处理用户输入 0-100 数值及控制并行 API 请求的实际逻辑。"
+                ]
+            },
+            "total_time": 140.94896745681763
+        },
+        {
+            "requirement_index": 3,
+            "criteria": "SUBMIT按钮应触发将对话发送X次（其中X是数值输入字段的值）到模拟LLM响应。这应通过在`src/backend.py`中调用`src/mock_llm.py`中的模拟响应生成器来处理。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 31.188472270965576,
+                "input_tokens": 1167,
+                "output_tokens": 1443,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n依据：提供的 `src/backend.py` 和 `src/mock_llm.py` 文件中仅包含需求定义的字符串（存储在 `REQUIREMENT_CRITERIA` 列表中），并未实现实际的 SUBMIT 按钮触发逻辑、数值输入处理或调用模拟响应生成器的功能。例如 `backend.py` 中的 `main()` 函数仅返回静态字典 `{\"status\": \"ok\", ...}`，缺少与 `mock_llm.py` 交互或处理用户输入的实际代码。"
+                ]
+            },
+            "total_time": 128.56061577796936
+        },
+        {
+            "requirement_index": 4,
+            "criteria": "模拟响应应由`src/mock_llm.py`生成，然后传递给`src/frontend_render.py`以显示为可展开元素的列表，每个元素标记为请求编号。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 32.685922145843506,
+                "input_tokens": 1137,
+                "output_tokens": 1267,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n依据：提供的 `src/mock_llm.py` 和 `src/frontend_render.py` 文件内容仅包含需求准则字符串（`REQUIREMENT_CRITERIA`）和基础的 `main()` 函数，没有任何实际生成模拟响应的逻辑代码，也没有前端渲染可展开元素的实现。此外，两个模块之间缺乏数据传递机制。"
+                ]
+            },
+            "total_time": 110.56135702133179
+        },
+        {
+            "requirement_index": 5,
+            "criteria": "响应应流向前端并实时逐个令牌显示，在`src/stream_handler.py`中实现。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 36.124067068099976,
+                "input_tokens": 760,
+                "output_tokens": 1430,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n文件 `src/stream_handler.py` 的内容仅为占位符，未实现实际的流式传输逻辑。代码中仅定义了 `REQUIREMENT_CRITERIA` 变量存储需求文本，且 `main()` 函数仅返回 `{\"status\": \"ok\", ...}`，缺乏与前端通信、令牌逐个显示或实时流处理的具体代码实现。"
+                ]
+            },
+            "total_time": 189.8788788318634
+        },
+        {
+            "requirement_index": 6,
+            "criteria": "Tailwind应用于在`src/styles.css`中对前端进行样式设计，通过CDN加载而无需安装。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 49.732889890670776,
+                "input_tokens": 630,
+                "output_tokens": 2048,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    ""
+                ]
+            },
+            "total_time": 128.9413297176361
+        }
+    ]
+}

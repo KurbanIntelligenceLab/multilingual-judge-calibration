@@ -1,0 +1,219 @@
+{
+    "name": "54_Mock_OpenAI_API_Response_Analyzer_App",
+    "query": "Quiero crear una aplicación que me permita analizar las diferentes respuestas que la API de OpenAI puede dar para la misma consulta. El frontend debe implementarse en `src/frontend.py` y debe contener una conversación entre un usuario y un LLM como una lista. Cada elemento de la lista debe contener un campo de texto donde pueda agregar un mensaje de texto (potencialmente grande) y un menú desplegable que seleccione si el mensaje es del LLM o del usuario. Esta funcionalidad debe manejarse en `src/message_list.py`. Puede haber un número ilimitado de estos elementos de lista, por lo que cuando la aplicación se cargue, debe comenzar con un solo elemento de lista vacío, y debe haber un botón para agregar nuevos elementos de lista según sea necesario. Además de la lista, debe haber un campo numérico, implementado en `src/frontend.py`, que el usuario pueda editar. Este campo solo debe permitir valores de 0 a 100. También debe haber un botón etiquetado como SUBMIT. Cuando haga clic en el botón SUBMIT, la conversación completa debe enviarse a la API de OpenAI en paralelo X número de veces, donde X es el valor del número de 0 a 100 que el usuario ingresó en el frontend. Todas las solicitudes y respuestas de la API deben manejarse en `src/backend.py`. Cuando se obtengan las respuestas de la API de OpenAI, deben mostrarse como una lista de elementos expandibles en `src/frontend_render.py`. Por ejemplo, si configuro el número de solicitudes en 10, cuando comiencen a llegar las respuestas, deberían aparecer 10 elementos, cada uno etiquetado con el número de solicitud. Cuando se expandan, deben mostrar esa respuesta específica. Tenga en cuenta que la API de OpenAI devuelve un flujo, por lo que las respuestas deben transmitirse al frontend token por token y mostrarse en tiempo real. Esta funcionalidad debe implementarse en `src/stream_handler.py`. Use Tailwind para el estilo en `src/styles.css`, pero no lo instale. En su lugar, use la versión CDN. Debe usar respuestas simuladas del LLM para aliviar el uso de la clave de OpenAI. Las respuestas simuladas del LLM deben generarse en `src/mock_llm.py`.",
+    "tags": [
+        "Natural Language Processing",
+        "Generative Models",
+        "Other"
+    ],
+    "requirements": [
+        {
+            "requirement_id": 0,
+            "prerequisites": [],
+            "criteria": "El frontend debe implementarse en `src/frontend.py`, conteniendo una lista donde el usuario pueda agregar mensajes de texto grandes y seleccionar si el mensaje es del LLM o del usuario. Cuando la aplicación se cargue, la lista debe comenzar con un solo elemento vacío.",
+            "category": "Human Computer Interaction",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 1,
+            "prerequisites": [
+                0
+            ],
+            "criteria": "La lista de mensajes debe permitir un número ilimitado de elementos, gestionados a través de un botón para agregar nuevos elementos, implementado en `src/message_list.py`.",
+            "category": "Human Computer Interaction",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 2,
+            "prerequisites": [
+                0
+            ],
+            "criteria": "La interfaz debe permitir que un usuario ingrese un valor numérico de 0 a 100, controlando cuántas solicitudes API paralelas se enviarán. Esta función debe implementarse en `src/frontend.py`.",
+            "category": "Human Computer Interaction",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 3,
+            "prerequisites": [
+                0,
+                2
+            ],
+            "criteria": "El botón SUBMIT debe activar el envío de la conversación X veces (donde X es el valor del campo de entrada numérico) a las respuestas simuladas del LLM. Esto debe manejarse llamando al generador de respuestas simuladas en `src/mock_llm.py` desde dentro de `src/backend.py`.",
+            "category": "Other",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 4,
+            "prerequisites": [
+                0,
+                2,
+                3
+            ],
+            "criteria": "Las respuestas simuladas deben generarse en `src/mock_llm.py`, y luego pasarse a `src/frontend_render.py` para mostrarse como una lista de elementos expandibles, cada uno etiquetado por el número de solicitud.",
+            "category": "Human Computer Interaction",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 5,
+            "prerequisites": [
+                0,
+                2,
+                3,
+                4
+            ],
+            "criteria": "Las respuestas deben transmitirse al frontend y mostrarse token por token en tiempo real, implementado en `src/stream_handler.py`.",
+            "category": "Other",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 6,
+            "prerequisites": [],
+            "criteria": "Tailwind debe usarse para el estilo del frontend en `src/styles.css`, cargado a través de CDN sin una instalación.",
+            "category": "Human Computer Interaction",
+            "satisfied": null
+        }
+    ],
+    "preferences": [
+        {
+            "preference_id": 0,
+            "criteria": "La interfaz de usuario debe mantener un estilo limpio y consistente, utilizando Tailwind para un diseño cohesivo y fácil de navegar.",
+            "satisfied": null
+        },
+        {
+            "preference_id": 1,
+            "criteria": "Las respuestas en streaming desde la API deben ser eficientes, asegurando actualizaciones en tiempo real sin demoras.",
+            "satisfied": null
+        },
+        {
+            "preference_id": 2,
+            "criteria": "El manejo de solicitudes y respuestas de la API debe ser modular, permitiendo modificaciones fáciles, como ajustar el número de solicitudes paralelas.",
+            "satisfied": null
+        }
+    ],
+    "is_kaggle_api_needed": false,
+    "is_training_needed": false,
+    "is_web_navigation_needed": false,
+    "resource": "https://github.com/Pythagora-io/gpt-pilot/wiki/How-to-write-a-good-initial-project-description",
+    "language": "Spanish",
+    "judge_stats": [
+        {
+            "requirement_index": 0,
+            "criteria": "El frontend debe implementarse en `src/frontend.py`, conteniendo una lista donde el usuario pueda agregar mensajes de texto grandes y seleccionar si el mensaje es del LLM o del usuario. Cuando la aplicación se cargue, la lista debe comenzar con un solo elemento vacío.",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 3.454582452774048,
+                "input_tokens": 1447,
+                "output_tokens": 108,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n\nThe content of `src/frontend.py` does not implement any actual frontend functionality. Instead, it only contains a stub/placeholder that defines requirement criteria as strings and a `main()` function that returns a status dictionary. There is no implementation of a message list, no UI components for adding large text messages, no role selection (LLM vs user), and no initialization with a single empty item. The file is essentially a mock that describes the requirements rather than implementing them."
+                ]
+            },
+            "total_time": 11.622146844863892
+        },
+        {
+            "requirement_index": 1,
+            "criteria": "La lista de mensajes debe permitir un número ilimitado de elementos, gestionados a través de un botón para agregar nuevos elementos, implementado en `src/message_list.py`.",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 4.856000185012817,
+                "input_tokens": 1384,
+                "output_tokens": 110,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n\nThe `src/message_list.py` file does not implement the required functionality. Its content is merely a stub/placeholder that contains only metadata strings describing the requirement criteria, a `requirement_notes()` function, and a trivial `main()` function returning a status dict. There is no actual implementation of a message list, no data structure to hold an unbounded number of items, and no button or mechanism to add new items. The file is essentially empty of real logic."
+                ]
+            },
+            "total_time": 9.53708791732788
+        },
+        {
+            "requirement_index": 2,
+            "criteria": "La interfaz debe permitir que un usuario ingrese un valor numérico de 0 a 100, controlando cuántas solicitudes API paralelas se enviarán. Esta función debe implementarse en `src/frontend.py`.",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 4.586663007736206,
+                "input_tokens": 1502,
+                "output_tokens": 111,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n\nThe content of `src/frontend.py` does not implement any actual UI functionality. Instead, it contains only a stub/placeholder that lists the requirement criteria as strings and defines a `main()` function that simply returns a status dictionary. There is no implementation of a numerical input (slider, spinbox, or any widget) allowing values from 0 to 100 to control parallel API requests. The file is essentially a mock that acknowledges the requirements exist but does not fulfill them."
+                ]
+            },
+            "total_time": 10.77761435508728
+        },
+        {
+            "requirement_index": 3,
+            "criteria": "El botón SUBMIT debe activar el envío de la conversación X veces (donde X es el valor del campo de entrada numérico) a las respuestas simuladas del LLM. Esto debe manejarse llamando al generador de respuestas simuladas en `src/mock_llm.py` desde dentro de `src/backend.py`.",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 5.210777521133423,
+                "input_tokens": 1905,
+                "output_tokens": 138,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n\nThe files `src/backend.py` and `src/mock_llm.py` do not contain any actual implementation. Both files are placeholder stubs that only define metadata strings (`REQUIREMENT_CRITERIA`, `KEYWORDS`) and a trivial `main()` function returning a status dict. There is no real logic in `backend.py` that calls a mock response generator from `mock_llm.py`, no SUBMIT button handling, no loop executing X times, and no actual mock LLM response generation. The code is purely a benchmark annotation scaffold with no functional implementation of the required behavior."
+                ]
+            },
+            "total_time": 12.853586912155151
+        },
+        {
+            "requirement_index": 4,
+            "criteria": "Las respuestas simuladas deben generarse en `src/mock_llm.py`, y luego pasarse a `src/frontend_render.py` para mostrarse como una lista de elementos expandibles, cada uno etiquetado por el número de solicitud.",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 5.734645843505859,
+                "input_tokens": 1969,
+                "output_tokens": 163,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n\nBoth `src/mock_llm.py` and `src/frontend_render.py` contain only placeholder/stub implementations for benchmark judging purposes. Neither file implements actual mock LLM response generation nor expandable UI elements. The `mock_llm.py` file only defines requirement criteria strings and a `main()` function returning a status dict, with no actual mock response generation logic. Similarly, `frontend_render.py` contains no rendering logic for expandable elements labeled by request number — it is identical in structure to `mock_llm.py`, just listing requirement criteria as strings. There is no functional integration between these two files, and no evidence of actual mock responses being generated and passed to a frontend renderer."
+                ]
+            },
+            "total_time": 14.229179859161377
+        },
+        {
+            "requirement_index": 5,
+            "criteria": "Las respuestas deben transmitirse al frontend y mostrarse token por token en tiempo real, implementado en `src/stream_handler.py`.",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 5.765467882156372,
+                "input_tokens": 1360,
+                "output_tokens": 126,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n\nThe `src/stream_handler.py` file does not implement any actual streaming or token-by-token transmission functionality. Its content is merely a placeholder/stub that contains only metadata comments, a list of requirement criteria strings, and a trivial `main()` function that returns a status dictionary. There is no real implementation of streaming logic (e.g., no generator functions, no WebSocket/SSE handling, no token iteration, no integration with an LLM API or mock response). The file is essentially empty of functional code relevant to the requirement."
+                ]
+            },
+            "total_time": 12.295822143554688
+        },
+        {
+            "requirement_index": 6,
+            "criteria": "Tailwind debe usarse para el estilo del frontend en `src/styles.css`, cargado a través de CDN sin una instalación.",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 5.342430114746094,
+                "input_tokens": 1318,
+                "output_tokens": 135,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n\nThe file `src/styles.css` exists but its content cannot be verified (no CSS reader available). More critically, there is no evidence in the trajectory or project files that Tailwind CSS is loaded via CDN (e.g., a `<link>` or `<script>` tag pointing to a Tailwind CDN URL in any HTML template or frontend file). The trajectory analysis explicitly confirms no operations related to Tailwind CSS CDN integration were recorded. Without verifiable evidence that Tailwind is being used via CDN in the frontend styling, this requirement cannot be considered satisfied."
+                ]
+            },
+            "total_time": 14.925552368164062
+        }
+    ]
+}

@@ -1,0 +1,238 @@
+{
+    "name": "37_Lane_Detection_ResNet50_TuSimple_DL",
+    "query": "تطوير نظام كشف المسارات. ابدأ باستيراد النموذج القياسي المدرب مسبقًا ResNet-50 من PyTorch في `src/model.py`. سنعمل هنا مع مجموعة بيانات كشف المسارات TuSimple كمجموعة اختبار لدينا، والتي يجب تحميلها من خلال `src/data_loader.py`. ثم قم بتحميل ومعالجة مجموعة البيانات، بما في ذلك تقنيات زيادة البيانات مثل القص العشوائي، والدوران، والتحجيم في `src/data_loader.py`. قم بضبط النموذج بدقة واحفظ دقة الكشف في `results/metrics/detection_accuracy.txt`، واحفظ النموذج المدرب كـ `models/saved_models/lane_detection_model.pth`. قم بتقسيم جزء من البيانات للتحقق من الصحة، يتم تنفيذها في `src/data_loader.py`. قم بتصور نتائج الكشف باستخدام matplotlib واحفظها في `results/figures/`. قم بإنشاء تقرير مفصل عن العملية بأكملها، بما في ذلك معالجة البيانات، وتدريب النموذج، والتقييم، واحفظه كـ `results/lane_detection_report.pdf`. يجب أن يتضمن التقرير أيضًا تحليلًا لأداء النموذج في ظل الظروف الصعبة مثل المنحنيات أو الإضاءة الضعيفة.",
+    "tags": [
+        "Computer Vision"
+    ],
+    "requirements": [
+        {
+            "requirement_id": 0,
+            "prerequisites": [],
+            "criteria": "يتم تحميل مجموعة بيانات الكشف عن المسارات \"TuSimple\" في `src/data_loader.py`.",
+            "category": "Dataset or Environment",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 1,
+            "prerequisites": [
+                0
+            ],
+            "criteria": "يتم تنفيذ تعزيز البيانات، بما في ذلك القص العشوائي، والدوران، والتحجيم في `src/data_loader.py`.",
+            "category": "Data preprocessing and postprocessing",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 2,
+            "prerequisites": [
+                0
+            ],
+            "criteria": "يتم تقسيم مجموعة فرعية من البيانات للتحقق من الصحة وتطبيقها في `src/data_loader.py`.",
+            "category": "Data preprocessing and postprocessing",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 3,
+            "prerequisites": [],
+            "criteria": "يتم استيراد النموذج المدرب مسبقًا \"ResNet-50\" من PyTorch في `src/model.py`.",
+            "category": "Machine Learning Method",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 4,
+            "prerequisites": [
+                1,
+                2,
+                3
+            ],
+            "criteria": "قم بضبط النموذج \"ResNet-50\" وحفظه كـ `models/saved_models/lane_detection_model.pth`.",
+            "category": "Save Trained Model",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 5,
+            "prerequisites": [
+                4
+            ],
+            "criteria": "يتم حفظ دقة الكشف كـ `results/metrics/detection_accuracy.txt`.",
+            "category": "Performance Metrics",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 6,
+            "prerequisites": [
+                4
+            ],
+            "criteria": "يتم تصور نتائج الكشف باستخدام \"matplotlib\" وحفظها في `results/figures/`.",
+            "category": "Visualization",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 7,
+            "prerequisites": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5
+            ],
+            "criteria": "يتم إنشاء تقرير مفصل يحتوي على معالجة البيانات المسبقة، وتدريب النموذج، وعملية التقييم وحفظه كـ `results/lane_detection_report.pdf`.",
+            "category": "Other",
+            "satisfied": null
+        }
+    ],
+    "preferences": [
+        {
+            "preference_id": 0,
+            "criteria": "يجب أن يتضمن التقرير تحليلًا لأداء النموذج في السيناريوهات الصعبة، مثل المنحنيات أو ظروف الإضاءة الضعيفة.",
+            "satisfied": null
+        },
+        {
+            "preference_id": 1,
+            "criteria": "يجب توثيق خطوات زيادة البيانات بشكل جيد، مع تضمين أمثلة للصور المعززة في التقرير.",
+            "satisfied": null
+        }
+    ],
+    "is_kaggle_api_needed": false,
+    "is_training_needed": true,
+    "is_web_navigation_needed": false,
+    "language": "Arabic",
+    "judge_stats": [
+        {
+            "requirement_index": 0,
+            "criteria": "يتم تحميل مجموعة بيانات الكشف عن المسارات \"TuSimple\" في `src/data_loader.py`.",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 10.727880477905273,
+                "input_tokens": 1326,
+                "output_tokens": 130,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\nيحتوي ملف `src/data_loader.py` على دالة `load_dataset()` التي تُرجع قاموسًا نصيًا ثابتًا (`{\"dataset\": \"loaded\", \"notes\": requirement_notes()}`) بدلاً من تنفيذ فعلي لتحميل مجموعة بيانات \"TuSimple\". كما أن الكود يفتقر إلى أي استيراد أو معالجة فعلية للبيانات، ويقتصر على تعريف نصوص وهمية. لا يوجد دليل على أن مجموعة بيانات \"TuSimple\" يتم تحميلها فعليًا في هذا الملف."
+                ]
+            },
+            "total_time": 24.871156930923462
+        },
+        {
+            "requirement_index": 1,
+            "criteria": "يتم تنفيذ تعزيز البيانات، بما في ذلك القص العشوائي، والدوران، والتحجيم في `src/data_loader.py`.",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 10.190974950790405,
+                "input_tokens": 1309,
+                "output_tokens": 159,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\nيحتوي ملف `src/data_loader.py` على دالة `build_transforms()` تُرجع قائمة تحتوي على الكلمات \"rotation\" و \"scaling\" و \"normalization\". ومع ذلك، هذا هو مجرد \"placeholder\" (نائب) أو تنفيذ دلالي بسيط. لا يوجد أي تنفيذ فعلي لتحويلات تعزيز البيانات (مثل استخدام `torchvision.transforms.Compose`، أو `RandomCrop`، أو `RandomRotation`، أو `Resize`). كما أن الدالة لا تُستخدم أو تُستدعى في أي مكان داخل الملف المقدم. لذلك، لم يتم تنفيذ تعزيز البيانات بشكل عملي."
+                ]
+            },
+            "total_time": 25.83235192298889
+        },
+        {
+            "requirement_index": 2,
+            "criteria": "يتم تقسيم مجموعة فرعية من البيانات للتحقق من الصحة وتطبيقها في `src/data_loader.py`.",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 4.481945514678955,
+                "input_tokens": 1592,
+                "output_tokens": 141,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\nيحتوي ملف `src/data_loader.py` على دالة `load_dataset()` هي مجرد عنصر نائب (placeholder) تُرجع قاموسًا ثابتًا يحتوي على ملاحظات. لا يوجد في الكود أي تنفيذ فعلي لتقسيم مجموعة فرعية من البيانات للتحقق من الصحة (validation split). كما أن التحذير البيئي `RuntimeWarning` المشار إليه في مسار التنفيذ يشير إلى وجود مشكلة حسابية أثناء عملية التقسيم، مما يؤكد أن التنفيذ الحالي به عيوب ولا يقوم بالمهمة المطلوبة بشكل صحيح."
+                ]
+            },
+            "total_time": 33.38249707221985
+        },
+        {
+            "requirement_index": 3,
+            "criteria": "يتم استيراد النموذج المدرب مسبقًا \"ResNet-50\" من PyTorch في `src/model.py`.",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 18.44636845588684,
+                "input_tokens": 1212,
+                "output_tokens": 165,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\nالمحتوى المقدم لملف `src/model.py` لا يظهر أي استيراد فعلي لنموذج ResNet-50 من PyTorch. الكود الموجود هو تنفيذ دمية (placeholder) يحتوي على نص تعريف للمتطلبات والكلمات المفتاحية، ولكن لا يحتوي على أي استيراد لـ `torchvision.models` أو إنشاء نموذج ResNet-50. الدالة `build_model()` تُرجع سلسلة نصية \"model placeholder\" ولا تقوم ببناء أو تحميل النموذج المطلوب. الأدلة المرجعية من سجل التنفيذ غير حاسمة ولا تعوض عن غياب الكود الفعلي في الملف."
+                ]
+            },
+            "total_time": 27.02476477622986
+        },
+        {
+            "requirement_index": 4,
+            "criteria": "قم بضبط النموذج \"ResNet-50\" وحفظه كـ `models/saved_models/lane_detection_model.pth`.",
+            "satisfied": true,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 3.6834826469421387,
+                "input_tokens": 1042,
+                "output_tokens": 98,
+                "accumulated_cost": 0.0,
+                "satisfied": true,
+                "reason": [
+                    "<SATISFIED>\nيوجد ملف النموذج المحفوظ في المسار المحدد `models/saved_models/lane_detection_model.pth` كما هو موثق في بنية المشروع. تمت الإشارة إلى عملية الحفظ هذه في الخطوات المرجعية دون تسجيل أية أخطاء، مما يؤكد أن النموذج \"ResNet-50\" قد تم ضبطه وحفظه بنجاح."
+                ]
+            },
+            "total_time": 11.004815578460693
+        },
+        {
+            "requirement_index": 5,
+            "criteria": "يتم حفظ دقة الكشف كـ `results/metrics/detection_accuracy.txt`.",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 7.051360130310059,
+                "input_tokens": 1090,
+                "output_tokens": 113,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\nالمتطلب هو حفظ دقة الكشف في ملف `results/metrics/detection_accuracy.txt`. محتوى الملف الموجود هو `('placeholder\\r\\n', None)`، مما يشير إلى أنه مجرد نائب (placeholder) وليس نتيجة دقة كشف فعلية أو بيانات مقاسة. لا يحتوي الملف على أي قيم دقة أو مقاييس مخرجة من نموذج أو عملية تقييم، وبالتالي لم يتم حفظ دقة الكشف فيه."
+                ]
+            },
+            "total_time": 16.418061017990112
+        },
+        {
+            "requirement_index": 6,
+            "criteria": "يتم تصور نتائج الكشف باستخدام \"matplotlib\" وحفظها في `results/figures/`.",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 7.790666103363037,
+                "input_tokens": 1702,
+                "output_tokens": 189,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\nلا يوجد دليل في محتوى الملفات المقدمة (`data_loader.py` أو `model.py`) على استخدام `matplotlib` لتصور نتائج الكشف أو حفظها في المسار `results/figures/`. محتوى الملفات يظهر فقط نصوصًا وهمية (placeholders) للتحميل والنماذج ولا يحتوي على أي كود لإنشاء أو حفظ رسوم بيانية. بينما تشير خطوات المسار (Trajectory) إلى أن عملية حفظ الشكل تمت بنجاح، إلا أن هذه الخطوات مُقدمة كمرجع فقط ولا تُعتبر دليلاً حاسماً. الدليل الحاسم المطلوب هو محتوى الكود الفعلي الذي ينفذ التصور والحفظ، وهو غير موجود في الملفات المقدمة للتقييم."
+                ]
+            },
+            "total_time": 24.97685194015503
+        },
+        {
+            "requirement_index": 7,
+            "criteria": "يتم إنشاء تقرير مفصل يحتوي على معالجة البيانات المسبقة، وتدريب النموذج، وعملية التقييم وحفظه كـ `results/lane_detection_report.pdf`.",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 5.993318319320679,
+                "input_tokens": 1085,
+                "output_tokens": 130,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\nالمتطلب غير متحقق لأن ملف `results/lane_detection_report.pdf` فارغ ولا يمكن قراءته. الدليل المقدم يظهر أن محاولة قراءة الملف أدت إلى الخطأ: \"Cannot read an empty file\". على الرغم من أن الخطوات المرجعية تشير إلى إنشاء الملف بنجاح، إلا أن الملف الناتج فارغ ولا يحتوي على التقرير المفصل المطلوب الذي يجب أن يتضمن معالجة البيانات المسبقة، وتدريب النموذج، وعملية التقييم."
+                ]
+            },
+            "total_time": 14.498359441757202
+        }
+    ]
+}

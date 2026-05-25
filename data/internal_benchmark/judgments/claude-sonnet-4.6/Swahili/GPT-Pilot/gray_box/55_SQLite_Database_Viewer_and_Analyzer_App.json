@@ -1,0 +1,429 @@
+{
+    "name": "55_SQLite_Database_Viewer_and_Analyzer_App",
+    "query": "Nataka kuunda programu inayowezesha watumiaji kutazama na kuchambua data ya maendeleo ya AI iliyohifadhiwa katika hifadhidata ya SQLite. Kwenye sehemu ya mbele (iliyotekelezwa katika `src/frontend.py`), mtumiaji anapaswa ama kupakia hifadhidata mpya ya SQLite, ikijumuisha kumbukumbu za mafunzo ya modeli za AI au data ya majibu ya maelekezo, kwa kuchagua faili kutoka kwa kifaa chao au kuchagua hifadhidata iliyopakiwa awali iliyohifadhiwa katika `src/cache.py`. Kwa njia hii, mtumiaji hatalazimika kupakia hifadhidata kila wakati wanapotaka kuichambua. Ikiwa hifadhidata mpya imepakiwa, wanaweza kuipa jina, na faili itatumwa kwa sehemu ya nyuma (`src/backend.py`) na kuhifadhiwa kwa matumizi ya baadaye. Mara hifadhidata inapopakiwa, watumiaji wanaweza kuingiliana nayo. Mtumiaji anapaswa kuona orodha ya modeli za AI au programu kutoka kwenye jedwali la `app`. Wanapaswa kuwa na uwezo wa kuchagua programu moja, na kutazama kazi zake za maendeleo kutoka kwenye jedwali la `development_planning`. Baada ya kuchagua kazi, wanaweza kuona hatua zote za maendeleo zinazohusiana nayo. Hatimaye, kuchagua hatua kutawasilisha data ya kina kama vile `prompt_path`, `messages`, `llm_response`, na `prompt_data`, na taarifa sahihi itaonyeshwa kwenye sehemu ya mbele (katika `src/frontend_render.py`).\nHifadhidata ya SQLite itafuata muundo huu kila wakati: jedwali la `app` lina programu zote zilizohifadhiwa kwenye hifadhidata. Kila programu ina kazi nyingi za maendeleo zilizohifadhiwa kama safu katika jedwali la `development_planning` chini ya ufunguo `development_plan`. Kila kipengee cha safu ni kitu cha JSON chenye jozi tatu za ufunguo-thamani: `description`, `user_review_goal`, na `programming_goal`. Kila kazi ya maendeleo ina hatua nyingi za maendeleo, ambazo zimehifadhiwa katika jedwali la `development_steps` na kuunganishwa na jedwali la `app` kwa kutumia uwanja wa `app_id`.\nChangamoto ni kwamba hakuna uhusiano wa moja kwa moja kati ya kazi ya maendeleo na hatua ya maendeleo. Kwa hiyo, katika `src/backend_logic.py`, hatua zote za maendeleo zinahitaji kupatikana na kisha kugawanywa kwa uwanja wa `prompt_path`. Kila kazi ya maendeleo huanza na thamani ya `prompt_path` `development/task/breakdown.prompt`, hivyo hatua za maendeleo zinaweza kuunganishwa kwa kugawanya orodha ya hatua katika orodha ndogo, ambapo kila moja huanza na hatua yenye `prompt_path` sawa na `development/task/breakdown.prompt`. Hii itatoa seti sahihi ya hatua za maendeleo kwa kila kazi.\nKila hatua ya maendeleo ina maadili yafuatayo, ambayo yanahitaji kuonyeshwa kwenye sehemu ya mbele (`src/frontend_render.py`):\n- `prompt_path`: kamba.\n- `messages`: safu ya vitu vya JSON.\n- `llm_response`: kitu cha JSON.\n- `prompt_data`: kitu cha JSON.\nSafu ya `messages` itakuwa na vitu vya JSON kila wakati na funguo `content` na `role`. Sehemu ya mbele inapaswa kuonyesha `content` katika uwanja mkubwa wa maandishi, na `role` kuonyeshwa kama lebo. Kitu cha `llm_response` kitakuwa na ufunguo wa `text` kila wakati, ambao unapaswa kuonyeshwa kama eneo la maandishi kuonyesha mistari inayoweza kuwa ndefu. Kitu cha `prompt_data` kinaweza kuwa na jozi mbalimbali za ufunguo-thamani, na kila moja inapaswa kuonyeshwa kwa mtumiaji kwa muundo unaofaa.",
+    "tags": [
+        "Other"
+    ],
+    "requirements": [
+        {
+            "requirement_id": 0,
+            "prerequisites": [],
+            "criteria": "Sehemu ya mbele imetekelezwa katika `src/frontend.py` na inaruhusu watumiaji kupakia hifadhidata mpya ya SQLite au kuchagua moja iliyohifadhiwa awali kutoka `src/cache.py`. Faili iliyochaguliwa inapaswa kuhifadhiwa na kupatikana kwa matumizi ya baadaye.",
+            "category": "Human Computer Interaction",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 1,
+            "prerequisites": [
+                0
+            ],
+            "criteria": "Wakati hifadhidata mpya inapopakiwa, watumiaji wanaweza kuipa jina, na faili inatumwa kwa sehemu ya nyuma (`src/backend.py`) na kuhifadhiwa kwa matumizi ya baadaye.",
+            "category": "Other",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 2,
+            "prerequisites": [
+                0,
+                1
+            ],
+            "criteria": "Hifadhidata zilizopakiwa awali zimehifadhiwa katika `src/cache.py` na zinaweza kuchaguliwa bila kupakiwa tena.",
+            "category": "Dataset or Environment",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 3,
+            "prerequisites": [
+                0,
+                1,
+                2
+            ],
+            "criteria": "Mara hifadhidata inapopakiwa au kuchaguliwa, mtumiaji anaweza kuona orodha ya modeli za AI au programu kutoka kwenye jedwali la `app` ndani ya hifadhidata.",
+            "category": "Other",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 4,
+            "prerequisites": [
+                0,
+                1,
+                2,
+                3
+            ],
+            "criteria": "Watumiaji wanaweza kuchagua programu na kuona kazi zake za maendeleo kutoka kwenye jedwali la `development_planning`.",
+            "category": "Other",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 5,
+            "prerequisites": [
+                0,
+                1,
+                2,
+                3,
+                4
+            ],
+            "criteria": "Baada ya kuchagua kazi, watumiaji wanaweza kuona hatua zote za maendeleo zinazohusiana, ambazo zinaonyeshwa kwenye sehemu ya mbele iliyotekelezwa katika `src/frontend_render.py`.",
+            "category": "Human Computer Interaction",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 6,
+            "prerequisites": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5
+            ],
+            "criteria": "Kuchagua hatua ya maendeleo kunaonyesha data ya kina ikijumuisha `prompt_path`, `messages`, `llm_response`, na `prompt_data`, iliyotolewa ipasavyo kwenye sehemu ya mbele (`src/frontend_render.py`).",
+            "category": "Human Computer Interaction",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 7,
+            "prerequisites": [],
+            "criteria": "Katika `src/backend_logic.py`, pata hatua zote za maendeleo kutoka kwenye jedwali la `development_steps` na uzigawanye kwa kazi ya maendeleo kwa kutumia uwanja wa `prompt_path` unaoanza na `development/task/breakdown.prompt`.",
+            "category": "Other",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 8,
+            "prerequisites": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6
+            ],
+            "criteria": "Safu ya `messages` inaonyeshwa kwenye sehemu ya mbele (`src/frontend_render.py`), ikionyesha `content` katika uwanja mkubwa wa maandishi na `role` kama lebo kwa kila ujumbe.",
+            "category": "Human Computer Interaction",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 9,
+            "prerequisites": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6
+            ],
+            "criteria": "Kitu cha `llm_response` chenye ufunguo wa `text` kinaonyeshwa katika eneo la maandishi ili kukidhi mistari inayoweza kuwa ndefu kwenye sehemu ya mbele (`src/frontend_render.py`).",
+            "category": "Human Computer Interaction",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 10,
+            "prerequisites": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6
+            ],
+            "criteria": "Kitu cha `prompt_data` kinaonyeshwa na jozi zake za ufunguo-thamani zikiwa zimewasilishwa kwa muundo unaofaa kwenye sehemu ya mbele (`src/frontend_render.py`).",
+            "category": "Human Computer Interaction",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 11,
+            "prerequisites": [],
+            "criteria": "Hifadhidata ya SQLite inafuata muundo uliowekwa na `app`, `development_planning`, na `development_steps` meza, kama ilivyoelezwa katika swali la mradi.",
+            "category": "Dataset or Environment",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 12,
+            "prerequisites": [
+                11
+            ],
+            "criteria": "Kila programu katika jedwali la `app` ina kazi nyingi za maendeleo zilizohifadhiwa kama safu chini ya ufunguo `development_plan` katika jedwali la `development_planning`.",
+            "category": "Dataset or Environment",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 13,
+            "prerequisites": [
+                11
+            ],
+            "criteria": "Kila kazi ya maendeleo ina hatua nyingi za maendeleo zilizohifadhiwa katika jedwali la `development_steps` na kuunganishwa na jedwali la `app` kwa kutumia uwanja wa `app_id`.",
+            "category": "Dataset or Environment",
+            "satisfied": null
+        }
+    ],
+    "preferences": [
+        {
+            "preference_id": 0,
+            "criteria": "Kiolesura cha sehemu ya mbele kinapaswa kuruhusu mwingiliano rahisi na hifadhidata, kuhakikisha watumiaji wanaweza kuvinjari kwa urahisi kati ya programu, kazi, na hatua.",
+            "satisfied": null
+        },
+        {
+            "preference_id": 1,
+            "criteria": "Mfumo unapaswa kushughulikia kwa ufanisi hifadhidata kubwa za SQLite, kuhakikisha kwamba utendaji unadumishwa na seti kubwa za data.",
+            "satisfied": null
+        },
+        {
+            "preference_id": 2,
+            "criteria": "Taarifa zinapaswa kuonyeshwa kwenye sehemu ya mbele kwa njia ya angavu na rafiki kwa mtumiaji, kuhakikisha urahisi wa mwingiliano.",
+            "satisfied": null
+        },
+        {
+            "preference_id": 3,
+            "criteria": "Kugawanya hatua za maendeleo kunapaswa kuakisi kwa usahihi seti sahihi ya hatua kwa kila kazi, kulingana na mantiki iliyotekelezwa katika `src/backend_logic.py`.",
+            "satisfied": null
+        }
+    ],
+    "is_kaggle_api_needed": false,
+    "is_training_needed": false,
+    "is_web_navigation_needed": false,
+    "resource": "https://github.com/Pythagora-io/gpt-pilot/wiki/How-to-write-a-good-initial-project-description",
+    "language": "Swahili",
+    "judge_stats": [
+        {
+            "requirement_index": 0,
+            "criteria": "Sehemu ya mbele imetekelezwa katika `src/frontend.py` na inaruhusu watumiaji kupakia hifadhidata mpya ya SQLite au kuchagua moja iliyohifadhiwa awali kutoka `src/cache.py`. Faili iliyochaguliwa inapaswa kuhifadhiwa na kupatikana kwa matumizi ya baadaye.",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 3.386615037918091,
+                "input_tokens": 2274,
+                "output_tokens": 127,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>: The `src/frontend.py` file does not contain any actual implementation. It only contains metadata/documentation strings listing requirement criteria, with no real code for uploading SQLite databases, selecting cached databases, or saving files for future use. The file is a \"minimal semantic implementation for benchmark judging\" placeholder that simply returns `{\"status\": \"ok\"}` without implementing any frontend functionality. Similarly, `src/cache.py` contains no actual caching logic. Neither file fulfills the requirement of allowing users to upload new SQLite databases or select previously cached ones."
+                ]
+            },
+            "total_time": 15.136199235916138
+        },
+        {
+            "requirement_index": 1,
+            "criteria": "Wakati hifadhidata mpya inapopakiwa, watumiaji wanaweza kuipa jina, na faili inatumwa kwa sehemu ya nyuma (`src/backend.py`) na kuhifadhiwa kwa matumizi ya baadaye.",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 6.090370178222656,
+                "input_tokens": 1852,
+                "output_tokens": 199,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n\nThe file `src/backend.py` does not contain any actual implementation. It only contains a minimal semantic stub with metadata strings (`REQUIREMENT_CRITERIA`, `KEYWORDS`, `requirement_notes()`, and `main()`), but no real backend logic such as:\n\n- File upload handling (e.g., receiving a database file from the frontend)\n- Allowing users to assign a name to the uploaded database\n- Storing the uploaded file for future use (e.g., saving to disk or a database registry)\n\nThe content is essentially a placeholder that acknowledges the requirement exists but does not implement it. Similarly, `backend_logic.py`, `frontend.py`, and `frontend_render.py` are listed but their contents are not shown to compensate for this gap. The trajectory evidence also confirms no actual upload/storage operations were performed. The requirement is clearly **not satisfied**."
+                ]
+            },
+            "total_time": 13.953208208084106
+        },
+        {
+            "requirement_index": 2,
+            "criteria": "Hifadhidata zilizopakiwa awali zimehifadhiwa katika `src/cache.py` na zinaweza kuchaguliwa bila kupakiwa tena.",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 3.9331071376800537,
+                "input_tokens": 1858,
+                "output_tokens": 148,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n\nThe `src/cache.py` file does not implement any actual caching functionality for previously uploaded SQLite databases. Instead, it contains only a stub/placeholder implementation with metadata strings describing what the requirement criteria should be. There is no actual code to:\n\n1. Store/save uploaded database file paths or references\n2. Retrieve previously cached databases\n3. Allow selection of cached databases without re-uploading\n\nThe file merely contains `REQUIREMENT_CRITERIA` strings that describe the requirements as text, a `requirement_notes()` function returning those strings, and a `main()` function returning a status dict — none of which implement real caching logic."
+                ]
+            },
+            "total_time": 11.704937934875488
+        },
+        {
+            "requirement_index": 3,
+            "criteria": "Mara hifadhidata inapopakiwa au kuchaguliwa, mtumiaji anaweza kuona orodha ya modeli za AI au programu kutoka kwenye jedwali la `app` ndani ya hifadhidata.",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 9.940871953964233,
+                "input_tokens": 1627,
+                "output_tokens": 515,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>: Hakuna ushahidi wa kutosha unaoonyesha kwamba mtumiaji anaweza kuona orodha ya modeli za AI au programu kutoka kwenye jedwali la `app` baada ya hifadhidata kupakiwa au kuchaguliwa.\n\n**Sababu:**\n\n1. **Muundo wa mradi**: Faili zilizopo (`backend.py`, `backend_logic.py`, `cache.py`, `frontend.py`, `frontend_render.py`) zinaonyesha mfumo ulioundwa, lakini **hakuna msimbo wowote uliotolewa** kutoka kwa faili hizi ili kuthibitisha utekelezaji wa kipengele hiki.\n\n2. **Hakuna trajekta ya utekelezaji**: Taarifa ya trajekta inabainisha wazi kwamba **hakuna rekodi ya hatua zilizotekelezwa** zinazohusiana na upakiaji wa hifadhidata, uchaguzi wa hifadhidata, upatikanaji wa jedwali la `app`, au uonyeshaji wa orodha ya modeli/programu.\n\n3. **Jedwali la `app`**: Ingawa muundo wa mradi unaonyesha sehemu inayoitwa `app`, hakuna uthibitisho kwamba jedwali hili la hifadhidata lipo, lina data sahihi, au kwamba mfumo unaweza kuisoma na kuionyesha kwa mtumiaji.\n\n4. **Kipengele cha frontend**: Faili `frontend.py` na `frontend_render.py` zinaonyesha kuna sehemu ya kuonyesha data, lakini bila msimbo halisi, haiwezekani kuthibitisha kwamba orodha ya modeli za AI inaonyeshwa ipasavyo.\n\nKwa hivyo, hitaji hili **halijatimizwa** kwa sababu ya ukosefu wa ushahidi wa msimbo na utekelezaji."
+                ]
+            },
+            "total_time": 18.6418616771698
+        },
+        {
+            "requirement_index": 4,
+            "criteria": "Watumiaji wanaweza kuchagua programu na kuona kazi zake za maendeleo kutoka kwenye jedwali la `development_planning`.",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 6.992342233657837,
+                "input_tokens": 1482,
+                "output_tokens": 147,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>: The project structure shows files like `frontend.py`, `frontend_render.py`, `backend.py`, `backend_logic.py`, and `cache.py` in the `src` directory, but there is no evidence that the application implements functionality allowing users to select an application and view its development tasks from the `development_planning` table. The trajectory evidence explicitly states that no action logs or file operation records were provided, making it impossible to verify this feature. Additionally, the workspace structure shows a `development_planning` directory/table exists, but no code evidence demonstrates that users can interact with it through a UI to browse applications and their associated development tasks."
+                ]
+            },
+            "total_time": 14.29119062423706
+        },
+        {
+            "requirement_index": 5,
+            "criteria": "Baada ya kuchagua kazi, watumiaji wanaweza kuona hatua zote za maendeleo zinazohusiana, ambazo zinaonyeshwa kwenye sehemu ya mbele iliyotekelezwa katika `src/frontend_render.py`.",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 4.076138973236084,
+                "input_tokens": 2255,
+                "output_tokens": 174,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n\nThe file `src/frontend_render.py` contains only a minimal stub/placeholder implementation for benchmark judging purposes. It does not contain any actual frontend rendering logic. The file only defines:\n- A list of `REQUIREMENT_CRITERIA` strings (just text descriptions, not code)\n- A `requirement_notes()` function that returns those strings joined\n- A `main()` function that returns a simple status dictionary\n\nThere is no actual implementation showing development steps associated with a selected task, no UI rendering code, no data fetching logic, and no display of development steps on the frontend. The file is explicitly labeled as a \"Minimal semantic implementation for benchmark judging\" — meaning it does not fulfill the requirement of displaying all associated development steps to users after selecting a task."
+                ]
+            },
+            "total_time": 14.403138399124146
+        },
+        {
+            "requirement_index": 6,
+            "criteria": "Kuchagua hatua ya maendeleo kunaonyesha data ya kina ikijumuisha `prompt_path`, `messages`, `llm_response`, na `prompt_data`, iliyotolewa ipasavyo kwenye sehemu ya mbele (`src/frontend_render.py`).",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 4.096694231033325,
+                "input_tokens": 2219,
+                "output_tokens": 114,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>: The file `src/frontend_render.py` contains only a minimal semantic stub/placeholder implementation. It does not contain any actual frontend rendering logic for displaying `prompt_path`, `messages`, `llm_response`, or `prompt_data` when a development step is selected. The file merely defines a list of requirement criteria as strings and a `main()` function that returns a status dictionary — there is no UI rendering code, no data display logic, and no actual implementation of the required functionality."
+                ]
+            },
+            "total_time": 13.800475120544434
+        },
+        {
+            "requirement_index": 7,
+            "criteria": "Katika `src/backend_logic.py`, pata hatua zote za maendeleo kutoka kwenye jedwali la `development_steps` na uzigawanye kwa kazi ya maendeleo kwa kutumia uwanja wa `prompt_path` unaoanza na `development/task/breakdown.prompt`.",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 3.8660402297973633,
+                "input_tokens": 2177,
+                "output_tokens": 190,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>: The `src/backend_logic.py` file does not implement the required functionality. Instead of containing code that retrieves all development steps from the `development_steps` table and groups them by development task using the `prompt_path` field starting with `development/task/breakdown.prompt`, the file only contains a minimal stub/placeholder with:\n\n1. A `REQUIREMENT_CRITERIA` list that merely *describes* the requirement as a string\n2. A `main()` function that returns a simple status dictionary\n3. No database connection or query logic whatsoever\n4. No grouping logic based on `prompt_path`\n\nThe actual implementation — querying the `development_steps` table, filtering by `prompt_path` starting with `development/task/breakdown.prompt`, and grouping results by development task — is completely absent."
+                ]
+            },
+            "total_time": 13.140796899795532
+        },
+        {
+            "requirement_index": 8,
+            "criteria": "Safu ya `messages` inaonyeshwa kwenye sehemu ya mbele (`src/frontend_render.py`), ikionyesha `content` katika uwanja mkubwa wa maandishi na `role` kama lebo kwa kila ujumbe.",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 3.4961163997650146,
+                "input_tokens": 1993,
+                "output_tokens": 101,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n\nThe file `src/frontend_render.py` does not contain any actual implementation. It only contains a stub/placeholder with metadata strings listing requirement criteria, but no real code that renders the `messages` array on the frontend. There is no logic to display `content` in a large text field or `role` as a label for each message. The `main()` function simply returns a status dictionary rather than implementing any UI rendering functionality."
+                ]
+            },
+            "total_time": 10.318657636642456
+        },
+        {
+            "requirement_index": 9,
+            "criteria": "Kitu cha `llm_response` chenye ufunguo wa `text` kinaonyeshwa katika eneo la maandishi ili kukidhi mistari inayoweza kuwa ndefu kwenye sehemu ya mbele (`src/frontend_render.py`).",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 3.5149543285369873,
+                "input_tokens": 2273,
+                "output_tokens": 136,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>: The file `src/frontend_render.py` contains only a minimal stub/placeholder implementation for benchmark judging purposes. It does not contain any actual frontend rendering code. Specifically, there is no implementation that displays the `llm_response` object's `text` key in a text area. The file only defines metadata constants (`REQUIREMENT_CRITERIA`, `KEYWORDS`) and a simple `main()` function that returns a status dictionary. No Streamlit, HTML, or any other UI framework code exists in this file to render `llm_response.text` in a text area widget."
+                ]
+            },
+            "total_time": 15.08643388748169
+        },
+        {
+            "requirement_index": 10,
+            "criteria": "Kitu cha `prompt_data` kinaonyeshwa na jozi zake za ufunguo-thamani zikiwa zimewasilishwa kwa muundo unaofaa kwenye sehemu ya mbele (`src/frontend_render.py`).",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 3.869962453842163,
+                "input_tokens": 2168,
+                "output_tokens": 127,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>: The file `src/frontend_render.py` does not contain any actual implementation. It only contains a stub/placeholder with metadata about requirements (`REQUIREMENT_CRITERIA`, `KEYWORDS`, `requirement_notes()`, and `main()`), but no real code that displays `prompt_data` object with its key-value pairs in any format on the frontend. There is no Streamlit, Flask, or any other UI framework code that renders `prompt_data` key-value pairs in an appropriate format. The file is essentially empty of functional implementation."
+                ]
+            },
+            "total_time": 12.49241042137146
+        },
+        {
+            "requirement_index": 11,
+            "criteria": "Hifadhidata ya SQLite inafuata muundo uliowekwa na `app`, `development_planning`, na `development_steps` meza, kama ilivyoelezwa katika swali la mradi.",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 5.348633289337158,
+                "input_tokens": 1768,
+                "output_tokens": 245,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>: Hakuna ushahidi wa kutosha unaoonyesha kwamba hifadhidata ya SQLite iliundwa kwa muundo uliohitajika. Muundo wa mradi unaonyesha faili za Python (`backend.py`, `backend_logic.py`, `cache.py`, `frontend.py`, `frontend_render.py`) lakini hakuna faili za uhamiaji wa hifadhidata, faili za `.db`, au msimbo wowote unaothibitisha uundaji wa meza za `app`, `development_planning`, na `development_steps`. Zaidi ya hayo, taarifa ya trajekta inakiri wazi kwamba \"hakuna ushahidi wa kutosha wa hatua za utekelezaji\" zinazohusiana na muundo wa hifadhidata hii, na haiwezekani kuthibitisha kama meza hizo zipo au zinafuata muundo uliowekwa."
+                ]
+            },
+            "total_time": 18.109193801879883
+        },
+        {
+            "requirement_index": 12,
+            "criteria": "Kila programu katika jedwali la `app` ina kazi nyingi za maendeleo zilizohifadhiwa kama safu chini ya ufunguo `development_plan` katika jedwali la `development_planning`.",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 4.7505784034729,
+                "input_tokens": 1516,
+                "output_tokens": 161,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>: The provided evidence does not contain any data from the `app` table or the `development_planning` table, nor does it show any database schema, sample records, or query results that would confirm the relationship between apps and their development tasks stored under the `development_plan` key. The workspace structure only shows file paths and directory names (e.g., `development_planning`, `development_plan` as apparent fields), but there is no actual database content, ORM definitions, or code demonstrating that multiple development tasks are stored as rows linked via a `development_plan` key in the `development_planning` table. The trajectory evidence explicitly states that no action/step data was included, making it impossible to verify this requirement."
+                ]
+            },
+            "total_time": 12.228326082229614
+        },
+        {
+            "requirement_index": 13,
+            "criteria": "Kila kazi ya maendeleo ina hatua nyingi za maendeleo zilizohifadhiwa katika jedwali la `development_steps` na kuunganishwa na jedwali la `app` kwa kutumia uwanja wa `app_id`.",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 7.325637340545654,
+                "input_tokens": 1548,
+                "output_tokens": 332,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>: Hakuna ushahidi wa kutosha unaoonyesha kwamba kila kazi ya maendeleo ina hatua nyingi za maendeleo zilizohifadhiwa katika jedwali la `development_steps` na kuunganishwa na jedwali la `app` kwa kutumia uwanja wa `app_id`.\n\nMuundo wa mradi unaonyesha kuwepo kwa vipengele kama `development_steps`, `app`, na `app_id` katika mti wa mradi, lakini hizi zinaonekana kama **maeneo ya faili au folda** tu, si kama ushahidi wa utekelezaji wa hifadhidata halisi. Zaidi ya hayo, taarifa ya trajekta inakiri wazi kwamba **hakuna data ya trajekta au kumbukumbu ya vitendo** iliyoambatishwa, na inasema haitawezekana kutoa uchambuzi sahihi bila data hiyo. Hakuna sampuli za data, schema ya hifadhidata, msimbo unaotekeleza uhusiano kati ya `development_steps` na `app` kupitia `app_id`, wala matokeo ya utekelezaji yanayothibitisha muundo huu wa uhusiano."
+                ]
+            },
+            "total_time": 15.200982093811035
+        }
+    ]
+}

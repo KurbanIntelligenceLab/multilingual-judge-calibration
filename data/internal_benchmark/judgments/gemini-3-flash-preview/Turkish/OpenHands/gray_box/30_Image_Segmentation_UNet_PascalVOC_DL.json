@@ -1,0 +1,212 @@
+{
+    "name": "30_Image_Segmentation_UNet_PascalVOC_DL",
+    "query": "Pascal VOC veri kümesi ve PyTorch'ta uygulanmış önceden eğitilmiş bir U-Net modeli kullanarak bir görüntü segmentasyon projesi kurmama yardımcı olabilir misiniz? Ek eğitim gerekmez. Veri artırımı uygulayın (örneğin, görüntüleri çevirme ve döndürme), değerlendirme için Dice katsayısını kullanın, segmentlenmiş görüntüleri `results/figures/` dizinine kaydedin, segmentasyon öncesi ve sonrası görüntüleri gösteren bir GIF animasyonu oluşturup `results/figures/segmentation_results.gif` olarak kaydedin ve model mimarisi, süreç ve segmentasyon sonuçlarını içeren iyi belgelenmiş bir Jupyter Notebook oluşturun, bunu bir HTML raporuna dönüştürün (bunu `results/report.html` olarak kaydedin).",
+    "tags": [
+        "Computer Vision"
+    ],
+    "requirements": [
+        {
+            "requirement_id": 0,
+            "prerequisites": [],
+            "criteria": "\"Pascal VOC\" veri kümesi `src/data_loader.py` içinde kullanılır.",
+            "category": "Dataset or Environment",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 1,
+            "prerequisites": [
+                0
+            ],
+            "criteria": "Görüntüleri çevirme ve döndürme dahil veri artırımı `src/data_loader.py` içinde gerçekleştirilir.",
+            "category": "Data preprocessing and postprocessing",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 2,
+            "prerequisites": [],
+            "criteria": "PyTorch'tan önceden eğitilmiş bir \"U-Net\" modeli ek eğitim olmadan kullanılır ve `models/saved_models/` içinde kaydedilir.",
+            "category": "Machine Learning Method",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 3,
+            "prerequisites": [
+                1,
+                2
+            ],
+            "criteria": "\"Dice katsayısı\" değerlendirme için kullanılır ve `results/metrics/` içinde kaydedilmelidir.",
+            "category": "Performance Metrics",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 4,
+            "prerequisites": [
+                1,
+                2
+            ],
+            "criteria": "Segmentlenmiş görüntüler belirtilen `results/figures/` klasörüne kaydedilir.",
+            "category": "Data preprocessing and postprocessing",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 5,
+            "prerequisites": [
+                1,
+                2,
+                4
+            ],
+            "criteria": "Segmentasyon öncesi ve sonrası görüntülerin bir GIF animasyonu oluşturulur ve `results/figures/segmentation_results.gif` olarak kaydedilir.",
+            "category": "Visualization",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 6,
+            "prerequisites": [
+                1,
+                2,
+                3,
+                4
+            ],
+            "criteria": "Model mimarisi, önceden eğitilmiş modelin uygulanma süreci ve segmentasyon sonuçlarını içeren bir Jupyter Notebook oluşturulur. Bu, bir HTML raporuna dönüştürülür ve `results/report.html` olarak kaydedilir.",
+            "category": "Visualization",
+            "satisfied": null
+        }
+    ],
+    "preferences": [
+        {
+            "preference_id": 0,
+            "criteria": "Jupyter Notebook, sürecin her adımını açıklayan iyi belgelenmiş kod parçacıkları içermelidir.",
+            "satisfied": null
+        },
+        {
+            "preference_id": 1,
+            "criteria": "GIF animasyonu, veri kümesinden farklı görüntüler üzerinde segmentasyon öncesi ve sonrası değişiklikleri net bir şekilde göstermelidir.",
+            "satisfied": null
+        }
+    ],
+    "is_kaggle_api_needed": false,
+    "is_training_needed": false,
+    "is_web_navigation_needed": false,
+    "language": "Turkish",
+    "judge_stats": [
+        {
+            "requirement_index": 0,
+            "criteria": "\"Pascal VOC\" veri kümesi `src/data_loader.py` içinde kullanılır.",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.704454183578491,
+                "input_tokens": 1276,
+                "output_tokens": 172,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>: `src/data_loader.py` dosyasının içeriği incelendiğinde, \"Pascal VOC\" ifadesinin sadece bir yorum satırı (`Task: 30_Image_Segmentation_UNet_PascalVOC_DL`) ve bir metin listesi (`REQUIREMENT_CRITERIA`) içinde geçtiği görülmektedir. Dosya içerisinde Pascal VOC veri kümesini yükleyecek gerçek bir fonksiyonel kod (örneğin `torchvision.datasets.VOCSegmentation` kullanımı) bulunmamakta, sadece \"Minimal dataset loader placeholder\" şeklinde yer tutucu (placeholder) fonksiyonlar yer almaktadır. Ayrıca, yörünge kanıtları (Trajectory Evidence) çalışma zamanında `torchvision` kütüphanesinin eksikliği nedeniyle veri yükleme işleminin başarısız olduğunu doğrulamaktadır."
+                ]
+            },
+            "total_time": 9.401953935623169
+        },
+        {
+            "requirement_index": 1,
+            "criteria": "Görüntüleri çevirme ve döndürme dahil veri artırımı `src/data_loader.py` içinde gerçekleştirilir.",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.197852849960327,
+                "input_tokens": 1286,
+                "output_tokens": 128,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>: `src/data_loader.py` dosyasının içeriği incelendiğinde, veri artırma (flipping ve rotating) işlemlerinin gerçek kod blokları yerine sadece yer tutucu (placeholder) ifadelerden oluştuğu görülmektedir. `build_transforms` fonksiyonu sadece `\"rotation\"` ve `\"scaling\"` gibi dizeler içeren bir liste döndürmektedir; ancak `torchvision.transforms` veya benzeri bir kütüphane kullanılarak gerçekleştirilen somut bir görüntü işleme mantığı (örneğin `RandomHorizontalFlip` veya `RandomRotation`) dosyada mevcut değildir."
+                ]
+            },
+            "total_time": 6.506383895874023
+        },
+        {
+            "requirement_index": 2,
+            "criteria": "PyTorch'tan önceden eğitilmiş bir \"U-Net\" modeli ek eğitim olmadan kullanılır ve `models/saved_models/` içinde kaydedilir.",
+            "satisfied": true,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.3432118892669678,
+                "input_tokens": 1215,
+                "output_tokens": 131,
+                "accumulated_cost": 0.0,
+                "satisfied": true,
+                "reason": [
+                    "<SATISFIED>: Trajectory kanıtlarına göre, Adım 4'te `segmentation_models_pytorch` kütüphanesi kullanılarak önceden eğitilmiş bir U-Net modeli başarıyla yüklenmiş ve herhangi bir eğitim döngüsü çalıştırılmadan `models/saved_models/unet_pretrained.pth` yoluna kaydedilmiştir. Adım 5'te ise bu modelin başarıyla yüklendiği ve mimarisinin doğrulandığı teyit edilmiştir. Proje ağaç yapısında da `models/saved_models` dizininin varlığı bu durumu desteklemektedir."
+                ]
+            },
+            "total_time": 8.513250827789307
+        },
+        {
+            "requirement_index": 3,
+            "criteria": "\"Dice katsayısı\" değerlendirme için kullanılır ve `results/metrics/` içinde kaydedilmelidir.",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 3.260033369064331,
+                "input_tokens": 1227,
+                "output_tokens": 135,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>: Proje yapısında `results/metrics/` dizini mevcut olsa da, bu dizin içerisinde Dice katsayılarını içeren herhangi bir dosya (örneğin `dice_scores.json`) bulunmamaktadır. Ayrıca, yörünge kanıtlarında (Trajectory Evidence) belirtildiği üzere, `evaluate.py` dosyasının çalıştırılması sırasında `ZeroDivisionError` hatası alınmış ve dizin hatası nedeniyle kayıt işlemi başarısız olmuştur. Dosya içeriği ve proje ağacı, Dice katsayısının hesaplandığına veya kaydedildiğine dair somut bir kanıt sunmamaktadır."
+                ]
+            },
+            "total_time": 9.168831825256348
+        },
+        {
+            "requirement_index": 4,
+            "criteria": "Segmentlenmiş görüntüler belirtilen `results/figures/` klasörüne kaydedilir.",
+            "satisfied": true,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.396181344985962,
+                "input_tokens": 1356,
+                "output_tokens": 100,
+                "accumulated_cost": 0.0,
+                "satisfied": true,
+                "reason": [
+                    "<SATISFIED>: Proje yapısı incelendiğinde, `results/figures/` dizini altında `segmentation_results.gif` dosyasının mevcut olduğu görülmektedir. Ayrıca, yörünge kanıtları (Trajectory Evidence) Adım 15 ve 16'da, segmentlenmiş çıktıların ilgili klasöre yazma işleminin hatasız tamamlandığını ve sürecin `Exit Code: 0` ile sonuçlandığını doğrulamaktadır."
+                ]
+            },
+            "total_time": 8.198235750198364
+        },
+        {
+            "requirement_index": 5,
+            "criteria": "Segmentasyon öncesi ve sonrası görüntülerin bir GIF animasyonu oluşturulur ve `results/figures/segmentation_results.gif` olarak kaydedilir.",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.6612281799316406,
+                "input_tokens": 1049,
+                "output_tokens": 99,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>: Proje yapısında `results/figures/segmentation_results.gif` dosyası mevcut görünse de, dosya içeriği incelendiğinde (\"The image is a solid, uniform white square... perfectly blank\") animasyonun boş/beyaz bir kareden ibaret olduğu anlaşılmaktadır. Segmentasyon öncesi ve sonrası görüntüleri içermesi gereken GIF'in içeriği boş olduğu için gereksinim teknik olarak karşılanmamıştır."
+                ]
+            },
+            "total_time": 9.488593578338623
+        },
+        {
+            "requirement_index": 6,
+            "criteria": "Model mimarisi, önceden eğitilmiş modelin uygulanma süreci ve segmentasyon sonuçlarını içeren bir Jupyter Notebook oluşturulur. Bu, bir HTML raporuna dönüştürülür ve `results/report.html` olarak kaydedilir.",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.51764178276062,
+                "input_tokens": 1100,
+                "output_tokens": 123,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>: Proje yapısında `results/report.html` dosyası mevcut görünse de, dosya içeriği incelendiğinde boş olduğu (`('', None)`) tespit edilmiştir. Ayrıca, model mimarisini ve segmentasyon sonuçlarını içermesi gereken kaynak Jupyter Notebook dosyası (`notebooks/segmentation_analysis.ipynb`) proje ağacında (Project Tree) bulunmamaktadır. Raporun içeriğinin boş olması, gereksinimde belirtilen model uygulama süreci ve segmentasyon sonuçlarının sunulması şartının karşılanmadığını kanıtlamaktadır."
+                ]
+            },
+            "total_time": 7.476899862289429
+        }
+    ]
+}

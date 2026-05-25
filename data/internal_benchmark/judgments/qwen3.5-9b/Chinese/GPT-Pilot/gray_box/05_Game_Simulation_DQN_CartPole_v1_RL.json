@@ -1,0 +1,156 @@
+{
+    "name": "05_Game_Simulation_DQN_CartPole_v1_RL",
+    "query": "创建一个可靠的系统，在OpenAI Gym环境（如CartPole-v1）中使用PyTorch训练DQN代理。在`src/model.py`中使用PyTorch实现DQN。环境应在主文件`src/main.py`中实例化。处理DQN与环境之间的任何维度不匹配（例如，如果Gym环境ID更改时可能发生的情况），通过记录错误来处理。此外，请在每个episode后将返回值记录到`results/metrics/`，并在每个新episode完成后更新它。将最终的episode返回曲线保存为`results/figures/return_over_time.png`，并将最终训练的模型保存为`models/saved_models/dqn_model.pt`。如果可能，请在episode返回曲线上添加注释以展示关键里程碑。",
+    "tags": [
+        "Reinforcement Learning"
+    ],
+    "requirements": [
+        {
+            "requirement_id": 0,
+            "prerequisites": [],
+            "criteria": "使用PyTorch实现的\"DQN\"算法并保存在`src/model.py`中。",
+            "category": "Machine Learning Method",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 1,
+            "prerequisites": [],
+            "criteria": "在`src/main.py`中实例化一个\"OpenAI Gym\"环境。",
+            "category": "Dataset or Environment",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 2,
+            "prerequisites": [
+                0,
+                1
+            ],
+            "criteria": "绘制时间返回曲线，记录每个episode的返回，并保存为`results/figures/reward_over_time.png`。",
+            "category": "Visualization",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 3,
+            "prerequisites": [
+                0,
+                1
+            ],
+            "criteria": "训练后的模型保存为`models/saved_models/dqn_model.pt`。",
+            "category": "Save Trained Model",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 4,
+            "prerequisites": [
+                0,
+                1
+            ],
+            "criteria": "每个episode的返回记录到`results/metrics/`，并在每个episode完成后更新。",
+            "category": "Performance Metrics",
+            "satisfied": null
+        }
+    ],
+    "preferences": [
+        {
+            "preference_id": 0,
+            "criteria": "系统应处理维度不匹配，记录问题以便于调试。",
+            "satisfied": null
+        },
+        {
+            "preference_id": 1,
+            "criteria": "episode返回曲线有关键里程碑的注释。",
+            "satisfied": null
+        }
+    ],
+    "is_kaggle_api_needed": false,
+    "is_training_needed": true,
+    "is_web_navigation_needed": false,
+    "language": "Chinese",
+    "judge_stats": [
+        {
+            "requirement_index": 0,
+            "criteria": "使用PyTorch实现的\"DQN\"算法并保存在`src/model.py`中。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 24.472047090530396,
+                "input_tokens": 818,
+                "output_tokens": 1359,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n依据：虽然 `src/model.py` 文件存在且导入了 `torch`，但代码中并未包含实际的 DQN 算法实现。`build_model()` 函数仅返回 `\"model placeholder\"` 字符串，且没有定义任何神经网络结构、训练循环或 DQN 特有的逻辑（如经验回放、目标网络更新等），无法满足“使用 PyTorch 实现的'DQN'算法”的要求。"
+                ]
+            },
+            "total_time": 101.23948979377747
+        },
+        {
+            "requirement_index": 1,
+            "criteria": "在`src/main.py`中实例化一个\"OpenAI Gym\"环境。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 24.117981672286987,
+                "input_tokens": 796,
+                "output_tokens": 1315,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n依据：提供的 `src/main.py` 代码中仅导入了 `pathlib` 和 `torch` 库，并未导入 `gym` 或 `gymnasium` 库，也未包含任何实例化 OpenAI Gym 环境的代码（如 `env = gym.make(...)`）。代码仅在 `REQUIREMENT_CRITERIA` 列表中声明了该需求，但未在实际逻辑中实现。"
+                ]
+            },
+            "total_time": 79.10392713546753
+        },
+        {
+            "requirement_index": 2,
+            "criteria": "绘制时间返回曲线，记录每个episode的返回，并保存为`results/figures/reward_over_time.png`。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 22.631896495819092,
+                "input_tokens": 856,
+                "output_tokens": 1110,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n依据文件内容证据，`results/figures/reward_over_time.png` 实际存储的是错误日志（`litellm.BadRequestError: ... One of the image(s) could not be processed`），而非有效的图像数据。这表明绘图或保存过程失败，未成功生成符合要求的时间返回曲线图。"
+                ]
+            },
+            "total_time": 90.51534271240234
+        },
+        {
+            "requirement_index": 3,
+            "criteria": "训练后的模型保存为`models/saved_models/dqn_model.pt`。",
+            "satisfied": true,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 25.40754270553589,
+                "input_tokens": 665,
+                "output_tokens": 1020,
+                "accumulated_cost": 0.0,
+                "satisfied": true,
+                "reason": [
+                    "<SATISFIED>\n依据：项目结构树（Project Tree）中明确列出了文件 `models\\saved_models\\dqn_model.pt`，且文件内容检查反馈确认该文件存在（\"The file exists\"），路径与要求完全一致。"
+                ]
+            },
+            "total_time": 92.61282992362976
+        },
+        {
+            "requirement_index": 4,
+            "criteria": "每个episode的返回记录到`results/metrics/`，并在每个episode完成后更新。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 22.192984580993652,
+                "input_tokens": 1103,
+                "output_tokens": 1273,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n代码未满足要求。`src/main.py` 和 `src/model.py` 中均无运行 episode 或写入 `results/metrics/` 的逻辑。`main.py` 仅返回 `{\"status\": \"ok\", ...}`，`model.py` 仅定义 `build_model` 占位符，缺少训练/评估循环及指标保存功能。"
+                ]
+            },
+            "total_time": 87.60508894920349
+        }
+    ]
+}

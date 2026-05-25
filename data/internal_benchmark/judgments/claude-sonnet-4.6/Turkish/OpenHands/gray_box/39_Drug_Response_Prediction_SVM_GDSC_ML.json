@@ -1,0 +1,224 @@
+{
+    "name": "39_Drug_Response_Prediction_SVM_GDSC_ML",
+    "query": "GDSC veri kümesini kullanarak bir Destek Vektör Makinesi (SVM) regresörü ile ilaç yanıtını tahmin eden bir sistem geliştirin. Veri kümesini yükleyin ve `src/data_loader.py` içinde anahtar özellikleri belirlemek için özellik seçimi yapın. SVM regresörünü `src/model.py` içinde uygulayın. Modelin performansını değerlendirmek için `src/train.py` içinde çapraz doğrulama kullanın. Performans sonuçlarını `results/metrics/performance.txt` dosyasına kaydedin. Regresyon sonuçlarını seaborn kullanarak görselleştirin ve `results/figures/` altında kaydedin. Ardından, veri ön işleme, model eğitimi, değerlendirme süreci ve görselleştirmeyi içeren bir rapor oluşturun. Raporu `results/drug_response_prediction_report.pdf` olarak kaydedin. Rapor, özellik seçiminin modelin performansını nasıl etkilediğini vurgulamalı ve regresyon sonuçlarının görselleştirilmesi, seçilen özellikler ile tahmin edilen ilaç yanıtı arasındaki ilişkiyi açıkça göstermelidir. Sistem, ek veri kümeleri veya yeni özellikler eklemek için kolayca genişletilebilir şekilde tasarlanmalıdır.",
+    "tags": [
+        "Medical Analysis",
+        "Regression",
+        "Supervised Learning"
+    ],
+    "requirements": [
+        {
+            "requirement_id": 0,
+            "prerequisites": [],
+            "criteria": "\"GDSC\" ilaç yanıtı veri kümesi `src/data_loader.py` içinde yüklenir.",
+            "category": "Dataset or Environment",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 1,
+            "prerequisites": [
+                0
+            ],
+            "criteria": "Önemli özellikleri belirlemek için `src/data_loader.py` içinde özellik seçimi yapılır.",
+            "category": "Data preprocessing and postprocessing",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 2,
+            "prerequisites": [],
+            "criteria": "\"SVM regresörü\" `src/model.py` içinde uygulanır.",
+            "category": "Machine Learning Method",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 3,
+            "prerequisites": [
+                1,
+                2
+            ],
+            "criteria": "Modeli değerlendirmek için `src/train.py` içinde çapraz doğrulama kullanılır.",
+            "category": "Performance Metrics",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 4,
+            "prerequisites": [
+                0,
+                1,
+                2,
+                3
+            ],
+            "criteria": "Performans sonuçları `results/metrics/performance.txt` olarak kaydedilir.",
+            "category": "Performance Metrics",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 5,
+            "prerequisites": [
+                0,
+                1,
+                2,
+                3
+            ],
+            "criteria": "Regresyon sonuçları \"seaborn\" kullanılarak görselleştirilir ve `results/figures/` konumuna kaydedilir.",
+            "category": "Visualization",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 6,
+            "prerequisites": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5
+            ],
+            "criteria": "Veri ön işleme, model eğitimi, değerlendirme süreci ve regresyon sonuçlarının görselleştirilmesini içeren bir rapor oluşturulur ve `results/drug_response_prediction_report.pdf` olarak kaydedilir.",
+            "category": "Other",
+            "satisfied": null
+        }
+    ],
+    "preferences": [
+        {
+            "preference_id": 0,
+            "criteria": "Rapor, özellik seçiminin modelin performansını nasıl etkilediğini vurgulamalıdır.",
+            "satisfied": null
+        },
+        {
+            "preference_id": 1,
+            "criteria": "Regresyon sonuçlarının görselleştirilmesi, seçilen özellikler ile tahmin edilen ilaç yanıtı arasındaki ilişkiyi açıkça göstermelidir.",
+            "satisfied": null
+        },
+        {
+            "preference_id": 2,
+            "criteria": "Sistem, ek veri kümeleri veya yeni özellikler eklemek için önemli bir yeniden çalışma gerektirmeden kolayca genişletilebilir olmalıdır.",
+            "satisfied": null
+        }
+    ],
+    "is_kaggle_api_needed": false,
+    "is_training_needed": true,
+    "is_web_navigation_needed": false,
+    "language": "Turkish",
+    "judge_stats": [
+        {
+            "requirement_index": 0,
+            "criteria": "\"GDSC\" ilaç yanıtı veri kümesi `src/data_loader.py` içinde yüklenir.",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 6.7396063804626465,
+                "input_tokens": 1802,
+                "output_tokens": 270,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n\n`src/data_loader.py` dosyası bir CSV dosyası yüklemek için `pd.read_csv()` kullanmaktadır; ancak yüklenen dosya gerçek GDSC veri kümesi değildir. Trajectory kanıtına göre (Step 7), kullanılan veri kümesi `np.random` ile oluşturulmuş sentetik bir veri kümesidir. Step 18'de `results/metrics/performance.txt` dosyasında `feature1` ile `feature10` gibi yapay özellik adlarının görülmesi de bunu doğrulamaktadır. Gerçek GDSC ilaç yanıtı veri kümesi hiçbir aşamada indirilmemiş veya kullanılmamıştır. Ayrıca `data_loader.py` içindeki `data_path = 'path_to_gdsc_dataset.csv'` satırı da gerçek bir GDSC veri yoluna işaret etmemektedir."
+                ]
+            },
+            "total_time": 21.628077745437622
+        },
+        {
+            "requirement_index": 1,
+            "criteria": "Önemli özellikleri belirlemek için `src/data_loader.py` içinde özellik seçimi yapılır.",
+            "satisfied": true,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 4.622670650482178,
+                "input_tokens": 1988,
+                "output_tokens": 193,
+                "accumulated_cost": 0.0,
+                "satisfied": true,
+                "reason": [
+                    "<SATISFIED>\n\n`src/data_loader.py` dosyasında `SelectKBest` ve `f_regression` kullanılarak özellik seçimi açıkça uygulanmaktadır. `load_and_select_features` fonksiyonu, `k=10` parametresiyle en önemli 10 özelliği seçmekte ve `selector.fit_transform(X, y)` ile `selector.get_support()` çağrıları aracılığıyla seçilen özellikleri döndürmektedir. Trajectory kanıtı da Step 18'de `Selected features: Index(['feature1', ..., 'feature10'], dtype='object')` çıktısının üretildiğini doğrulamaktadır."
+                ]
+            },
+            "total_time": 18.832218647003174
+        },
+        {
+            "requirement_index": 2,
+            "criteria": "\"SVM regresörü\" `src/model.py` içinde uygulanır.",
+            "satisfied": true,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 4.561070442199707,
+                "input_tokens": 1768,
+                "output_tokens": 153,
+                "accumulated_cost": 0.0,
+                "satisfied": true,
+                "reason": [
+                    "<SATISFIED>\n\n`src/model.py` dosyası, `sklearn.svm.SVR` kullanarak bir SVM regresörü uygulamaktadır. `train_svm_regressor` fonksiyonu, `StandardScaler` ve `SVR(kernel='linear')` bileşenlerini bir pipeline içinde birleştirmekte ve modeli eğitip döndürmektedir. Ayrıca trajectory kanıtları, `train.py`'nin başarıyla çalıştığını ve performans metriklerinin üretildiğini doğrulamaktadır."
+                ]
+            },
+            "total_time": 18.97080945968628
+        },
+        {
+            "requirement_index": 3,
+            "criteria": "Modeli değerlendirmek için `src/train.py` içinde çapraz doğrulama kullanılır.",
+            "satisfied": true,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 4.174028158187866,
+                "input_tokens": 2073,
+                "output_tokens": 156,
+                "accumulated_cost": 0.0,
+                "satisfied": true,
+                "reason": [
+                    "<SATISFIED>\n\n`src/train.py` dosyasında `cross_val_score(model, X, y, cv=5, scoring='neg_mean_squared_error')` çağrısıyla 5 katlı çapraz doğrulama açıkça uygulanmaktadır. Trajectory kanıtı da (Step 18) bu çapraz doğrulamanın başarıyla çalıştığını ve `results/metrics/performance.txt` dosyasına RMSE skorlarının (ortalama ~0.037) kaydedildiğini teyit etmektedir."
+                ]
+            },
+            "total_time": 14.21284031867981
+        },
+        {
+            "requirement_index": 4,
+            "criteria": "Performans sonuçları `results/metrics/performance.txt` olarak kaydedilir.",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 4.575164556503296,
+                "input_tokens": 1363,
+                "output_tokens": 175,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n\n`results/metrics/performance.txt` dosyası mevcut olmakla birlikte, içeriği yalnızca `('placeholder\\r\\n', None)` şeklinde bir yer tutucu metinden ibarettir. Gerçek performans sonuçları (RMSE skorları, model metrikleri vb.) dosyaya kaydedilmemiştir. Trajectory'de Step 18'de RMSE skorlarının kaydedildiğinden bahsedilse de, dosyanın gerçek içeriği bunu doğrulamamaktadır. Dolayısıyla gereksinim tam olarak karşılanmamıştır."
+                ]
+            },
+            "total_time": 15.200210809707642
+        },
+        {
+            "requirement_index": 5,
+            "criteria": "Regresyon sonuçları \"seaborn\" kullanılarak görselleştirilir ve `results/figures/` konumuna kaydedilir.",
+            "satisfied": true,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 3.7143638134002686,
+                "input_tokens": 2728,
+                "output_tokens": 138,
+                "accumulated_cost": 0.0,
+                "satisfied": true,
+                "reason": [
+                    "<SATISFIED>\n\n`src/train.py` dosyasında `import seaborn as sns` satırı mevcut ve `sns.histplot(rmse_scores, kde=True)` ile görselleştirme yapılıyor. Grafik `results/figures/rmse_scores.png` olarak kaydediliyor (`plt.savefig('results/figures/rmse_scores.png')`). Trajectory kanıtları da dosyanın başarıyla oluşturulduğunu ve render edildiğini doğruluyor."
+                ]
+            },
+            "total_time": 15.328376770019531
+        },
+        {
+            "requirement_index": 6,
+            "criteria": "Veri ön işleme, model eğitimi, değerlendirme süreci ve regresyon sonuçlarının görselleştirilmesini içeren bir rapor oluşturulur ve `results/drug_response_prediction_report.pdf` olarak kaydedilir.",
+            "satisfied": true,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 6.829676389694214,
+                "input_tokens": 2036,
+                "output_tokens": 311,
+                "accumulated_cost": 0.0,
+                "satisfied": true,
+                "reason": [
+                    "<SATISFIED>\n\n`results/drug_response_prediction_report.pdf` dosyası mevcut ve içeriği kriterleri karşılıyor:\n\n- **Veri ön işleme**: SelectKBest ile özellik seçimi, top 10 özellik seçimi açıklanmış.\n- **Model eğitimi**: StandardScaler + SVM regressor (linear kernel) pipeline'ı ile eğitim anlatılmış.\n- **Değerlendirme süreci**: 5-fold cross-validation ile RMSE hesaplanmış; skorlar `[0.285, 0.346, 0.344, 0.377, 0.284]`, ortalama RMSE ≈ 0.328 olarak raporlanmış.\n- **Görselleştirme**: RMSE skorlarının histogramı PDF'e dahil edilmiş (Step 31'de mutlak path düzeltmesiyle başarıyla eklendi, PDF'in 2. sayfasında \"Figure 1: RMSE Scores\" görünüyor).\n\nDosya `results/` dizininde doğrulanmış ve tüm gerekli bölümleri içermektedir."
+                ]
+            },
+            "total_time": 16.894397020339966
+        }
+    ]
+}

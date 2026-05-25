@@ -1,0 +1,216 @@
+{
+    "name": "27_Image_Generation_DCGAN_MNIST_DL",
+    "query": "我需要使用DCGAN模型和MNIST数据集创建一个图像生成系统。在`src/data_loader.py`中加载MNIST数据集，并在`src/model.py`中实现DCGAN模型。系统应确保使用正确的DCGAN架构，将生成的图像保存到`results/figures/`，通过记录训练损失在`results/metrics/`和生成的图像在`results/figures/`下监控模型训练，并在`src/train.py`中对生成参数如噪声向量维度和学习率进行超参数搜索以提高性能。此外，创建并保存生成图像的GIF动画到`results/figures/generated_images.gif`，在结构良好的Jupyter Notebook中展示训练过程和结果，并将Notebook转换为精美的PDF报告，保存为`results/training_report.pdf`。DCGAN模型架构应在Notebook中清晰记录，以避免与其他GAN变体混淆。",
+    "tags": [
+        "Computer Vision",
+        "Generative Models"
+    ],
+    "requirements": [
+        {
+            "requirement_id": 0,
+            "prerequisites": [],
+            "criteria": "在`src/data_loader.py`中加载\"MNIST\"数据集。",
+            "category": "Dataset or Environment",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 1,
+            "prerequisites": [],
+            "criteria": "在`src/model.py`中实现\"DCGAN\"模型，而不是标准GAN。",
+            "category": "Machine Learning Method",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 2,
+            "prerequisites": [
+                0,
+                1
+            ],
+            "criteria": "生成的图像保存到指定文件夹`results/figures/`。",
+            "category": "Save Trained Model",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 3,
+            "prerequisites": [
+                0,
+                1
+            ],
+            "criteria": "通过记录训练损失在`results/metrics/`下监控模型训练。",
+            "category": "Performance Metrics",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 4,
+            "prerequisites": [
+                0,
+                1
+            ],
+            "criteria": "在`src/train.py`中实现超参数搜索方法，以搜索如噪声向量维度和学习率等参数，以提高模型性能。",
+            "category": "Machine Learning Method",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 5,
+            "prerequisites": [
+                1,
+                2,
+                3,
+                4
+            ],
+            "criteria": "创建生成图像的GIF动画并保存为`results/figures/generated_images.gif`。",
+            "category": "Visualization",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 6,
+            "prerequisites": [
+                1,
+                2,
+                3,
+                4
+            ],
+            "criteria": "在Jupyter Notebook中展示训练过程和结果，并转换为PDF报告，保存为`results/training_report.pdf`。",
+            "category": "Visualization",
+            "satisfied": null
+        }
+    ],
+    "preferences": [
+        {
+            "preference_id": 0,
+            "criteria": "DCGAN模型架构应在Notebook中清晰记录，以避免与其他GAN变体混淆。",
+            "satisfied": null
+        },
+        {
+            "preference_id": 1,
+            "criteria": "PDF报告应结构良好，包含模型架构、训练过程、结果和未来改进的清晰章节。",
+            "satisfied": null
+        }
+    ],
+    "is_kaggle_api_needed": false,
+    "is_training_needed": true,
+    "is_web_navigation_needed": false,
+    "hint": "Saving figures is mentioned twice, i.e., once in requirement 2 and once in requirement 3.",
+    "language": "Chinese",
+    "judge_stats": [
+        {
+            "requirement_index": 0,
+            "criteria": "在`src/data_loader.py`中加载\"MNIST\"数据集。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 24.211518049240112,
+                "input_tokens": 787,
+                "output_tokens": 1393,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n依据：`src/data_loader.py` 中的 `load_dataset` 函数仅返回字典 `{\"dataset\": \"loaded\", ...}`，且注释明确标注为“占位符”（placeholder）。代码中未包含实际加载 MNIST 数据集的逻辑（如使用 `torchvision.datasets.MNIST` 或 `torch.utils.data`），因此未满足实际加载数据集的要求。"
+                ]
+            },
+            "total_time": 80.0768780708313
+        },
+        {
+            "requirement_index": 1,
+            "criteria": "在`src/model.py`中实现\"DCGAN\"模型，而不是标准GAN。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 26.069053888320923,
+                "input_tokens": 789,
+                "output_tokens": 1222,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n依据：`src/model.py` 的实际内容仅包含元数据变量（如 `REQUIREMENT_CRITERIA`）和返回占位符字符串的函数（`build_model` 返回 `\"model placeholder\"`），并未包含 DCGAN 模型的具体实现代码（如生成器/判别器网络结构、卷积层、损失函数等）。"
+                ]
+            },
+            "total_time": 64.33891034126282
+        },
+        {
+            "requirement_index": 2,
+            "criteria": "生成的图像保存到指定文件夹`results/figures/`。",
+            "satisfied": true,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 25.598360776901245,
+                "input_tokens": 1525,
+                "output_tokens": 1284,
+                "accumulated_cost": 0.0,
+                "satisfied": true,
+                "reason": [
+                    "<SATISFIED>\n依据 `src/train.py` 中的 `save_expected_artifacts` 函数，代码明确指定保存路径为 `root / Path(\"results/figures/generated_images.gif\")`，并执行了目录创建和文件写入操作。同时，项目结构树显示 `results/figures/generated_images.gif` 文件已存在，符合指定文件夹要求。"
+                ]
+            },
+            "total_time": 111.63859105110168
+        },
+        {
+            "requirement_index": 3,
+            "criteria": "通过记录训练损失在`results/metrics/`下监控模型训练。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 32.09757661819458,
+                "input_tokens": 1529,
+                "output_tokens": 1195,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n依据：代码 `src/train.py` 中的 `save_expected_artifacts` 函数仅生成了 `results/figures/generated_images.gif` 和 `results/training_report.pdf`，未向 `results/metrics/` 目录写入任何文件。此外，`train` 函数内部仅模拟了 `score` 累加，没有计算或记录训练损失（loss）的逻辑。虽然项目结构中存在 `results/metrics/` 目录，但未被代码实际使用。"
+                ]
+            },
+            "total_time": 84.25698852539062
+        },
+        {
+            "requirement_index": 4,
+            "criteria": "在`src/train.py`中实现超参数搜索方法，以搜索如噪声向量维度和学习率等参数，以提高模型性能。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 28.899601697921753,
+                "input_tokens": 969,
+                "output_tokens": 1186,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n依据：代码 `src/train.py` 中的 `train` 函数仅包含一个空循环（`score += step`），没有任何实际的模型训练逻辑或超参数搜索实现。代码中未定义噪声向量维度或学习率等超参数，也未包含搜索这些参数的算法（如网格搜索、随机搜索等）。文件内容明确标注为\"Minimal semantic implementation\"，仅为占位符。"
+                ]
+            },
+            "total_time": 98.24255919456482
+        },
+        {
+            "requirement_index": 5,
+            "criteria": "创建生成图像的GIF动画并保存为`results/figures/generated_images.gif`。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 12.892557382583618,
+                "input_tokens": 823,
+                "output_tokens": 1128,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n依据文件内容证据，`results/figures/generated_images.gif` 并非有效的 GIF 动画文件。其内容包含错误日志：`litellm.BadRequestError: ... \"One of the image(s) is 1 by 1 pixel in size, not supported\"`，表明图像生成过程失败，未成功创建符合要求的动画。"
+                ]
+            },
+            "total_time": 98.67389273643494
+        },
+        {
+            "requirement_index": 6,
+            "criteria": "在Jupyter Notebook中展示训练过程和结果，并转换为PDF报告，保存为`results/training_report.pdf`。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 19.68326425552368,
+                "input_tokens": 632,
+                "output_tokens": 2048,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    ""
+                ]
+            },
+            "total_time": 78.00797581672668
+        }
+    ]
+}

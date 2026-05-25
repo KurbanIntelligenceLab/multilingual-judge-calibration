@@ -1,0 +1,429 @@
+{
+    "name": "55_SQLite_Database_Viewer_and_Analyzer_App",
+    "query": "Nataka kuunda programu inayowezesha watumiaji kutazama na kuchambua data ya maendeleo ya AI iliyohifadhiwa katika hifadhidata ya SQLite. Kwenye sehemu ya mbele (iliyotekelezwa katika `src/frontend.py`), mtumiaji anapaswa ama kupakia hifadhidata mpya ya SQLite, ikijumuisha kumbukumbu za mafunzo ya modeli za AI au data ya majibu ya maelekezo, kwa kuchagua faili kutoka kwa kifaa chao au kuchagua hifadhidata iliyopakiwa awali iliyohifadhiwa katika `src/cache.py`. Kwa njia hii, mtumiaji hatalazimika kupakia hifadhidata kila wakati wanapotaka kuichambua. Ikiwa hifadhidata mpya imepakiwa, wanaweza kuipa jina, na faili itatumwa kwa sehemu ya nyuma (`src/backend.py`) na kuhifadhiwa kwa matumizi ya baadaye. Mara hifadhidata inapopakiwa, watumiaji wanaweza kuingiliana nayo. Mtumiaji anapaswa kuona orodha ya modeli za AI au programu kutoka kwenye jedwali la `app`. Wanapaswa kuwa na uwezo wa kuchagua programu moja, na kutazama kazi zake za maendeleo kutoka kwenye jedwali la `development_planning`. Baada ya kuchagua kazi, wanaweza kuona hatua zote za maendeleo zinazohusiana nayo. Hatimaye, kuchagua hatua kutawasilisha data ya kina kama vile `prompt_path`, `messages`, `llm_response`, na `prompt_data`, na taarifa sahihi itaonyeshwa kwenye sehemu ya mbele (katika `src/frontend_render.py`).\nHifadhidata ya SQLite itafuata muundo huu kila wakati: jedwali la `app` lina programu zote zilizohifadhiwa kwenye hifadhidata. Kila programu ina kazi nyingi za maendeleo zilizohifadhiwa kama safu katika jedwali la `development_planning` chini ya ufunguo `development_plan`. Kila kipengee cha safu ni kitu cha JSON chenye jozi tatu za ufunguo-thamani: `description`, `user_review_goal`, na `programming_goal`. Kila kazi ya maendeleo ina hatua nyingi za maendeleo, ambazo zimehifadhiwa katika jedwali la `development_steps` na kuunganishwa na jedwali la `app` kwa kutumia uwanja wa `app_id`.\nChangamoto ni kwamba hakuna uhusiano wa moja kwa moja kati ya kazi ya maendeleo na hatua ya maendeleo. Kwa hiyo, katika `src/backend_logic.py`, hatua zote za maendeleo zinahitaji kupatikana na kisha kugawanywa kwa uwanja wa `prompt_path`. Kila kazi ya maendeleo huanza na thamani ya `prompt_path` `development/task/breakdown.prompt`, hivyo hatua za maendeleo zinaweza kuunganishwa kwa kugawanya orodha ya hatua katika orodha ndogo, ambapo kila moja huanza na hatua yenye `prompt_path` sawa na `development/task/breakdown.prompt`. Hii itatoa seti sahihi ya hatua za maendeleo kwa kila kazi.\nKila hatua ya maendeleo ina maadili yafuatayo, ambayo yanahitaji kuonyeshwa kwenye sehemu ya mbele (`src/frontend_render.py`):\n- `prompt_path`: kamba.\n- `messages`: safu ya vitu vya JSON.\n- `llm_response`: kitu cha JSON.\n- `prompt_data`: kitu cha JSON.\nSafu ya `messages` itakuwa na vitu vya JSON kila wakati na funguo `content` na `role`. Sehemu ya mbele inapaswa kuonyesha `content` katika uwanja mkubwa wa maandishi, na `role` kuonyeshwa kama lebo. Kitu cha `llm_response` kitakuwa na ufunguo wa `text` kila wakati, ambao unapaswa kuonyeshwa kama eneo la maandishi kuonyesha mistari inayoweza kuwa ndefu. Kitu cha `prompt_data` kinaweza kuwa na jozi mbalimbali za ufunguo-thamani, na kila moja inapaswa kuonyeshwa kwa mtumiaji kwa muundo unaofaa.",
+    "tags": [
+        "Other"
+    ],
+    "requirements": [
+        {
+            "requirement_id": 0,
+            "prerequisites": [],
+            "criteria": "Sehemu ya mbele imetekelezwa katika `src/frontend.py` na inaruhusu watumiaji kupakia hifadhidata mpya ya SQLite au kuchagua moja iliyohifadhiwa awali kutoka `src/cache.py`. Faili iliyochaguliwa inapaswa kuhifadhiwa na kupatikana kwa matumizi ya baadaye.",
+            "category": "Human Computer Interaction",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 1,
+            "prerequisites": [
+                0
+            ],
+            "criteria": "Wakati hifadhidata mpya inapopakiwa, watumiaji wanaweza kuipa jina, na faili inatumwa kwa sehemu ya nyuma (`src/backend.py`) na kuhifadhiwa kwa matumizi ya baadaye.",
+            "category": "Other",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 2,
+            "prerequisites": [
+                0,
+                1
+            ],
+            "criteria": "Hifadhidata zilizopakiwa awali zimehifadhiwa katika `src/cache.py` na zinaweza kuchaguliwa bila kupakiwa tena.",
+            "category": "Dataset or Environment",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 3,
+            "prerequisites": [
+                0,
+                1,
+                2
+            ],
+            "criteria": "Mara hifadhidata inapopakiwa au kuchaguliwa, mtumiaji anaweza kuona orodha ya modeli za AI au programu kutoka kwenye jedwali la `app` ndani ya hifadhidata.",
+            "category": "Other",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 4,
+            "prerequisites": [
+                0,
+                1,
+                2,
+                3
+            ],
+            "criteria": "Watumiaji wanaweza kuchagua programu na kuona kazi zake za maendeleo kutoka kwenye jedwali la `development_planning`.",
+            "category": "Other",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 5,
+            "prerequisites": [
+                0,
+                1,
+                2,
+                3,
+                4
+            ],
+            "criteria": "Baada ya kuchagua kazi, watumiaji wanaweza kuona hatua zote za maendeleo zinazohusiana, ambazo zinaonyeshwa kwenye sehemu ya mbele iliyotekelezwa katika `src/frontend_render.py`.",
+            "category": "Human Computer Interaction",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 6,
+            "prerequisites": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5
+            ],
+            "criteria": "Kuchagua hatua ya maendeleo kunaonyesha data ya kina ikijumuisha `prompt_path`, `messages`, `llm_response`, na `prompt_data`, iliyotolewa ipasavyo kwenye sehemu ya mbele (`src/frontend_render.py`).",
+            "category": "Human Computer Interaction",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 7,
+            "prerequisites": [],
+            "criteria": "Katika `src/backend_logic.py`, pata hatua zote za maendeleo kutoka kwenye jedwali la `development_steps` na uzigawanye kwa kazi ya maendeleo kwa kutumia uwanja wa `prompt_path` unaoanza na `development/task/breakdown.prompt`.",
+            "category": "Other",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 8,
+            "prerequisites": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6
+            ],
+            "criteria": "Safu ya `messages` inaonyeshwa kwenye sehemu ya mbele (`src/frontend_render.py`), ikionyesha `content` katika uwanja mkubwa wa maandishi na `role` kama lebo kwa kila ujumbe.",
+            "category": "Human Computer Interaction",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 9,
+            "prerequisites": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6
+            ],
+            "criteria": "Kitu cha `llm_response` chenye ufunguo wa `text` kinaonyeshwa katika eneo la maandishi ili kukidhi mistari inayoweza kuwa ndefu kwenye sehemu ya mbele (`src/frontend_render.py`).",
+            "category": "Human Computer Interaction",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 10,
+            "prerequisites": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6
+            ],
+            "criteria": "Kitu cha `prompt_data` kinaonyeshwa na jozi zake za ufunguo-thamani zikiwa zimewasilishwa kwa muundo unaofaa kwenye sehemu ya mbele (`src/frontend_render.py`).",
+            "category": "Human Computer Interaction",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 11,
+            "prerequisites": [],
+            "criteria": "Hifadhidata ya SQLite inafuata muundo uliowekwa na `app`, `development_planning`, na `development_steps` meza, kama ilivyoelezwa katika swali la mradi.",
+            "category": "Dataset or Environment",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 12,
+            "prerequisites": [
+                11
+            ],
+            "criteria": "Kila programu katika jedwali la `app` ina kazi nyingi za maendeleo zilizohifadhiwa kama safu chini ya ufunguo `development_plan` katika jedwali la `development_planning`.",
+            "category": "Dataset or Environment",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 13,
+            "prerequisites": [
+                11
+            ],
+            "criteria": "Kila kazi ya maendeleo ina hatua nyingi za maendeleo zilizohifadhiwa katika jedwali la `development_steps` na kuunganishwa na jedwali la `app` kwa kutumia uwanja wa `app_id`.",
+            "category": "Dataset or Environment",
+            "satisfied": null
+        }
+    ],
+    "preferences": [
+        {
+            "preference_id": 0,
+            "criteria": "Kiolesura cha sehemu ya mbele kinapaswa kuruhusu mwingiliano rahisi na hifadhidata, kuhakikisha watumiaji wanaweza kuvinjari kwa urahisi kati ya programu, kazi, na hatua.",
+            "satisfied": null
+        },
+        {
+            "preference_id": 1,
+            "criteria": "Mfumo unapaswa kushughulikia kwa ufanisi hifadhidata kubwa za SQLite, kuhakikisha kwamba utendaji unadumishwa na seti kubwa za data.",
+            "satisfied": null
+        },
+        {
+            "preference_id": 2,
+            "criteria": "Taarifa zinapaswa kuonyeshwa kwenye sehemu ya mbele kwa njia ya angavu na rafiki kwa mtumiaji, kuhakikisha urahisi wa mwingiliano.",
+            "satisfied": null
+        },
+        {
+            "preference_id": 3,
+            "criteria": "Kugawanya hatua za maendeleo kunapaswa kuakisi kwa usahihi seti sahihi ya hatua kwa kila kazi, kulingana na mantiki iliyotekelezwa katika `src/backend_logic.py`.",
+            "satisfied": null
+        }
+    ],
+    "is_kaggle_api_needed": false,
+    "is_training_needed": false,
+    "is_web_navigation_needed": false,
+    "resource": "https://github.com/Pythagora-io/gpt-pilot/wiki/How-to-write-a-good-initial-project-description",
+    "language": "Swahili",
+    "judge_stats": [
+        {
+            "requirement_index": 0,
+            "criteria": "Sehemu ya mbele imetekelezwa katika `src/frontend.py` na inaruhusu watumiaji kupakia hifadhidata mpya ya SQLite au kuchagua moja iliyohifadhiwa awali kutoka `src/cache.py`. Faili iliyochaguliwa inapaswa kuhifadhiwa na kupatikana kwa matumizi ya baadaye.",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 26.60069990158081,
+                "input_tokens": 1656,
+                "output_tokens": 2048,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    ""
+                ]
+            },
+            "total_time": 74.4879162311554
+        },
+        {
+            "requirement_index": 1,
+            "criteria": "Wakati hifadhidata mpya inapopakiwa, watumiaji wanaweza kuipa jina, na faili inatumwa kwa sehemu ya nyuma (`src/backend.py`) na kuhifadhiwa kwa matumizi ya baadaye.",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 8.767881393432617,
+                "input_tokens": 1302,
+                "output_tokens": 1445,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\nThe `src/backend.py` file only defines the requirement criteria in `REQUIREMENT_CRITERIA` and returns a static status dictionary. It lacks the actual implementation logic for handling database uploads, assigning names, and storing files as specified in the requirement \"file is sent to the backend... and stored for future use.\""
+                ]
+            },
+            "total_time": 40.34357309341431
+        },
+        {
+            "requirement_index": 2,
+            "criteria": "Hifadhidata zilizopakiwa awali zimehifadhiwa katika `src/cache.py` na zinaweza kuchaguliwa bila kupakiwa tena.",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 26.95527744293213,
+                "input_tokens": 1315,
+                "output_tokens": 2048,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    ""
+                ]
+            },
+            "total_time": 52.418126583099365
+        },
+        {
+            "requirement_index": 3,
+            "criteria": "Mara hifadhidata inapopakiwa au kuchaguliwa, mtumiaji anaweza kuona orodha ya modeli za AI au programu kutoka kwenye jedwali la `app` ndani ya hifadhidata.",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 23.636581420898438,
+                "input_tokens": 1012,
+                "output_tokens": 2048,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    ""
+                ]
+            },
+            "total_time": 67.67024827003479
+        },
+        {
+            "requirement_index": 4,
+            "criteria": "Watumiaji wanaweza kuchagua programu na kuona kazi zake za maendeleo kutoka kwenye jedwali la `development_planning`.",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 11.744255781173706,
+                "input_tokens": 991,
+                "output_tokens": 1982,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\nThe requirement is not satisfied because the provided evidence only shows the project file structure. While the `development_planning` file exists, there is no code content in `frontend.py` or `backend.py` to implement the logic for selecting programs or querying the table. Additionally, the trajectory evidence is empty, providing no confirmation that the functionality works."
+                ]
+            },
+            "total_time": 55.969685554504395
+        },
+        {
+            "requirement_index": 5,
+            "criteria": "Baada ya kuchagua kazi, watumiaji wanaweza kuona hatua zote za maendeleo zinazohusiana, ambazo zinaonyeshwa kwenye sehemu ya mbele iliyotekelezwa katika `src/frontend_render.py`.",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 34.31969976425171,
+                "input_tokens": 1453,
+                "output_tokens": 2048,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    ""
+                ]
+            },
+            "total_time": 83.67679572105408
+        },
+        {
+            "requirement_index": 6,
+            "criteria": "Kuchagua hatua ya maendeleo kunaonyesha data ya kina ikijumuisha `prompt_path`, `messages`, `llm_response`, na `prompt_data`, iliyotolewa ipasavyo kwenye sehemu ya mbele (`src/frontend_render.py`).",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 13.016496419906616,
+                "input_tokens": 1454,
+                "output_tokens": 2048,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    ""
+                ]
+            },
+            "total_time": 61.66682171821594
+        },
+        {
+            "requirement_index": 7,
+            "criteria": "Katika `src/backend_logic.py`, pata hatua zote za maendeleo kutoka kwenye jedwali la `development_steps` na uzigawanye kwa kazi ya maendeleo kwa kutumia uwanja wa `prompt_path` unaoanza na `development/task/breakdown.prompt`.",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 27.87574529647827,
+                "input_tokens": 1472,
+                "output_tokens": 2048,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    ""
+                ]
+            },
+            "total_time": 77.04020667076111
+        },
+        {
+            "requirement_index": 8,
+            "criteria": "Safu ya `messages` inaonyeshwa kwenye sehemu ya mbele (`src/frontend_render.py`), ikionyesha `content` katika uwanja mkubwa wa maandishi na `role` kama lebo kwa kila ujumbe.",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 29.90516710281372,
+                "input_tokens": 1451,
+                "output_tokens": 1956,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\nThe `src/frontend_render.py` file provided only defines the requirement criteria within the `REQUIREMENT_CRITERIA` list and does not contain any actual implementation code to render the `messages` array, `content`, or `role`. There is no UI logic, HTML generation, or data binding present to fulfill the display requirement described."
+                ]
+            },
+            "total_time": 93.50540804862976
+        },
+        {
+            "requirement_index": 9,
+            "criteria": "Kitu cha `llm_response` chenye ufunguo wa `text` kinaonyeshwa katika eneo la maandishi ili kukidhi mistari inayoweza kuwa ndefu kwenye sehemu ya mbele (`src/frontend_render.py`).",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 26.02800488471985,
+                "input_tokens": 1450,
+                "output_tokens": 2048,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    ""
+                ]
+            },
+            "total_time": 77.24607467651367
+        },
+        {
+            "requirement_index": 10,
+            "criteria": "Kitu cha `prompt_data` kinaonyeshwa na jozi zake za ufunguo-thamani zikiwa zimewasilishwa kwa muundo unaofaa kwenye sehemu ya mbele (`src/frontend_render.py`).",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 14.483052968978882,
+                "input_tokens": 1443,
+                "output_tokens": 2048,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    ""
+                ]
+            },
+            "total_time": 41.30400514602661
+        },
+        {
+            "requirement_index": 11,
+            "criteria": "Hifadhidata ya SQLite inafuata muundo uliowekwa na `app`, `development_planning`, na `development_steps` meza, kama ilivyoelezwa katika swali la mradi.",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 12.289726495742798,
+                "input_tokens": 1006,
+                "output_tokens": 2048,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    ""
+                ]
+            },
+            "total_time": 64.20969367027283
+        },
+        {
+            "requirement_index": 12,
+            "criteria": "Kila programu katika jedwali la `app` ina kazi nyingi za maendeleo zilizohifadhiwa kama safu chini ya ufunguo `development_plan` katika jedwali la `development_planning`.",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 12.762823581695557,
+                "input_tokens": 1009,
+                "output_tokens": 2048,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    ""
+                ]
+            },
+            "total_time": 67.36313796043396
+        },
+        {
+            "requirement_index": 13,
+            "criteria": "Kila kazi ya maendeleo ina hatua nyingi za maendeleo zilizohifadhiwa katika jedwali la `development_steps` na kuunganishwa na jedwali la `app` kwa kutumia uwanja wa `app_id`.",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 14.78088092803955,
+                "input_tokens": 1016,
+                "output_tokens": 2048,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    ""
+                ]
+            },
+            "total_time": 73.77294731140137
+        }
+    ]
+}

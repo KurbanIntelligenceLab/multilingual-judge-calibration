@@ -1,0 +1,212 @@
+{
+    "name": "30_Image_Segmentation_UNet_PascalVOC_DL",
+    "query": "你能帮我使用 Pascal VOC 数据集和在 PyTorch 中实现的预训练 U-Net 模型设置一个图像分割项目吗？不需要额外的训练。应用数据增强（例如，翻转和旋转图像），使用 Dice 系数进行评估，将分割后的图像保存到 `results/figures/`，生成并保存一个显示分割前后图像的 GIF 动画到 `results/figures/segmentation_results.gif`，并创建一个包含模型架构、过程和分割结果的文档良好的 Jupyter Notebook，将其转换为 HTML 报告（保存为 `results/report.html`）。",
+    "tags": [
+        "Computer Vision"
+    ],
+    "requirements": [
+        {
+            "requirement_id": 0,
+            "prerequisites": [],
+            "criteria": "在 `src/data_loader.py` 中使用 \"Pascal VOC\" 数据集。",
+            "category": "Dataset or Environment",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 1,
+            "prerequisites": [
+                0
+            ],
+            "criteria": "在 `src/data_loader.py` 中执行数据增强，包括翻转和旋转图像。",
+            "category": "Data preprocessing and postprocessing",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 2,
+            "prerequisites": [],
+            "criteria": "使用来自 PyTorch 的预训练 \"U-Net\" 模型，无需额外训练，并保存在 `models/saved_models/`。",
+            "category": "Machine Learning Method",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 3,
+            "prerequisites": [
+                1,
+                2
+            ],
+            "criteria": "使用 \"Dice 系数\" 进行评估，并应保存在 `results/metrics/`。",
+            "category": "Performance Metrics",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 4,
+            "prerequisites": [
+                1,
+                2
+            ],
+            "criteria": "分割后的图像保存到指定文件夹 `results/figures/`。",
+            "category": "Data preprocessing and postprocessing",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 5,
+            "prerequisites": [
+                1,
+                2,
+                4
+            ],
+            "criteria": "生成分割前后图像的 GIF 动画，并保存为 `results/figures/segmentation_results.gif`。",
+            "category": "Visualization",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 6,
+            "prerequisites": [
+                1,
+                2,
+                3,
+                4
+            ],
+            "criteria": "创建一个 Jupyter Notebook，包含模型架构、应用预训练模型的过程和分割结果。将其转换为 HTML 报告并保存为 `results/report.html`。",
+            "category": "Visualization",
+            "satisfied": null
+        }
+    ],
+    "preferences": [
+        {
+            "preference_id": 0,
+            "criteria": "Jupyter Notebook 应包含文档良好的代码片段，解释过程的每一步。",
+            "satisfied": null
+        },
+        {
+            "preference_id": 1,
+            "criteria": "GIF 动画应清晰显示数据集中不同图像分割前后的变化。",
+            "satisfied": null
+        }
+    ],
+    "is_kaggle_api_needed": false,
+    "is_training_needed": false,
+    "is_web_navigation_needed": false,
+    "language": "Chinese",
+    "judge_stats": [
+        {
+            "requirement_index": 0,
+            "criteria": "在 `src/data_loader.py` 中使用 \"Pascal VOC\" 数据集。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.1603946685791016,
+                "input_tokens": 1010,
+                "output_tokens": 97,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>：`src/data_loader.py` 中仅在字符串常量里出现了 `\"Pascal VOC\"`（如 `REQUIREMENT_CRITERIA`、`KEYWORDS`），没有任何实际的数据集导入、实例化或加载逻辑。`load_dataset()` 只是返回 `{\"dataset\": \"loaded\", \"notes\": ...}` 的占位实现，不能证明实际使用了 Pascal VOC 数据集。"
+                ]
+            },
+            "total_time": 8.487990379333496
+        },
+        {
+            "requirement_index": 1,
+            "criteria": "在 `src/data_loader.py` 中执行数据增强，包括翻转和旋转图像。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.0176308155059814,
+                "input_tokens": 923,
+                "output_tokens": 82,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>：`src/data_loader.py` 中没有实现“翻转”增强。`build_transforms()` 仅返回 `[\"rotation\", \"scaling\", \"normalization\"]`，虽包含 `rotation`，但缺少 flipping；且整体只是占位实现（`\"Data augmentation placeholder\"`），未见实际增强流水线代码。"
+                ]
+            },
+            "total_time": 4.8145246505737305
+        },
+        {
+            "requirement_index": 2,
+            "criteria": "使用来自 PyTorch 的预训练 \"U-Net\" 模型，无需额外训练，并保存在 `models/saved_models/`。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 3.7490921020507812,
+                "input_tokens": 1048,
+                "output_tokens": 133,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>：现有证据中仅看到 `src/data_loader.py`，其内容只涉及占位式数据加载与增强说明，没有任何关于“PyTorch 预训练 U-Net 模型”的加载、免训练使用或保存逻辑。虽然目录中存在 `models/saved_models/`，但未提供其中有已保存模型文件的证据；轨迹也明确说明“无法确认是否实际加载了 PyTorch 预训练 U-Net、是否无需训练、是否执行了保存到 `models/saved_models/`”。因此该标准未被证实满足。"
+                ]
+            },
+            "total_time": 7.886242628097534
+        },
+        {
+            "requirement_index": 3,
+            "criteria": "使用 \"Dice 系数\" 进行评估，并应保存在 `results/metrics/`。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.635685682296753,
+                "input_tokens": 928,
+                "output_tokens": 113,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>：现有证据中没有任何关于使用“Dice 系数”进行评估的实现或结果。项目树虽包含 `results/metrics/` 目录，但未提供其中存在 Dice 相关指标文件；唯一源码 `src/data_loader.py` 仅涉及数据加载占位与变换占位（如 `return [\"rotation\", \"scaling\", \"normalization\"]`），不包含评估逻辑或保存指标到 `results/metrics/` 的代码。"
+                ]
+            },
+            "total_time": 6.061572074890137
+        },
+        {
+            "requirement_index": 4,
+            "criteria": "分割后的图像保存到指定文件夹 `results/figures/`。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.3160722255706787,
+                "input_tokens": 1045,
+                "output_tokens": 112,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>：现有证据仅显示 `results/figures/segmentation_results.gif` 文件存在于工作区结构中，但未提供任何代码、函数调用或执行日志证明“分割后的图像”是由项目流程保存到 `results/figures/` 的。`src/data_loader.py` 仅包含数据加载占位实现，与图像保存无关；轨迹证据也明确说明“证据不足，无法判断该保存流程是否正常执行”。"
+                ]
+            },
+            "total_time": 7.692519664764404
+        },
+        {
+            "requirement_index": 5,
+            "criteria": "生成分割前后图像的 GIF 动画，并保存为 `results/figures/segmentation_results.gif`。",
+            "satisfied": true,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.4783706665039062,
+                "input_tokens": 1137,
+                "output_tokens": 99,
+                "accumulated_cost": 0.0,
+                "satisfied": true,
+                "reason": [
+                    "<SATISFIED>  \n依据：目标文件 `results/figures/segmentation_results.gif` 已存在于工作区结构中；给定证据明确列出了该路径下的文件。虽然未提供生成过程日志，且文件内容解析不像典型 GIF 帧信息，但就要求“生成…并保存为 `results/figures/segmentation_results.gif`”而言，保存结果文件这一点已有直接证据支持。"
+                ]
+            },
+            "total_time": 12.396152973175049
+        },
+        {
+            "requirement_index": 6,
+            "criteria": "创建一个 Jupyter Notebook，包含模型架构、应用预训练模型的过程和分割结果。将其转换为 HTML 报告并保存为 `results/report.html`。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 1.6179168224334717,
+                "input_tokens": 875,
+                "output_tokens": 85,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>：`results/report.html` 存在，但其内容仅为 `('', None)`，不是由 Jupyter Notebook 转换得到的有效 HTML 报告；同时工作区中也未见 Notebook 文件，且无证据表明其中包含“模型架构、预训练模型应用过程和分割结果”。因此该要求未被满足。"
+                ]
+            },
+            "total_time": 6.241048097610474
+        }
+    ]
+}

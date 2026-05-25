@@ -1,0 +1,212 @@
+{
+    "name": "30_Image_Segmentation_UNet_PascalVOC_DL",
+    "query": "هل يمكنك مساعدتي في إعداد مشروع لتجزئة الصور باستخدام مجموعة بيانات Pascal VOC ونموذج U-Net مدرب مسبقًا ومطبق في PyTorch؟ لا حاجة لتدريب إضافي. قم بتطبيق تعزيز البيانات (مثل قلب وتدوير الصور)، استخدم معامل Dice للتقييم، احفظ الصور المجزأة في `results/figures/`، أنشئ واحفظ صورة GIF متحركة تعرض الصور قبل وبعد التجزئة في `results/figures/segmentation_results.gif`، وأنشئ دفتر Jupyter موثق جيدًا مع بنية النموذج والعملية ونتائج التجزئة، وقم بتحويله إلى تقرير HTML (احفظه كـ `results/report.html`).",
+    "tags": [
+        "Computer Vision"
+    ],
+    "requirements": [
+        {
+            "requirement_id": 0,
+            "prerequisites": [],
+            "criteria": "يتم استخدام مجموعة البيانات \"Pascal VOC\" في `src/data_loader.py`.",
+            "category": "Dataset or Environment",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 1,
+            "prerequisites": [
+                0
+            ],
+            "criteria": "يتم تنفيذ تعزيز البيانات، بما في ذلك قلب وتدوير الصور، في `src/data_loader.py`.",
+            "category": "Data preprocessing and postprocessing",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 2,
+            "prerequisites": [],
+            "criteria": "يتم استخدام نموذج \"U-Net\" المدرب مسبقًا من PyTorch بدون تدريب إضافي ويتم حفظه في `models/saved_models/`.",
+            "category": "Machine Learning Method",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 3,
+            "prerequisites": [
+                1,
+                2
+            ],
+            "criteria": "يتم استخدام \"معامل Dice\" للتقييم ويجب حفظه في `results/metrics/`.",
+            "category": "Performance Metrics",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 4,
+            "prerequisites": [
+                1,
+                2
+            ],
+            "criteria": "يتم حفظ الصور المجزأة في المجلد المحدد `results/figures/`.",
+            "category": "Data preprocessing and postprocessing",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 5,
+            "prerequisites": [
+                1,
+                2,
+                4
+            ],
+            "criteria": "يتم إنشاء وحفظ صورة متحركة بصيغة GIF للصور قبل وبعد التجزئة كـ `results/figures/segmentation_results.gif`.",
+            "category": "Visualization",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 6,
+            "prerequisites": [
+                1,
+                2,
+                3,
+                4
+            ],
+            "criteria": "يتم إنشاء دفتر Jupyter يحتوي على بنية النموذج، وعملية تطبيق النموذج المدرب مسبقًا، ونتائج التجزئة. يتم تحويله إلى تقرير HTML وحفظه كـ `results/report.html`.",
+            "category": "Visualization",
+            "satisfied": null
+        }
+    ],
+    "preferences": [
+        {
+            "preference_id": 0,
+            "criteria": "يجب أن يتضمن دفتر Jupyter مقتطفات كود موثقة جيدًا تشرح كل خطوة من العملية.",
+            "satisfied": null
+        },
+        {
+            "preference_id": 1,
+            "criteria": "يجب أن تعرض صورة GIF المتحركة بوضوح التغييرات قبل وبعد التجزئة على صور مختلفة من مجموعة البيانات.",
+            "satisfied": null
+        }
+    ],
+    "is_kaggle_api_needed": false,
+    "is_training_needed": false,
+    "is_web_navigation_needed": false,
+    "language": "Arabic",
+    "judge_stats": [
+        {
+            "requirement_index": 0,
+            "criteria": "يتم استخدام مجموعة البيانات \"Pascal VOC\" في `src/data_loader.py`.",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.292544364929199,
+                "input_tokens": 1181,
+                "output_tokens": 114,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED> لا يوجد في `src/data_loader.py` أي تحميل فعلي أو استدعاء لمجموعة بيانات Pascal VOC؛ الملف يحتوي فقط على نصوص وصفية مثل `REQUIREMENT_CRITERIA = [\"The \\\"Pascal VOC\\\" dataset is used ...\"]` و`KEYWORDS = [\"Pascal VOC\"]`، بينما الدالة `load_dataset()` تُرجع قاموسًا شكليًا `{\"dataset\": \"loaded\", ...}` دون استخدام أي كود تحميل حقيقي لـ Pascal VOC."
+                ]
+            },
+            "total_time": 8.589554786682129
+        },
+        {
+            "requirement_index": 1,
+            "criteria": "يتم تنفيذ تعزيز البيانات، بما في ذلك قلب وتدوير الصور، في `src/data_loader.py`.",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.1401915550231934,
+                "input_tokens": 1231,
+                "output_tokens": 124,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED> في `src/data_loader.py` لا يوجد تنفيذ فعلي لتعزيز البيانات يتضمن **قلب الصور** و**تدويرها**. الدالة `build_transforms()` تعيد فقط قائمة نصية: `[\"rotation\", \"scaling\", \"normalization\"]`، وهذا يذكر التدوير فقط ككلمة وليس كتحويل منفذ، ولا يتضمن أي إشارة إلى **flipping**. كما أن الوصف نفسه يقول `Data augmentation placeholder`، ما يدل على أنه مجرد عنصر placeholder وليس تطبيقًا حقيقيًا."
+                ]
+            },
+            "total_time": 6.7474846839904785
+        },
+        {
+            "requirement_index": 2,
+            "criteria": "يتم استخدام نموذج \"U-Net\" المدرب مسبقًا من PyTorch بدون تدريب إضافي ويتم حفظه في `models/saved_models/`.",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.583789348602295,
+                "input_tokens": 1278,
+                "output_tokens": 134,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED> لا يوجد دليل في الملفات المتاحة على استخدام نموذج U-Net مدرب مسبقًا من PyTorch أو تحميله بدون تدريب إضافي. الملف الوحيد المعروض `src/data_loader.py` يقتصر على دوال تحميل بيانات وتحويلات وهمية ولا يحتوي أي كود للنموذج أو الاستدعاء من `torchvision`/`torch.nn` لنموذج U-Net. كما أن وجود المجلد `models/saved_models/` وحده لا يثبت حفظ نموذج فيه، والسجل المرجعي يذكر صراحةً عدم وجود خطوة تشغيل/تحميل/حفظ تؤكد ذلك."
+                ]
+            },
+            "total_time": 8.373087406158447
+        },
+        {
+            "requirement_index": 3,
+            "criteria": "يتم استخدام \"معامل Dice\" للتقييم ويجب حفظه في `results/metrics/`.",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.33536696434021,
+                "input_tokens": 1308,
+                "output_tokens": 115,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED> لا يوجد دليل متاح على استخدام معامل Dice للتقييم أو حفظه داخل `results/metrics/`. بنية المشروع تُظهر أن المجلد `results/metrics` موجود فقط دون أي ملفات ظاهرة بداخله، ومحتوى `src/data_loader.py` يقتصر على تحميل بيانات وتحويلات بسيطة ولا يتضمن أي حساب أو تسجيل لمؤشر Dice. كما تؤكد ملاحظات المسار المرجعي عدم وجود خطوات تنفيذ أو حفظ مرتبطة بـ Dice داخل `results/metrics/`."
+                ]
+            },
+            "total_time": 7.713117361068726
+        },
+        {
+            "requirement_index": 4,
+            "criteria": "يتم حفظ الصور المجزأة في المجلد المحدد `results/figures/`.",
+            "satisfied": true,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 1.890183448791504,
+                "input_tokens": 1368,
+                "output_tokens": 76,
+                "accumulated_cost": 0.0,
+                "satisfied": true,
+                "reason": [
+                    "<SATISFIED> يوجد ملف ناتج محفوظ داخل المسار المطلوب `results/figures/` وهو `segmentation_results.gif` وفق بنية المشروع المعروضة، كما تشير خطوات التتبع إلى تنفيذ الحفظ عبر `cv2.imwrite(...)` داخل `results/figures/` دون ظهور أخطاء في الكتابة."
+                ]
+            },
+            "total_time": 10.721734762191772
+        },
+        {
+            "requirement_index": 5,
+            "criteria": "يتم إنشاء وحفظ صورة متحركة بصيغة GIF للصور قبل وبعد التجزئة كـ `results/figures/segmentation_results.gif`.",
+            "satisfied": true,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.2121431827545166,
+                "input_tokens": 1611,
+                "output_tokens": 108,
+                "accumulated_cost": 0.0,
+                "satisfied": true,
+                "reason": [
+                    "<SATISFIED> يوجد الملف فعليًا في المسار `results/figures/segmentation_results.gif` ضمن بنية المشروع، كما تشير أدلة التنفيذ المرجعية إلى أن فحصه عبر `PIL.Image` نجح وأثبت أنه بصيغة **GIF** و`animated=True` مع `n_frames=2`، وهو ما يطابق إنشاء صورة متحركة تعرض حالتي **قبل** و**بعد** التجزئة وحفظها في المسار المطلوب."
+                ]
+            },
+            "total_time": 12.774916648864746
+        },
+        {
+            "requirement_index": 6,
+            "criteria": "يتم إنشاء دفتر Jupyter يحتوي على بنية النموذج، وعملية تطبيق النموذج المدرب مسبقًا، ونتائج التجزئة. يتم تحويله إلى تقرير HTML وحفظه كـ `results/report.html`.",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.3994932174682617,
+                "input_tokens": 1177,
+                "output_tokens": 103,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED> الملف المطلوب `results/report.html` موجود ظاهريًا، لكن محتواه المعروض هو فقط `('', None)`، ولا يقدّم أي دليل على أنه تقرير HTML ناتج من دفتر Jupyter أو أنه يحتوي على بنية النموذج، تطبيق النموذج المدرّب مسبقًا، ونتائج التجزئة. كما لا يوجد ضمن الأدلة المقدمة ملف دفتر Jupyter نفسه أو محتوى تقرير صالح يمكن التحقق منه."
+                ]
+            },
+            "total_time": 8.546386003494263
+        }
+    ]
+}

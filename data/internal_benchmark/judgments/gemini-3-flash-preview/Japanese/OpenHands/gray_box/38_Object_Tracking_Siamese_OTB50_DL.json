@@ -1,0 +1,241 @@
+{
+    "name": "38_Object_Tracking_Siamese_OTB50_DL",
+    "query": "SiameseネットワークとOTB50データセットを使用してオブジェクト追跡システムを作成する必要があります。OTB50データセットは`src/data_loader.py`で読み込む必要があります。システムには、回転やスケーリングなどのデータ拡張ステップを含め、`src/data_loader.py`で実行します。Siameseネットワークは`src/model.py`で実装します。学習率やバッチサイズなどのハイパーパラメータは`src/train.py`で調整します。追跡結果は`results/tracking_results.txt`として保存します。OpenCVを使用して追跡結果を可視化し、追跡ビデオを`results/videos/`に保存します。さらに、データ前処理、モデルのトレーニング、評価プロセスの詳細を含む包括的なMarkdownレポートを作成し、`results/object_tracking_report.md`として保存します。システムが新しいビデオシーケンスを最小限の調整で処理できるようにし、柔軟なアプリケーションを可能にします。Markdownレポートには、異なるハイパーパラメータが追跡性能に与える影響を分析するセクションを含める必要があります。",
+    "tags": [
+        "Computer Vision"
+    ],
+    "requirements": [
+        {
+            "requirement_id": 0,
+            "prerequisites": [],
+            "criteria": "\"OTB50\"データセットは`src/data_loader.py`で読み込まれます。",
+            "category": "Dataset or Environment",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 1,
+            "prerequisites": [
+                0
+            ],
+            "criteria": "回転やスケーリングなどのデータ拡張は`src/data_loader.py`で実行されます。",
+            "category": "Data preprocessing and postprocessing",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 2,
+            "prerequisites": [],
+            "criteria": "\"Siamese\"ネットワークは`src/model.py`で実装されます。",
+            "category": "Machine Learning Method",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 3,
+            "prerequisites": [
+                0,
+                1,
+                2
+            ],
+            "criteria": "学習率やバッチサイズなどのハイパーパラメータは`src/train.py`で調整されます。",
+            "category": "Machine Learning Method",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 4,
+            "prerequisites": [
+                0,
+                1,
+                2,
+                3
+            ],
+            "criteria": "追跡結果は`results/tracking_results.txt`として保存されます。",
+            "category": "Other",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 5,
+            "prerequisites": [
+                0,
+                1,
+                2,
+                3
+            ],
+            "criteria": "追跡結果はOpenCVで可視化され、`results/videos/`に保存されます。",
+            "category": "Visualization",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 6,
+            "prerequisites": [
+                0,
+                1,
+                2,
+                3
+            ],
+            "criteria": "データ前処理、モデルのトレーニング、評価プロセスを含む詳細なMarkdownドキュメントが作成され、`results/object_tracking_report.md`として保存されます。",
+            "category": "Other",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 7,
+            "prerequisites": [
+                6
+            ],
+            "criteria": "Markdownレポートには、異なるハイパーパラメータが追跡性能に与える影響を分析するセクションを含める必要があります。",
+            "satisfied": null
+        }
+    ],
+    "preferences": [
+        {
+            "preference_id": 0,
+            "criteria": "追跡ビデオは高解像度で保存され、追跡対象を強調する注釈を含むべきです。",
+            "satisfied": null
+        },
+        {
+            "preference_id": 1,
+            "criteria": "システムは新しいビデオシーケンスを最小限の変更で処理でき、柔軟な使用ケースを可能にする必要があります。",
+            "satisfied": null
+        }
+    ],
+    "is_kaggle_api_needed": false,
+    "is_training_needed": true,
+    "is_web_navigation_needed": false,
+    "language": "Japanese",
+    "judge_stats": [
+        {
+            "requirement_index": 0,
+            "criteria": "\"OTB50\"データセットは`src/data_loader.py`で読み込まれます。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.180224657058716,
+                "input_tokens": 1144,
+                "output_tokens": 100,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>: 提供された `src/data_loader.py` のコードは、\"OTB50\" データセットを実際に読み込むための具体的なロジック（パスの指定、ファイルのパース、データのメモリへの展開など）を含んでおらず、プレースホルダ関数 `load_dataset()` が定義されているのみです。また、実行ログ（Trajectory Evidence）においても、データセットのパス不整合により読み込みに失敗したことが示されています。"
+                ]
+            },
+            "total_time": 8.032609462738037
+        },
+        {
+            "requirement_index": 1,
+            "criteria": "回転やスケーリングなどのデータ拡張は`src/data_loader.py`で実行されます。",
+            "satisfied": true,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 1.8839077949523926,
+                "input_tokens": 1188,
+                "output_tokens": 96,
+                "accumulated_cost": 0.0,
+                "satisfied": true,
+                "reason": [
+                    "<SATISFIED>: `src/data_loader.py` 内の `build_transforms` 関数において、\"rotation\"（回転）および \"scaling\"（スケーリング）がデータ拡張の要素として定義されており、要件を満たしています。また、トラジェクトリのステップ12および15においても、`RandomRotation` や `RandomResizedCrop` を含むパイプラインが正常に初期化・適用されていることが確認されています。"
+                ]
+            },
+            "total_time": 5.861077785491943
+        },
+        {
+            "requirement_index": 2,
+            "criteria": "\"Siamese\"ネットワークは`src/model.py`で実装されます。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.058664560317993,
+                "input_tokens": 1082,
+                "output_tokens": 88,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>: 提供された `src/model.py` のファイル内容には、\"Siamese\" ネットワークの具体的なクラス定義や実装コードが含まれておらず、プレースホルダー関数 `build_model` が定義されているのみです。軌跡（Trajectory Evidence）には `SiameseNetwork` クラスのテストに成功したとの記述がありますが、提出されたソースコードの実体からはその実装を確認できません。"
+                ]
+            },
+            "total_time": 6.877079010009766
+        },
+        {
+            "requirement_index": 3,
+            "criteria": "学習率やバッチサイズなどのハイパーパラメータは`src/train.py`で調整されます。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.6718943119049072,
+                "input_tokens": 1284,
+                "output_tokens": 97,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED> 提供された `src/train.py` のコード内容を確認したところ、学習率（learning rate）やバッチサイズ（batch size）といったハイパーパラメータの定義や、それらを用いたトレーニングロジックが実装されていません。ファイル内には要件を示すコメント（REQUIREMENT_CRITERIA）が含まれているのみで、実際のプログラムコードとしてハイパーパラメータの調整機能が存在しないため、要件を満たしていません。"
+                ]
+            },
+            "total_time": 6.229136228561401
+        },
+        {
+            "requirement_index": 4,
+            "criteria": "追跡結果は`results/tracking_results.txt`として保存されます。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 1.9847071170806885,
+                "input_tokens": 878,
+                "output_tokens": 58,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>: 提供された `results/tracking_results.txt` の内容は `('placeholder\\r\\n', None)` となっており、実際の追跡結果データではなくプレースホルダが格納されているため、要件を満たしているとは言えません。"
+                ]
+            },
+            "total_time": 5.764184474945068
+        },
+        {
+            "requirement_index": 5,
+            "criteria": "追跡結果はOpenCVで可視化され、`results/videos/`に保存されます。",
+            "satisfied": true,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.427255868911743,
+                "input_tokens": 1932,
+                "output_tokens": 64,
+                "accumulated_cost": 0.0,
+                "satisfied": true,
+                "reason": [
+                    "<SATISFIED>: プロジェクト構造において `results/videos` ディレクトリが存在しており、Trajectory Evidence（ステップ12）により、OpenCVを使用した描画処理およびビデオエンコードが完了し、`results/videos/output.mp4` への保存が正常に終了したことが確認されています。"
+                ]
+            },
+            "total_time": 6.312136650085449
+        },
+        {
+            "requirement_index": 6,
+            "criteria": "データ前処理、モデルのトレーニング、評価プロセスを含む詳細なMarkdownドキュメントが作成され、`results/object_tracking_report.md`として保存されます。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 1.9934523105621338,
+                "input_tokens": 913,
+                "output_tokens": 65,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>: 提供された `results/object_tracking_report.md` の内容は `('placeholder', None)` となっており、データ前処理、モデルのトレーニング、評価プロセスに関する詳細な記述が含まれていません。要件を満たすドキュメントが作成・保存されていることが確認できません。"
+                ]
+            },
+            "total_time": 6.116690397262573
+        },
+        {
+            "requirement_index": 7,
+            "criteria": "Markdownレポートには、異なるハイパーパラメータが追跡性能に与える影響を分析するセクションを含める必要があります。",
+            "satisfied": true,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 3.0390801429748535,
+                "input_tokens": 1979,
+                "output_tokens": 71,
+                "accumulated_cost": 0.0,
+                "satisfied": true,
+                "reason": [
+                    "<SATISFIED>: `results/object_tracking_report.md` が生成されており、Trajectory Evidence（ステップ12および13）において、レポート内に「Impact of Hyperparameters on Tracking Performance」というセクションが存在し、学習率やバッチサイズが追跡精度に与える影響の分析が含まれていることが確認されました。"
+                ]
+            },
+            "total_time": 6.797599792480469
+        }
+    ]
+}

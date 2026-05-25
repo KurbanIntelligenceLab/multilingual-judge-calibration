@@ -1,0 +1,212 @@
+{
+    "name": "40_Text_Summarization_BART_CNNDailyMail_DL",
+    "query": "BART modeli ve CNN/Daily Mail veri kümesi kullanarak metin özetleme sistemi gerçekleştiren bir sistem geliştirin. `src/data_loader.py` içinde veri kümesini yükleyip hazırlayarak başlayın, ardından `src/data_loader.py` içinde HTML etiketlerini ve noktalama işaretlerini kaldırma gibi veri ön işleme işlemlerini gerçekleştirin. Metin özetleme için önceden eğitilmiş bir BART modelini `src/model.py` içinde içe aktararak özetler oluşturun. Oluşturulan özetleri `results/summaries.txt` dosyasına kaydedin. Bu özetlerin uzunluk dağılımını seaborn kullanarak görselleştirin ve görselleştirmeyi `results/figures/summary_length_distribution.png` dosyasına kaydedin. Ayrıca, kullanıcıların giriş metinlerini ve oluşturulan özetlerini görüntülemelerine olanak tanıyan `src/visualize.py` içinde etkileşimli bir Streamlit web sayfası uygulayın. Son olarak, veri ön işleme ve oluşturma sonuçlarını kapsayan bir rapor oluşturun ve `results/text_summarization_report.pdf` olarak kaydedin.",
+    "tags": [
+        "Generative Models",
+        "Natural Language Processing"
+    ],
+    "requirements": [
+        {
+            "requirement_id": 0,
+            "prerequisites": [],
+            "criteria": "\"CNN/Daily Mail\" haber veri kümesi kullanılır, `src/data_loader.py` içinde veri kümesinin yüklenmesi ve hazırlanması dahil.",
+            "category": "Dataset or Environment",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 1,
+            "prerequisites": [
+                0
+            ],
+            "criteria": "Veri ön işleme `src/data_loader.py` içinde gerçekleştirilir, HTML etiketlerinin ve noktalama işaretlerinin kaldırılması dahil.",
+            "category": "Data preprocessing and postprocessing",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 2,
+            "prerequisites": [],
+            "criteria": "Metin özetleme için önceden eğitilmiş \"BART\" modeli `src/model.py` içinde içe aktarılır.",
+            "category": "Machine Learning Method",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 3,
+            "prerequisites": [
+                1,
+                2
+            ],
+            "criteria": "Oluşturulan özet sonuçları `results/summary_results.txt` dosyasına kaydedilir.",
+            "category": "Other",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 4,
+            "prerequisites": [
+                3
+            ],
+            "criteria": "Oluşturulan özetlerin uzunluk dağılımı \"seaborn\" kullanılarak görselleştirilir ve grafik `results/figures/summary_length_distribution.png` olarak kaydedilir.",
+            "category": "Visualization",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 5,
+            "prerequisites": [
+                3
+            ],
+            "criteria": "Giriş metinlerini ve oluşturulan özetlerini görüntülemek için \"Streamlit\" kullanılarak etkileşimli bir web sayfası oluşturulur ve `src/visualize.py` içinde uygulanır.",
+            "category": "Human Computer Interaction",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 6,
+            "prerequisites": [
+                3
+            ],
+            "criteria": "Veri ön işleme, model eğitimi ve oluşturma sonuçlarını kapsayan bir rapor oluşturulur ve `results/text_summarization_report.pdf` olarak kaydedilir.",
+            "category": "Other",
+            "satisfied": null
+        }
+    ],
+    "preferences": [
+        {
+            "preference_id": 0,
+            "criteria": "Etkileşimli \"Streamlit\" web sayfası, kullanıcıların yeni metin girmesine ve gerçek zamanlı olarak özetler oluşturmasına olanak tanımalıdır.",
+            "satisfied": null
+        },
+        {
+            "preference_id": 1,
+            "criteria": "Rapor, farklı hiperparametre ayarlarının modelin performansını nasıl etkilediğine dair bir tartışma içermelidir.",
+            "satisfied": null
+        },
+        {
+            "preference_id": 2,
+            "criteria": "Geliştirme sırasında, \"Streamlit\" uygulaması gereksiz kaynak kullanımını önlemek için verimli bir şekilde yönetilmelidir.",
+            "satisfied": null
+        }
+    ],
+    "is_kaggle_api_needed": false,
+    "is_training_needed": false,
+    "is_web_navigation_needed": false,
+    "language": "Turkish",
+    "judge_stats": [
+        {
+            "requirement_index": 0,
+            "criteria": "\"CNN/Daily Mail\" haber veri kümesi kullanılır, `src/data_loader.py` içinde veri kümesinin yüklenmesi ve hazırlanması dahil.",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 61.03355121612549,
+                "input_tokens": 1372,
+                "output_tokens": 244,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n\nGerekçe: Verilen `src/data_loader.py` dosyasının içeriği, \"CNN/Daily Mail\" veri kümesini gerçekten yükleyen veya hazırlayan bir kod içermemektedir. Dosya yalnızca bir yer tutucu işlev (`load_dataset`) ve gereksinim açıklamaları içermektedir. İzlenim kanıtları, `cnn_dailymail` veri kümesinin `datasets` kütüphanesi kullanılarak başka bir yerde (muhtemelen `src/train.py` gibi bir dosyada) yüklendiğini gösterse de, ölçüt özellikle bu işlevselliğin `src/data_loader.py` dosyasında olmasını gerektirmektedir. Bu dosya, gereksinimi karşılayacak gerçek bir yükleme veya hazırlama mantığından yoksundur."
+                ]
+            },
+            "total_time": 81.24321413040161
+        },
+        {
+            "requirement_index": 1,
+            "criteria": "Veri ön işleme `src/data_loader.py` içinde gerçekleştirilir, HTML etiketlerinin ve noktalama işaretlerinin kaldırılması dahil.",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 20.312883138656616,
+                "input_tokens": 1413,
+                "output_tokens": 262,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n\nGerekçe: `src/data_loader.py` dosyasının içeriği incelendiğinde, dosyanın yalnızca bir \"minimal semantic implementation for benchmark judging\" (kıyaslama değerlendirmesi için minimal anlamsal uygulama) olduğu ve gerçek bir veri yükleme veya ön işleme mantığı içermediği görülmektedir. Dosya, `load_dataset` ve `build_transforms` adında iki basit yer tutucu (placeholder) fonksiyon tanımlamakta, ancak HTML etiketlerini veya noktalama işaretlerini kaldıran herhangi bir işlem (örneğin `clean_text` fonksiyonu) içermemektedir. Trajektory kanıtları, böyle bir fonksiyonun çalıştırıldığını belirtse de, mevcut dosya içeriği bu gereksinimi karşılayacak gerçek kodu barındırmamaktadır."
+                ]
+            },
+            "total_time": 33.36112952232361
+        },
+        {
+            "requirement_index": 2,
+            "criteria": "Metin özetleme için önceden eğitilmiş \"BART\" modeli `src/model.py` içinde içe aktarılır.",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 19.247465133666992,
+                "input_tokens": 1443,
+                "output_tokens": 138,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED> `src/model.py` dosyasının içeriği, BART modelini içe aktarmak için `transformers` kütüphanesini kullanan gerçek bir kod içermemektedir. Dosya, yalnızca yargılama için minimal bir yer tutucu ve meta veri içerir. Trajectory Evidence'deki adımlar, bir noktada BART modelinin başarıyla içe aktarıldığını gösterse de, mevcut dosya içeriği bu gereksinimi karşılamaz."
+                ]
+            },
+            "total_time": 91.8570249080658
+        },
+        {
+            "requirement_index": 3,
+            "criteria": "Oluşturulan özet sonuçları `results/summary_results.txt` dosyasına kaydedilir.",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 18.297794342041016,
+                "input_tokens": 1149,
+                "output_tokens": 202,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n\nGereksinim, özet sonuçlarının `results/summary_results.txt` dosyasına kaydedilmesini şart koşuyor. Ancak, sağlanan dosya içeriği (`summary_results.txt`) sadece `('placeholder\\r\\n', None)` metnini içeriyor. Bu, gerçek özet sonuçlarının (örneğin, model çıktıları, metrikler veya özetlenmiş metinler) kaydedilmediğini, bunun yerine bir yer tutucu veya hatalı bir çıktının kaydedildiğini gösteriyor. Dosyanın varlığı tek başına gereksinimi karşılamak için yeterli değildir; dosyanın anlamlı özet sonuçları içermesi gerekir."
+                ]
+            },
+            "total_time": 51.139289140701294
+        },
+        {
+            "requirement_index": 4,
+            "criteria": "Oluşturulan özetlerin uzunluk dağılımı \"seaborn\" kullanılarak görselleştirilir ve grafik `results/figures/summary_length_distribution.png` olarak kaydedilir.",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 16.750588417053223,
+                "input_tokens": 1129,
+                "output_tokens": 340,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n\nGereksinim, özet uzunluk dağılımının `seaborn` kullanılarak görselleştirilmesini ve grafiğin belirtilen dosya yoluna kaydedilmesini şart koşuyor. Proje yapısı, `results/figures/summary_length_distribution.png` dosyasının varlığını gösteriyor ve ilgili adımlar da dosyanın oluşturulduğunu belirtiyor. Ancak, dosyanın içeriğini doğrulamak için yapılan okuma girişimi bir hata ile sonuçlandı: \"Error reading image file: ... No endpoints found that support image input\". Bu, dosyanın içeriğinin (grafiğin) doğrulanamadığı anlamına gelir. Gereksinimin karşılandığını kanıtlayacak görselin başarıyla oluşturulduğuna ve kaydedildiğine dair doğrudan bir kanıt (örneğin, grafiğin başarıyla okunabilen içeriği veya görselleştirme kodunun çıktısı) sunulmamıştır. Sadece dosyanın varlığı ve oluşturulma iddiası, içeriğin doğruluğu için yeterli değildir."
+                ]
+            },
+            "total_time": 76.05191993713379
+        },
+        {
+            "requirement_index": 5,
+            "criteria": "Giriş metinlerini ve oluşturulan özetlerini görüntülemek için \"Streamlit\" kullanılarak etkileşimli bir web sayfası oluşturulur ve `src/visualize.py` içinde uygulanır.",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 15.234192132949829,
+                "input_tokens": 1434,
+                "output_tokens": 342,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n\nGereksinim, giriş metinlerini ve oluşturulan özetlerini görüntülemek için \"Streamlit\" kullanılarak etkileşimli bir web sayfası oluşturulmasını ve bunun `src/visualize.py` dosyasında uygulanmasını şart koşuyor. Ancak, sağlanan `src/visualize.py` dosyasının içeriği, yalnızca gereksinim kriterlerini ve anahtar kelimeleri listeleyen minimal bir semantik uygulamadır. Dosyada Streamlit kütüphanesini içe aktaran (`import streamlit`) veya bir Streamlit uygulaması oluşturan (örneğin `st.title`, `st.write` gibi fonksiyonlar kullanan) herhangi bir kod bulunmamaktadır. Trajektör kanıtları, dosyanın çalıştırıldığını ve bir Streamlit sunucusunun başlatıldığını gösterse de, bu, dosyanın mevcut içeriğiyle tutarsızdır ve muhtemelen dosyanın daha önceki, tam bir versiyonunun çalıştırıldığını gösterir. Mevcut dosya içeriği, gereksinimde belirtilen etkileşimli web sayfasını uygulamaz."
+                ]
+            },
+            "total_time": 40.84306287765503
+        },
+        {
+            "requirement_index": 6,
+            "criteria": "Veri ön işleme, model eğitimi ve oluşturma sonuçlarını kapsayan bir rapor oluşturulur ve `results/text_summarization_report.pdf` olarak kaydedilir.",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 10.227137565612793,
+                "input_tokens": 1028,
+                "output_tokens": 120,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED> Gereksinimde belirtilen PDF rapor dosyası oluşturulmuş ancak içeriği boş. Dosya sistemi yapısında `results/text_summarization_report.pdf` dosyası mevcut, ancak dosya içeriği okunamadı (\"Cannot read an empty file\" hatası). Bu, raporun başarıyla oluşturulduğu ancak içeriğin eksik veya boş olduğunu gösterir."
+                ]
+            },
+            "total_time": 20.91933584213257
+        }
+    ]
+}

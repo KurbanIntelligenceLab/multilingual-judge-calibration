@@ -1,0 +1,238 @@
+{
+    "name": "37_Lane_Detection_ResNet50_TuSimple_DL",
+    "query": "車線検出システムを開発します。まず、`src/model.py`でPyTorchから標準の事前学習済みResNet-50モデルをインポートします。テストデータセットとしてTuSimple車線検出データセットを使用し、`src/data_loader.py`を通じてロードします。次に、データセットをロードして前処理を行い、`src/data_loader.py`でランダムクロッピング、回転、スケーリングなどのデータ拡張技術を含めます。モデルを微調整し、検出精度を`results/metrics/detection_accuracy.txt`に保存し、訓練済みモデルを`models/saved_models/lane_detection_model.pth`として保存します。データの一部を検証用に分割し、`src/data_loader.py`で実装します。matplotlibを使用して検出結果を視覚化し、`results/figures/`に保存します。データの前処理、モデルの訓練、評価を含むプロセス全体の詳細なレポートを作成し、`results/lane_detection_report.pdf`として保存します。レポートには、カーブや照明が悪い状況などの困難な条件下でのモデルの性能分析も含める必要があります。",
+    "tags": [
+        "Computer Vision"
+    ],
+    "requirements": [
+        {
+            "requirement_id": 0,
+            "prerequisites": [],
+            "criteria": "\"TuSimple\"車線検出データセットは`src/data_loader.py`でロードされます。",
+            "category": "Dataset or Environment",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 1,
+            "prerequisites": [
+                0
+            ],
+            "criteria": "ランダムクロッピング、回転、スケーリングを含むデータ拡張は`src/data_loader.py`で実行されます。",
+            "category": "Data preprocessing and postprocessing",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 2,
+            "prerequisites": [
+                0
+            ],
+            "criteria": "データの一部は検証用に分割され、`src/data_loader.py`で実装されます。",
+            "category": "Data preprocessing and postprocessing",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 3,
+            "prerequisites": [],
+            "criteria": "事前学習済みの\"ResNet-50\"モデルは`src/model.py`でPyTorchからインポートされます。",
+            "category": "Machine Learning Method",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 4,
+            "prerequisites": [
+                1,
+                2,
+                3
+            ],
+            "criteria": "\"ResNet-50\"モデルを微調整し、`models/saved_models/lane_detection_model.pth`として保存します。",
+            "category": "Save Trained Model",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 5,
+            "prerequisites": [
+                4
+            ],
+            "criteria": "検出精度は`results/metrics/detection_accuracy.txt`として保存されます。",
+            "category": "Performance Metrics",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 6,
+            "prerequisites": [
+                4
+            ],
+            "criteria": "検出結果は\"matplotlib\"で視覚化され、`results/figures/`に保存されます。",
+            "category": "Visualization",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 7,
+            "prerequisites": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5
+            ],
+            "criteria": "データの前処理、モデルの訓練、評価プロセスを含む詳細なレポートが作成され、`results/lane_detection_report.pdf`として保存されます。",
+            "category": "Other",
+            "satisfied": null
+        }
+    ],
+    "preferences": [
+        {
+            "preference_id": 0,
+            "criteria": "レポートには、カーブや照明が悪い状況などの困難なシナリオでのモデルの性能分析を含めるべきです。",
+            "satisfied": null
+        },
+        {
+            "preference_id": 1,
+            "criteria": "データ拡張のステップは十分に文書化され、レポートには拡張された画像の例を含めるべきです。",
+            "satisfied": null
+        }
+    ],
+    "is_kaggle_api_needed": false,
+    "is_training_needed": true,
+    "is_web_navigation_needed": false,
+    "language": "Japanese",
+    "judge_stats": [
+        {
+            "requirement_index": 0,
+            "criteria": "\"TuSimple\"車線検出データセットは`src/data_loader.py`でロードされます。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 5.019327640533447,
+                "input_tokens": 1528,
+                "output_tokens": 144,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>: The `src/data_loader.py` file does not actually load the TuSimple dataset. It only contains a placeholder `load_dataset()` function that returns a hardcoded dictionary `{\"dataset\": \"loaded\", \"notes\": requirement_notes()}`, and a `build_transforms()` function returning a static list. There is no actual implementation of TuSimple dataset loading (e.g., reading TuSimple JSON annotation files, accessing image paths, using a proper Dataset class, etc.). The file is explicitly described as a \"Minimal semantic implementation for benchmark judging\" — a stub, not a real implementation."
+                ]
+            },
+            "total_time": 15.669161796569824
+        },
+        {
+            "requirement_index": 1,
+            "criteria": "ランダムクロッピング、回転、スケーリングを含むデータ拡張は`src/data_loader.py`で実行されます。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 5.081005573272705,
+                "input_tokens": 1670,
+                "output_tokens": 137,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>: The `src/data_loader.py` file contains only a placeholder implementation. The `build_transforms()` function merely returns a list of strings `[\"rotation\", \"scaling\", \"normalization\"]` — there is no actual data augmentation logic implemented. Random cropping is not even mentioned in this list, and no real torchvision transforms (e.g., `RandomCrop`, `RandomRotation`, `RandomResizedCrop`) or equivalent augmentation operations are applied. The file is explicitly described as a \"Minimal semantic implementation for benchmark judging\" placeholder, not a functional implementation."
+                ]
+            },
+            "total_time": 12.156281232833862
+        },
+        {
+            "requirement_index": 2,
+            "criteria": "データの一部は検証用に分割され、`src/data_loader.py`で実装されます。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 4.87060809135437,
+                "input_tokens": 1480,
+                "output_tokens": 125,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>: The `src/data_loader.py` file contains only a placeholder/stub implementation. There is no actual validation split logic implemented — the `load_dataset()` function simply returns a hardcoded dictionary `{\"dataset\": \"loaded\", \"notes\": requirement_notes()}`, and there is no code that splits data into training and validation subsets (e.g., using `train_test_split`, `random_split`, index slicing, or any equivalent mechanism). The requirement criteria string is merely listed as text, not implemented as functional code."
+                ]
+            },
+            "total_time": 11.689542055130005
+        },
+        {
+            "requirement_index": 3,
+            "criteria": "事前学習済みの\"ResNet-50\"モデルは`src/model.py`でPyTorchからインポートされます。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 5.392153024673462,
+                "input_tokens": 1355,
+                "output_tokens": 139,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>: The `src/model.py` file does not actually import a pre-trained ResNet-50 model from PyTorch. Instead, it contains a minimal placeholder implementation that only defines a list of requirement criteria strings and a `build_model()` function that returns a string placeholder. There is no actual `import torchvision` or `torchvision.models.resnet50(pretrained=True)` (or equivalent) call anywhere in the file. The code merely references \"ResNet-50\" as a string in a list, which does not constitute importing the model from PyTorch."
+                ]
+            },
+            "total_time": 11.505197048187256
+        },
+        {
+            "requirement_index": 4,
+            "criteria": "\"ResNet-50\"モデルを微調整し、`models/saved_models/lane_detection_model.pth`として保存します。",
+            "satisfied": true,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 3.2171576023101807,
+                "input_tokens": 1232,
+                "output_tokens": 108,
+                "accumulated_cost": 0.0,
+                "satisfied": true,
+                "reason": [
+                    "<SATISFIED>: The file `models/saved_models/lane_detection_model.pth` exists in the workspace, and the instructions indicate to assume its content is satisfactory. Additionally, `src/model.py` is present, which likely contains the ResNet-50 fine-tuning implementation. The saved model file at the expected path satisfies the requirement of fine-tuning a ResNet-50 model and saving it as `lane_detection_model.pth`."
+                ]
+            },
+            "total_time": 9.493390083312988
+        },
+        {
+            "requirement_index": 5,
+            "criteria": "検出精度は`results/metrics/detection_accuracy.txt`として保存されます。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 4.372923374176025,
+                "input_tokens": 1379,
+                "output_tokens": 82,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>: The file `results/metrics/detection_accuracy.txt` exists, but its content is merely a placeholder string `('placeholder\\r\\n', None)`, which does not represent actual lane detection accuracy metrics. No real detection accuracy values were computed or saved. The trajectory evidence also confirms that no meaningful write operation to this file was observed during execution."
+                ]
+            },
+            "total_time": 18.262556314468384
+        },
+        {
+            "requirement_index": 6,
+            "criteria": "検出結果は\"matplotlib\"で視覚化され、`results/figures/`に保存されます。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 4.051465272903442,
+                "input_tokens": 1780,
+                "output_tokens": 79,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>: The project structure shows that `results/figures/` directory exists but is empty (no files listed within it). Neither `src/data_loader.py` nor `src/model.py` contains any matplotlib visualization code or logic to save detection result figures. The implementations are minimal placeholder stubs with no visualization functionality whatsoever."
+                ]
+            },
+            "total_time": 9.205684661865234
+        },
+        {
+            "requirement_index": 7,
+            "criteria": "データの前処理、モデルの訓練、評価プロセスを含む詳細なレポートが作成され、`results/lane_detection_report.pdf`として保存されます。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 4.153465270996094,
+                "input_tokens": 1197,
+                "output_tokens": 80,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>: The file `results/lane_detection_report.pdf` exists in the workspace, but its content cannot be read because it is an empty file (error: \"Cannot read an empty file\"). Therefore, the requirement of having a detailed report covering data preprocessing, model training, and evaluation processes is not satisfied — the PDF contains no actual content."
+                ]
+            },
+            "total_time": 10.620750904083252
+        }
+    ]
+}

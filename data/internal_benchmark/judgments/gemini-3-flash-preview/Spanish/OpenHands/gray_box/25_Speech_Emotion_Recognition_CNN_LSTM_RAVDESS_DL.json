@@ -1,0 +1,211 @@
+{
+    "name": "25_Speech_Emotion_Recognition_CNN_LSTM_RAVDESS_DL",
+    "query": "Estoy buscando un proyecto de reconocimiento de emociones en el habla utilizando un modelo CNN-LSTM con el conjunto de datos RAVDESS, que debe descargarse de Kaggle o [este enlace de Hugging Face](https://huggingface.co/datasets/xbgoose/ravdess). El proyecto debe cargar el conjunto de datos y realizar un preprocesamiento de audio robusto (eliminación de ruido y normalización) y extracción de características MFCC, implementado en `src/data_loader.py`. El modelo CNN-LSTM debe implementarse en `src/model.py`. La precisión del reconocimiento debe guardarse en `results/metrics/recognition_accuracy.txt`, y se debe generar una matriz de confusión y guardarse como `results/figures/confusion_matrix.png`. Además, se debe crear una API local fácil de usar con Flask para permitir a los usuarios subir archivos de audio y recibir resultados de reconocimiento de emociones, con la implementación incluida en `src/hci.py`.",
+    "tags": [
+        "Audio Processing",
+        "Classification"
+    ],
+    "requirements": [
+        {
+            "requirement_id": 0,
+            "prerequisites": [],
+            "criteria": "El conjunto de datos \"RAVDESS\" se carga en `src/data_loader.py`, que se descarga de Kaggle o [este enlace de Hugging Face](https://huggingface.co/datasets/xbgoose/ravdess).",
+            "category": "Dataset or Environment",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 1,
+            "prerequisites": [
+                0
+            ],
+            "criteria": "El preprocesamiento de audio, incluida la eliminación de ruido y la normalización, se implementa en `src/data_loader.py`.",
+            "category": "Data preprocessing and postprocessing",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 2,
+            "prerequisites": [
+                0,
+                1
+            ],
+            "criteria": "La extracción de características MFCC se implementa en `src/data_loader.py`.",
+            "category": "Data preprocessing and postprocessing",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 3,
+            "prerequisites": [],
+            "criteria": "El modelo \"CNN-LSTM\" se implementa en `src/model.py`.",
+            "category": "Machine Learning Method",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 4,
+            "prerequisites": [
+                2,
+                3
+            ],
+            "criteria": "La precisión del reconocimiento se guarda en `results/metrics/recognition_accuracy.txt`.",
+            "category": "Performance Metrics",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 5,
+            "prerequisites": [
+                2,
+                3,
+                4
+            ],
+            "criteria": "La matriz de confusión se genera y guarda como `results/figures/confusion_matrix.png`.",
+            "category": "Visualization",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 6,
+            "prerequisites": [
+                2,
+                3
+            ],
+            "criteria": "Se crea una API local usando \"Flask\" para permitir a los usuarios subir archivos de audio y recibir resultados de reconocimiento de emociones. La implementación debe incluirse en `src/hci.py`.",
+            "category": "Human Computer Interaction",
+            "satisfied": null
+        }
+    ],
+    "preferences": [
+        {
+            "preference_id": 0,
+            "criteria": "El paso de preprocesamiento de audio debe ser robusto, reduciendo efectivamente el ruido mientras se preserva la integridad de las señales de habla.",
+            "satisfied": null
+        },
+        {
+            "preference_id": 1,
+            "criteria": "La API local debe ser fácil de usar, con instrucciones claras para subir archivos e interpretar resultados.",
+            "satisfied": null
+        }
+    ],
+    "is_kaggle_api_needed": true,
+    "is_training_needed": true,
+    "is_web_navigation_needed": true,
+    "language": "Spanish",
+    "judge_stats": [
+        {
+            "requirement_index": 0,
+            "criteria": "El conjunto de datos \"RAVDESS\" se carga en `src/data_loader.py`, que se descarga de Kaggle o [este enlace de Hugging Face](https://huggingface.co/datasets/xbgoose/ravdess).",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.1707444190979004,
+                "input_tokens": 1446,
+                "output_tokens": 131,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n\nThe requirement is not met. According to the content of `src/data_loader.py`, the file only contains minimal placeholders and strings describing the requirements (`load_dataset` and `build_transforms` functions are empty shells), but it does not implement the actual logic to download or load the RAVDESS dataset. Furthermore, the trajectory evidence confirms that the execution attempts to download the dataset from Hugging Face and Kaggle failed due to an `EntryNotFoundError` and a `KaggleApiError: 401 - Unauthorized`, respectively. Therefore, the dataset was never successfully integrated into the project."
+                ]
+            },
+            "total_time": 8.915124893188477
+        },
+        {
+            "requirement_index": 1,
+            "criteria": "El preprocesamiento de audio, incluida la eliminación de ruido y la normalización, se implementa en `src/data_loader.py`.",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.6918509006500244,
+                "input_tokens": 1384,
+                "output_tokens": 222,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n\nThe requirement is not satisfied because the file `src/data_loader.py` contains only minimal placeholders and does not include the actual implementation of audio preprocessing. Specifically:\n\n1.  **Missing Logic**: The file `src/data_loader.py` only contains a placeholder function `build_transforms()` that returns a list of strings (`[\"rotation\", \"scaling\", \"normalization\"]`) and a `load_dataset()` function that returns a dictionary with notes. There is no functional code for noise removal or audio normalization.\n2.  **Incomplete Implementation**: Although the \"Trajectory Evidence\" mentions execution errors related to `noisereduce` and normalization warnings, the actual content of the file provided in the workspace shows that the logic is absent or was replaced by a \"Minimal semantic implementation for benchmark judging.\"\n3.  **MFCC and Noise Removal**: There is no evidence of MFCC feature extraction or noise reduction algorithms (such as spectral gating or integration with libraries like `librosa` or `noisereduce`) within the provided source code."
+                ]
+            },
+            "total_time": 7.089745759963989
+        },
+        {
+            "requirement_index": 2,
+            "criteria": "La extracción de características MFCC se implementa en `src/data_loader.py`.",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.152134656906128,
+                "input_tokens": 1334,
+                "output_tokens": 132,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n\nThe requirement is not met. Upon reviewing the provided content of `src/data_loader.py`, the file only contains minimal placeholders and metadata strings. There is no actual implementation of MFCC (Mel-frequency cepstral coefficients) feature extraction; instead, the file contains a `build_transforms` function that returns a list of image-related strings (\"rotation\", \"scaling\", \"normalization\") and a `load_dataset` function that returns a placeholder dictionary. Although the trajectory mentions attempts to use `librosa`, the final code provided in the workspace lacks the necessary imports and logic to perform audio feature extraction."
+                ]
+            },
+            "total_time": 6.185658931732178
+        },
+        {
+            "requirement_index": 3,
+            "criteria": "El modelo \"CNN-LSTM\" se implementa en `src/model.py`.",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.2084672451019287,
+                "input_tokens": 1327,
+                "output_tokens": 115,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n\nThe file `src/model.py` does not contain an actual implementation of a \"CNN-LSTM\" model. Instead, it contains a minimal placeholder script with a `build_model()` function that returns the string `\"model placeholder\"`. Although the trajectory evidence suggests that a functional model might have existed or been tested during execution, the actual content of the file provided in the workspace shows only metadata and a placeholder, failing to provide the required architectural implementation (layers, filters, LSTM units, etc.) for a Speech Emotion Recognition task."
+                ]
+            },
+            "total_time": 6.14748740196228
+        },
+        {
+            "requirement_index": 4,
+            "criteria": "La precisión del reconocimiento se guarda en `results/metrics/recognition_accuracy.txt`.",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.263082504272461,
+                "input_tokens": 1072,
+                "output_tokens": 91,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n\nThe requirement is not satisfied because the file `results/metrics/recognition_accuracy.txt` does not contain any valid recognition accuracy metrics. According to the provided content of the file, it only contains a placeholder string `('placeholder\\r\\n', None)`. Although the trajectory suggests that a save operation was performed, the actual evidence shows that no real numerical data or evaluation results were persisted in the specified path."
+                ]
+            },
+            "total_time": 6.674185514450073
+        },
+        {
+            "requirement_index": 5,
+            "criteria": "La matriz de confusión se genera y guarda como `results/figures/confusion_matrix.png`.",
+            "satisfied": true,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.2231571674346924,
+                "input_tokens": 1110,
+                "output_tokens": 115,
+                "accumulated_cost": 0.0,
+                "satisfied": true,
+                "reason": [
+                    "<SATISFIED>\n\nThe requirement is satisfied. The project structure confirms the existence of the file at the specified path `results/figures/confusion_matrix.png`. Additionally, the trajectory evidence (Step 7 and Step 8) explicitly mentions the successful execution of the evaluation script, the generation of the confusion matrix, and its storage in the designated directory without errors. Although the file content preview shows a reading error (likely due to the environment's inability to render binary image data as text), the metadata and logs confirm the file was correctly created and saved."
+                ]
+            },
+            "total_time": 7.874788284301758
+        },
+        {
+            "requirement_index": 6,
+            "criteria": "Se crea una API local usando \"Flask\" para permitir a los usuarios subir archivos de audio y recibir resultados de reconocimiento de emociones. La implementación debe incluirse en `src/hci.py`.",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.9225780963897705,
+                "input_tokens": 1277,
+                "output_tokens": 123,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n\nThe requirement is not met because the file `src/hci.py` contains only a minimal placeholder script with metadata and does not implement a functional **Flask** API. Although the \"Trajectory Evidence\" suggests a server was executed, the actual content of `src/hci.py` provided in the [Key Evidence] shows only a `main()` function returning a dictionary and a list of keywords, lacking the necessary imports (`from flask import Flask`), route definitions (e.g., `@app.route('/predict')`), and logic to handle audio file uploads and emotion recognition."
+                ]
+            },
+            "total_time": 6.965373516082764
+        }
+    ]
+}

@@ -1,0 +1,212 @@
+{
+    "name": "30_Image_Segmentation_UNet_PascalVOC_DL",
+    "query": "क्या आप मुझे Pascal VOC डेटासेट और PyTorch में लागू किए गए प्री-ट्रेंड U-Net मॉडल का उपयोग करके एक इमेज सेगमेंटेशन प्रोजेक्ट सेट अप करने में मदद कर सकते हैं? अतिरिक्त प्रशिक्षण की आवश्यकता नहीं है। डेटा ऑग्मेंटेशन लागू करें (जैसे, इमेज को फ्लिप और रोटेट करना), मूल्यांकन के लिए Dice गुणांक का उपयोग करें, सेगमेंटेड इमेज को `results/figures/` में सहेजें, सेगमेंटेशन से पहले और बाद की इमेज दिखाने वाला एक GIF एनीमेशन उत्पन्न करें और इसे `results/figures/segmentation_results.gif` में सहेजें, और मॉडल आर्किटेक्चर, प्रक्रिया, और सेगमेंटेशन परिणामों के साथ एक अच्छी तरह से प्रलेखित Jupyter Notebook बनाएं, इसे HTML रिपोर्ट में परिवर्तित करें (इसे `results/report.html` के रूप में सहेजें)।",
+    "tags": [
+        "Computer Vision"
+    ],
+    "requirements": [
+        {
+            "requirement_id": 0,
+            "prerequisites": [],
+            "criteria": "\"Pascal VOC\" डेटासेट का उपयोग `src/data_loader.py` में किया जाता है।",
+            "category": "Dataset or Environment",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 1,
+            "prerequisites": [
+                0
+            ],
+            "criteria": "डेटा ऑग्मेंटेशन, जिसमें इमेज को फ्लिप और रोटेट करना शामिल है, `src/data_loader.py` में किया जाता है।",
+            "category": "Data preprocessing and postprocessing",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 2,
+            "prerequisites": [],
+            "criteria": "PyTorch से प्री-ट्रेंड \"U-Net\" मॉडल का उपयोग बिना अतिरिक्त प्रशिक्षण के किया जाता है और इसे `models/saved_models/` में सहेजा जाता है।",
+            "category": "Machine Learning Method",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 3,
+            "prerequisites": [
+                1,
+                2
+            ],
+            "criteria": "\"Dice गुणांक\" का उपयोग मूल्यांकन के लिए किया जाता है और इसे `results/metrics/` में सहेजा जाना चाहिए।",
+            "category": "Performance Metrics",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 4,
+            "prerequisites": [
+                1,
+                2
+            ],
+            "criteria": "सेगमेंटेड इमेज को निर्दिष्ट फोल्डर `results/figures/` में सहेजा जाता है।",
+            "category": "Data preprocessing and postprocessing",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 5,
+            "prerequisites": [
+                1,
+                2,
+                4
+            ],
+            "criteria": "सेगमेंटेशन से पहले और बाद की इमेज का GIF एनीमेशन उत्पन्न किया जाता है और इसे `results/figures/segmentation_results.gif` के रूप में सहेजा जाता है।",
+            "category": "Visualization",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 6,
+            "prerequisites": [
+                1,
+                2,
+                3,
+                4
+            ],
+            "criteria": "एक Jupyter Notebook बनाई जाती है जिसमें मॉडल आर्किटेक्चर, प्री-ट्रेंड मॉडल को लागू करने की प्रक्रिया, और सेगमेंटेशन परिणाम शामिल होते हैं। इसे HTML रिपोर्ट में परिवर्तित किया जाता है और `results/report.html` के रूप में सहेजा जाता है।",
+            "category": "Visualization",
+            "satisfied": null
+        }
+    ],
+    "preferences": [
+        {
+            "preference_id": 0,
+            "criteria": "Jupyter Notebook में प्रक्रिया के प्रत्येक चरण को समझाने वाले अच्छी तरह से प्रलेखित कोड स्निपेट शामिल होने चाहिए।",
+            "satisfied": null
+        },
+        {
+            "preference_id": 1,
+            "criteria": "GIF एनीमेशन को डेटासेट से विभिन्न इमेज पर सेगमेंटेशन से पहले और बाद के परिवर्तन को स्पष्ट रूप से दिखाना चाहिए।",
+            "satisfied": null
+        }
+    ],
+    "is_kaggle_api_needed": false,
+    "is_training_needed": false,
+    "is_web_navigation_needed": false,
+    "language": "Hindi",
+    "judge_stats": [
+        {
+            "requirement_index": 0,
+            "criteria": "\"Pascal VOC\" डेटासेट का उपयोग `src/data_loader.py` में किया जाता है।",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 5.8286895751953125,
+                "input_tokens": 1608,
+                "output_tokens": 162,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n\n`src/data_loader.py` में \"Pascal VOC\" केवल एक string constant (`KEYWORDS = [\"Pascal VOC\"]`) और comment में उल्लेखित है। वास्तविक Pascal VOC dataset loading का कोई implementation नहीं है — न कोई actual dataset download/load code, न कोई VOC-specific path handling, न कोई annotation parsing। `load_dataset()` function केवल एक placeholder है जो `{\"dataset\": \"loaded\"}` return करता है। यह एक minimal stub implementation है, न कि वास्तविक Pascal VOC dataset उपयोग।"
+                ]
+            },
+            "total_time": 17.99064612388611
+        },
+        {
+            "requirement_index": 1,
+            "criteria": "डेटा ऑग्मेंटेशन, जिसमें इमेज को फ्लिप और रोटेट करना शामिल है, `src/data_loader.py` में किया जाता है।",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 5.585707902908325,
+                "input_tokens": 1556,
+                "output_tokens": 186,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n\n`src/data_loader.py` में `build_transforms()` फ़ंक्शन केवल `[\"rotation\", \"scaling\", \"normalization\"]` की एक placeholder list return करता है। इसमें वास्तविक flip augmentation का कोई implementation नहीं है। न तो `torchvision.transforms.RandomHorizontalFlip`, `RandomVerticalFlip`, `RandomRotation` जैसे actual transforms का उपयोग किया गया है, और न ही कोई वास्तविक data augmentation pipeline बनाई गई है। यह केवल एक \"minimal semantic implementation\" placeholder है जो requirements को पूरा नहीं करता।"
+                ]
+            },
+            "total_time": 16.344361066818237
+        },
+        {
+            "requirement_index": 2,
+            "criteria": "PyTorch से प्री-ट्रेंड \"U-Net\" मॉडल का उपयोग बिना अतिरिक्त प्रशिक्षण के किया जाता है और इसे `models/saved_models/` में सहेजा जाता है।",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 4.901445627212524,
+                "input_tokens": 1690,
+                "output_tokens": 161,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n\n**कारण:** प्रोजेक्ट में केवल `src/data_loader.py` फ़ाइल मौजूद है जो एक minimal placeholder implementation है। इसमें U-Net मॉडल का कोई उपयोग नहीं है। `models/saved_models/` डायरेक्टरी खाली है — कोई saved model फ़ाइल नहीं है। Trajectory log में भी U-Net मॉडल load करने या save करने का कोई evidence नहीं मिला।"
+                ]
+            },
+            "total_time": 17.035027503967285
+        },
+        {
+            "requirement_index": 3,
+            "criteria": "\"Dice गुणांक\" का उपयोग मूल्यांकन के लिए किया जाता है और इसे `results/metrics/` में सहेजा जाना चाहिए।",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 4.369825601577759,
+                "input_tokens": 1698,
+                "output_tokens": 163,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n\n**कारण:** प्रोजेक्ट में `results/metrics/` फ़ोल्डर खाली है (कोई फ़ाइल नहीं)। केवल `src/data_loader.py` फ़ाइल मौजूद है जो एक minimal placeholder implementation है और इसमें Dice गुणांक की गणना या saving का कोई कोड नहीं है। Trajectory log भी खाली है, जिससे किसी execution का कोई प्रमाण नहीं मिलता।"
+                ]
+            },
+            "total_time": 14.955323457717896
+        },
+        {
+            "requirement_index": 4,
+            "criteria": "सेगमेंटेड इमेज को निर्दिष्ट फोल्डर `results/figures/` में सहेजा जाता है।",
+            "satisfied": true,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 3.751974105834961,
+                "input_tokens": 1657,
+                "output_tokens": 117,
+                "accumulated_cost": 0.0,
+                "satisfied": true,
+                "reason": [
+                    "<SATISFIED>\n\n**कारण:** प्रोजेक्ट स्ट्रक्चर में `results/figures/segmentation_results.gif` फ़ाइल स्पष्ट रूप से मौजूद है, जो दर्शाती है कि सेगमेंटेड इमेज `results/figures/` फोल्डर में सहेजी गई है।"
+                ]
+            },
+            "total_time": 12.603761434555054
+        },
+        {
+            "requirement_index": 5,
+            "criteria": "सेगमेंटेशन से पहले और बाद की इमेज का GIF एनीमेशन उत्पन्न किया जाता है और इसे `results/figures/segmentation_results.gif` के रूप में सहेजा जाता है।",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 4.053928852081299,
+                "input_tokens": 1508,
+                "output_tokens": 207,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n\n**कारण:** `results/figures/segmentation_results.gif` फ़ाइल मौजूद है, लेकिन इसकी सामग्री एक valid GIF एनीमेशन नहीं है। फ़ाइल में केवल एक error message है जो दर्शाता है कि GIF फ़ाइल को पढ़ने/generate करने में त्रुटि हुई (`litellm.BadRequestError` - image format mismatch)। अतः वास्तविक segmentation से पहले और बाद की इमेज का GIF एनीमेशन सफलतापूर्वक उत्पन्न नहीं हुआ।"
+                ]
+            },
+            "total_time": 18.520302772521973
+        },
+        {
+            "requirement_index": 6,
+            "criteria": "एक Jupyter Notebook बनाई जाती है जिसमें मॉडल आर्किटेक्चर, प्री-ट्रेंड मॉडल को लागू करने की प्रक्रिया, और सेगमेंटेशन परिणाम शामिल होते हैं। इसे HTML रिपोर्ट में परिवर्तित किया जाता है और `results/report.html` के रूप में सहेजा जाता है।",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 6.073677062988281,
+                "input_tokens": 1599,
+                "output_tokens": 289,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n\n**कारण:** `results/report.html` फ़ाइल मौजूद है, लेकिन उसकी सामग्री केवल `('', None)` है, जो एक खाली/अमान्य HTML रिपोर्ट को दर्शाती है। इसमें मॉडल आर्किटेक्चर, प्री-ट्रेंड मॉडल को लागू करने की प्रक्रिया, या सेगमेंटेशन परिणाम जैसी कोई भी आवश्यक सामग्री नहीं है। साथ ही, कोई Jupyter Notebook फ़ाइल (`.ipynb`) प्रोजेक्ट संरचना में दिखाई नहीं देती, जिससे यह स्पष्ट है कि Notebook बनाई ही नहीं गई और न ही उसे HTML में परिवर्तित किया गया।"
+                ]
+            },
+            "total_time": 19.09010601043701
+        }
+    ]
+}

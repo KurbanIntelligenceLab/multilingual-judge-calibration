@@ -1,0 +1,156 @@
+{
+    "name": "05_Game_Simulation_DQN_CartPole_v1_RL",
+    "query": "创建一个可靠的系统，在OpenAI Gym环境（如CartPole-v1）中使用PyTorch训练DQN代理。在`src/model.py`中使用PyTorch实现DQN。环境应在主文件`src/main.py`中实例化。处理DQN与环境之间的任何维度不匹配（例如，如果Gym环境ID更改时可能发生的情况），通过记录错误来处理。此外，请在每个episode后将返回值记录到`results/metrics/`，并在每个新episode完成后更新它。将最终的episode返回曲线保存为`results/figures/return_over_time.png`，并将最终训练的模型保存为`models/saved_models/dqn_model.pt`。如果可能，请在episode返回曲线上添加注释以展示关键里程碑。",
+    "tags": [
+        "Reinforcement Learning"
+    ],
+    "requirements": [
+        {
+            "requirement_id": 0,
+            "prerequisites": [],
+            "criteria": "使用PyTorch实现的\"DQN\"算法并保存在`src/model.py`中。",
+            "category": "Machine Learning Method",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 1,
+            "prerequisites": [],
+            "criteria": "在`src/main.py`中实例化一个\"OpenAI Gym\"环境。",
+            "category": "Dataset or Environment",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 2,
+            "prerequisites": [
+                0,
+                1
+            ],
+            "criteria": "绘制时间返回曲线，记录每个episode的返回，并保存为`results/figures/reward_over_time.png`。",
+            "category": "Visualization",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 3,
+            "prerequisites": [
+                0,
+                1
+            ],
+            "criteria": "训练后的模型保存为`models/saved_models/dqn_model.pt`。",
+            "category": "Save Trained Model",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 4,
+            "prerequisites": [
+                0,
+                1
+            ],
+            "criteria": "每个episode的返回记录到`results/metrics/`，并在每个episode完成后更新。",
+            "category": "Performance Metrics",
+            "satisfied": null
+        }
+    ],
+    "preferences": [
+        {
+            "preference_id": 0,
+            "criteria": "系统应处理维度不匹配，记录问题以便于调试。",
+            "satisfied": null
+        },
+        {
+            "preference_id": 1,
+            "criteria": "episode返回曲线有关键里程碑的注释。",
+            "satisfied": null
+        }
+    ],
+    "is_kaggle_api_needed": false,
+    "is_training_needed": true,
+    "is_web_navigation_needed": false,
+    "language": "Chinese",
+    "judge_stats": [
+        {
+            "requirement_index": 0,
+            "criteria": "使用PyTorch实现的\"DQN\"算法并保存在`src/model.py`中。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.793058395385742,
+                "input_tokens": 1363,
+                "output_tokens": 148,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n\n依据：\n1. **代码内容缺失**：根据提供的 `src/model.py` 文件内容，该文件仅包含一个名为 `build_model` 的占位符函数，返回字符串 `\"model placeholder\"`，并未包含任何实际的 PyTorch DQN 算法实现（如 `nn.Module` 子类、经验回放或 Q 网络逻辑）。\n2. **逻辑错误**：参考轨迹（Trajectory Evidence）显示，在之前的测试中，该模型存在输出维度不匹配的问题（预期 4 维，实际 2 维），且在当前提供的代码版本中，这些逻辑已被简化为占位符，无法满足功能性要求。"
+                ]
+            },
+            "total_time": 10.264301300048828
+        },
+        {
+            "requirement_index": 1,
+            "criteria": "在`src/main.py`中实例化一个\"OpenAI Gym\"环境。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 3.216662645339966,
+                "input_tokens": 1236,
+                "output_tokens": 180,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n\n**依据：**\n1. **代码内容缺失**：根据提供的 `src/main.py` 文件内容，该文件仅包含元数据描述（如 `REQUIREMENT_CRITERIA` 列表）和一个返回状态字典的 `main` 函数，并没有实际调用 `gym.make()` 或任何实例化 OpenAI Gym 环境的代码逻辑。\n2. **运行轨迹证据**：虽然轨迹记录显示曾尝试运行并报错 `AttributeError: module 'gym' has no attribute 'make'`，这表明在某个历史版本中可能存在相关代码，但当前工作区中 `src/main.py` 的最终代码实现并未包含实例化环境的有效语句。\n3. **执行失败**：轨迹反馈明确指出最新执行状态为失败，由于环境配置或代码问题，未能成功创建 Gym 实例。"
+                ]
+            },
+            "total_time": 8.893813371658325
+        },
+        {
+            "requirement_index": 2,
+            "criteria": "绘制时间返回曲线，记录每个episode的返回，并保存为`results/figures/reward_over_time.png`。",
+            "satisfied": true,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.9640395641326904,
+                "input_tokens": 1121,
+                "output_tokens": 159,
+                "accumulated_cost": 0.0,
+                "satisfied": true,
+                "reason": [
+                    "<SATISFIED>\n\n**依据：**\n1. **文件系统证据**：根据项目树结构（Project Tree），文件 `results/figures/reward_over_time.png` 已成功生成并存在于指定路径。\n2. **执行轨迹证据**：轨迹记录显示，在 Step 12 执行了绘图脚本 `python scripts/plot_rewards.py` 且未报告任何错误。在此之前，Step 11 的训练脚本已成功将 episode returns 数据序列化，为绘图提供了必要的输入。\n3. **结论**：尽管在读取该图像内容时出现了 API 错误（无法预览），但从文件系统结构和脚本执行逻辑来看，该要求已在功能层面被完全满足。"
+                ]
+            },
+            "total_time": 9.849251985549927
+        },
+        {
+            "requirement_index": 3,
+            "criteria": "训练后的模型保存为`models/saved_models/dqn_model.pt`。",
+            "satisfied": true,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.212069034576416,
+                "input_tokens": 1051,
+                "output_tokens": 108,
+                "accumulated_cost": 0.0,
+                "satisfied": true,
+                "reason": [
+                    "<SATISFIED>\n\n依据：\n1. **文件系统验证**：项目结构树（Project Tree）明确显示 `models/saved_models/dqn_model.pt` 文件已存在。\n2. **执行轨迹验证**：根据轨迹记录，`train.py` 脚本运行后输出 `Model saved to models/saved_models/dqn_model.pt`，且随后的评估脚本成功加载了该文件，证明模型已按要求路径正确保存且功能完整。"
+                ]
+            },
+            "total_time": 7.164422512054443
+        },
+        {
+            "requirement_index": 4,
+            "criteria": "每个episode的返回记录到`results/metrics/`，并在每个episode完成后更新。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 3.1597819328308105,
+                "input_tokens": 1537,
+                "output_tokens": 171,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n\n**依据：**\n1.  **代码内容缺失：** 提供的核心源代码 `src/main.py` 和 `src/model.py` 仅包含占位符和元数据描述，完全没有实现任何关于强化学习训练、Episode 循环或文件 I/O 的逻辑。\n2.  **目录结构矛盾：** 虽然项目树显示存在 `results/metrics` 目录，但该目录下没有任何生成的文件（如 `.json` 或 `.csv`）。\n3.  **轨迹证据不可信：** 轨迹证据中提到的 `scripts/train.py` 在项目树结构中并不存在。由于源代码中缺乏实际的逻辑实现，无法满足“每个 episode 的返回记录到 `results/metrics/`”这一功能性要求。"
+                ]
+            },
+            "total_time": 8.133345127105713
+        }
+    ]
+}

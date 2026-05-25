@@ -1,0 +1,192 @@
+{
+    "name": "42_Medical_Image_Classification_DenseNet121_ChestXray_DL",
+    "query": "事前学習済みのDenseNet-121モデルとKaggle Chest X-rayデータセットを使用して、医療画像分類システムを作成します。まず、データセットを読み込み、前処理を行い、`src/data_loader.py`でデータ拡張（回転、平行移動、スケーリングを含む）を実施します。分類にはDenseNet-121モデルを適用し、精度を記録して`results/metrics/classification_accuracy.txt`に保存します。モデルを微調整し、`models/saved_models/chest_xray_densenet_model.pth`として保存します。Grad-CAMを使用してモデルの意思決定プロセスを可視化し、これらの可視化を`results/figures/grad_cam_visualizations.gif`として保存します。最後に、モデルのアーキテクチャ、トレーニングプロセス、データ拡張技術、結果の分析を文書化したMarkdownレポートを作成し、`results/medical_image_classification_report.md`として保存します。また、DenseNet-121が人間のユーザーによってさらに微調整されやすいようにシステムが柔軟であると良いです。",
+    "tags": [
+        "Classification",
+        "Computer Vision",
+        "Medical Analysis",
+        "Supervised Learning"
+    ],
+    "requirements": [
+        {
+            "requirement_id": 0,
+            "prerequisites": [],
+            "criteria": "\"Kaggle Chest X-ray\"データセットが使用され、データの読み込みと前処理が`src/data_loader.py`で実装されています。",
+            "category": "Dataset or Environment",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 1,
+            "prerequisites": [
+                0
+            ],
+            "criteria": "データ拡張が実施され、`src/data_loader.py`で画像の回転、平行移動、スケーリングが含まれます。",
+            "category": "Data preprocessing and postprocessing",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 2,
+            "prerequisites": [
+                1
+            ],
+            "criteria": "事前学習済みの\"DenseNet-121\"モデルが微調整され、`models/saved_models/`に保存されます。",
+            "category": "Machine Learning Method",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 3,
+            "prerequisites": [
+                1,
+                2
+            ],
+            "criteria": "分類精度が表示され、`results/metrics/classification_accuracy.txt`として保存されます。",
+            "category": "Performance Metrics",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 4,
+            "prerequisites": [
+                2,
+                3
+            ],
+            "criteria": "\"Grad-CAM\"がモデルの意思決定を可視化するために使用され、可視化は`results/figures/grad_cam_visualizations.gif`として保存されます。",
+            "category": "Visualization",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 5,
+            "prerequisites": [
+                2,
+                3
+            ],
+            "criteria": "モデルのアーキテクチャ、トレーニングプロセス、データ拡張、結果の分析を含む\"Markdown\"レポートが作成され、`results/medical_image_classification_report.md`として保存されます。",
+            "category": "Other",
+            "satisfied": null
+        }
+    ],
+    "preferences": [
+        {
+            "preference_id": 0,
+            "criteria": "\"Markdown\"レポートには、データ拡張がモデルの性能に与える影響を説明するセクションを含めるべきです。",
+            "satisfied": null
+        },
+        {
+            "preference_id": 1,
+            "criteria": "\"Grad-CAM\"の可視化は、モデルの決定に最も寄与した画像の領域を明確に強調するべきです。",
+            "satisfied": null
+        },
+        {
+            "preference_id": 2,
+            "criteria": "システムは\"DenseNet-121\"モデルのさらなる微調整を可能にする柔軟性を持つべきです。",
+            "satisfied": null
+        }
+    ],
+    "is_kaggle_api_needed": true,
+    "is_training_needed": true,
+    "is_web_navigation_needed": false,
+    "language": "Japanese",
+    "judge_stats": [
+        {
+            "requirement_index": 0,
+            "criteria": "\"Kaggle Chest X-ray\"データセットが使用され、データの読み込みと前処理が`src/data_loader.py`で実装されています。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 1.8072583675384521,
+                "input_tokens": 1233,
+                "output_tokens": 102,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>: 提供された `src/data_loader.py` の内容は、要件を満たすためのプレースホルダー（Minimal semantic implementation）に留まっており、実際のデータ読み込みロジックや Kaggle Chest X-ray データセットを処理する具体的なコードが実装されていません。また、実行ログ（ステップ12）においても、データセットが存在しないことによる `FileNotFoundError` が報告されており、実際にデータセットが使用可能な状態で実装されていることが確認できません。"
+                ]
+            },
+            "total_time": 8.033499240875244
+        },
+        {
+            "requirement_index": 1,
+            "criteria": "データ拡張が実施され、`src/data_loader.py`で画像の回転、平行移動、スケーリングが含まれます。",
+            "satisfied": true,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 1.8833327293395996,
+                "input_tokens": 1284,
+                "output_tokens": 56,
+                "accumulated_cost": 0.0,
+                "satisfied": true,
+                "reason": [
+                    "<SATISFIED>: `src/data_loader.py` の実装および実行ログ（ステップ12）により、データ拡張として回転 (rotation)、平行移動 (translation/shift)、およびスケーリング (scaling/zoom) が含まれていることが確認されました。"
+                ]
+            },
+            "total_time": 6.387068271636963
+        },
+        {
+            "requirement_index": 2,
+            "criteria": "事前学習済みの\"DenseNet-121\"モデルが微調整され、`models/saved_models/`に保存されます。",
+            "satisfied": true,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 1.7852201461791992,
+                "input_tokens": 1236,
+                "output_tokens": 84,
+                "accumulated_cost": 0.0,
+                "satisfied": true,
+                "reason": [
+                    "<SATISFIED>: ワークスペース構造において `models/saved_models` ディレクトリの存在が確認されており、実行ログ（ステップ12および13）により、DenseNet-121をベースとしたモデルの微調整と `models/saved_models/densenet121_finetuned.h5` への保存が正常に完了したことが示されています。"
+                ]
+            },
+            "total_time": 5.661001920700073
+        },
+        {
+            "requirement_index": 3,
+            "criteria": "分類精度が表示され、`results/metrics/classification_accuracy.txt`として保存されます。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.1955695152282715,
+                "input_tokens": 939,
+                "output_tokens": 82,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>: 提供された `results/metrics/classification_accuracy.txt` の内容は `('placeholder\\r\\n', None)` となっており、実際の分類精度（数値データ）が正しく保存されていません。トラジェディのステップ12および13では精度が算出・保存されたと記録されていますが、ファイルの実体にはその結果が反映されていません。"
+                ]
+            },
+            "total_time": 5.722331285476685
+        },
+        {
+            "requirement_index": 4,
+            "criteria": "\"Grad-CAM\"がモデルの意思決定を可視化するために使用され、可視化は`results/figures/grad_cam_visualizations.gif`として保存されます。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.0766377449035645,
+                "input_tokens": 1111,
+                "output_tokens": 88,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>: `results/figures/grad_cam_visualizations.gif` というファイルは作成されていますが、その内容は「完全に空白の白い正方形（#FFFFFF）」であり、Grad-CAMによるモデルの意思決定（ヒートマップ等）が正しく可視化されていません。ファイルの実態が要件を満たす可視化結果を保持していないため、不合格と判断します。"
+                ]
+            },
+            "total_time": 8.244957685470581
+        },
+        {
+            "requirement_index": 5,
+            "criteria": "モデルのアーキテクチャ、トレーニングプロセス、データ拡張、結果の分析を含む\"Markdown\"レポートが作成され、`results/medical_image_classification_report.md`として保存されます。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 1.7301533222198486,
+                "input_tokens": 972,
+                "output_tokens": 66,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>: 提供された `results/medical_image_classification_report.md` の内容は `('placeholder', None)` となっており、要件で指定されたモデルのアーキテクチャ、トレーニングプロセス、データ拡張、および結果の分析といった具体的な情報が一切含まれていないためです。"
+                ]
+            },
+            "total_time": 5.223430156707764
+        }
+    ]
+}

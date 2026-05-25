@@ -1,0 +1,241 @@
+{
+    "name": "38_Object_Tracking_Siamese_OTB50_DL",
+    "query": "我需要使用孪生网络和OTB50数据集创建一个对象跟踪系统。OTB50数据集应在`src/data_loader.py`中加载。系统应包括数据增强步骤，如旋转和缩放，并在`src/data_loader.py`中执行。在`src/model.py`中实现孪生网络。超参数，如学习率和批量大小，应在`src/train.py`中调整。跟踪结果应保存为`results/tracking_results.txt`。使用OpenCV可视化跟踪结果，并将跟踪视频保存到`results/videos/`下。此外，创建一个全面的Markdown报告，其中包括数据预处理、模型训练和评估过程的详细信息，并将其保存为`results/object_tracking_report.md`。确保系统能够以最小的调整处理新的视频序列，以实现灵活的应用。Markdown报告应包括一个分析不同超参数对跟踪性能影响的部分。",
+    "tags": [
+        "Computer Vision"
+    ],
+    "requirements": [
+        {
+            "requirement_id": 0,
+            "prerequisites": [],
+            "criteria": "\"OTB50\"数据集在`src/data_loader.py`中加载。",
+            "category": "Dataset or Environment",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 1,
+            "prerequisites": [
+                0
+            ],
+            "criteria": "数据增强，如旋转和缩放，在`src/data_loader.py`中执行。",
+            "category": "Data preprocessing and postprocessing",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 2,
+            "prerequisites": [],
+            "criteria": "在`src/model.py`中实现一个\"Siamese\"网络。",
+            "category": "Machine Learning Method",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 3,
+            "prerequisites": [
+                0,
+                1,
+                2
+            ],
+            "criteria": "超参数，如学习率和批量大小，在`src/train.py`中调整。",
+            "category": "Machine Learning Method",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 4,
+            "prerequisites": [
+                0,
+                1,
+                2,
+                3
+            ],
+            "criteria": "跟踪结果保存为`results/tracking_results.txt`。",
+            "category": "Other",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 5,
+            "prerequisites": [
+                0,
+                1,
+                2,
+                3
+            ],
+            "criteria": "使用OpenCV可视化跟踪结果，并保存到`results/videos/`。",
+            "category": "Visualization",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 6,
+            "prerequisites": [
+                0,
+                1,
+                2,
+                3
+            ],
+            "criteria": "创建一个包含数据预处理、模型训练和评估过程的详细Markdown文档，并保存为`results/object_tracking_report.md`。",
+            "category": "Other",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 7,
+            "prerequisites": [
+                6
+            ],
+            "criteria": "Markdown报告应包括一个分析不同超参数对跟踪性能影响的部分。",
+            "satisfied": null
+        }
+    ],
+    "preferences": [
+        {
+            "preference_id": 0,
+            "criteria": "跟踪视频应以高分辨率保存，并包含突出显示跟踪对象的注释。",
+            "satisfied": null
+        },
+        {
+            "preference_id": 1,
+            "criteria": "确保系统能够以最小的修改处理新的视频序列，以实现灵活的使用场景。",
+            "satisfied": null
+        }
+    ],
+    "is_kaggle_api_needed": false,
+    "is_training_needed": true,
+    "is_web_navigation_needed": false,
+    "language": "Chinese",
+    "judge_stats": [
+        {
+            "requirement_index": 0,
+            "criteria": "\"OTB50\"数据集在`src/data_loader.py`中加载。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 11.00017237663269,
+                "input_tokens": 1133,
+                "output_tokens": 119,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n\n依据：提供的 `src/data_loader.py` 文件内容仅包含一个名为 `load_dataset` 的占位符函数，该函数返回一个固定的字典 `{\"dataset\": \"loaded\", \"notes\": requirement_notes()}`，并未包含任何实际加载“OTB50”数据集的代码逻辑。此外，轨迹证据也表明，尝试运行该脚本时因依赖缺失而失败，且依赖解决后并未重新执行以验证功能。因此，没有证据表明“OTB50”数据集在该文件中被实际加载。"
+                ]
+            },
+            "total_time": 70.37010979652405
+        },
+        {
+            "requirement_index": 1,
+            "criteria": "数据增强，如旋转和缩放，在`src/data_loader.py`中执行。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 9.119716167449951,
+                "input_tokens": 1122,
+                "output_tokens": 110,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n\n依据：`src/data_loader.py` 文件中的 `build_transforms` 函数仅返回一个包含字符串 `\"rotation\"`, `\"scaling\"`, `\"normalization\"` 的列表作为占位符。代码中并未实际导入 `torchvision.transforms` 或任何图像处理库，也未实现任何具体的图像变换操作（如 `RandomRotation`、`RandomResizedCrop` 等）。因此，数据增强功能并未被真正执行。"
+                ]
+            },
+            "total_time": 25.32614755630493
+        },
+        {
+            "requirement_index": 2,
+            "criteria": "在`src/model.py`中实现一个\"Siamese\"网络。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 13.559747695922852,
+                "input_tokens": 1003,
+                "output_tokens": 127,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n\n依据：提供的 `src/model.py` 文件内容仅包含一个用于基准测试的占位符实现，其核心函数 `build_model()` 返回的是字符串 `\"model placeholder\"` 或 `\"ResNet-18 imported from PyTorch\"`，而不是一个实际的 Siamese 网络类或结构定义。虽然轨迹证据提到执行时打印了包含“Siamese”网络层定义的结构，但该证据与当前提供的实际代码文件内容直接矛盾。评审必须基于提供的具体代码证据，而该代码中并未实现任何 Siamese 网络。"
+                ]
+            },
+            "total_time": 24.810354232788086
+        },
+        {
+            "requirement_index": 3,
+            "criteria": "超参数，如学习率和批量大小，在`src/train.py`中调整。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 10.37853193283081,
+                "input_tokens": 1155,
+                "output_tokens": 86,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n\n依据：提供的 `src/train.py` 文件内容是一个“最小语义实现”，仅包含一个简单的训练循环和保存工件的函数。代码中没有任何调整超参数（如学习率或批量大小）的逻辑。`train` 函数仅对步数进行累加，没有定义或使用任何可调整的模型超参数。因此，该要求未被满足。"
+                ]
+            },
+            "total_time": 21.909446239471436
+        },
+        {
+            "requirement_index": 4,
+            "criteria": "跟踪结果保存为`results/tracking_results.txt`。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 7.703819513320923,
+                "input_tokens": 826,
+                "output_tokens": 71,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n\n依据：提供的文件内容显示 `results/tracking_results.txt` 中仅包含字符串 `('placeholder\\r\\n', None)`，这明显是一个占位符或无效数据，并非实际的跟踪结果。虽然轨迹证据表明文件写入操作成功，但文件内容不符合“跟踪结果”的实质要求。"
+                ]
+            },
+            "total_time": 21.901907205581665
+        },
+        {
+            "requirement_index": 5,
+            "criteria": "使用OpenCV可视化跟踪结果，并保存到`results/videos/`。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 15.013676643371582,
+                "input_tokens": 1899,
+                "output_tokens": 128,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n\n依据：提供的代码证据中，没有任何文件（`data_loader.py`、`model.py`、`train.py`）包含使用OpenCV可视化跟踪结果并保存到`results/videos/`的代码实现。`train.py`中的`save_expected_artifacts`函数仅创建了文本文件（`tracking_results.txt`和`object_tracking_report.md`），并未生成视频文件。轨迹证据中提到的`visualize_results.py`脚本及其执行结果不在当前提供的代码文件内容中，因此无法作为当前代码满足要求的直接证据。"
+                ]
+            },
+            "total_time": 88.84810829162598
+        },
+        {
+            "requirement_index": 6,
+            "criteria": "创建一个包含数据预处理、模型训练和评估过程的详细Markdown文档，并保存为`results/object_tracking_report.md`。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 6.104276180267334,
+                "input_tokens": 915,
+                "output_tokens": 82,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n\n依据：提供的文件内容显示 `results/object_tracking_report.md` 的内容为 `('placeholder', None)`，这是一个占位符或空内容，而不是一个“包含数据预处理、模型训练和评估过程的详细Markdown文档”。虽然轨迹证据表明文件已成功生成并保存，但文件的实际内容不符合“详细Markdown文档”的要求。"
+                ]
+            },
+            "total_time": 33.17297410964966
+        },
+        {
+            "requirement_index": 7,
+            "criteria": "Markdown报告应包括一个分析不同超参数对跟踪性能影响的部分。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 10.040353059768677,
+                "input_tokens": 885,
+                "output_tokens": 84,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n\n依据：提供的文件内容证据显示，`object_tracking_report.md` 文件的内容为 `('placeholder', None)`，这表明该文件仅包含占位符文本，并未生成包含“分析不同超参数对跟踪性能影响的部分”的实际报告内容。虽然轨迹证据表明生成报告的指令已执行且无错误，但最终输出文件的内容不满足要求。"
+                ]
+            },
+            "total_time": 40.49395751953125
+        }
+    ]
+}

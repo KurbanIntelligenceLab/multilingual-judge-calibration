@@ -1,0 +1,219 @@
+{
+    "name": "54_Mock_OpenAI_API_Response_Analyzer_App",
+    "query": "Aynı sorgu için OpenAI API'sinin verebileceği farklı yanıtları analiz etmemi sağlayacak bir uygulama oluşturmak istiyorum. Ön yüz `src/frontend.py` içinde uygulanmalı ve bir kullanıcı ile bir LLM arasında bir konuşmayı liste olarak içermelidir. Her liste öğesi, büyük bir metin mesajı ekleyebileceğim bir metin alanı ve mesajın LLM'den mi yoksa kullanıcıdan mı olduğunu seçen bir açılır menü içermelidir. Bu işlevsellik `src/message_list.py` içinde ele alınmalıdır. Bu liste öğelerinin sayısı sınırsız olabilir, bu yüzden uygulama yüklendiğinde tek bir boş liste öğesiyle başlamalı ve gerektiğinde yeni liste öğeleri eklemek için bir düğme olmalıdır. Liste dışında, kullanıcı tarafından düzenlenebilen ve yalnızca 0 ile 100 arasındaki değerleri kabul eden bir sayısal alan `src/frontend.py` içinde uygulanmalıdır. Ayrıca, SUBMIT etiketli bir düğme olmalıdır. SUBMIT düğmesine tıkladığımda, tam konuşma OpenAI API'sine paralel olarak X kez gönderilmelidir, burada X, kullanıcının ön yüzde girdiği 0 ile 100 arasındaki sayıdır. Tüm API istekleri ve yanıtları `src/backend.py` içinde ele alınmalıdır. OpenAI API'sinden yanıtlar alındığında, `src/frontend_render.py` içinde genişletilebilir öğeler listesi olarak görüntülenmelidir. Örneğin, istek sayısını 10 olarak ayarlarsam, yanıtlar gelmeye başladığında, her biri istek numarası ile etiketlenmiş 10 öğe görünmelidir. Genişletildiğinde, belirli yanıtı göstermelidirler. OpenAI API'sinin bir akış döndürdüğünü unutmayın, bu nedenle yanıtlar ön yüze token bazında akmalı ve gerçek zamanlı olarak görüntülenmelidir. Bu işlevsellik `src/stream_handler.py` içinde uygulanmalıdır. `src/styles.css` içinde stil vermek için Tailwind kullanılmalı, ancak yüklenmemelidir. Bunun yerine, CDN sürümü kullanılmalıdır. OpenAI anahtar kullanımını hafifletmek için sahte LLM yanıtları kullanılmalıdır. Sahte LLM yanıtları `src/mock_llm.py` içinde üretilmelidir.",
+    "tags": [
+        "Natural Language Processing",
+        "Generative Models",
+        "Other"
+    ],
+    "requirements": [
+        {
+            "requirement_id": 0,
+            "prerequisites": [],
+            "criteria": "Ön yüz, kullanıcının büyük metin mesajları ekleyebileceği ve mesajın LLM'den mi yoksa kullanıcıdan mı olduğunu seçebileceği bir liste içermelidir ve `src/frontend.py` içinde uygulanmalıdır. Uygulama yüklendiğinde, liste tek bir boş öğeyle başlamalıdır.",
+            "category": "Human Computer Interaction",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 1,
+            "prerequisites": [
+                0
+            ],
+            "criteria": "Mesaj listesi, `src/message_list.py` içinde uygulanan yeni öğeler eklemek için bir düğme aracılığıyla yönetilen sınırsız sayıda öğeye izin vermelidir.",
+            "category": "Human Computer Interaction",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 2,
+            "prerequisites": [
+                0
+            ],
+            "criteria": "Arayüz, kullanıcının 0 ile 100 arasında bir sayısal değer girmesine izin vermelidir ve bu, kaç paralel API isteğinin gönderileceğini kontrol eder. Bu işlev `src/frontend.py` içinde uygulanmalıdır.",
+            "category": "Human Computer Interaction",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 3,
+            "prerequisites": [
+                0,
+                2
+            ],
+            "criteria": "SUBMIT düğmesi, konuşmanın X kez (X, sayısal giriş alanındaki değerdir) sahte LLM yanıtlarına gönderilmesini tetiklemelidir. Bu, `src/backend.py` içinden `src/mock_llm.py` içindeki sahte yanıt oluşturucusunu çağırarak ele alınmalıdır.",
+            "category": "Other",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 4,
+            "prerequisites": [
+                0,
+                2,
+                3
+            ],
+            "criteria": "Sahte yanıtlar `src/mock_llm.py` tarafından üretilmeli ve ardından her biri istek numarası ile etiketlenmiş genişletilebilir öğeler listesi olarak görüntülenmek üzere `src/frontend_render.py`'ye iletilmelidir.",
+            "category": "Human Computer Interaction",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 5,
+            "prerequisites": [
+                0,
+                2,
+                3,
+                4
+            ],
+            "criteria": "Yanıtlar ön yüze akmalı ve `src/stream_handler.py` içinde gerçek zamanlı olarak token bazında görüntülenmelidir.",
+            "category": "Other",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 6,
+            "prerequisites": [],
+            "criteria": "Ön yüz için stil vermek amacıyla `src/styles.css` içinde Tailwind kullanılmalı ve yükleme yapılmadan CDN üzerinden yüklenmelidir.",
+            "category": "Human Computer Interaction",
+            "satisfied": null
+        }
+    ],
+    "preferences": [
+        {
+            "preference_id": 0,
+            "criteria": "Kullanıcı arayüzü, Tailwind kullanarak temiz ve tutarlı bir stil korumalı, kolay gezilebilir bir tasarım sunmalıdır.",
+            "satisfied": null
+        },
+        {
+            "preference_id": 1,
+            "criteria": "API'den gelen akış yanıtları verimli olmalı, gecikme olmadan sorunsuz gerçek zamanlı güncellemeler sağlamalıdır.",
+            "satisfied": null
+        },
+        {
+            "preference_id": 2,
+            "criteria": "API istek ve yanıt işlemleri modüler olmalı, paralel istek sayısını ayarlamak gibi kolay değişikliklere izin vermelidir.",
+            "satisfied": null
+        }
+    ],
+    "is_kaggle_api_needed": false,
+    "is_training_needed": false,
+    "is_web_navigation_needed": false,
+    "resource": "https://github.com/Pythagora-io/gpt-pilot/wiki/How-to-write-a-good-initial-project-description",
+    "language": "Turkish",
+    "judge_stats": [
+        {
+            "requirement_index": 0,
+            "criteria": "Ön yüz, kullanıcının büyük metin mesajları ekleyebileceği ve mesajın LLM'den mi yoksa kullanıcıdan mı olduğunu seçebileceği bir liste içermelidir ve `src/frontend.py` içinde uygulanmalıdır. Uygulama yüklendiğinde, liste tek bir boş öğeyle başlamalıdır.",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.423352003097534,
+                "input_tokens": 1274,
+                "output_tokens": 122,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED> `src/frontend.py` içinde istenen ön yüz uygulanmamış. Dosya yalnızca gereksinimleri metin olarak `REQUIREMENT_CRITERIA` listesinde tutuyor ve `main()` fonksiyonu `{\"status\": \"ok\", \"notes\": ...}` döndürüyor; kullanıcıların büyük metin mesajları ekleyebileceği bir liste, LLM/kullanıcı seçimi veya uygulama açılışında tek boş öğeyle başlatılan bir arayüz bileşeni kodda yok."
+                ]
+            },
+            "total_time": 11.000544548034668
+        },
+        {
+            "requirement_index": 1,
+            "criteria": "Mesaj listesi, `src/message_list.py` içinde uygulanan yeni öğeler eklemek için bir düğme aracılığıyla yönetilen sınırsız sayıda öğeye izin vermelidir.",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.2008631229400635,
+                "input_tokens": 1266,
+                "output_tokens": 101,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>: `src/message_list.py` içinde mesaj listesi davranışını uygulayan hiçbir kod yok. Dosya yalnızca bir açıklama, `REQUIREMENT_CRITERIA` sabiti ve `main()` içinde `{\"status\": \"ok\", \"notes\": ...}` döndüren minimal bir iskelet içeriyor; yeni öğe ekleyen bir düğme, liste durumu veya sınırsız öğe yönetimi bulunmuyor."
+                ]
+            },
+            "total_time": 9.22742223739624
+        },
+        {
+            "requirement_index": 2,
+            "criteria": "Arayüz, kullanıcının 0 ile 100 arasında bir sayısal değer girmesine izin vermelidir ve bu, kaç paralel API isteğinin gönderileceğini kontrol eder. Bu işlev `src/frontend.py` içinde uygulanmalıdır.",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.5947091579437256,
+                "input_tokens": 1272,
+                "output_tokens": 118,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>: `src/frontend.py` içeriğinde bu işlevin gerçek bir arayüz uygulaması yok. Dosya yalnızca gereksinim metinlerini `REQUIREMENT_CRITERIA` içinde string olarak tutuyor ve `main()` sadece `{\"status\": \"ok\", \"notes\": ...}` döndürüyor. 0–100 aralığında sayısal giriş alanı, paralel API istek sayısını kontrol eden bir bileşen veya buna bağlı herhangi bir uygulama kodu görünmüyor."
+                ]
+            },
+            "total_time": 8.262800216674805
+        },
+        {
+            "requirement_index": 3,
+            "criteria": "SUBMIT düğmesi, konuşmanın X kez (X, sayısal giriş alanındaki değerdir) sahte LLM yanıtlarına gönderilmesini tetiklemelidir. Bu, `src/backend.py` içinden `src/mock_llm.py` içindeki sahte yanıt oluşturucusunu çağırarak ele alınmalıdır.",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 3.0143392086029053,
+                "input_tokens": 1609,
+                "output_tokens": 140,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED> `src/backend.py` içinde `src/mock_llm.py`'den herhangi bir fonksiyon import edilip çağrılmıyor; dosya yalnızca `REQUIREMENT_CRITERIA` metnini döndüren bir `main()` içeriyor. `src/mock_llm.py` de benzer şekilde sadece açıklama metni barındırıyor, sahte yanıt üreten bir oluşturucu fonksiyonu yok. Ayrıca SUBMIT düğmesinin sayısal girişteki X değerine göre konuşmayı X kez göndermesine dair hiçbir uygulama veya çağrı akışı kanıtı bulunmuyor."
+                ]
+            },
+            "total_time": 9.462355136871338
+        },
+        {
+            "requirement_index": 4,
+            "criteria": "Sahte yanıtlar `src/mock_llm.py` tarafından üretilmeli ve ardından her biri istek numarası ile etiketlenmiş genişletilebilir öğeler listesi olarak görüntülenmek üzere `src/frontend_render.py`'ye iletilmelidir.",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 3.261277437210083,
+                "input_tokens": 1595,
+                "output_tokens": 150,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED> `src/mock_llm.py` ve `src/frontend_render.py` gerçek işlevsellik içermiyor; her iki dosya da sadece gereksinim metnini `REQUIREMENT_CRITERIA` içinde döndüren minimal şablonlar. `src/mock_llm.py` içinde sahte yanıt üreten bir fonksiyon yok, `src/frontend_render.py` içinde bu yanıtları alıp “istek numarası” ile etiketlenmiş genişletilebilir liste öğeleri olarak render eden herhangi bir kod da bulunmuyor. Bu nedenle istenen `mock_llm.py -> frontend_render.py` akışı kodla kanıtlanmıyor."
+                ]
+            },
+            "total_time": 9.506051301956177
+        },
+        {
+            "requirement_index": 5,
+            "criteria": "Yanıtlar ön yüze akmalı ve `src/stream_handler.py` içinde gerçek zamanlı olarak token bazında görüntülenmelidir.",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.3025736808776855,
+                "input_tokens": 1273,
+                "output_tokens": 129,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>: `src/stream_handler.py` içinde gerçek bir akış/streaming mantığı yok. Dosya yalnızca `REQUIREMENT_CRITERIA` metnini döndüren basit bir `main()` içeriyor; token üretimi, parçalı iletim, frontend’e gerçek zamanlı gönderim veya görüntüleme için herhangi bir fonksiyon/kod bulunmuyor. Verilen içerikte sadece açıklama ve `\"status\": \"ok\"` döndüren yapı var; bu da gereksinimde istenen token-bazlı canlı akışı kanıtlamıyor."
+                ]
+            },
+            "total_time": 10.704453468322754
+        },
+        {
+            "requirement_index": 6,
+            "criteria": "Ön yüz için stil vermek amacıyla `src/styles.css` içinde Tailwind kullanılmalı ve yükleme yapılmadan CDN üzerinden yüklenmelidir.",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.1497628688812256,
+                "input_tokens": 1085,
+                "output_tokens": 107,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED> `src/styles.css` dosyasının gerçek içeriği okunamıyor (“we do not have a reader for .css”), bu yüzden Tailwind kullanımına dair kod kanıtı yok. Ayrıca verilen yürütme izinde Tailwind’in **CDN üzerinden, kurulum yapılmadan** yüklendiğini doğrulayan herhangi bir çıktı veya ağ/çalıştırma kanıtı bulunmadığı açıkça belirtilmiş. Bu nedenle ölçüt doğrulanamıyor."
+                ]
+            },
+            "total_time": 8.252403497695923
+        }
+    ]
+}

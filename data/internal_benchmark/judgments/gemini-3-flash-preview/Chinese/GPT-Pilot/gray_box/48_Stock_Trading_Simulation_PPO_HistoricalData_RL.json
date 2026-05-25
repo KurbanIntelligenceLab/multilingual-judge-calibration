@@ -1,0 +1,234 @@
+{
+    "name": "48_Stock_Trading_Simulation_PPO_HistoricalData_RL",
+    "query": "你好！我有兴趣使用近端策略优化（PPO）算法开发一个股票交易代理。这个想法是使用历史市场数据进行训练和测试。应该在`src/env.py`中实现一个股票交易模拟环境。近端策略优化（PPO）算法应该在`src/train.py`中实现。请将训练好的代理保存在`models/saved_models/`下。将所有交易决策记录在`results/trade_decisions.txt`中，并将总利润保存在`results/metrics/total_profit.txt`中。将利润曲线可视化并保存为`results/figures/profit_curve.png`。生成一个涵盖交易策略、利润和风险分析的报告，并保存为`results/trading_strategy_report.md`。使用Streamlit在`src/visualize.py`中实现一个交互工具，允许用户尝试不同参数并运行模拟。",
+    "tags": [
+        "Financial Analysis",
+        "Reinforcement Learning"
+    ],
+    "requirements": [
+        {
+            "requirement_id": 0,
+            "prerequisites": [],
+            "criteria": "在`src/env.py`中实现一个股票交易模拟环境。",
+            "category": "Dataset or Environment",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 1,
+            "prerequisites": [
+                0
+            ],
+            "criteria": "使用历史市场数据进行训练和测试。",
+            "category": "Dataset or Environment",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 2,
+            "prerequisites": [],
+            "criteria": "在`src/train.py`中实现“近端策略优化（PPO）”算法。",
+            "category": "Machine Learning Method",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 3,
+            "prerequisites": [
+                1,
+                2
+            ],
+            "criteria": "交易决策被记录并保存为`results/trade_decisions.txt`。",
+            "category": "Other",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 4,
+            "prerequisites": [
+                3
+            ],
+            "criteria": "总利润保存在`results/metrics/total_profit.txt`。",
+            "category": "Other",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 5,
+            "prerequisites": [
+                4
+            ],
+            "criteria": "利润曲线被可视化并保存为`results/figures/profit_curve.png`。",
+            "category": "Visualization",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 6,
+            "prerequisites": [
+                4
+            ],
+            "criteria": "生成一个包含交易策略、利润和风险分析的报告，并保存为`results/trading_strategy_report.md`。",
+            "category": "Other",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 7,
+            "prerequisites": [
+                1,
+                2
+            ],
+            "criteria": "在`src/visualize.py`中使用“Streamlit”实现一个交互工具，允许用户尝试不同参数并运行模拟。",
+            "category": "Human Computer Interaction",
+            "satisfied": null
+        }
+    ],
+    "preferences": [
+        {
+            "preference_id": 0,
+            "criteria": "利润曲线可视化应突出显示影响表现的重大交易或事件。",
+            "satisfied": null
+        },
+        {
+            "preference_id": 1,
+            "criteria": "报告应包括关于参数调整如何影响交易结果的见解。",
+            "satisfied": null
+        }
+    ],
+    "is_kaggle_api_needed": false,
+    "is_training_needed": true,
+    "is_web_navigation_needed": false,
+    "language": "Chinese",
+    "judge_stats": [
+        {
+            "requirement_index": 0,
+            "criteria": "在`src/env.py`中实现一个股票交易模拟环境。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 3.073533535003662,
+                "input_tokens": 1273,
+                "output_tokens": 127,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n\n**依据：**\n根据提供的 `src/env.py` 文件内容，该文件虽然存在，但其内部实现的是一个简单的 **Gridworld（网格世界）** 类（包含 `grid_size`, `start`, `end` 等属性），而非要求的**股票交易模拟环境**。代码中缺乏股票交易相关的核心逻辑，如价格数据处理、买入/卖出/持有动作空间、账户余额或持仓状态管理。虽然轨迹证据声称测试通过，但基于源代码内容的直接审查，该实现完全偏离了任务目标。"
+                ]
+            },
+            "total_time": 10.463472843170166
+        },
+        {
+            "requirement_index": 1,
+            "criteria": "使用历史市场数据进行训练和测试。",
+            "satisfied": true,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.8456063270568848,
+                "input_tokens": 1578,
+                "output_tokens": 151,
+                "accumulated_cost": 0.0,
+                "satisfied": true,
+                "reason": [
+                    "<SATISFIED>\n\n依据如下：\n1. **轨迹证据支持**：根据轨迹记录（Step 12 和 Step 14），系统成功运行了 `train_model.py` 和 `evaluate_model.py`。其中，训练脚本明确加载了 `data/processed/historical_market_data.csv`（历史市场数据），且评估脚本调用了历史测试集进行回测。\n2. **处理机制完备**：尽管在测试阶段出现了数据频率不一致的警告，但系统通过自动重采样（Resampling）成功处理了历史数据，并最终输出了评估指标（如 Sharpe Ratio），证明了历史数据在训练和测试流程中的有效应用。"
+                ]
+            },
+            "total_time": 8.766220569610596
+        },
+        {
+            "requirement_index": 2,
+            "criteria": "在`src/train.py`中实现“近端策略优化（PPO）”算法。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 3.9678661823272705,
+                "input_tokens": 1681,
+                "output_tokens": 213,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n\n依据：\n1. **代码内容缺失**：查看 `src/train.py` 的实际文件内容，该文件仅包含一个名为 `train` 的空循环函数（仅进行简单的加法运算 `score += step`）和生成占位文件的 `save_expected_artifacts` 函数。代码中完全没有实现 PPO 算法所需的神经网络定义、策略梯度计算、优势函数估计或任何深度学习框架（如 PyTorch 或 TensorFlow）的逻辑。\n2. **伪造实现**：文件开头的 `REQUIREMENT_CRITERIA` 和 `KEYWORDS` 仅是文本声明，并非算法实现。\n3. **证据冲突**：虽然轨迹证据（Trajectory Evidence）提到了 `Policy Loss` 等运行日志，但当前工作区中 `src/train.py` 的源代码与描述严重不符，实际代码是一个为了通过基准测试而编写的“最小语义实现”（Minimal semantic implementation），并未包含真正的 PPO 算法。"
+                ]
+            },
+            "total_time": 11.125457048416138
+        },
+        {
+            "requirement_index": 3,
+            "criteria": "交易决策被记录并保存为`results/trade_decisions.txt`。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.8563802242279053,
+                "input_tokens": 954,
+                "output_tokens": 100,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n\n**依据：**\n虽然项目结构中存在 `results/trade_decisions.txt` 文件，且轨迹证据显示脚本执行成功，但该文件的实际内容仅为 `('placeholder\\r\\n', None)`。这表明该文件目前仅包含占位符数据，并未记录真实的交易决策（如买入/卖出指令、价格、时间戳等具体业务数据）。因此，该要求未被实质性满足。"
+                ]
+            },
+            "total_time": 8.361307382583618
+        },
+        {
+            "requirement_index": 4,
+            "criteria": "总利润保存在`results/metrics/total_profit.txt`。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.51607608795166,
+                "input_tokens": 1010,
+                "output_tokens": 85,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n\n依据：根据提供的文件内容证据，`results/metrics/total_profit.txt` 的内容为 `('placeholder\\r\\n', None)`。这表明该文件仅包含占位符信息，并未记录实际的数值型总利润数据。虽然轨迹显示脚本运行成功，但最终生成的文件内容并未满足存储“总利润”这一实质性要求。"
+                ]
+            },
+            "total_time": 7.219084978103638
+        },
+        {
+            "requirement_index": 5,
+            "criteria": "利润曲线被可视化并保存为`results/figures/profit_curve.png`。",
+            "satisfied": true,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.809356451034546,
+                "input_tokens": 1231,
+                "output_tokens": 170,
+                "accumulated_cost": 0.0,
+                "satisfied": true,
+                "reason": [
+                    "<SATISFIED>\n\n**依据：**\n1. **文件系统证据**：在项目结构（Project Tree）中，明确存在 `results/figures/profit_curve.png` 文件。\n2. **执行轨迹证据**：根据轨迹记录（Step 12），执行 `python scripts/visualize_results.py` 后，终端明确输出“Profit curve successfully saved to results/figures/profit_curve.png”，且未报告任何异常。\n3. **测试验证**：Step 11 的单元测试验证了绘图函数的路径处理和保存逻辑。\n\n虽然在读取该图片内容时出现了 API 错误（Provider error），但这属于评审系统的多模态解析问题，不影响“文件已成功生成并保存到指定路径”这一事实的判定。"
+                ]
+            },
+            "total_time": 9.817269086837769
+        },
+        {
+            "requirement_index": 6,
+            "criteria": "生成一个包含交易策略、利润和风险分析的报告，并保存为`results/trading_strategy_report.md`。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.153015375137329,
+                "input_tokens": 976,
+                "output_tokens": 81,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n\n依据：根据提供的文件内容证据，`results/trading_strategy_report.md` 的内容仅为 `('placeholder', None)`，这表明该文件虽然存在，但并未包含实际的交易策略、利润和风险分析内容，仅是一个占位符。尽管执行轨迹显示脚本运行成功，但最终生成的文件内容未达到要求。"
+                ]
+            },
+            "total_time": 7.056527376174927
+        },
+        {
+            "requirement_index": 7,
+            "criteria": "在`src/visualize.py`中使用“Streamlit”实现一个交互工具，允许用户尝试不同参数并运行模拟。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.790635108947754,
+                "input_tokens": 1258,
+                "output_tokens": 163,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n\n**依据：**\n1. **代码内容缺失**：根据提供的 `src/visualize.py` 文件内容，该文件仅包含一段用于基准测试评审的最小化语义实现（Minimal semantic implementation），并没有实际导入 `streamlit` 库，也没有实现任何交互式 UI 逻辑或模拟运行功能。\n2. **环境反馈验证**：轨迹证据显示，在尝试运行 `streamlit run src/visualize.py` 时，系统抛出了 `ModuleNotFoundError: No module named 'streamlit'`，且静态检查也提示无法导入该模块。\n3. **功能未达成**：该文件目前只是一个占位符脚本，未满足“允许用户尝试不同参数并运行模拟”的交互工具要求。"
+                ]
+            },
+            "total_time": 7.970360517501831
+        }
+    ]
+}

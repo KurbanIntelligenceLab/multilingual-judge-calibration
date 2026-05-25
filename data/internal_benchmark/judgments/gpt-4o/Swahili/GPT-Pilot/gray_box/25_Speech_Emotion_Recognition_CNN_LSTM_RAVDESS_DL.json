@@ -1,0 +1,211 @@
+{
+    "name": "25_Speech_Emotion_Recognition_CNN_LSTM_RAVDESS_DL",
+    "query": "Ninatafuta mradi wa utambuzi wa hisia za sauti kwa kutumia mfano wa CNN-LSTM na seti ya data ya RAVDESS, ambayo inapaswa kupakuliwa kutoka Kaggle au [kiungo hiki cha Hugging Face](https://huggingface.co/datasets/xbgoose/ravdess). Mradi unapaswa kupakia seti ya data na kufanya usindikaji wa sauti thabiti (kuondoa kelele na kuweka sawa) na uchimbaji wa vipengele vya MFCC, vilivyotekelezwa katika `src/data_loader.py`. Mfano wa CNN-LSTM unapaswa kutekelezwa katika `src/model.py`. Usahihi wa utambuzi unapaswa kuhifadhiwa katika `results/metrics/recognition_accuracy.txt`, na matriki ya mkanganyiko inapaswa kuzalishwa na kuhifadhiwa kama `results/figures/confusion_matrix.png`. Zaidi ya hayo, API ya ndani inayofaa mtumiaji inapaswa kuundwa kwa kutumia Flask ili kuruhusu watumiaji kupakia faili za sauti na kupokea matokeo ya utambuzi wa hisia, na utekelezaji unajumuishwa katika `src/hci.py`.",
+    "tags": [
+        "Audio Processing",
+        "Classification"
+    ],
+    "requirements": [
+        {
+            "requirement_id": 0,
+            "prerequisites": [],
+            "criteria": "Seti ya data ya \"RAVDESS\" inapakiwa katika `src/data_loader.py`, ambayo inapakuliwa kutoka Kaggle au [kiungo hiki cha Hugging Face](https://huggingface.co/datasets/xbgoose/ravdess).",
+            "category": "Dataset or Environment",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 1,
+            "prerequisites": [
+                0
+            ],
+            "criteria": "Usindikaji wa sauti, ikiwa ni pamoja na kuondoa kelele na kuweka sawa, unatekelezwa katika `src/data_loader.py`.",
+            "category": "Data preprocessing and postprocessing",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 2,
+            "prerequisites": [
+                0,
+                1
+            ],
+            "criteria": "Uchimbaji wa vipengele vya MFCC unatekelezwa katika `src/data_loader.py`.",
+            "category": "Data preprocessing and postprocessing",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 3,
+            "prerequisites": [],
+            "criteria": "Mfano wa \"CNN-LSTM\" unatekelezwa katika `src/model.py`.",
+            "category": "Machine Learning Method",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 4,
+            "prerequisites": [
+                2,
+                3
+            ],
+            "criteria": "Usahihi wa utambuzi unahifadhiwa katika `results/metrics/recognition_accuracy.txt`.",
+            "category": "Performance Metrics",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 5,
+            "prerequisites": [
+                2,
+                3,
+                4
+            ],
+            "criteria": "Matriki ya mkanganyiko inazalishwa na kuhifadhiwa kama `results/figures/confusion_matrix.png`.",
+            "category": "Visualization",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 6,
+            "prerequisites": [
+                2,
+                3
+            ],
+            "criteria": "API ya ndani inaundwa kwa kutumia \"Flask\" ili kuruhusu watumiaji kupakia faili za sauti na kupokea matokeo ya utambuzi wa hisia. Utekelezaji unapaswa kujumuishwa katika `src/hci.py`.",
+            "category": "Human Computer Interaction",
+            "satisfied": null
+        }
+    ],
+    "preferences": [
+        {
+            "preference_id": 0,
+            "criteria": "Hatua ya usindikaji wa sauti inapaswa kuwa thabiti, kupunguza kelele kwa ufanisi huku ikihifadhi uadilifu wa ishara za sauti.",
+            "satisfied": null
+        },
+        {
+            "preference_id": 1,
+            "criteria": "API ya ndani inapaswa kuwa rafiki kwa mtumiaji, ikiwa na maelekezo wazi ya kupakia faili na kufasiri matokeo.",
+            "satisfied": null
+        }
+    ],
+    "is_kaggle_api_needed": true,
+    "is_training_needed": true,
+    "is_web_navigation_needed": true,
+    "language": "Swahili",
+    "judge_stats": [
+        {
+            "requirement_index": 0,
+            "criteria": "Seti ya data ya \"RAVDESS\" inapakiwa katika `src/data_loader.py`, ambayo inapakuliwa kutoka Kaggle au [kiungo hiki cha Hugging Face](https://huggingface.co/datasets/xbgoose/ravdess).",
+            "satisfied": true,
+            "llm_stats": {
+                "cost": 0.0042475,
+                "inference_time": 1.9012422561645508,
+                "input_tokens": 1395,
+                "output_tokens": 76,
+                "accumulated_cost": 0.00317,
+                "satisfied": true,
+                "reason": [
+                    "<SATISFIED>: The requirement that the \"RAVDESS\" dataset is loaded in `src/data_loader.py` is satisfied. The content of the `data_loader.py` file explicitly mentions that the RAVDESS dataset is loaded, and the trajectory evidence confirms that the dataset was successfully downloaded from Kaggle or the provided Hugging Face link without any errors."
+                ]
+            },
+            "total_time": 9.984121084213257
+        },
+        {
+            "requirement_index": 1,
+            "criteria": "Usindikaji wa sauti, ikiwa ni pamoja na kuondoa kelele na kuweka sawa, unatekelezwa katika `src/data_loader.py`.",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.00457,
+                "inference_time": 1.7046740055084229,
+                "input_tokens": 1452,
+                "output_tokens": 94,
+                "accumulated_cost": 0.0070175,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>: While the `src/data_loader.py` file is involved in audio processing, including noise removal and normalization, the evidence indicates that there are warnings about sample rate mismatches and noise removal parameters being outside the recommended range. These issues suggest that the implementation may not be fully robust or optimal, potentially affecting the quality of the processed audio. Therefore, the requirement for effective audio processing, including noise removal and normalization, is not fully satisfied."
+                ]
+            },
+            "total_time": 6.190551996231079
+        },
+        {
+            "requirement_index": 2,
+            "criteria": "Uchimbaji wa vipengele vya MFCC unatekelezwa katika `src/data_loader.py`.",
+            "satisfied": true,
+            "llm_stats": {
+                "cost": 0.0042825,
+                "inference_time": 1.282524585723877,
+                "input_tokens": 1373,
+                "output_tokens": 85,
+                "accumulated_cost": 0.010207500000000001,
+                "satisfied": true,
+                "reason": [
+                    "<SATISFIED>: The requirement for MFCC feature extraction to be implemented in `src/data_loader.py` is satisfied. The content of the file indicates that MFCC feature extraction is indeed a part of the implementation, as noted in the `REQUIREMENT_CRITERIA`. Additionally, the trajectory evidence confirms that the MFCC feature extraction was executed successfully without any major issues, further supporting that this requirement is met."
+                ]
+            },
+            "total_time": 4.834709882736206
+        },
+        {
+            "requirement_index": 3,
+            "criteria": "Mfano wa \"CNN-LSTM\" unatekelezwa katika `src/model.py`.",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0044275,
+                "inference_time": 1.6647398471832275,
+                "input_tokens": 1331,
+                "output_tokens": 110,
+                "accumulated_cost": 0.013830000000000002,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>: The requirement specifies that a \"CNN-LSTM\" model should be implemented in `src/model.py`. However, the content of the file provided does not show any actual implementation of a CNN-LSTM model. Instead, it contains a placeholder function `build_model()` that returns a string \"model placeholder\" and checks for the presence of \"resnet-18\" in keywords, which is unrelated to CNN-LSTM. There is no evidence of CNN or LSTM layers being defined or used in the code snippet provided."
+                ]
+            },
+            "total_time": 7.44420051574707
+        },
+        {
+            "requirement_index": 4,
+            "criteria": "Usahihi wa utambuzi unahifadhiwa katika `results/metrics/recognition_accuracy.txt`.",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0037600000000000003,
+                "inference_time": 2.1796817779541016,
+                "input_tokens": 1180,
+                "output_tokens": 81,
+                "accumulated_cost": 0.017442500000000003,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>: The requirement that recognition accuracy is stored in `results/metrics/recognition_accuracy.txt` is not satisfied. The content of the file is shown as `('placeholder\\r\\n', None)`, which indicates that the actual recognition accuracy data is missing or not properly recorded. This placeholder suggests that the file does not contain the expected accuracy results from the model's training process."
+                ]
+            },
+            "total_time": 8.854793310165405
+        },
+        {
+            "requirement_index": 5,
+            "criteria": "Matriki ya mkanganyiko inazalishwa na kuhifadhiwa kama `results/figures/confusion_matrix.png`.",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0042075,
+                "inference_time": 1.6736023426055908,
+                "input_tokens": 1335,
+                "output_tokens": 87,
+                "accumulated_cost": 0.020945000000000005,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>: Although the file `results/figures/confusion_matrix.png` was successfully saved, there is an error when attempting to read the image file, indicating it is unsupported or invalid. Additionally, there was a warning about incomplete input data during the generation of the confusion matrix, which suggests potential accuracy issues. These factors indicate that the requirement for a valid and accurate confusion matrix file is not fully met."
+                ]
+            },
+            "total_time": 6.323768377304077
+        },
+        {
+            "requirement_index": 6,
+            "criteria": "API ya ndani inaundwa kwa kutumia \"Flask\" ili kuruhusu watumiaji kupakia faili za sauti na kupokea matokeo ya utambuzi wa hisia. Utekelezaji unapaswa kujumuishwa katika `src/hci.py`.",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0050325000000000005,
+                "inference_time": 2.1204023361206055,
+                "input_tokens": 1473,
+                "output_tokens": 135,
+                "accumulated_cost": 0.025382500000000006,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>: The requirement specifies that a local API should be created using \"Flask\" to allow users to upload audio files and receive emotion recognition results, and this implementation should be included in `src/hci.py`. However, the content of `src/hci.py` provided does not show any implementation of a Flask API. It only contains a minimal semantic implementation with a function `main()` that returns a status and notes, but no actual Flask API setup or routes for handling audio file uploads and processing. The trajectory evidence mentions successful execution and emotion recognition, but without the specific Flask implementation in the provided code, the requirement is not fully satisfied."
+                ]
+            },
+            "total_time": 7.930938482284546
+        }
+    ]
+}

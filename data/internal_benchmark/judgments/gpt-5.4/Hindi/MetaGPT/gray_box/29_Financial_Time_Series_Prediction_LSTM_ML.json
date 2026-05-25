@@ -1,0 +1,212 @@
+{
+    "name": "29_Financial_Time_Series_Prediction_LSTM_ML",
+    "query": "क्या आप मुझे एक वित्तीय समय श्रृंखला भविष्यवाणी प्रणाली स्थापित करने में मदद कर सकते हैं जो LSTM मॉडल का उपयोग करती है, कुछ वास्तविक दुनिया के वित्तीय विश्लेषण के साथ, जैसे स्टॉक की कीमतें या बिटकॉइन की कीमतें? पहले, हमें डेटा को साफ करने की आवश्यकता होगी, किसी भी गायब मानों और बाहरी मानों का ध्यान रखते हुए `src/data_loader.py` में। फिर, आइए समय श्रृंखला डेटा को एक पर्यवेक्षित शिक्षण प्रारूप में परिवर्तित करें, `src/data_loader.py` में एक समय विंडो का उपयोग करके। अंत में भविष्यवाणी के लिए एक LSTM मॉडल लागू करें, जहां LSTM मॉडल `src/model.py` में लागू किया गया है। एक बार जब आपके पास भविष्यवाणियाँ हो जाएँ, तो परिणामों को `results/prediction_results.text` के रूप में सहेजें। भविष्यवाणी परिणामों को विज़ुअलाइज़ करने के लिए एक इंटरैक्टिव डैशबोर्ड बनाएं और कार्यान्वयन को `src/dashboard.py` में सहेजें। अंत में, मैं एक मार्कडाउन दस्तावेज़ की सराहना करूंगा जो मॉडल आर्किटेक्चर, प्रशिक्षण प्रक्रिया, और प्रदर्शन विश्लेषण दिखाता है, जिसे `results/report.md` के रूप में सहेजा गया है। सुनिश्चित करें कि सिस्टम संसाधनों को बचाने के लिए स्वचालित रूप से डैश ऐप की शुरुआत और समाप्ति का प्रबंधन करता है। बहुत धन्यवाद!",
+    "tags": [
+        "Financial Analysis",
+        "Supervised Learning",
+        "Time Series Forecasting"
+    ],
+    "requirements": [
+        {
+            "requirement_id": 0,
+            "prerequisites": [],
+            "criteria": "कुछ वास्तविक दुनिया के वित्तीय समय श्रृंखला डेटा (जैसे, \"स्टॉक की कीमतें\" या \"बिटकॉइन की कीमतें\") `src/data_loader.py` में लोड किया जाता है।",
+            "category": "Dataset or Environment",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 1,
+            "prerequisites": [
+                0
+            ],
+            "criteria": "डेटा सफाई की जाती है, जिसमें `src/data_loader.py` में गायब मानों और बाहरी मानों का प्रबंधन शामिल है।",
+            "category": "Data preprocessing and postprocessing",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 2,
+            "prerequisites": [
+                1
+            ],
+            "criteria": "एक समय विंडो का उपयोग करके समय श्रृंखला डेटा को एक पर्यवेक्षित शिक्षण समस्या में परिवर्तित किया जाता है। कृपया इसे `src/data_loader.py` में लागू करें।",
+            "category": "Data preprocessing and postprocessing",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 3,
+            "prerequisites": [],
+            "criteria": "वित्तीय समय श्रृंखला भविष्यवाणी के लिए एक \"LSTM\" मॉडल का उपयोग किया जाता है और इसे `src/model.py` में लागू किया गया है।",
+            "category": "Machine Learning Method",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 4,
+            "prerequisites": [
+                2,
+                3
+            ],
+            "criteria": "भविष्यवाणी परिणाम `results/prediction_results.txt` के रूप में सहेजे जाते हैं।",
+            "category": "Other",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 5,
+            "prerequisites": [
+                2,
+                3
+            ],
+            "criteria": "भविष्यवाणी परिणामों का एक इंटरैक्टिव विज़ुअलाइज़ेशन डैशबोर्ड \"Dash\" का उपयोग करके बनाया जाता है। कार्यान्वयन `src/visualize.py` में सहेजा गया है।",
+            "category": "Visualization",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 6,
+            "prerequisites": [
+                2,
+                3,
+                4,
+                5
+            ],
+            "criteria": "मॉडल आर्किटेक्चर, प्रशिक्षण प्रक्रिया, और प्रदर्शन विश्लेषण युक्त एक मार्कडाउन दस्तावेज़ उत्पन्न किया जाता है, और इसे `results/report.md` के रूप में सहेजा जाता है।",
+            "category": "Other",
+            "satisfied": null
+        }
+    ],
+    "preferences": [
+        {
+            "preference_id": 0,
+            "criteria": "\"Dash\" डैशबोर्ड उपयोगकर्ताओं को भविष्यवाणी परिणामों के साथ इंटरैक्ट करने की अनुमति देनी चाहिए, विभिन्न समय फ्रेम की खोज करने और विस्तृत विश्लेषण के लिए विशिष्ट अवधियों में ज़ूम करने में सक्षम होना चाहिए।",
+            "satisfied": null
+        },
+        {
+            "preference_id": 1,
+            "criteria": "विकास के दौरान, सिस्टम को अनावश्यक संसाधन उपयोग को रोकने के लिए \"Dash\" एप्लिकेशन की शुरुआत और समाप्ति को स्वचालित रूप से प्रबंधित करना चाहिए।",
+            "satisfied": null
+        }
+    ],
+    "is_kaggle_api_needed": false,
+    "is_training_needed": true,
+    "is_web_navigation_needed": false,
+    "language": "Hindi",
+    "judge_stats": [
+        {
+            "requirement_index": 0,
+            "criteria": "कुछ वास्तविक दुनिया के वित्तीय समय श्रृंखला डेटा (जैसे, \"स्टॉक की कीमतें\" या \"बिटकॉइन की कीमतें\") `src/data_loader.py` में लोड किया जाता है।",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 1.897451400756836,
+                "input_tokens": 1165,
+                "output_tokens": 88,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>: `src/data_loader.py` के वास्तविक कोड में कोई वित्तीय टाइम-सीरीज़ डेटा लोडिंग नहीं है। `load_dataset()` सिर्फ `{\"dataset\": \"loaded\", ...}` जैसा placeholder लौटाता है, और `\"Bitcoin prices\"` केवल `KEYWORDS`/notes में टेक्स्ट रूप में मौजूद है, न कि वास्तविक data-loading logic के रूप में।"
+                ]
+            },
+            "total_time": 9.179245233535767
+        },
+        {
+            "requirement_index": 1,
+            "criteria": "डेटा सफाई की जाती है, जिसमें `src/data_loader.py` में गायब मानों और बाहरी मानों का प्रबंधन शामिल है।",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 1.8785419464111328,
+                "input_tokens": 1101,
+                "output_tokens": 74,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED> `src/data_loader.py` में केवल placeholder `load_dataset()` है जो `{\"dataset\": \"loaded\", \"notes\": ...}` लौटाता है; missing values या outliers को handle करने वाला कोई वास्तविक cleaning code नहीं है. उपलब्ध trajectory evidence भी cleaning functionality के किसी execution/proof को नहीं दिखाता."
+                ]
+            },
+            "total_time": 7.488250732421875
+        },
+        {
+            "requirement_index": 2,
+            "criteria": "एक समय विंडो का उपयोग करके समय श्रृंखला डेटा को एक पर्यवेक्षित शिक्षण समस्या में परिवर्तित किया जाता है। कृपया इसे `src/data_loader.py` में लागू करें।",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.070951223373413,
+                "input_tokens": 1108,
+                "output_tokens": 84,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED> `src/data_loader.py` में time-window आधारित time-series → supervised transformation का कोई वास्तविक implementation नहीं है। केवल placeholder functions हैं: `load_dataset()` एक dummy dict लौटाता है और `build_transforms()` unrelated list (`[\"rotation\", \"scaling\", \"normalization\"]`) लौटाता है; sliding window/sequence-label generation logic मौजूद नहीं है।"
+                ]
+            },
+            "total_time": 7.027660369873047
+        },
+        {
+            "requirement_index": 3,
+            "criteria": "वित्तीय समय श्रृंखला भविष्यवाणी के लिए एक \"LSTM\" मॉडल का उपयोग किया जाता है और इसे `src/model.py` में लागू किया गया है।",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.357675075531006,
+                "input_tokens": 1146,
+                "output_tokens": 91,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED> `src/model.py` में वास्तविक LSTM implementation नहीं है। उपलब्ध कोड में केवल `KEYWORDS = [\"LSTM\", \"lstm\"]` और `build_model()` से `\"model placeholder\"` return होता है; कोई `LSTM` class/import/model architecture नहीं दिखता। Trajectory reference निर्णायक साक्ष्य नहीं है, जबकि अंतिम फ़ाइल सामग्री requirement को support नहीं करती।"
+                ]
+            },
+            "total_time": 10.016075849533081
+        },
+        {
+            "requirement_index": 4,
+            "criteria": "भविष्यवाणी परिणाम `results/prediction_results.txt` के रूप में सहेजे जाते हैं।",
+            "satisfied": true,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 1.4324970245361328,
+                "input_tokens": 848,
+                "output_tokens": 56,
+                "accumulated_cost": 0.0,
+                "satisfied": true,
+                "reason": [
+                    "<SATISFIED> `results/prediction_results.txt` फ़ाइल मौजूद है और उसमें सामग्री भी है: `('placeholder\\r\\n', None)`। साथ ही trajectory evidence में inference के बाद इसी path पर results लिखे जाने की पुष्टि है।"
+                ]
+            },
+            "total_time": 6.126373529434204
+        },
+        {
+            "requirement_index": 5,
+            "criteria": "भविष्यवाणी परिणामों का एक इंटरैक्टिव विज़ुअलाइज़ेशन डैशबोर्ड \"Dash\" का उपयोग करके बनाया जाता है। कार्यान्वयन `src/visualize.py` में सहेजा गया है।",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 1.8641884326934814,
+                "input_tokens": 1067,
+                "output_tokens": 86,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED> `src/visualize.py` मौजूद है, लेकिन इसमें वास्तविक Dash dashboard implementation नहीं है। फ़ाइल केवल placeholder code रखती है (`KEYWORDS = [\"Dash\", \"lstm\"]`, `main()` returning metadata) और न तो `dash` import करती है, न app/layout/callbacks बनाती है, न prediction results का interactive visualization दिखाती है।"
+                ]
+            },
+            "total_time": 7.474305629730225
+        },
+        {
+            "requirement_index": 6,
+            "criteria": "मॉडल आर्किटेक्चर, प्रशिक्षण प्रक्रिया, और प्रदर्शन विश्लेषण युक्त एक मार्कडाउन दस्तावेज़ उत्पन्न किया जाता है, और इसे `results/report.md` के रूप में सहेजा जाता है।",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 1.357980489730835,
+                "input_tokens": 912,
+                "output_tokens": 58,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>: `results/report.md` मौजूद है, लेकिन उसकी सामग्री केवल `('placeholder', None)` है। इसमें मॉडल आर्किटेक्चर, प्रशिक्षण प्रक्रिया, और प्रदर्शन विश्लेषण वाला वास्तविक मार्कडाउन दस्तावेज़ नहीं है।"
+                ]
+            },
+            "total_time": 6.168503999710083
+        }
+    ]
+}

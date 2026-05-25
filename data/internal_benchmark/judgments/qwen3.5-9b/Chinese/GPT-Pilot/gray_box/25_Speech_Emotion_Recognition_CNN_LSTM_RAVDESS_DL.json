@@ -1,0 +1,211 @@
+{
+    "name": "25_Speech_Emotion_Recognition_CNN_LSTM_RAVDESS_DL",
+    "query": "我正在寻找一个使用CNN-LSTM模型和RAVDESS数据集的语音情感识别项目，该数据集应从Kaggle或[这个Hugging Face链接](https://huggingface.co/datasets/xbgoose/ravdess)下载。项目应加载数据集并执行稳健的音频预处理（去噪和归一化）以及MFCC特征提取，实现在`src/data_loader.py`中。CNN-LSTM模型应实现在`src/model.py`中。识别准确率应保存在`results/metrics/recognition_accuracy.txt`中，并生成混淆矩阵，保存为`results/figures/confusion_matrix.png`。此外，应使用Flask创建一个用户友好的本地API，允许用户上传音频文件并接收情感识别结果，实现在`src/hci.py`中。",
+    "tags": [
+        "Audio Processing",
+        "Classification"
+    ],
+    "requirements": [
+        {
+            "requirement_id": 0,
+            "prerequisites": [],
+            "criteria": "\"RAVDESS\"数据集在`src/data_loader.py`中加载，从Kaggle或[这个Hugging Face链接](https://huggingface.co/datasets/xbgoose/ravdess)下载。",
+            "category": "Dataset or Environment",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 1,
+            "prerequisites": [
+                0
+            ],
+            "criteria": "音频预处理，包括去噪和归一化，实现在`src/data_loader.py`中。",
+            "category": "Data preprocessing and postprocessing",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 2,
+            "prerequisites": [
+                0,
+                1
+            ],
+            "criteria": "MFCC特征提取实现在`src/data_loader.py`中。",
+            "category": "Data preprocessing and postprocessing",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 3,
+            "prerequisites": [],
+            "criteria": "\"CNN-LSTM\"模型实现在`src/model.py`中。",
+            "category": "Machine Learning Method",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 4,
+            "prerequisites": [
+                2,
+                3
+            ],
+            "criteria": "识别准确率保存在`results/metrics/recognition_accuracy.txt`中。",
+            "category": "Performance Metrics",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 5,
+            "prerequisites": [
+                2,
+                3,
+                4
+            ],
+            "criteria": "混淆矩阵生成并保存为`results/figures/confusion_matrix.png`。",
+            "category": "Visualization",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 6,
+            "prerequisites": [
+                2,
+                3
+            ],
+            "criteria": "使用\"Flask\"创建一个本地API，允许用户上传音频文件并接收情感识别结果。实现应包含在`src/hci.py`中。",
+            "category": "Human Computer Interaction",
+            "satisfied": null
+        }
+    ],
+    "preferences": [
+        {
+            "preference_id": 0,
+            "criteria": "音频预处理步骤应稳健，有效减少噪音，同时保持语音信号的完整性。",
+            "satisfied": null
+        },
+        {
+            "preference_id": 1,
+            "criteria": "本地API应用户友好，提供清晰的文件上传和结果解释说明。",
+            "satisfied": null
+        }
+    ],
+    "is_kaggle_api_needed": true,
+    "is_training_needed": true,
+    "is_web_navigation_needed": true,
+    "language": "Chinese",
+    "judge_stats": [
+        {
+            "requirement_index": 0,
+            "criteria": "\"RAVDESS\"数据集在`src/data_loader.py`中加载，从Kaggle或[这个Hugging Face链接](https://huggingface.co/datasets/xbgoose/ravdess)下载。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 33.26345181465149,
+                "input_tokens": 919,
+                "output_tokens": 1741,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n依据：`src/data_loader.py` 中的 `load_dataset()` 函数仅返回占位字典 `{\"dataset\": \"loaded\", \"notes\": requirement_notes()}`，并未包含从 Kaggle 或 Hugging Face 链接下载 RAVDESS 数据集的实际代码逻辑。代码注释明确标注为 \"Minimal dataset loader placeholder\"，缺乏必要的下载和加载实现。"
+                ]
+            },
+            "total_time": 100.0722484588623
+        },
+        {
+            "requirement_index": 1,
+            "criteria": "音频预处理，包括去噪和归一化，实现在`src/data_loader.py`中。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 43.62349534034729,
+                "input_tokens": 893,
+                "output_tokens": 2048,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    ""
+                ]
+            },
+            "total_time": 73.455730676651
+        },
+        {
+            "requirement_index": 2,
+            "criteria": "MFCC特征提取实现在`src/data_loader.py`中。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 8.547737836837769,
+                "input_tokens": 886,
+                "output_tokens": 1075,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n代码中仅通过 `REQUIREMENT_CRITERIA` 列表声明了该要求，但 `load_dataset` 和 `build_transforms` 函数仅为占位符（placeholder），未包含实际的 MFCC 提取逻辑（如调用 `librosa` 或 `scipy` 库），因此未满足实现要求。"
+                ]
+            },
+            "total_time": 70.83081793785095
+        },
+        {
+            "requirement_index": 3,
+            "criteria": "\"CNN-LSTM\"模型实现在`src/model.py`中。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 29.687466382980347,
+                "input_tokens": 806,
+                "output_tokens": 2048,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    ""
+                ]
+            },
+            "total_time": 59.85693693161011
+        },
+        {
+            "requirement_index": 4,
+            "criteria": "识别准确率保存在`results/metrics/recognition_accuracy.txt`中。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 9.04215693473816,
+                "input_tokens": 636,
+                "output_tokens": 1103,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n依据：虽然文件 `results/metrics/recognition_accuracy.txt` 存在于工作区结构中，但其实际内容为 `('placeholder\\r\\n', None)`，这表明文件中存储的是占位符而非实际的识别准确率数值，因此未满足保存准确率的要求。"
+                ]
+            },
+            "total_time": 41.761632204055786
+        },
+        {
+            "requirement_index": 5,
+            "criteria": "混淆矩阵生成并保存为`results/figures/confusion_matrix.png`。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 10.15328073501587,
+                "input_tokens": 842,
+                "output_tokens": 1259,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n依据：文件 `results/figures/confusion_matrix.png` 虽然存在于工作区中，但其内容并非有效的图像数据，而是包含错误日志的文本字符串（`litellm.BadRequestError`）。错误信息明确指出“图像无法处理（possibly corrupt）”，表明混淆矩阵生成失败，未成功保存有效图片。"
+                ]
+            },
+            "total_time": 60.503780126571655
+        },
+        {
+            "requirement_index": 6,
+            "criteria": "使用\"Flask\"创建一个本地API，允许用户上传音频文件并接收情感识别结果。实现应包含在`src/hci.py`中。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 23.352004289627075,
+                "input_tokens": 825,
+                "output_tokens": 1284,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n代码未满足要求。虽然 `src/hci.py` 文件存在，但其内容仅包含 `pathlib` 导入、`REQUIREMENT_CRITERIA` 变量定义及 `main` 函数，并未实际导入 `Flask` 模块或创建 API 路由。文件中缺少 `from flask import Flask`、应用实例初始化、路由装饰器（如 `@app.route`）及处理文件上传的逻辑，无法实现音频上传与情感识别结果返回的功能。"
+                ]
+            },
+            "total_time": 84.78526139259338
+        }
+    ]
+}

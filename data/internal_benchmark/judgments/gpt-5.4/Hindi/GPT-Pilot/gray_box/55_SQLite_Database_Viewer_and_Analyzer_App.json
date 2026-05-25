@@ -1,0 +1,429 @@
+{
+    "name": "55_SQLite_Database_Viewer_and_Analyzer_App",
+    "query": "मैं एक ऐसा ऐप बनाना चाहता हूँ जो उपयोगकर्ताओं को SQLite डेटाबेस में संग्रहीत AI विकास डेटा को देखने और विश्लेषण करने में सक्षम बनाता है। फ्रंटएंड (जो `src/frontend.py` में लागू किया गया है) पर, उपयोगकर्ता या तो अपने डिवाइस से एक नई SQLite डेटाबेस अपलोड करके, जिसमें AI मॉडल प्रशिक्षण लॉग या प्रॉम्प्ट-प्रतिक्रिया डेटा शामिल है, या `src/cache.py` में कैश की गई पहले से अपलोड की गई डेटाबेस का चयन करके, डेटाबेस देख सकते हैं। इस तरह, उपयोगकर्ता को हर बार डेटाबेस अपलोड करने की आवश्यकता नहीं होगी जब वे इसे विश्लेषण करना चाहते हैं। यदि एक नई डेटाबेस अपलोड की जाती है, तो वे इसे नाम दे सकते हैं, और फ़ाइल को बैकएंड (`src/backend.py`) पर भेजा जाएगा और भविष्य के उपयोग के लिए संग्रहीत किया जाएगा। एक बार डेटाबेस अपलोड हो जाने के बाद, उपयोगकर्ता इसके साथ इंटरैक्ट कर सकते हैं। उपयोगकर्ता को `app` तालिका से AI मॉडल या ऐप्स की एक सूची देखनी चाहिए। उन्हें एक ऐप का चयन करने और `development_planning` तालिका से इसके विकास कार्यों को देखने में सक्षम होना चाहिए। एक कार्य का चयन करने के बाद, वे इसके साथ जुड़े सभी विकास चरणों को देख सकते हैं। अंत में, एक चरण का चयन करने पर विस्तृत डेटा जैसे `prompt_path`, `messages`, `llm_response`, और `prompt_data` प्रदर्शित होगा, जिसमें उपयुक्त जानकारी फ्रंटएंड (जो `src/frontend_render.py` में है) पर प्रस्तुत की जाएगी।\nSQLite डेटाबेस हमेशा इस संरचना का पालन करेगा: `app` तालिका में डेटाबेस में संग्रहीत सभी ऐप्स होते हैं। प्रत्येक ऐप के पास कई विकास कार्य होते हैं जो `development_planning` तालिका में `development_plan` कुंजी के तहत एक एरे के रूप में संग्रहीत होते हैं। प्रत्येक एरे आइटम तीन कुंजी-मूल्य जोड़े के साथ एक JSON ऑब्जेक्ट होता है: `description`, `user_review_goal`, और `programming_goal`। प्रत्येक विकास कार्य में कई विकास चरण होते हैं, जो `development_steps` तालिका में संग्रहीत होते हैं और `app_id` फ़ील्ड का उपयोग करके `app` तालिका से जुड़े होते हैं।\nचुनौती यह है कि विकास कार्य और विकास चरण के बीच कोई सीधा संबंध नहीं है। इसलिए, `src/backend_logic.py` में, सभी विकास चरणों को पुनः प्राप्त करने और फिर `prompt_path` फ़ील्ड द्वारा विभाजित करने की आवश्यकता है। प्रत्येक विकास कार्य `prompt_path` मान `development/task/breakdown.prompt` के साथ शुरू होता है, इसलिए विकास चरणों को छोटे सूचियों में विभाजित करके समूहित किया जा सकता है, जहां प्रत्येक `prompt_path` के बराबर `development/task/breakdown.prompt` के साथ चरण से शुरू होता है। यह प्रत्येक कार्य के लिए सही विकास चरणों का सेट देगा।\nप्रत्येक विकास चरण में निम्नलिखित मान होते हैं, जिन्हें फ्रंटएंड (`src/frontend_render.py`) पर प्रदर्शित करने की आवश्यकता होती है:\n- `prompt_path`: एक स्ट्रिंग।\n- `messages`: JSON ऑब्जेक्ट्स की एक एरे।\n- `llm_response`: एक JSON ऑब्जेक्ट।\n- `prompt_data`: एक JSON ऑब्जेक्ट।\n`messages` एरे में हमेशा `content` और `role` कुंजियों के साथ JSON ऑब्जेक्ट्स होंगे। फ्रंटएंड को बड़े टेक्स्ट फ़ील्ड में `content` प्रदर्शित करना चाहिए, जिसमें `role` को एक लेबल के रूप में दिखाया जाना चाहिए। `llm_response` ऑब्जेक्ट में हमेशा एक `text` कुंजी होगी, जिसे संभावित रूप से लंबे स्ट्रिंग्स को दिखाने के लिए एक टेक्स्ट एरिया के रूप में प्रदर्शित किया जाना चाहिए। `prompt_data` ऑब्जेक्ट में विभिन्न कुंजी-मूल्य जोड़े हो सकते हैं, और प्रत्येक को उपयोगकर्ता को उपयुक्त प्रारूप में प्रदर्शित किया जाना चाहिए।",
+    "tags": [
+        "Other"
+    ],
+    "requirements": [
+        {
+            "requirement_id": 0,
+            "prerequisites": [],
+            "criteria": "फ्रंटएंड `src/frontend.py` में लागू किया गया है और उपयोगकर्ताओं को एक नई SQLite डेटाबेस अपलोड करने या `src/cache.py` से पहले से कैश की गई एक का चयन करने की अनुमति देता है। चयनित फ़ाइल को भविष्य के उपयोग के लिए सहेजा और सुलभ होना चाहिए।",
+            "category": "Human Computer Interaction",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 1,
+            "prerequisites": [
+                0
+            ],
+            "criteria": "जब एक नई डेटाबेस अपलोड की जाती है, तो उपयोगकर्ता इसे एक नाम दे सकते हैं, और फ़ाइल को बैकएंड (`src/backend.py`) पर भेजा जाता है और भविष्य के उपयोग के लिए संग्रहीत किया जाता है।",
+            "category": "Other",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 2,
+            "prerequisites": [
+                0,
+                1
+            ],
+            "criteria": "पहले से अपलोड की गई डेटाबेस `src/cache.py` में कैश की जाती हैं और बिना पुनः अपलोड किए चयनित की जा सकती हैं।",
+            "category": "Dataset or Environment",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 3,
+            "prerequisites": [
+                0,
+                1,
+                2
+            ],
+            "criteria": "एक बार डेटाबेस अपलोड या चयनित हो जाने के बाद, उपयोगकर्ता डेटाबेस के भीतर `app` तालिका से AI मॉडल या ऐप्स की एक सूची देख सकते हैं।",
+            "category": "Other",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 4,
+            "prerequisites": [
+                0,
+                1,
+                2,
+                3
+            ],
+            "criteria": "उपयोगकर्ता एक ऐप का चयन कर सकते हैं और `development_planning` तालिका से इसके विकास कार्यों को देख सकते हैं।",
+            "category": "Other",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 5,
+            "prerequisites": [
+                0,
+                1,
+                2,
+                3,
+                4
+            ],
+            "criteria": "एक कार्य का चयन करने के बाद, उपयोगकर्ता सभी संबंधित विकास चरणों को देख सकते हैं, जो `src/frontend_render.py` में लागू फ्रंटएंड पर प्रदर्शित होते हैं।",
+            "category": "Human Computer Interaction",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 6,
+            "prerequisites": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5
+            ],
+            "criteria": "एक विकास चरण का चयन करने पर विस्तृत डेटा जैसे `prompt_path`, `messages`, `llm_response`, और `prompt_data` प्रदर्शित होता है, जो फ्रंटएंड (`src/frontend_render.py`) पर उपयुक्त रूप से प्रस्तुत किया जाता है।",
+            "category": "Human Computer Interaction",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 7,
+            "prerequisites": [],
+            "criteria": "`src/backend_logic.py` में, `development_steps` तालिका से सभी विकास चरणों को पुनः प्राप्त करें और उन्हें `prompt_path` फ़ील्ड का उपयोग करके विकास कार्य द्वारा समूहित करें, जो `development/task/breakdown.prompt` से शुरू होता है।",
+            "category": "Other",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 8,
+            "prerequisites": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6
+            ],
+            "criteria": "`messages` एरे को फ्रंटएंड (`src/frontend_render.py`) पर प्रदर्शित किया जाता है, जिसमें प्रत्येक संदेश के लिए बड़े टेक्स्ट फ़ील्ड में `content` और एक लेबल के रूप में `role` दिखाया जाता है।",
+            "category": "Human Computer Interaction",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 9,
+            "prerequisites": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6
+            ],
+            "criteria": "`llm_response` ऑब्जेक्ट जिसमें `text` कुंजी होती है, को फ्रंटएंड (`src/frontend_render.py`) पर एक टेक्स्ट एरिया में प्रदर्शित किया जाता है ताकि संभावित रूप से लंबे स्ट्रिंग्स को समायोजित किया जा सके।",
+            "category": "Human Computer Interaction",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 10,
+            "prerequisites": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6
+            ],
+            "criteria": "`prompt_data` ऑब्जेक्ट को इसके कुंजी-मूल्य जोड़े के साथ उपयुक्त प्रारूप में फ्रंटएंड (`src/frontend_render.py`) पर प्रदर्शित किया जाता है।",
+            "category": "Human Computer Interaction",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 11,
+            "prerequisites": [],
+            "criteria": "SQLite डेटाबेस निर्दिष्ट संरचना का पालन करता है जिसमें `app`, `development_planning`, और `development_steps` तालिकाएँ होती हैं, जैसा कि प्रोजेक्ट क्वेरी में वर्णित है।",
+            "category": "Dataset or Environment",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 12,
+            "prerequisites": [
+                11
+            ],
+            "criteria": "`app` तालिका में प्रत्येक ऐप के पास कई विकास कार्य होते हैं जो `development_planning` तालिका में `development_plan` कुंजी के तहत एक एरे के रूप में संग्रहीत होते हैं।",
+            "category": "Dataset or Environment",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 13,
+            "prerequisites": [
+                11
+            ],
+            "criteria": "प्रत्येक विकास कार्य में कई विकास चरण होते हैं जो `development_steps` तालिका में संग्रहीत होते हैं और `app_id` फ़ील्ड का उपयोग करके `app` तालिका से जुड़े होते हैं।",
+            "category": "Dataset or Environment",
+            "satisfied": null
+        }
+    ],
+    "preferences": [
+        {
+            "preference_id": 0,
+            "criteria": "फ्रंटएंड इंटरफ़ेस को डेटाबेस के साथ आसान इंटरैक्शन की अनुमति देनी चाहिए, यह सुनिश्चित करते हुए कि उपयोगकर्ता ऐप्स, कार्यों, और चरणों के बीच आसानी से नेविगेट कर सकें।",
+            "satisfied": null
+        },
+        {
+            "preference_id": 1,
+            "criteria": "सिस्टम को बड़े SQLite डेटाबेस को कुशलतापूर्वक संभालना चाहिए, यह सुनिश्चित करते हुए कि बड़े डेटा सेट के साथ प्रदर्शन बनाए रखा जाए।",
+            "satisfied": null
+        },
+        {
+            "preference_id": 2,
+            "criteria": "जानकारी को फ्रंटएंड पर सहज और उपयोगकर्ता-मित्रवत तरीके से प्रस्तुत किया जाना चाहिए, यह सुनिश्चित करते हुए कि इंटरैक्शन में आसानी हो।",
+            "satisfied": null
+        },
+        {
+            "preference_id": 3,
+            "criteria": "विकास चरणों का समूह `src/backend_logic.py` में लागू तर्क के अनुसार प्रत्येक कार्य के लिए सही चरणों के सेट को सटीक रूप से प्रतिबिंबित करना चाहिए।",
+            "satisfied": null
+        }
+    ],
+    "is_kaggle_api_needed": false,
+    "is_training_needed": false,
+    "is_web_navigation_needed": false,
+    "resource": "https://github.com/Pythagora-io/gpt-pilot/wiki/How-to-write-a-good-initial-project-description",
+    "language": "Hindi",
+    "judge_stats": [
+        {
+            "requirement_index": 0,
+            "criteria": "फ्रंटएंड `src/frontend.py` में लागू किया गया है और उपयोगकर्ताओं को एक नई SQLite डेटाबेस अपलोड करने या `src/cache.py` से पहले से कैश की गई एक का चयन करने की अनुमति देता है। चयनित फ़ाइल को भविष्य के उपयोग के लिए सहेजा और सुलभ होना चाहिए।",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 1.6645610332489014,
+                "input_tokens": 1530,
+                "output_tokens": 68,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED> `src/frontend.py` और `src/cache.py` में केवल requirement text लौटाने वाला minimal placeholder code है; upload/select/save/cache functionality का कोई वास्तविक implementation नहीं है। साथ ही execution evidence भी नहीं है कि SQLite DB upload, cached selection, या future access काम करता है।"
+                ]
+            },
+            "total_time": 9.386984825134277
+        },
+        {
+            "requirement_index": 1,
+            "criteria": "जब एक नई डेटाबेस अपलोड की जाती है, तो उपयोगकर्ता इसे एक नाम दे सकते हैं, और फ़ाइल को बैकएंड (`src/backend.py`) पर भेजा जाता है और भविष्य के उपयोग के लिए संग्रहीत किया जाता है।",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.201284885406494,
+                "input_tokens": 1267,
+                "output_tokens": 84,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>: `src/backend.py` में वास्तविक upload handling, user-provided database name स्वीकार करना, file receive/store करना, या persistence logic नहीं है। फ़ाइल सिर्फ `REQUIREMENT_CRITERIA` लौटाने वाला minimal stub है (`main()` केवल `{\"status\": \"ok\", ...}` देता है), इसलिए backend storage requirement का साक्ष्य नहीं मिलता।"
+                ]
+            },
+            "total_time": 9.070412874221802
+        },
+        {
+            "requirement_index": 2,
+            "criteria": "पहले से अपलोड की गई डेटाबेस `src/cache.py` में कैश की जाती हैं और बिना पुनः अपलोड किए चयनित की जा सकती हैं।",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.363588571548462,
+                "input_tokens": 1175,
+                "output_tokens": 68,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>: `src/cache.py` में वास्तविक कैशिंग लॉजिक नहीं है। फाइल में केवल `REQUIREMENT_CRITERIA`, `requirement_notes()` और `main()` जैसी placeholder सामग्री है; किसी uploaded database को save/load/list/select करने का कोई implementation नहीं दिखता।"
+                ]
+            },
+            "total_time": 7.565849542617798
+        },
+        {
+            "requirement_index": 3,
+            "criteria": "एक बार डेटाबेस अपलोड या चयनित हो जाने के बाद, उपयोगकर्ता डेटाबेस के भीतर `app` तालिका से AI मॉडल या ऐप्स की एक सूची देख सकते हैं।",
+            "satisfied": true,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 1.8407597541809082,
+                "input_tokens": 907,
+                "output_tokens": 63,
+                "accumulated_cost": 0.0,
+                "satisfied": true,
+                "reason": [
+                    "<SATISFIED>: साक्ष्य के अनुसार डेटाबेस upload/selection के बाद `app` तालिका से रिकॉर्ड पढ़े गए और apps/AI models की सूची fetch/render हुई; हालिया execution/UI flow में कोई query, missing table, या schema error रिपोर्ट नहीं हुआ।"
+                ]
+            },
+            "total_time": 9.247863531112671
+        },
+        {
+            "requirement_index": 4,
+            "criteria": "उपयोगकर्ता एक ऐप का चयन कर सकते हैं और `development_planning` तालिका से इसके विकास कार्यों को देख सकते हैं।",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 1.8598716259002686,
+                "input_tokens": 872,
+                "output_tokens": 71,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>: उपलब्ध साक्ष्य में ऐप चयन के बाद `development_planning` तालिका से tasks fetch/display होने का कोई प्रत्यक्ष प्रमाण नहीं है। trajectory evidence भी स्पष्ट रूप से कहता है कि execution/loading/saving evidence अनुपस्थित है, इसलिए requirement पूरी होना सत्यापित नहीं किया जा सकता।"
+                ]
+            },
+            "total_time": 6.940569877624512
+        },
+        {
+            "requirement_index": 5,
+            "criteria": "एक कार्य का चयन करने के बाद, उपयोगकर्ता सभी संबंधित विकास चरणों को देख सकते हैं, जो `src/frontend_render.py` में लागू फ्रंटएंड पर प्रदर्शित होते हैं।",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.248750686645508,
+                "input_tokens": 1359,
+                "output_tokens": 79,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>: `src/frontend_render.py` में वास्तविक frontend rendering logic नहीं है। फ़ाइल केवल `REQUIREMENT_CRITERIA` strings और `main()` में `{\"status\": \"ok\", ...}` return करती है; task selection के बाद development steps को fetch/render करने वाला कोई UI code, component, या display logic मौजूद नहीं है।"
+                ]
+            },
+            "total_time": 8.201456308364868
+        },
+        {
+            "requirement_index": 6,
+            "criteria": "एक विकास चरण का चयन करने पर विस्तृत डेटा जैसे `prompt_path`, `messages`, `llm_response`, और `prompt_data` प्रदर्शित होता है, जो फ्रंटएंड (`src/frontend_render.py`) पर उपयुक्त रूप से प्रस्तुत किया जाता है।",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.294281482696533,
+                "input_tokens": 1645,
+                "output_tokens": 94,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>: `src/frontend_render.py` में कोई वास्तविक frontend rendering logic नहीं है। फ़ाइल सिर्फ `REQUIREMENT_CRITERIA` नाम की strings लौटाती है (`main()` → `{\"status\": \"ok\", \"notes\": ...}`), लेकिन `prompt_path`, `messages`, `llm_response`, और `prompt_data` को चयन के बाद प्रदर्शित करने वाला कोई UI/code मौजूद नहीं है।"
+                ]
+            },
+            "total_time": 12.528033018112183
+        },
+        {
+            "requirement_index": 7,
+            "criteria": "`src/backend_logic.py` में, `development_steps` तालिका से सभी विकास चरणों को पुनः प्राप्त करें और उन्हें `prompt_path` फ़ील्ड का उपयोग करके विकास कार्य द्वारा समूहित करें, जो `development/task/breakdown.prompt` से शुरू होता है।",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.3303580284118652,
+                "input_tokens": 1356,
+                "output_tokens": 95,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>: `src/backend_logic.py` में वास्तविक SQLite query/grouping logic नहीं है। फ़ाइल सिर्फ requirement text लौटाती है (`REQUIREMENT_CRITERIA`, `requirement_notes()`, `main()`), लेकिन `development_steps` तालिका से data retrieve करने, `prompt_path` पर `development/task/breakdown.prompt` prefix से filter करने, या task-wise group करने का कोई implementation नहीं दिखता।"
+                ]
+            },
+            "total_time": 7.875906705856323
+        },
+        {
+            "requirement_index": 8,
+            "criteria": "`messages` एरे को फ्रंटएंड (`src/frontend_render.py`) पर प्रदर्शित किया जाता है, जिसमें प्रत्येक संदेश के लिए बड़े टेक्स्ट फ़ील्ड में `content` और एक लेबल के रूप में `role` दिखाया जाता है।",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.0456035137176514,
+                "input_tokens": 1385,
+                "output_tokens": 70,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>: `src/frontend_render.py` में केवल requirement strings और `main()` है; `messages` array को render करने वाला कोई UI code नहीं है। प्रत्येक message के `content` को large text field और `role` को label के रूप में दिखाने का कोई implementation/syntax मौजूद नहीं।"
+                ]
+            },
+            "total_time": 7.980058670043945
+        },
+        {
+            "requirement_index": 9,
+            "criteria": "`llm_response` ऑब्जेक्ट जिसमें `text` कुंजी होती है, को फ्रंटएंड (`src/frontend_render.py`) पर एक टेक्स्ट एरिया में प्रदर्शित किया जाता है ताकि संभावित रूप से लंबे स्ट्रिंग्स को समायोजित किया जा सके।",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.3966667652130127,
+                "input_tokens": 1388,
+                "output_tokens": 80,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>: `src/frontend_render.py` में वास्तविक UI/rendering कोड नहीं है। फ़ाइल केवल requirement strings लौटाती है (`REQUIREMENT_CRITERIA`) और `main()` में metadata return करती है; `llm_response[\"text\"]` को किसी text area/widget में प्रदर्शित करने का कोई implementation साक्ष्य नहीं है।"
+                ]
+            },
+            "total_time": 8.642698526382446
+        },
+        {
+            "requirement_index": 10,
+            "criteria": "`prompt_data` ऑब्जेक्ट को इसके कुंजी-मूल्य जोड़े के साथ उपयुक्त प्रारूप में फ्रंटएंड (`src/frontend_render.py`) पर प्रदर्शित किया जाता है।",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 1.751331090927124,
+                "input_tokens": 1331,
+                "output_tokens": 68,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>: `src/frontend_render.py` में वास्तविक frontend rendering logic नहीं है; यह केवल requirement strings return करता है. साथ ही trajectory evidence में भी `prompt_data` rendering/format expectation mismatch वाली test failure बताई गई है, इसलिए key-value pairs का उपयुक्त display सिद्ध नहीं होता।"
+                ]
+            },
+            "total_time": 6.468978404998779
+        },
+        {
+            "requirement_index": 11,
+            "criteria": "SQLite डेटाबेस निर्दिष्ट संरचना का पालन करता है जिसमें `app`, `development_planning`, और `development_steps` तालिकाएँ होती हैं, जैसा कि प्रोजेक्ट क्वेरी में वर्णित है।",
+            "satisfied": true,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 1.3362998962402344,
+                "input_tokens": 895,
+                "output_tokens": 66,
+                "accumulated_cost": 0.0,
+                "satisfied": true,
+                "reason": [
+                    "<SATISFIED>: साक्ष्य में workspace root पर `app`, `development_planning`, और `development_steps` मौजूद हैं, और trajectory evidence के अनुसार SQLite schema inspection/query में इन तालिकाओं के संदर्भ मिले तथा कोई missing table, schema mismatch, या migration error रिपोर्ट नहीं हुई।"
+                ]
+            },
+            "total_time": 7.20648717880249
+        },
+        {
+            "requirement_index": 12,
+            "criteria": "`app` तालिका में प्रत्येक ऐप के पास कई विकास कार्य होते हैं जो `development_planning` तालिका में `development_plan` कुंजी के तहत एक एरे के रूप में संग्रहीत होते हैं।",
+            "satisfied": true,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 3.5781002044677734,
+                "input_tokens": 972,
+                "output_tokens": 107,
+                "accumulated_cost": 0.0,
+                "satisfied": true,
+                "reason": [
+                    "<SATISFIED>: साक्ष्य के अनुसार `app` ↔ `development_planning` संबंध के लिए संबंधित migration `20250311120000_update_app_and_development_planning.sql` बिना त्रुटि चला, और बाद की DB जाँच खास तौर पर यह सत्यापित करती रही कि योजनाएँ `development_planning.development_plan` के तहत संग्रहीत हैं। उपलब्ध साक्ष्य में कहीं भी इस field structure या array-based storage के टूटने का संकेत नहीं है।"
+                ]
+            },
+            "total_time": 9.552189111709595
+        },
+        {
+            "requirement_index": 13,
+            "criteria": "प्रत्येक विकास कार्य में कई विकास चरण होते हैं जो `development_steps` तालिका में संग्रहीत होते हैं और `app_id` फ़ील्ड का उपयोग करके `app` तालिका से जुड़े होते हैं।",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.2021713256835938,
+                "input_tokens": 1010,
+                "output_tokens": 85,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>: साक्ष्य दिखाता है कि `development_steps` relation अभी `app_id`-based नहीं है। Trajectory में `CreateDevelopmentStep(...)` inserts में `project_id` इस्तेमाल होने का उल्लेख है, और system design TODO में साफ लिखा है कि `development_steps` relation को `project_id` से `app_id` में migrate करना अभी pending है।"
+                ]
+            },
+            "total_time": 8.102692604064941
+        }
+    ]
+}

@@ -1,0 +1,429 @@
+{
+    "name": "55_SQLite_Database_Viewer_and_Analyzer_App",
+    "query": "我想创建一个应用程序，使用户能够查看和分析存储在SQLite数据库中的AI开发数据。在前端（在`src/frontend.py`中实现），用户应该可以通过从设备中选择文件上传新的SQLite数据库，包括AI模型训练日志或提示-响应数据，或者选择之前上传的缓存数据库（在`src/cache.py`中）。这样，用户就不需要每次想分析时都上传数据库。如果上传了新的数据库，他们可以命名它，文件将被发送到后端（`src/backend.py`）并存储以供将来使用。一旦数据库上传，用户可以与之交互。用户应该看到一个来自`app`表的AI模型或应用程序列表。他们应该能够选择一个应用程序，并从`development_planning`表中查看其开发任务。选择任务后，他们可以查看与之相关的所有开发步骤。最后，选择一个步骤将显示详细数据，如`prompt_path`、`messages`、`llm_response`和`prompt_data`，并在前端（在`src/frontend_render.py`中）呈现适当的信息。\nSQLite数据库将始终遵循此结构：`app`表包含数据库中存储的所有应用程序。每个应用程序都有多个开发任务，存储为`development_planning`表中的键`development_plan`下的数组。每个数组项是一个具有三个键值对的JSON对象：`description`、`user_review_goal`和`programming_goal`。每个开发任务包含许多开发步骤，这些步骤存储在`development_steps`表中，并使用`app_id`字段链接到`app`表。\n挑战在于开发任务和开发步骤之间没有直接连接。因此，在`src/backend_logic.py`中，需要检索所有开发步骤，然后通过`prompt_path`字段进行拆分。每个开发任务都以`prompt_path`值`development/task/breakdown.prompt`开始，因此可以通过将步骤列表拆分为较小的列表来分组，其中每个列表以具有`prompt_path`等于`development/task/breakdown.prompt`的步骤开始。这将为每个任务提供正确的开发步骤集。\n每个开发步骤包含以下值，需要在前端（`src/frontend_render.py`中）显示：\n- `prompt_path`：一个字符串。\n- `messages`：一个JSON对象数组。\n- `llm_response`：一个JSON对象。\n- `prompt_data`：一个JSON对象。\n`messages`数组将始终具有键`content`和`role`的JSON对象。前端应该在大文本字段中显示`content`，并将`role`显示为标签。`llm_response`对象将始终具有`text`键，应该显示为文本区域以显示可能的长字符串。`prompt_data`对象可能具有各种键值对，每个都应该以适当的格式显示给用户。",
+    "tags": [
+        "Other"
+    ],
+    "requirements": [
+        {
+            "requirement_id": 0,
+            "prerequisites": [],
+            "criteria": "前端在`src/frontend.py`中实现，允许用户上传新的SQLite数据库或从`src/cache.py`中选择之前缓存的数据库。选择的文件应保存并可供将来使用。",
+            "category": "Human Computer Interaction",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 1,
+            "prerequisites": [
+                0
+            ],
+            "criteria": "上传新数据库时，用户可以为其命名，文件将发送到后端（`src/backend.py`）并存储以供将来使用。",
+            "category": "Other",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 2,
+            "prerequisites": [
+                0,
+                1
+            ],
+            "criteria": "之前上传的数据库缓存在`src/cache.py`中，可以选择而无需重新上传。",
+            "category": "Dataset or Environment",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 3,
+            "prerequisites": [
+                0,
+                1,
+                2
+            ],
+            "criteria": "一旦数据库上传或选择，用户可以查看数据库中`app`表的AI模型或应用程序列表。",
+            "category": "Other",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 4,
+            "prerequisites": [
+                0,
+                1,
+                2,
+                3
+            ],
+            "criteria": "用户可以选择一个应用程序，并从`development_planning`表中查看其开发任务。",
+            "category": "Other",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 5,
+            "prerequisites": [
+                0,
+                1,
+                2,
+                3,
+                4
+            ],
+            "criteria": "选择任务后，用户可以查看所有相关的开发步骤，这些步骤在前端实现的`src/frontend_render.py`中显示。",
+            "category": "Human Computer Interaction",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 6,
+            "prerequisites": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5
+            ],
+            "criteria": "选择开发步骤会显示详细数据，包括`prompt_path`、`messages`、`llm_response`和`prompt_data`，在前端（`src/frontend_render.py`中）适当呈现。",
+            "category": "Human Computer Interaction",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 7,
+            "prerequisites": [],
+            "criteria": "在`src/backend_logic.py`中，从`development_steps`表中检索所有开发步骤，并使用以`development/task/breakdown.prompt`开头的`prompt_path`字段按开发任务分组。",
+            "category": "Other",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 8,
+            "prerequisites": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6
+            ],
+            "criteria": "`messages`数组在前端（`src/frontend_render.py`中）显示，显示`content`在大文本字段中，并将`role`作为每个消息的标签。",
+            "category": "Human Computer Interaction",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 9,
+            "prerequisites": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6
+            ],
+            "criteria": "具有`text`键的`llm_response`对象在前端（`src/frontend_render.py`中）显示为文本区域，以容纳可能的长字符串。",
+            "category": "Human Computer Interaction",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 10,
+            "prerequisites": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6
+            ],
+            "criteria": "`prompt_data`对象以适当的格式显示其键值对在前端（`src/frontend_render.py`中）。",
+            "category": "Human Computer Interaction",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 11,
+            "prerequisites": [],
+            "criteria": "SQLite数据库遵循项目查询中描述的结构，包括`app`、`development_planning`和`development_steps`表。",
+            "category": "Dataset or Environment",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 12,
+            "prerequisites": [
+                11
+            ],
+            "criteria": "`app`表中的每个应用程序都有多个开发任务，存储为`development_planning`表中的键`development_plan`下的数组。",
+            "category": "Dataset or Environment",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 13,
+            "prerequisites": [
+                11
+            ],
+            "criteria": "每个开发任务包含许多开发步骤，存储在`development_steps`表中，并使用`app_id`字段链接到`app`表。",
+            "category": "Dataset or Environment",
+            "satisfied": null
+        }
+    ],
+    "preferences": [
+        {
+            "preference_id": 0,
+            "criteria": "前端界面应允许轻松与数据库交互，确保用户可以顺利在应用程序、任务和步骤之间导航。",
+            "satisfied": null
+        },
+        {
+            "preference_id": 1,
+            "criteria": "系统应有效处理大型SQLite数据库，确保在处理大型数据集时性能保持。",
+            "satisfied": null
+        },
+        {
+            "preference_id": 2,
+            "criteria": "信息应在前端以直观和用户友好的方式呈现，确保交互的便利性。",
+            "satisfied": null
+        },
+        {
+            "preference_id": 3,
+            "criteria": "开发步骤的分组应准确反映每个任务的正确步骤集，按照在`src/backend_logic.py`中实现的逻辑。",
+            "satisfied": null
+        }
+    ],
+    "is_kaggle_api_needed": false,
+    "is_training_needed": false,
+    "is_web_navigation_needed": false,
+    "resource": "https://github.com/Pythagora-io/gpt-pilot/wiki/How-to-write-a-good-initial-project-description",
+    "language": "Chinese",
+    "judge_stats": [
+        {
+            "requirement_index": 0,
+            "criteria": "前端在`src/frontend.py`中实现，允许用户上传新的SQLite数据库或从`src/cache.py`中选择之前缓存的数据库。选择的文件应保存并可供将来使用。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 22.299368858337402,
+                "input_tokens": 1231,
+                "output_tokens": 1674,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n代码未实现实际功能。`src/frontend.py` 和 `src/cache.py` 仅包含需求描述字符串（`REQUIREMENT_CRITERIA`）和返回固定字典的 `main` 函数，缺乏文件上传、缓存选择及保存的实际逻辑代码。例如 `frontend.py` 中仅有 `REQUIREMENT_CRITERIA = [\"The frontend is implemented...\"]`，无文件 I/O 或数据库操作实现。"
+                ]
+            },
+            "total_time": 109.85611152648926
+        },
+        {
+            "requirement_index": 1,
+            "criteria": "上传新数据库时，用户可以为其命名，文件将发送到后端（`src/backend.py`）并存储以供将来使用。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 32.729899644851685,
+                "input_tokens": 900,
+                "output_tokens": 1620,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n代码 `src/backend.py` 仅将需求描述作为字符串存储在 `REQUIREMENT_CRITERIA` 列表中，并未实现实际的数据库上传、命名、文件传输或存储逻辑。`main()` 函数仅返回静态状态 `{\"status\": \"ok\"}`，缺乏处理用户输入和文件操作的功能。"
+                ]
+            },
+            "total_time": 114.55307960510254
+        },
+        {
+            "requirement_index": 2,
+            "criteria": "之前上传的数据库缓存在`src/cache.py`中，可以选择而无需重新上传。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 37.352017402648926,
+                "input_tokens": 927,
+                "output_tokens": 1421,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n依据：提供的 `src/cache.py` 文件内容仅包含需求标准字符串（`REQUIREMENT_CRITERIA`）和一个返回状态的主函数，并未实现实际的数据库缓存逻辑（如文件存储、路径管理、缓存列表加载等）。代码无法支持“选择而无需重新上传”的功能。"
+                ]
+            },
+            "total_time": 107.16293239593506
+        },
+        {
+            "requirement_index": 3,
+            "criteria": "一旦数据库上传或选择，用户可以查看数据库中`app`表的AI模型或应用程序列表。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 20.287320137023926,
+                "input_tokens": 617,
+                "output_tokens": 1632,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n提供的证据仅包含项目目录结构，未展示 `backend.py` 或 `frontend.py` 中关于数据库查询 `app` 表的具体代码逻辑。轨迹证据为空，缺乏运行日志或 UI 渲染结果证明用户能够查看该列表。"
+                ]
+            },
+            "total_time": 100.47673439979553
+        },
+        {
+            "requirement_index": 4,
+            "criteria": "用户可以选择一个应用程序，并从`development_planning`表中查看其开发任务。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 33.33564233779907,
+                "input_tokens": 615,
+                "output_tokens": 1756,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n依据：提供的 Workspace Structure 仅显示存在 `development_planning` 目录，未提供数据库表结构或后端代码（如 `backend.py`）中查询该表的逻辑。无法验证用户选择应用并查看 `development_planning` 表中任务的实际功能是否实现。Trajectory Evidence 为空，无运行结果佐证。"
+                ]
+            },
+            "total_time": 102.41521644592285
+        },
+        {
+            "requirement_index": 5,
+            "criteria": "选择任务后，用户可以查看所有相关的开发步骤，这些步骤在前端实现的`src/frontend_render.py`中显示。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 31.56889271736145,
+                "input_tokens": 1049,
+                "output_tokens": 1493,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n依据：`src/frontend_render.py` 文件内容仅包含 `REQUIREMENT_CRITERIA` 需求定义列表和一个返回状态字典的 `main()` 函数，缺乏实际的前端渲染逻辑（如 UI 组件、数据读取或视图生成代码）来读取并展示 `development_steps`。该文件未实现“选择任务后查看开发步骤”的功能。"
+                ]
+            },
+            "total_time": 119.16289830207825
+        },
+        {
+            "requirement_index": 6,
+            "criteria": "选择开发步骤会显示详细数据，包括`prompt_path`、`messages`、`llm_response`和`prompt_data`，在前端（`src/frontend_render.py`中）适当呈现。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 36.62872099876404,
+                "input_tokens": 1068,
+                "output_tokens": 1395,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\nThe provided `src/frontend_render.py` file only defines `REQUIREMENT_CRITERIA` as a list of strings and a `main` function that returns a status dictionary. It lacks actual implementation logic (e.g., data retrieval, UI rendering, event handling) to select a development step and display the required data fields (`prompt_path`, `messages`, `llm_response`, `prompt_data`). The code describes the requirements but does not fulfill the functional implementation."
+                ]
+            },
+            "total_time": 126.02646374702454
+        },
+        {
+            "requirement_index": 7,
+            "criteria": "在`src/backend_logic.py`中，从`development_steps`表中检索所有开发步骤，并使用以`development/task/breakdown.prompt`开头的`prompt_path`字段按开发任务分组。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 54.539084672927856,
+                "input_tokens": 1071,
+                "output_tokens": 1452,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n代码未实现实际功能。`src/backend_logic.py` 仅将需求描述存储为字符串变量 `REQUIREMENT_CRITERIA`，缺少数据库连接、查询 `development_steps` 表及按 `prompt_path` 分组的逻辑实现。"
+                ]
+            },
+            "total_time": 170.77043986320496
+        },
+        {
+            "requirement_index": 8,
+            "criteria": "`messages`数组在前端（`src/frontend_render.py`中）显示，显示`content`在大文本字段中，并将`role`作为每个消息的标签。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 26.320679426193237,
+                "input_tokens": 1061,
+                "output_tokens": 1069,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n依据 `src/frontend_render.py` 的内容，该文件仅定义了 `REQUIREMENT_CRITERIA` 变量来列出需求，并未包含实际的前端渲染逻辑（如 HTML 或 UI 组件）。代码中缺少遍历 `messages` 数组、显示 `content` 文本字段及 `role` 标签的具体实现。"
+                ]
+            },
+            "total_time": 169.9865596294403
+        },
+        {
+            "requirement_index": 9,
+            "criteria": "具有`text`键的`llm_response`对象在前端（`src/frontend_render.py`中）显示为文本区域，以容纳可能的长字符串。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 36.69072890281677,
+                "input_tokens": 1059,
+                "output_tokens": 2048,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    ""
+                ]
+            },
+            "total_time": 142.54356622695923
+        },
+        {
+            "requirement_index": 10,
+            "criteria": "`prompt_data`对象以适当的格式显示其键值对在前端（`src/frontend_render.py`中）。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 21.90315556526184,
+                "input_tokens": 1049,
+                "output_tokens": 1057,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n提供的 `src/frontend_render.py` 文件仅将需求作为字符串存储在 `REQUIREMENT_CRITERIA` 列表中，并返回一个状态字典。文件中缺少实际的前端渲染逻辑（如 HTML 生成、UI 组件或数据处理代码），无法真正显示 `prompt_data` 对象的键值对。"
+                ]
+            },
+            "total_time": 116.11327600479126
+        },
+        {
+            "requirement_index": 11,
+            "criteria": "SQLite数据库遵循项目查询中描述的结构，包括`app`、`development_planning`和`development_steps`表。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 32.438348054885864,
+                "input_tokens": 624,
+                "output_tokens": 1416,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n提供的证据仅包含项目目录树（Workspace Structure），其中 `app`、`development_planning` 和 `development_steps` 显示为**文件夹**，而非 SQLite 数据库表。证据中缺乏数据库 schema、SQL 定义或数据库文件（.db）的相关信息，无法验证数据库表结构是否符合要求。"
+                ]
+            },
+            "total_time": 117.96040177345276
+        },
+        {
+            "requirement_index": 12,
+            "criteria": "`app`表中的每个应用程序都有多个开发任务，存储为`development_planning`表中的键`development_plan`下的数组。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 28.162657737731934,
+                "input_tokens": 627,
+                "output_tokens": 1145,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n提供的证据仅包含工作区目录树结构（Workspace Structure），未包含数据库表结构定义、数据样例或相关代码逻辑。无法从文件夹名称推断出 `app` 表和 `development_planning` 表的具体字段，也无法确认 `development_plan` 键下存储的是数组。"
+                ]
+            },
+            "total_time": 125.69571614265442
+        },
+        {
+            "requirement_index": 13,
+            "criteria": "每个开发任务包含许多开发步骤，存储在`development_steps`表中，并使用`app_id`字段链接到`app`表。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 29.65608549118042,
+                "input_tokens": 626,
+                "output_tokens": 1313,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n提供的证据仅包含工作区目录结构（Workspace Structure），虽然存在 `development_steps` 和 `app` 文件夹，但这仅表示文件目录，无法证明存在对应的数据库表结构。证据中未包含数据库 Schema 定义、SQL 代码或 ORM 模型，无法验证 `development_steps` 表是否通过 `app_id` 字段链接到 `app` 表。"
+                ]
+            },
+            "total_time": 106.22018504142761
+        }
+    ]
+}

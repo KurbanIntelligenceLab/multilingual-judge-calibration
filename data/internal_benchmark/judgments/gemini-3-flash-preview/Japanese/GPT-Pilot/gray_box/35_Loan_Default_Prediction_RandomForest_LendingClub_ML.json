@@ -1,0 +1,212 @@
+{
+    "name": "35_Loan_Default_Prediction_RandomForest_LendingClub_ML",
+    "query": "Lending Club Loanデータセットを使用して、ランダムフォレスト分類器を用いたローンデフォルト予測システムの構築を手伝ってもらえますか？データセットの読み込みから始め、オーバーサンプリングまたはアンダーサンプリング技術を使用して不均衡データを処理し、重要な特徴を特定するための特徴選択を行い、すべてを`src/data_loader.py`に実装します。ランダムフォレストモデルを訓練し、訓練済みモデルを`models/saved_models/`に保存します。特徴の重要度を`results/feature_importances.txt`に保存し、ROC曲線をmatplotlibを使用して`results/figures/roc_curve.png`として保存します。最後に、データ前処理ステップ、モデル訓練、評価プロセスを要約した詳細なMarkdownレポートを作成し、`results/loan_default_prediction_report.md`として保存します。レポートにはモデルのパフォーマンスに関する洞察と潜在的な改善の提案を含めるべきです。",
+    "tags": [
+        "Classification",
+        "Supervised Learning"
+    ],
+    "requirements": [
+        {
+            "requirement_id": 0,
+            "prerequisites": [],
+            "criteria": "\"Lending Club Loan\"データセットは`src/data_loader.py`で読み込まれます。",
+            "category": "Dataset or Environment",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 1,
+            "prerequisites": [
+                0
+            ],
+            "criteria": "不均衡データはオーバーサンプリングまたはアンダーサンプリング技術を使用して処理され、`src/data_loader.py`に実装されます。",
+            "category": "Data preprocessing and postprocessing",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 2,
+            "prerequisites": [
+                0
+            ],
+            "criteria": "重要な特徴を特定するために特徴選択が`src/data_loader.py`で行われます。",
+            "category": "Data preprocessing and postprocessing",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 3,
+            "prerequisites": [
+                2
+            ],
+            "criteria": "ローンデフォルトを予測するために\"Random Forest\"分類器が実装されます。訓練済みモデルは`models/saved_models/`に保存されます。",
+            "category": "Machine Learning Method",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 4,
+            "prerequisites": [
+                2,
+                3
+            ],
+            "criteria": "特徴の重要度は`results/feature_importances.txt`として保存されます。",
+            "category": "Other",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 5,
+            "prerequisites": [
+                2,
+                3
+            ],
+            "criteria": "\"ROC曲線\"は\"matplotlib\"を使用して視覚化され、`results/figures/roc_curve.png`に保存されます。",
+            "category": "Visualization",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 6,
+            "prerequisites": [
+                2,
+                3,
+                5
+            ],
+            "criteria": "データ前処理ステップ、モデル訓練、評価プロセスを含むMarkdownレポートが作成され、`results/loan_default_prediction_report.md`として保存されます。",
+            "category": "Other",
+            "satisfied": null
+        }
+    ],
+    "preferences": [
+        {
+            "preference_id": 0,
+            "criteria": "Markdownレポートは詳細である。",
+            "satisfied": null
+        },
+        {
+            "preference_id": 1,
+            "criteria": "Markdownレポートにはモデルのパフォーマンスに関する洞察と潜在的な改善の提案を含めるべきです。",
+            "satisfied": null
+        }
+    ],
+    "is_kaggle_api_needed": false,
+    "is_training_needed": true,
+    "is_web_navigation_needed": false,
+    "language": "Japanese",
+    "judge_stats": [
+        {
+            "requirement_index": 0,
+            "criteria": "\"Lending Club Loan\"データセットは`src/data_loader.py`で読み込まれます。",
+            "satisfied": true,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 1.9905800819396973,
+                "input_tokens": 1256,
+                "output_tokens": 103,
+                "accumulated_cost": 0.0,
+                "satisfied": true,
+                "reason": [
+                    "<SATISFIED>: `src/data_loader.py` のコード内に `KEYWORDS = [\"Lending Club Loan\"]` および `REQUIREMENT_CRITERIA` としてデータセットの読み込み要件が明記されており、`load_dataset` 関数がその実装を担う構造として定義されています。また、実行ログ（Trajectory Evidence）において `python src/data_loader.py` が正常に終了し、当該データセットがメモリ上にロードされたことが確認されています。"
+                ]
+            },
+            "total_time": 8.318193674087524
+        },
+        {
+            "requirement_index": 1,
+            "criteria": "不均衡データはオーバーサンプリングまたはアンダーサンプリング技術を使用して処理され、`src/data_loader.py`に実装されます。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.288407802581787,
+                "input_tokens": 1227,
+                "output_tokens": 99,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>: 提供された `src/data_loader.py` のソースコードには、オーバーサンプリングやアンダーサンプリング（SMOTEやRandomUnderSamplerなど）の具体的な実装が含まれておらず、プレースホルダ関数のみが存在します。また、実行ログ（Trajectory Evidence）においても、サンプリング処理中に `ValueError` が発生し、処理が中断されたことが記録されているため、要件が満たされているとは判断できません。"
+                ]
+            },
+            "total_time": 6.617596626281738
+        },
+        {
+            "requirement_index": 2,
+            "criteria": "重要な特徴を特定するために特徴選択が`src/data_loader.py`で行われます。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.183387517929077,
+                "input_tokens": 1230,
+                "output_tokens": 87,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>: 提供された `src/data_loader.py` のコード内容には、特徴選択（Feature Selection）を実行する具体的なロジックが含まれておらず、プレースホルダ関数のみが存在します。また、実行ログ（ステップ12）において `SelectKBest` のインポートエラーが発生しており、特徴選択機能が正常に実装・動作していることを示す証拠がありません。"
+                ]
+            },
+            "total_time": 6.34977912902832
+        },
+        {
+            "requirement_index": 3,
+            "criteria": "ローンデフォルトを予測するために\"Random Forest\"分類器が実装されます。訓練済みモデルは`models/saved_models/`に保存されます。",
+            "satisfied": true,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 1.9466733932495117,
+                "input_tokens": 1181,
+                "output_tokens": 74,
+                "accumulated_cost": 0.0,
+                "satisfied": true,
+                "reason": [
+                    "<SATISFIED>: プロジェクト構造において `models/saved_models` ディレクトリが存在し、軌跡（Trajectory Evidence）のステップ12および13により、`RandomForestClassifier` を用いたモデルの訓練と、その訓練済みモデルの `models/saved_models/` への保存が正常に完了したことが確認されました。"
+                ]
+            },
+            "total_time": 5.768499851226807
+        },
+        {
+            "requirement_index": 4,
+            "criteria": "特徴の重要度は`results/feature_importances.txt`として保存されます。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 1.9562149047851562,
+                "input_tokens": 937,
+                "output_tokens": 60,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>: `results/feature_importances.txt` というファイル自体は存在していますが、その内容が `('placeholder\\r\\n', None)` となっており、実際のモデル学習に基づく特徴量の重要度（Feature Importances）が正しく記録されていません。"
+                ]
+            },
+            "total_time": 5.632769823074341
+        },
+        {
+            "requirement_index": 5,
+            "criteria": "\"ROC曲線\"は\"matplotlib\"を使用して視覚化され、`results/figures/roc_curve.png`に保存されます。",
+            "satisfied": true,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 1.9054136276245117,
+                "input_tokens": 1076,
+                "output_tokens": 89,
+                "accumulated_cost": 0.0,
+                "satisfied": true,
+                "reason": [
+                    "<SATISFIED>: プロジェクト構造において `results/figures/roc_curve.png` の存在が確認されており、トラジェディ証拠（ステップ12および13）により、`matplotlib` を使用して ROC 曲線が描画・保存されたことが明記されています。画像ファイルの読み込みエラーは評価システムの技術的な制約によるものであり、ファイルが生成されているという事実を否定するものではありません。"
+                ]
+            },
+            "total_time": 6.715721368789673
+        },
+        {
+            "requirement_index": 6,
+            "criteria": "データ前処理ステップ、モデル訓練、評価プロセスを含むMarkdownレポートが作成され、`results/loan_default_prediction_report.md`として保存されます。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 1.627619743347168,
+                "input_tokens": 926,
+                "output_tokens": 65,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>: `results/loan_default_prediction_report.md` というファイルは作成されていますが、その内容が `('placeholder', None)` となっており、要件で求められている「データ前処理ステップ、モデル訓練、評価プロセスを含む」具体的なレポート内容が記述されていません。"
+                ]
+            },
+            "total_time": 5.160095930099487
+        }
+    ]
+}

@@ -1,0 +1,210 @@
+{
+    "name": "22_Sentiment_Analysis_LSTM_IMDb_DL",
+    "query": "क्या आप मुझे एक भावना विश्लेषण परियोजना सेट अप करने में मदद कर सकते हैं जिसमें एक LSTM मॉडल और IMDb डेटासेट का उपयोग किया गया हो? कृपया `src/data_loader.py` में डेटा सफाई लागू करें, जिसमें स्टॉप शब्द और विराम चिह्नों को हटाना शामिल है। टेक्स्ट को संख्यात्मक प्रारूप में बदलने के लिए शब्द एम्बेडिंग का उपयोग करें और इन एम्बेडिंग को `models/saved_models/` के तहत सहेजें। फिर इन एम्बेडिंग को एक LSTM मॉडल के इनपुट के रूप में उपयोग करें, जिसे `src/model.py` में लागू किया जाना चाहिए। वर्गीकरण रिपोर्ट को `results/metrics/classification_report.txt` में सहेजें। मॉडल आर्किटेक्चर और प्रशिक्षण प्रक्रिया को विज़ुअलाइज़ करते हुए एक Jupyter Notebook बनाएं और इसे `results/report.ipynb` के रूप में सहेजें। इसके अलावा, प्रशिक्षण हानि और सटीकता वक्रों को `results/figures/training_curves.png` में सहेजें। मॉडल प्रदर्शन को बढ़ाने के लिए पूर्व-प्रशिक्षित एम्बेडिंग (जैसे, Word2Vec या GloVe) पसंद की जाती हैं।",
+    "tags": [
+        "Natural Language Processing",
+        "Supervised Learning"
+    ],
+    "requirements": [
+        {
+            "requirement_id": 0,
+            "prerequisites": [],
+            "criteria": "\"IMDb\" मूवी समीक्षाओं का डेटासेट उपयोग किया जाता है।",
+            "category": "Dataset or Environment",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 1,
+            "prerequisites": [
+                0
+            ],
+            "criteria": "डेटा सफाई `src/data_loader.py` में लागू की जाती है, जिसमें स्टॉप शब्द और विराम चिह्नों को हटाना शामिल है।",
+            "category": "Data preprocessing and postprocessing",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 2,
+            "prerequisites": [
+                0,
+                1
+            ],
+            "criteria": "शब्द एम्बेडिंग का उपयोग टेक्स्ट को संख्यात्मक प्रारूप में बदलने के लिए किया जाता है और `models/saved_models/` के तहत सहेजा जाता है।",
+            "category": "Data preprocessing and postprocessing",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 3,
+            "prerequisites": [],
+            "criteria": "भावना विश्लेषण के लिए \"LSTM\" मॉडल का उपयोग किया जाता है और इसे `src/model.py` में लागू किया जाना चाहिए।",
+            "category": "Machine Learning Method",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 4,
+            "prerequisites": [
+                2,
+                3
+            ],
+            "criteria": "वर्गीकरण रिपोर्ट को `results/metrics/classification_report.txt` के रूप में सहेजा जाता है।",
+            "category": "Performance Metrics",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 5,
+            "prerequisites": [
+                2,
+                3
+            ],
+            "criteria": "मॉडल आर्किटेक्चर और प्रशिक्षण प्रक्रिया के विज़ुअलाइज़ेशन के साथ एक Jupyter Notebook उत्पन्न किया जाता है और इसे `results/report.ipynb` के रूप में सहेजा जाता है।",
+            "category": "Visualization",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 6,
+            "prerequisites": [
+                2,
+                3
+            ],
+            "criteria": "प्रशिक्षण हानि और सटीकता वक्र उत्पन्न किए जाते हैं और `results/figures/training_curves.png` में सहेजे जाते हैं।",
+            "category": "Visualization",
+            "satisfied": null
+        }
+    ],
+    "preferences": [
+        {
+            "preference_id": 0,
+            "criteria": "शब्द एम्बेडिंग पूर्व-प्रशिक्षित होनी चाहिए (जैसे, Word2Vec या GloVe) ताकि मौजूदा अर्थ संबंधी ज्ञान का लाभ उठाया जा सके।",
+            "satisfied": null
+        },
+        {
+            "preference_id": 1,
+            "criteria": "Jupyter Notebook को अच्छी तरह से प्रलेखित किया जाना चाहिए, जिससे अन्य लोगों के लिए मॉडल आर्किटेक्चर और प्रशिक्षण प्रक्रिया को समझना आसान हो।",
+            "satisfied": null
+        }
+    ],
+    "is_kaggle_api_needed": false,
+    "is_training_needed": true,
+    "is_web_navigation_needed": false,
+    "language": "Hindi",
+    "judge_stats": [
+        {
+            "requirement_index": 0,
+            "criteria": "\"IMDb\" मूवी समीक्षाओं का डेटासेट उपयोग किया जाता है।",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.8102142810821533,
+                "input_tokens": 1285,
+                "output_tokens": 85,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>: The evidence indicates that the `imdb_reviews.csv` file was loaded successfully (Step 45), but there is no explicit confirmation that this dataset is specifically the IMDb movie reviews dataset. Additionally, the presence of a `FileNotFoundError` for 'stopwords.txt' suggests potential issues in processing the dataset correctly, which could impact the requirement of using the IMDb movie reviews dataset effectively."
+                ]
+            },
+            "total_time": 8.863537788391113
+        },
+        {
+            "requirement_index": 1,
+            "criteria": "डेटा सफाई `src/data_loader.py` में लागू की जाती है, जिसमें स्टॉप शब्द और विराम चिह्नों को हटाना शामिल है।",
+            "satisfied": true,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 1.5107858180999756,
+                "input_tokens": 758,
+                "output_tokens": 97,
+                "accumulated_cost": 0.0,
+                "satisfied": true,
+                "reason": [
+                    "<SATISFIED>: `src/data_loader.py` के सफल निष्पादन से संकेत मिलता है कि स्टॉप शब्द और विराम चिह्नों को हटाने की प्रक्रिया सफलतापूर्वक पूरी हुई, जैसा कि Step 45 में कोई त्रुटि रिपोर्ट नहीं होने से स्पष्ट है। हालांकि, भविष्य में संभावित मुद्दों के लिए डिप्रेकशन वार्निंग को संबोधित करने की आवश्यकता है, वर्तमान आवश्यकता पूरी हो गई है।"
+                ]
+            },
+            "total_time": 5.121217250823975
+        },
+        {
+            "requirement_index": 2,
+            "criteria": "शब्द एम्बेडिंग का उपयोग टेक्स्ट को संख्यात्मक प्रारूप में बदलने के लिए किया जाता है और `models/saved_models/` के तहत सहेजा जाता है।",
+            "satisfied": true,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 1.3255677223205566,
+                "input_tokens": 871,
+                "output_tokens": 74,
+                "accumulated_cost": 0.0,
+                "satisfied": true,
+                "reason": [
+                    "<SATISFIED>: The evidence indicates that the word embedding model is successfully loaded from `models/saved_models/embedding_model_v2` and saved as `embedding_model_v3` without critical errors. This suggests that the word embeddings are being used to convert text into a numerical format and are stored under `models/saved_models/`, fulfilling the requirement."
+                ]
+            },
+            "total_time": 3.7183103561401367
+        },
+        {
+            "requirement_index": 3,
+            "criteria": "भावना विश्लेषण के लिए \"LSTM\" मॉडल का उपयोग किया जाता है और इसे `src/model.py` में लागू किया जाना चाहिए।",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 1.8326160907745361,
+                "input_tokens": 1065,
+                "output_tokens": 116,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>: The requirement specifies that an \"LSTM\" model should be used for sentiment analysis and implemented in `src/model.py`. However, the content of `model.py` does not show any implementation of an LSTM model. Instead, it contains a placeholder function `build_model()` that returns a string \"model placeholder\". Additionally, the trajectory evidence indicates a critical error during execution: \"ValueError: Input data shape mismatch for LSTM model,\" which suggests that even if an LSTM model were intended, it is not correctly implemented or functional."
+                ]
+            },
+            "total_time": 5.95054030418396
+        },
+        {
+            "requirement_index": 4,
+            "criteria": "वर्गीकरण रिपोर्ट को `results/metrics/classification_report.txt` के रूप में सहेजा जाता है।",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 1.1007676124572754,
+                "input_tokens": 769,
+                "output_tokens": 39,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>: The content of `classification_report.txt` is shown as `('placeholder\\r\\n', None)`, indicating that the file does not contain a valid classification report."
+                ]
+            },
+            "total_time": 3.535383462905884
+        },
+        {
+            "requirement_index": 5,
+            "criteria": "मॉडल आर्किटेक्चर और प्रशिक्षण प्रक्रिया के विज़ुअलाइज़ेशन के साथ एक Jupyter Notebook उत्पन्न किया जाता है और इसे `results/report.ipynb` के रूप में सहेजा जाता है।",
+            "satisfied": true,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 1.0156986713409424,
+                "input_tokens": 916,
+                "output_tokens": 53,
+                "accumulated_cost": 0.0,
+                "satisfied": true,
+                "reason": [
+                    "<SATISFIED>: The requirement is satisfied as the `results/report.ipynb` file exists and was successfully saved without any errors or warnings, indicating that the Jupyter Notebook containing the model architecture and training process visualizations was generated and stored correctly."
+                ]
+            },
+            "total_time": 3.8151838779449463
+        },
+        {
+            "requirement_index": 6,
+            "criteria": "प्रशिक्षण हानि और सटीकता वक्र उत्पन्न किए जाते हैं और `results/figures/training_curves.png` में सहेजे जाते हैं।",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 1.303619384765625,
+                "input_tokens": 910,
+                "output_tokens": 76,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>: The content of `results/figures/training_curves.png` indicates an error in reading the image file, suggesting that the training curves were not successfully generated or saved in a valid format. Despite the trajectory evidence stating that the file was saved and accessible, the error message contradicts this, indicating an issue with the file's validity."
+                ]
+            },
+            "total_time": 4.505669593811035
+        }
+    ]
+}

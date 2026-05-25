@@ -1,0 +1,213 @@
+{
+    "name": "49_Explainable_AI_LIME_Titanic_ML",
+    "query": "你好！我正在寻找创建一个项目，使用LIME解释模型预测，特别是使用泰坦尼克号生存预测数据集。首先，在`src/data_loader.py`中加载数据集。然后，训练一个随机森林分类器并将其保存在`models/saved_models/`下。最后，使用LIME解释随机森林分类器的预测，并在`src/visualize.py`中实现。生成一份包含解释的报告，并将其保存为`results/model_explanation.md`。报告应使用Dash或Bokeh构建，并在`src/report.py`中实现，以便用户可以探索不同特征如何影响模型的预测。解释应清晰易懂，适合非技术人员。此外，保存一个标注良好的直观特征重要性图，保存在`results/figures/feature_importance.png`。谢谢！",
+    "tags": [
+        "Classification"
+    ],
+    "requirements": [
+        {
+            "requirement_id": 0,
+            "prerequisites": [],
+            "criteria": "在`src/data_loader.py`中加载“泰坦尼克号”生存预测数据集。",
+            "category": "Dataset or Environment",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 1,
+            "prerequisites": [
+                0
+            ],
+            "criteria": "训练一个用于生存预测的“随机森林分类器”。",
+            "category": "Machine Learning Method",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 2,
+            "prerequisites": [
+                0,
+                1
+            ],
+            "criteria": "使用“LIME”进行模型预测解释，并在`src/visualize.py`中实现。",
+            "category": "Human Computer Interaction",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 3,
+            "prerequisites": [
+                0,
+                1,
+                2
+            ],
+            "criteria": "生成一份模型预测解释报告，并保存为`results/model_explanation.md`。",
+            "category": "Other",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 4,
+            "prerequisites": [
+                2
+            ],
+            "criteria": "保存一个特征重要性图，路径为`results/figures/feature_importance.png`。",
+            "category": "Visualization",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 5,
+            "prerequisites": [
+                0,
+                1,
+                2,
+                4
+            ],
+            "criteria": "使用“Dash”或“Bokeh”创建一个展示不同特征对预测影响的交互式报告，并在`src/report.py`中实现。",
+            "category": "Other",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 6,
+            "prerequisites": [
+                1
+            ],
+            "criteria": "将训练好的模型保存在`models/saved_models/`下。",
+            "category": "Save Trained Model",
+            "satisfied": null
+        }
+    ],
+    "preferences": [
+        {
+            "preference_id": 0,
+            "criteria": "解释报告应以清晰易懂的风格撰写，使其即使对于没有深厚技术背景的人也能理解。",
+            "satisfied": null
+        },
+        {
+            "preference_id": 1,
+            "criteria": "特征重要性图应直观，具有清晰的标签和描述。",
+            "satisfied": null
+        }
+    ],
+    "is_kaggle_api_needed": false,
+    "is_training_needed": true,
+    "is_web_navigation_needed": false,
+    "language": "Chinese",
+    "judge_stats": [
+        {
+            "requirement_index": 0,
+            "criteria": "在`src/data_loader.py`中加载“泰坦尼克号”生存预测数据集。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 8.832994222640991,
+                "input_tokens": 1257,
+                "output_tokens": 390,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "## 评估结果\n\n<UNSATISFIED>\n\n**依据：**\n\n查看 `src/data_loader.py` 的实际内容，该文件是一个**最小化语义占位符实现**，并非真正加载泰坦尼克号数据集：\n\n```python\ndef load_dataset():\n    \"\"\"Minimal dataset loader placeholder.\"\"\"\n    return {\"dataset\": \"loaded\", \"notes\": requirement_notes()}\n```\n\n关键问题：\n1. **没有实际的数据加载逻辑**：函数仅返回一个硬编码的字典 `{\"dataset\": \"loaded\", ...}`，并未真正读取任何数据文件。\n2. **没有数据源引用**：代码中没有任何对泰坦尼克号数据集文件（如 CSV、URL 或库调用）的引用，例如缺少 `pd.read_csv('titanic.csv')` 或 `seaborn.load_dataset('titanic')` 等实际加载操作。\n3. **文件头注释明确说明**：注释中写明这是 \"Minimal semantic implementation for benchmark judging\"，即专为评测伪造的占位符代码。\n4. **`KEYWORDS = [\"Titanic\"]`** 仅是元数据标注，不代表实际功能实现。\n\n该文件未满足\"加载泰坦尼克号生存预测数据集\"的实质性要求。"
+                ]
+            },
+            "total_time": 15.908965587615967
+        },
+        {
+            "requirement_index": 1,
+            "criteria": "训练一个用于生存预测的“随机森林分类器”。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 9.416515588760376,
+                "input_tokens": 1294,
+                "output_tokens": 414,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "## 评估：训练随机森林分类器用于生存预测\n\n**分析证据：**\n\n1. **文件结构**：项目包含 `src/data_loader.py`、`src/report.py`、`src/visualize.py`，以及 `models/saved_models` 目录和 `results/` 目录。但**没有**专门的模型训练文件（如 `train.py`、`model.py` 等）。\n\n2. **`data_loader.py` 内容**：该文件是一个\"最小语义实现占位符\"（Minimal semantic implementation placeholder），仅包含：\n   - 一个返回字符串的 `requirement_notes()` 函数\n   - 一个返回假数据的 `load_dataset()` 占位函数\n   - 一个返回列表的 `build_transforms()` 占位函数\n   - **完全没有**随机森林分类器的训练代码\n\n3. **`models/saved_models` 目录**：虽然存在该目录，但没有证据表明其中保存了任何训练好的模型文件。\n\n4. **轨迹日志**：为空，无任何执行记录，无法确认随机森林分类器曾被训练。\n\n**结论：** 代码中不存在任何随机森林分类器（`RandomForestClassifier`）的训练逻辑，所有实现均为占位符，未满足该要求。\n\n<UNSATISFIED>"
+                ]
+            },
+            "total_time": 17.54407501220703
+        },
+        {
+            "requirement_index": 2,
+            "criteria": "使用“LIME”进行模型预测解释，并在`src/visualize.py`中实现。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 7.324432611465454,
+                "input_tokens": 1268,
+                "output_tokens": 408,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "## 评估结果\n\n<UNSATISFIED>\n\n**依据：**\n\n检查 `src/visualize.py` 的实际内容，该文件并非真正的 LIME 实现，而是一个**占位符/存根文件（stub file）**，内容如下：\n\n```python\n\"\"\"\nMinimal semantic implementation for benchmark judging.\nTask: 49_Explainable_AI_LIME_Titanic_ML\nFile: src/visualize.py\n\"\"\"\n\nREQUIREMENT_CRITERIA = [\n    '\"LIME\" is used for model prediction explanation and implemented in `src/visualize.py`.'\n]\nKEYWORDS = [\"LIME\"]\n\ndef requirement_notes() -> str:\n    return \"\\n\".join(REQUIREMENT_CRITERIA)\n\ndef main():\n    return {\"status\": \"ok\", \"notes\": requirement_notes(), \"keywords\": KEYWORDS}\n```\n\n该文件：\n1. **没有导入任何 LIME 相关库**（如 `lime`、`lime.lime_tabular` 等）\n2. **没有实际的 LIME 解释逻辑**（无 `LimeTabularExplainer`、无 `explain_instance` 等调用）\n3. 仅包含关键词字符串 `\"LIME\"` 作为元数据，属于伪造满足条件的占位代码\n4. 轨迹日志中也无任何 LIME 相关执行记录\n\n因此，LIME 模型预测解释功能**未在 `src/visualize.py` 中实际实现**。"
+                ]
+            },
+            "total_time": 17.210356950759888
+        },
+        {
+            "requirement_index": 3,
+            "criteria": "生成一份模型预测解释报告，并保存为`results/model_explanation.md`。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 4.915375471115112,
+                "input_tokens": 1034,
+                "output_tokens": 159,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "**<UNSATISFIED>**\n\n`results/model_explanation.md` 文件确实存在，但其内容仅为：\n\n```\n('placeholder', None)\n```\n\n这是一个占位符字符串，并非真正的模型预测解释报告。一份有效的模型解释报告应包含 LIME 解释结果、特征重要性分析、预测说明等实质性内容。当前文件内容表明报告从未被实际生成和填充，仅创建了一个空壳文件，因此该要求未被满足。"
+                ]
+            },
+            "total_time": 11.785459280014038
+        },
+        {
+            "requirement_index": 4,
+            "criteria": "保存一个特征重要性图，路径为`results/figures/feature_importance.png`。",
+            "satisfied": true,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 5.638075113296509,
+                "input_tokens": 1240,
+                "output_tokens": 220,
+                "accumulated_cost": 0.0,
+                "satisfied": true,
+                "reason": [
+                    "## 评估结果\n\n<SATISFIED>\n\n**依据：**\n\n工作区结构显示文件 `results/figures/feature_importance.png` 确实存在于项目目录中：\n\n```\nresults\\figures\n    └── feature_importance.png\n```\n\n文件路径与要求完全匹配（`results/figures/feature_importance.png`）。\n\n虽然读取图片内容时因格式检测问题（JPEG/PNG 媒体类型不匹配）导致 API 调用失败，但这是**评审系统读取文件时的错误**，并不代表文件不存在或内容损坏——文件本身已成功保存在指定路径，满足\"保存特征重要性图到 `results/figures/feature_importance.png`\"的要求。"
+                ]
+            },
+            "total_time": 16.865569829940796
+        },
+        {
+            "requirement_index": 5,
+            "criteria": "使用“Dash”或“Bokeh”创建一个展示不同特征对预测影响的交互式报告，并在`src/report.py`中实现。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 6.124319314956665,
+                "input_tokens": 1290,
+                "output_tokens": 318,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "## 评估结果\n\n<UNSATISFIED>\n\n**依据：**\n\n`src/report.py` 文件的内容表明这只是一个**最小语义占位实现（minimal semantic implementation）**，并非真正的交互式报告：\n\n```python\n\"\"\"\nMinimal semantic implementation for benchmark judging.\nTask: 49_Explainable_AI_LIME_Titanic_ML\nFile: src/report.py\n\"\"\"\n```\n\n该文件：\n1. **未导入 Dash 或 Bokeh**，仅导入了 `pathlib.Path`\n2. **未创建任何交互式报告**，`main()` 函数仅返回一个包含状态和关键词的字典\n3. 文件内容本质上只是将需求标准以字符串形式存储，并未实际实现任何可视化或交互功能\n4. `KEYWORDS = [\"Bokeh\", \"Dash\"]` 只是列出了关键词，而非实际使用这些库\n\n该实现完全不满足\"使用 Dash 或 Bokeh 创建展示不同特征对预测影响的交互式报告\"的要求。"
+                ]
+            },
+            "total_time": 13.0094735622406
+        },
+        {
+            "requirement_index": 6,
+            "criteria": "将训练好的模型保存在`models/saved_models/`下。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 8.5598464012146,
+                "input_tokens": 1276,
+                "output_tokens": 336,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "## 评估：将训练好的模型保存在`models/saved_models/`下\n\n**分析证据：**\n\n1. **目录结构**：项目树显示存在 `models/saved_models/` 目录，但该目录下**没有任何文件**（目录为空）。\n\n2. **代码内容**：`src/data_loader.py` 是一个\"最小语义实现占位符\"（Minimal semantic implementation placeholder），仅包含占位函数，并未实现实际的模型训练或保存逻辑。\n\n3. **轨迹证据**：日志为空，无法确认模型保存操作是否执行。\n\n4. **其他源文件**：`src/report.py` 和 `src/visualize.py` 存在但内容未提供，且从项目结构来看，`models/saved_models/` 目录下确实没有任何已保存的模型文件。\n\n**结论**：虽然 `models/saved_models/` 目录存在，但其中没有任何已保存的模型文件，代码实现也是占位符性质，未实现真正的模型训练和保存功能。\n\n<UNSATISFIED>"
+                ]
+            },
+            "total_time": 16.699403762817383
+        }
+    ]
+}

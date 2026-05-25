@@ -1,0 +1,212 @@
+{
+    "name": "40_Text_Summarization_BART_CNNDailyMail_DL",
+    "query": "开发一个使用BART模型和CNN/Daily Mail数据集进行文本摘要的系统。首先在`src/data_loader.py`中加载和准备数据集，然后在`src/data_loader.py`中进行数据预处理，例如去除HTML标签和标点符号。在`src/model.py`中导入预训练的BART模型进行文本摘要以生成摘要。将生成的摘要保存到`results/summaries.txt`。使用seaborn可视化这些摘要的长度分布，并将可视化结果保存到`results/figures/summary_length_distribution.png`。此外，在`src/visualize.py`中实现一个交互式Streamlit网页，允许用户查看输入文本及其生成的摘要。最后，生成一份涵盖数据预处理和生成结果的报告，并将其保存为`results/text_summarization_report.pdf`。",
+    "tags": [
+        "Generative Models",
+        "Natural Language Processing"
+    ],
+    "requirements": [
+        {
+            "requirement_id": 0,
+            "prerequisites": [],
+            "criteria": "使用\"CNN/Daily Mail\"新闻数据集，包括在`src/data_loader.py`中加载和准备数据集。",
+            "category": "Dataset or Environment",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 1,
+            "prerequisites": [
+                0
+            ],
+            "criteria": "在`src/data_loader.py`中进行数据预处理，包括去除HTML标签和标点符号。",
+            "category": "Data preprocessing and postprocessing",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 2,
+            "prerequisites": [],
+            "criteria": "在`src/model.py`中导入预训练的\"BART\"模型进行文本摘要。",
+            "category": "Machine Learning Method",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 3,
+            "prerequisites": [
+                1,
+                2
+            ],
+            "criteria": "生成的摘要结果保存在`results/summary_results.txt`。",
+            "category": "Other",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 4,
+            "prerequisites": [
+                3
+            ],
+            "criteria": "使用\"seaborn\"可视化生成的摘要的长度分布，并将图保存为`results/figures/summary_length_distribution.png`。",
+            "category": "Visualization",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 5,
+            "prerequisites": [
+                3
+            ],
+            "criteria": "使用\"Streamlit\"创建一个交互式网页以显示输入文本及其生成的摘要，并在`src/visualize.py`中实现。",
+            "category": "Human Computer Interaction",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 6,
+            "prerequisites": [
+                3
+            ],
+            "criteria": "生成一份涵盖数据预处理、模型训练和生成结果的报告，并保存为`results/text_summarization_report.pdf`。",
+            "category": "Other",
+            "satisfied": null
+        }
+    ],
+    "preferences": [
+        {
+            "preference_id": 0,
+            "criteria": "交互式\"Streamlit\"网页应允许用户输入新文本并实时生成摘要。",
+            "satisfied": null
+        },
+        {
+            "preference_id": 1,
+            "criteria": "报告应包括关于不同超参数设置如何影响模型性能的讨论。",
+            "satisfied": null
+        },
+        {
+            "preference_id": 2,
+            "criteria": "在开发过程中，应有效管理\"Streamlit\"应用以避免不必要的资源使用。",
+            "satisfied": null
+        }
+    ],
+    "is_kaggle_api_needed": false,
+    "is_training_needed": false,
+    "is_web_navigation_needed": false,
+    "language": "Chinese",
+    "judge_stats": [
+        {
+            "requirement_index": 0,
+            "criteria": "使用\"CNN/Daily Mail\"新闻数据集，包括在`src/data_loader.py`中加载和准备数据集。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 45.035231590270996,
+                "input_tokens": 842,
+                "output_tokens": 1800,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n依据：`src/data_loader.py` 中的 `load_dataset()` 函数仅返回占位符字典 `{\"dataset\": \"loaded\", ...}`，未包含实际的 CNN/Daily Mail 数据集加载和预处理逻辑（如读取数据文件、使用相关库加载数据）。此外，`build_transforms()` 返回的图像增强操作（rotation, scaling）不适用于文本数据集，表明代码仅为语义占位而非功能实现。"
+                ]
+            },
+            "total_time": 122.67395639419556
+        },
+        {
+            "requirement_index": 1,
+            "criteria": "在`src/data_loader.py`中进行数据预处理，包括去除HTML标签和标点符号。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 44.311094760894775,
+                "input_tokens": 837,
+                "output_tokens": 1942,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n依据：代码中 `load_dataset()` 和 `build_transforms()` 函数仅为占位符（placeholder），未实现实际的数据预处理逻辑。`load_dataset()` 仅返回静态字典 `{\"dataset\": \"loaded\", ...}`，`build_transforms()` 返回图像变换列表 `[\"rotation\", \"scaling\", \"normalization\"]`，均缺少去除 HTML 标签和标点符号的具体实现代码。"
+                ]
+            },
+            "total_time": 129.94306921958923
+        },
+        {
+            "requirement_index": 2,
+            "criteria": "在`src/model.py`中导入预训练的\"BART\"模型进行文本摘要。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 30.702210426330566,
+                "input_tokens": 800,
+                "output_tokens": 1184,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n依据：提供的 `src/model.py` 代码中仅导入了 `pathlib` 模块，并未导入任何 BART 模型（如 `transformers` 库中的 BART 类）。代码中的 `build_model()` 函数仅返回字符串 `\"model placeholder\"`，未实际加载或实例化预训练模型，也未实现文本摘要功能。"
+                ]
+            },
+            "total_time": 117.18030118942261
+        },
+        {
+            "requirement_index": 3,
+            "criteria": "生成的摘要结果保存在`results/summary_results.txt`。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 29.991053819656372,
+                "input_tokens": 622,
+                "output_tokens": 1422,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n虽然文件 `results/summary_results.txt` 存在于指定路径，但根据文件内容证据，其内容为 `('placeholder\\r\\n', None)`，并非实际的摘要结果数据，表明有效结果未被正确保存。"
+                ]
+            },
+            "total_time": 109.70327019691467
+        },
+        {
+            "requirement_index": 4,
+            "criteria": "使用\"seaborn\"可视化生成的摘要的长度分布，并将图保存为`results/figures/summary_length_distribution.png`。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 39.64176297187805,
+                "input_tokens": 848,
+                "output_tokens": 1409,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n依据：文件 `results/figures/summary_length_distribution.png` 的内容并非有效的图像数据，而是包含 `litellm.BadRequestError` 的错误日志。错误信息显示 \"One of the image(s) could not be processed (possibly corrupt)\"，说明可视化生成失败，未成功保存符合要求的 seaborn 图表。"
+                ]
+            },
+            "total_time": 134.7949891090393
+        },
+        {
+            "requirement_index": 5,
+            "criteria": "使用\"Streamlit\"创建一个交互式网页以显示输入文本及其生成的摘要，并在`src/visualize.py`中实现。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 52.906041383743286,
+                "input_tokens": 805,
+                "output_tokens": 2048,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n依据：`src/visualize.py` 的内容中仅导入了 `pathlib`，未导入 `streamlit` 库。代码中仅包含 `REQUIREMENT_CRITERIA` 字符串定义和返回字典的 `main` 函数，缺乏 Streamlit 组件（如 `st.title`, `st.text_area`）的实现，无法创建交互式网页。\n```python\nfrom pathlib import"
+                ]
+            },
+            "total_time": 153.23336005210876
+        },
+        {
+            "requirement_index": 6,
+            "criteria": "生成一份涵盖数据预处理、模型训练和生成结果的报告，并保存为`results/text_summarization_report.pdf`。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 26.20294427871704,
+                "input_tokens": 649,
+                "output_tokens": 1053,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n依据文件内容证据，`results/text_summarization_report.pdf` 读取时返回错误 `('Error reading PDF file: Cannot read an empty file', None)`，表明该文件为空或损坏。空文件无法包含涵盖数据预处理、模型训练和生成结果的报告内容，因此未满足生成有效报告的要求。"
+                ]
+            },
+            "total_time": 125.26218581199646
+        }
+    ]
+}

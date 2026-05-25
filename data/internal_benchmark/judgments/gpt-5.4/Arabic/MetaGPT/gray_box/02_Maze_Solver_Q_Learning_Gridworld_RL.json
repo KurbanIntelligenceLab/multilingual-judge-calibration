@@ -1,0 +1,157 @@
+{
+    "name": "02_Maze_Solver_Q_Learning_Gridworld_RL",
+    "query": "هل يمكنك مساعدتي في إنشاء نظام لحل مهام Gridworld على شكل متاهة باستخدام خوارزمية Q-learning؟ يجب أن يستخدم النظام مكتبة numpy لجعل الحسابات الأساسية أكثر كفاءة وmatplotlib للتصورات. يجب تنفيذ خوارزمية Q-learning في `src/train.py`، ويجب تنفيذ بيئة Gridworld المسماة بشكل مناسب في `src/env.py` بطريقة يمكن فيها تحديد حجم الشبكة ومواقع البداية/النهاية عند إنشائها. يحتاج النظام إلى تسجيل منحنى التعلم أثناء التدريب، متتبعًا الحلقات والعوائد المقابلة لها، وحفظه كـ `results/figures/learning_curve.png`. بالإضافة إلى ذلك، أود منك تصور وحفظ المسارات التي اتخذها الوكيل في كل حلقة في ملف يسمى `results/figures/path_changes.gif`، وحفظ النموذج المدرب كـ `models/saved_models/q_learning_model.npy`. سيكون من الرائع الحصول على نوع من التغذية الراجعة في الوقت الحقيقي أثناء التدريب، مثل رؤية التقدم أو الحصول على تحديثات حول كيفية تعلم النموذج. أيضًا، إذا كان بإمكانك، يرجى محاولة كتابة الكود بطريقة يسهل تعديلها أو توسيعها لاحقًا.",
+    "tags": [
+        "Reinforcement Learning"
+    ],
+    "requirements": [
+        {
+            "requirement_id": 0,
+            "prerequisites": [],
+            "criteria": "يتم استخدام خوارزمية \"Q-learning\" في `src/train.py`.",
+            "category": "Machine Learning Method",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 1,
+            "prerequisites": [],
+            "criteria": "يتم تعريف بيئة \"Gridworld\" في `src/env.py` مع إمكانية للمستخدم تحديد حجم الشبكة ومواقع البداية/النهاية.",
+            "category": "Dataset or Environment",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 2,
+            "prerequisites": [
+                0,
+                1
+            ],
+            "criteria": "يتم تسجيل منحنيات التعلم أثناء التدريب، وحفظها كـ `results/figures/learning_curve.png`. يتم تسجيل الحلقات والعوائد.",
+            "category": "Visualization",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 3,
+            "prerequisites": [
+                0,
+                1,
+                2
+            ],
+            "criteria": "يتم حفظ النموذج المتعلم كـ `models/saved_models/q_learning_model.npy`.",
+            "category": "Save Trained Model",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 4,
+            "prerequisites": [
+                0,
+                1
+            ],
+            "criteria": "يتم تصور المسارات المتخذة أثناء التعلم وحفظها كـ `results/figures/path_changes.gif`.",
+            "category": "Visualization",
+            "satisfied": null
+        }
+    ],
+    "preferences": [
+        {
+            "preference_id": 0,
+            "criteria": "يجب عرض بعض التقدم أو التغذية الراجعة في الوقت الحقيقي أثناء عملية التدريب.",
+            "satisfied": null
+        },
+        {
+            "preference_id": 1,
+            "criteria": "يجب كتابة الكود بطريقة يسهل تعديلها أو توسيعها لاحقًا.",
+            "satisfied": null
+        }
+    ],
+    "is_kaggle_api_needed": false,
+    "is_training_needed": true,
+    "is_web_navigation_needed": false,
+    "language": "Arabic",
+    "judge_stats": [
+        {
+            "requirement_index": 0,
+            "criteria": "يتم استخدام خوارزمية \"Q-learning\" في `src/train.py`.",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.370789051055908,
+                "input_tokens": 1419,
+                "output_tokens": 125,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED> ملف `src/train.py` لا يطبّق خوارزمية Q-learning فعليًا؛ الموجود فقط هو نصوص تعريفية مثل `REQUIREMENT_CRITERIA = [\"The \\\"Q-learning\\\" algorithm is used in \\`src/train.py\\`.\"]` و`KEYWORDS = [\"Q-learning\", ...]`. أما الدالة `train()` فهي مجرد حلقة تجمع `score += step` بدون حالات/أفعال/Q-table أو تحديث Q-learning مثل معادلة Bellman، لذا لا يوجد دليل برمجي على استخدام Q-learning."
+                ]
+            },
+            "total_time": 8.401991605758667
+        },
+        {
+            "requirement_index": 1,
+            "criteria": "يتم تعريف بيئة \"Gridworld\" في `src/env.py` مع إمكانية للمستخدم تحديد حجم الشبكة ومواقع البداية/النهاية.",
+            "satisfied": true,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.3193283081054688,
+                "input_tokens": 1284,
+                "output_tokens": 131,
+                "accumulated_cost": 0.0,
+                "satisfied": true,
+                "reason": [
+                    "<SATISFIED> تم تعريف الفئة `Gridworld` داخل `src/env.py` صراحةً، ويظهر في المُهيئ `__init__(self, grid_size=(5, 5), start=(0, 0), end=(4, 4))` أن المستخدم يمكنه تمرير `grid_size` و`start` و`end` كوسائط قابلة للتخصيص، ثم تُخزَّن في `self.grid_size` و`self.start` و`self.end`. هذا يحقق شرط تعريف البيئة مع إمكانية تحديد حجم الشبكة وموقعي البداية والنهاية."
+                ]
+            },
+            "total_time": 6.86977744102478
+        },
+        {
+            "requirement_index": 2,
+            "criteria": "يتم تسجيل منحنيات التعلم أثناء التدريب، وحفظها كـ `results/figures/learning_curve.png`. يتم تسجيل الحلقات والعوائد.",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.3867909908294678,
+                "input_tokens": 1320,
+                "output_tokens": 114,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED> الملف `results/figures/learning_curve.png` موجود اسميًا في شجرة المشروع، لكن الدليل المتاح يبيّن فشل قراءته: `The image data you provided does not represent a valid image`، لذا لا يمكن التحقق من أنه منحنى تعلم محفوظ بشكل صحيح. كذلك لا توجد في السجل المقدم أي خطوات تنفيذ موثقة تؤكد تسجيل `episodes` و`returns` أثناء التدريب أو حفظ المنحنى، كما ورد صراحة في Trajectory Evidence."
+                ]
+            },
+            "total_time": 8.145113468170166
+        },
+        {
+            "requirement_index": 3,
+            "criteria": "يتم حفظ النموذج المتعلم كـ `models/saved_models/q_learning_model.npy`.",
+            "satisfied": true,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.102095365524292,
+                "input_tokens": 1166,
+                "output_tokens": 70,
+                "accumulated_cost": 0.0,
+                "satisfied": true,
+                "reason": [
+                    "<SATISFIED> يوجد ملف محفوظ فعليًا في المسار `models/saved_models/q_learning_model.npy` ضمن شجرة المشروع، كما أن دليل التنفيذ يشير إلى أن سكربت التدريب انتهى بحفظ النموذج إلى هذا المسار دون أخطاء ظاهرة تتعلق بالكتابة أو إنشاء الملف."
+                ]
+            },
+            "total_time": 8.016679048538208
+        },
+        {
+            "requirement_index": 4,
+            "criteria": "يتم تصور المسارات المتخذة أثناء التعلم وحفظها كـ `results/figures/path_changes.gif`.",
+            "satisfied": true,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.927480459213257,
+                "input_tokens": 1352,
+                "output_tokens": 113,
+                "accumulated_cost": 0.0,
+                "satisfied": true,
+                "reason": [
+                    "<SATISFIED> يوجد ملف محفوظ بالمسار `results/figures/path_changes.gif` ضمن بنية المشروع المعروضة صراحة، وهذا يحقق جزء الحفظ المطلوب. كما أن المعيار يطلب وجود تصور للمسارات أثناء التعلم، والدليل المتاح الوحيد هو وجود ملف الـGIF نفسه في مجلد `results/figures`؛ ولا توجد أدلة تنفيذية تناقض ذلك، رغم أن محتوى المعاينة لا يسمح بالتحقق من جودة أو صحة التصور بصريا."
+                ]
+            },
+            "total_time": 10.082439184188843
+        }
+    ]
+}

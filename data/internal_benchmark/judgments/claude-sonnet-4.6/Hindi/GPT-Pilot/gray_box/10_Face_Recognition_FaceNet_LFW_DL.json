@@ -1,0 +1,189 @@
+{
+    "name": "10_Face_Recognition_FaceNet_LFW_DL",
+    "query": "मुझे FaceNet मॉडल का उपयोग करके PyTorch चेहरा पहचान परियोजना बनाने में मदद करें, जिसमें LFW डेटासेट का उपयोग हो। डेटासेट को `src/model.py` में लोड करें। मॉडल को Hugging Face से प्राप्त करें (आप इसे https://huggingface.co/py-feat/facenet पर पा सकते हैं) और इसे `models/saved_models/` में सहेजें। सुनिश्चित करें कि डेटा को पूर्व-प्रसंस्कृत किया गया है ताकि `src/data_loader.py` में चेहरे की छवियों का मानकीकरण सुनिश्चित हो सके। अपने सिस्टम के प्रदर्शन को सुधारने के लिए `src/model.py` में चेहरे की एम्बेडिंग का उपयोग करें। पहचान सटीकता को प्रिंट करें और इसे `results/metrics/recognition_accuracy.txt` में सहेजें। इसके बाद, एम्बेडिंग परिणामों को दृश्यात्मक बनाएं और उन्हें `results/figures/embedding_visualization.png` के रूप में सहेजें। मॉडल को बिना किसी समस्या के लोड होना चाहिए, आदर्श रूप से कुछ त्रुटि हैंडलिंग के साथ अगर कुछ गलत होता है। दृश्यावलोकन को यह दिखाना आसान होना चाहिए कि एम्बेडिंग कैसे विशिष्ट चेहरे की विशेषताओं का प्रतिनिधित्व करते हैं।",
+    "tags": [
+        "Computer Vision",
+        "Supervised Learning"
+    ],
+    "requirements": [
+        {
+            "requirement_id": 0,
+            "prerequisites": [],
+            "criteria": "\"LFW\" (Labeled Faces in the Wild) डेटासेट को `src/data_loader.py` में लोड किया गया है।",
+            "category": "Dataset or Environment",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 1,
+            "prerequisites": [
+                0
+            ],
+            "criteria": "चेहरे की छवियों का डेटा संरेखण और मानकीकरण `src/data_loader.py` में किया जाता है।",
+            "category": "Data preprocessing and postprocessing",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 2,
+            "prerequisites": [],
+            "criteria": "\"FaceNet\" मॉडल का \"PyTorch\" में उपयोग किया गया है, जो [Hugging Face](https://huggingface.co/py-feat/facenet) से लोड होता है। मॉडल को models/saved_models/ में सहेजें।",
+            "category": "Machine Learning Method",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 3,
+            "prerequisites": [
+                0,
+                1,
+                2
+            ],
+            "criteria": "चेहरे की एम्बेडिंग का उपयोग `src/model.py` में किया जाता है।",
+            "category": "Machine Learning Method",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 4,
+            "prerequisites": [
+                0,
+                1,
+                2,
+                3
+            ],
+            "criteria": "पहचान सटीकता को प्रिंट किया जाता है और `results/metrics/recognition_accuracy.txt` के रूप में सहेजा जाता है।",
+            "category": "Performance Metrics",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 5,
+            "prerequisites": [
+                0,
+                1,
+                2,
+                3
+            ],
+            "criteria": "एम्बेडिंग परिणामों को दृश्यात्मक बनाया जाता है और `results/figures/embedding_visualization.png` के रूप में सहेजा जाता है।",
+            "category": "Visualization",
+            "satisfied": null
+        }
+    ],
+    "preferences": [
+        {
+            "preference_id": 0,
+            "criteria": "मॉडल लोडिंग प्रक्रिया को सुचारू होना चाहिए, अगर मॉडल लोड करने में विफल रहता है तो किसी भी समस्या को स्पष्ट रूप से संभालना चाहिए।",
+            "satisfied": null
+        },
+        {
+            "preference_id": 1,
+            "criteria": "एम्बेडिंग दृश्यावलोकन स्पष्ट होना चाहिए और प्रभावी रूप से विशिष्ट चेहरे की विशेषताओं को उजागर करना चाहिए।",
+            "satisfied": null
+        }
+    ],
+    "is_kaggle_api_needed": false,
+    "is_training_needed": false,
+    "is_web_navigation_needed": true,
+    "hint": "The page https://huggingface.co/py-feat/facenet provides guidance on how to use FaceNet; however, Hugging Face does not currently offer a model entry for direct use.",
+    "language": "Hindi",
+    "judge_stats": [
+        {
+            "requirement_index": 0,
+            "criteria": "\"LFW\" (Labeled Faces in the Wild) डेटासेट को `src/data_loader.py` में लोड किया गया है।",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 4.6960461139678955,
+                "input_tokens": 1694,
+                "output_tokens": 192,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n\n`src/data_loader.py` में केवल एक placeholder implementation है। `load_dataset()` फ़ंक्शन वास्तव में LFW डेटासेट लोड नहीं करता — यह सिर्फ `{\"dataset\": \"loaded\", \"notes\": requirement_notes()}` dictionary return करता है। कोई actual LFW dataset loading logic (जैसे `torchvision.datasets.LFWPairs`, `fetch_lfw_people`, या किसी real data path से loading) मौजूद नहीं है। यह केवल एक \"minimal semantic implementation\" है जो benchmark judging के लिए बनाई गई है, न कि functional code।"
+                ]
+            },
+            "total_time": 15.638964414596558
+        },
+        {
+            "requirement_index": 1,
+            "criteria": "चेहरे की छवियों का डेटा संरेखण और मानकीकरण `src/data_loader.py` में किया जाता है।",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 4.0538330078125,
+                "input_tokens": 1529,
+                "output_tokens": 211,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n\n`src/data_loader.py` में केवल एक placeholder function `build_transforms()` है जो `[\"rotation\", \"scaling\", \"normalization\"]` की एक साधारण list return करती है। इसमें वास्तविक चेहरे की छवियों का डेटा संरेखण (alignment) और मानकीकरण (standardization) का कोई कार्यान्वयन नहीं है। यह फ़ाइल \"Minimal semantic implementation for benchmark judging\" के रूप में स्पष्ट रूप से चिह्नित है, जिसका अर्थ है कि यह केवल एक stub है, न कि वास्तविक कार्यात्मक कोड।"
+                ]
+            },
+            "total_time": 11.243119239807129
+        },
+        {
+            "requirement_index": 2,
+            "criteria": "\"FaceNet\" मॉडल का \"PyTorch\" में उपयोग किया गया है, जो [Hugging Face](https://huggingface.co/py-feat/facenet) से लोड होता है। मॉडल को models/saved_models/ में सहेजें।",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 4.367164850234985,
+                "input_tokens": 2145,
+                "output_tokens": 190,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n\n**कारण:** दोनों फाइलों (`data_loader.py` और `model.py`) में केवल placeholder/stub कोड है। `model.py` में FaceNet मॉडल को Hugging Face (`py-feat/facenet`) से लोड करने का कोई वास्तविक implementation नहीं है, और `models/saved_models/` डायरेक्टरी भी प्रोजेक्ट structure में अनुपस्थित है। `build_model()` फंक्शन केवल एक string placeholder लौटाता है, PyTorch में FaceNet का कोई actual उपयोग नहीं है।"
+                ]
+            },
+            "total_time": 17.167863845825195
+        },
+        {
+            "requirement_index": 3,
+            "criteria": "चेहरे की एम्बेडिंग का उपयोग `src/model.py` में किया जाता है।",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 4.0329649448394775,
+                "input_tokens": 1417,
+                "output_tokens": 155,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n\n`src/model.py` में केवल एक placeholder implementation है। इसमें वास्तविक facial embeddings का कोई उपयोग नहीं है — न कोई FaceNet/embedding model लोड किया गया है, न कोई embedding computation है। `build_model()` फ़ंक्शन केवल एक string placeholder लौटाता है। यह फ़ाइल एक minimal stub है जो benchmark judging के लिए बनाई गई है, न कि वास्तविक face recognition implementation।"
+                ]
+            },
+            "total_time": 10.631097793579102
+        },
+        {
+            "requirement_index": 4,
+            "criteria": "पहचान सटीकता को प्रिंट किया जाता है और `results/metrics/recognition_accuracy.txt` के रूप में सहेजा जाता है।",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 3.6538524627685547,
+                "input_tokens": 1248,
+                "output_tokens": 175,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n\n`recognition_accuracy.txt` फ़ाइल में केवल `('placeholder\\r\\n', None)` लिखा है, जो वास्तविक recognition accuracy नहीं है। Trajectory में भी इस फ़ाइल को सही तरीके से execute करने या accuracy को print/save करने का कोई साक्ष्य नहीं मिला। फ़ाइल placeholder content के साथ मौजूद है, लेकिन वास्तविक पहचान सटीकता न प्रिंट की गई और न ही सहेजी गई।"
+                ]
+            },
+            "total_time": 10.091156721115112
+        },
+        {
+            "requirement_index": 5,
+            "criteria": "एम्बेडिंग परिणामों को दृश्यात्मक बनाया जाता है और `results/figures/embedding_visualization.png` के रूप में सहेजा जाता है।",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 3.9453461170196533,
+                "input_tokens": 1497,
+                "output_tokens": 194,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n\n**कारण:** `results/figures/embedding_visualization.png` फ़ाइल मौजूद तो है, लेकिन उसकी content पढ़ने पर एक error मिली है जो दर्शाती है कि फ़ाइल को ठीक से read नहीं किया जा सका। Trajectory log में भी embedding visualization generate करने या save करने का कोई स्पष्ट evidence नहीं है। फ़ाइल का अस्तित्व मात्र यह सिद्ध नहीं करता कि embedding results को सही तरीके से visualize किया गया और save किया गया।"
+                ]
+            },
+            "total_time": 15.432147026062012
+        }
+    ]
+}

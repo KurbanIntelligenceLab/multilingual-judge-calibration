@@ -1,0 +1,157 @@
+{
+    "name": "02_Maze_Solver_Q_Learning_Gridworld_RL",
+    "query": "你能帮我创建一个系统来使用Q学习算法解决迷宫式Gridworld任务吗？该系统应使用numpy来提高核心计算效率，并使用matplotlib进行可视化。Q学习算法应在`src/train.py`中实现，恰当命名的Gridworld环境应在`src/env.py`中实现，以便在实例化时可以指定网格大小和起始/结束位置。系统需要在训练期间记录学习曲线，跟踪情节及其对应的回报，并将其保存为`results/figures/learning_curve.png`。此外，我希望你能可视化并保存代理在每个情节中采取的路径到一个名为`results/figures/path_changes.gif`的文件中，并将训练好的模型保存为`models/saved_models/q_learning_model.npy`。在训练期间有某种实时反馈会很棒，比如看到进度或获得关于模型学习情况的更新。此外，如果可以，请尝试以一种易于修改或扩展的方式编写代码。",
+    "tags": [
+        "Reinforcement Learning"
+    ],
+    "requirements": [
+        {
+            "requirement_id": 0,
+            "prerequisites": [],
+            "criteria": "在`src/train.py`中使用\"Q学习\"算法。",
+            "category": "Machine Learning Method",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 1,
+            "prerequisites": [],
+            "criteria": "在`src/env.py`中定义\"Gridworld\"环境，用户可以指定网格大小和起始/结束位置。",
+            "category": "Dataset or Environment",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 2,
+            "prerequisites": [
+                0,
+                1
+            ],
+            "criteria": "在训练期间记录学习曲线，并保存为`results/figures/learning_curve.png`。记录情节和回报。",
+            "category": "Visualization",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 3,
+            "prerequisites": [
+                0,
+                1,
+                2
+            ],
+            "criteria": "将学习到的模型保存为`models/saved_models/q_learning_model.npy`。",
+            "category": "Save Trained Model",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 4,
+            "prerequisites": [
+                0,
+                1
+            ],
+            "criteria": "学习期间采取的路径被可视化并保存为`results/figures/path_changes.gif`。",
+            "category": "Visualization",
+            "satisfied": null
+        }
+    ],
+    "preferences": [
+        {
+            "preference_id": 0,
+            "criteria": "在训练过程中应显示一些实时进度或反馈。",
+            "satisfied": null
+        },
+        {
+            "preference_id": 1,
+            "criteria": "代码应以易于修改或扩展的方式编写。",
+            "satisfied": null
+        }
+    ],
+    "is_kaggle_api_needed": false,
+    "is_training_needed": true,
+    "is_web_navigation_needed": false,
+    "language": "Chinese",
+    "judge_stats": [
+        {
+            "requirement_index": 0,
+            "criteria": "在`src/train.py`中使用\"Q学习\"算法。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.7351186275482178,
+                "input_tokens": 1153,
+                "output_tokens": 96,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>：`src/train.py` 中没有实现 Q-learning 的核心逻辑。代码仅有一个简单循环 `for step in iterator: score += step`，未见 Q 表、状态-动作价值更新、学习率、折扣因子、epsilon-greedy 等 Q 学习要素；虽然存在字符串 `\"Q-learning\"`，但这只是注释/元数据，不构成算法实现。"
+                ]
+            },
+            "total_time": 11.419042110443115
+        },
+        {
+            "requirement_index": 1,
+            "criteria": "在`src/env.py`中定义\"Gridworld\"环境，用户可以指定网格大小和起始/结束位置。",
+            "satisfied": true,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.137206792831421,
+                "input_tokens": 1050,
+                "output_tokens": 124,
+                "accumulated_cost": 0.0,
+                "satisfied": true,
+                "reason": [
+                    "<SATISFIED>：`src/env.py` 中明确定义了 `class Gridworld`，且其构造函数支持用户传入 `grid_size`、`start`、`end` 参数：`def __init__(self, grid_size=(5, 5), start=(0, 0), end=(4, 4))`，并将其保存为 `self.grid_size`、`self.start`、`self.end`，满足“定义 Gridworld 环境并可指定网格大小和起始/结束位置”的要求。"
+                ]
+            },
+            "total_time": 6.760117292404175
+        },
+        {
+            "requirement_index": 2,
+            "criteria": "在训练期间记录学习曲线，并保存为`results/figures/learning_curve.png`。记录情节和回报。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.773164749145508,
+                "input_tokens": 1034,
+                "output_tokens": 114,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>：现有证据无法证明该要求被满足。虽然项目中存在 `results/figures/learning_curve.png`，但该文件读取失败，报错为 “The image data you provided does not represent a valid image”，说明无法确认其为有效的学习曲线图。此外，未提供训练日志、episode/reward 记录数据，或代码/运行结果来证明“训练期间记录了情节（episode）和回报（reward）并保存学习曲线”。"
+                ]
+            },
+            "total_time": 7.842187404632568
+        },
+        {
+            "requirement_index": 3,
+            "criteria": "将学习到的模型保存为`models/saved_models/q_learning_model.npy`。",
+            "satisfied": true,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.159977436065674,
+                "input_tokens": 768,
+                "output_tokens": 88,
+                "accumulated_cost": 0.0,
+                "satisfied": true,
+                "reason": [
+                    "<SATISFIED>：工作区中存在目标文件 `models/saved_models/q_learning_model.npy`。证据显示该文件已保存于 `models\\saved_models\\q_learning_model.npy`，且文件内容说明中明确写明“`The file exists`”。因此“将学习到的模型保存为 `models/saved_models/q_learning_model.npy`”这一要求已满足。"
+                ]
+            },
+            "total_time": 9.873632669448853
+        },
+        {
+            "requirement_index": 4,
+            "criteria": "学习期间采取的路径被可视化并保存为`results/figures/path_changes.gif`。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 3.0044100284576416,
+                "input_tokens": 1241,
+                "output_tokens": 100,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>：虽存在文件 `results/figures/path_changes.gif`，但提供的内容解析显示其“只是一个极小的黑色块状图像”，没有可识别的迷宫、路径变化或学习过程可视化证据。且未提供生成过程或运行日志来证明“学习期间采取的路径”已被正确可视化并保存，因此该要求缺乏充分证据支持。"
+                ]
+            },
+            "total_time": 13.617278575897217
+        }
+    ]
+}

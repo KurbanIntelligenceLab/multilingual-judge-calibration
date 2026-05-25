@@ -1,0 +1,217 @@
+{
+    "name": "13_Style_Transfer_Perceptual_Loss_CustomImages_DL",
+    "query": "يرجى إنشاء مشروع PyTorch Perceptual Loss لنقل نمط الصور (ارجع إلى هذه الورقة: https://arxiv.org/pdf/1603.08155). يمكنك بناء شبكة Perceptual Loss باستخدام VGG16 في `src/model.py`. يجب أن يجمع المشروع بين صور المحتوى والنمط، ويسمح بتعديل سلس لشدة النمط عن طريق ضبط أوزان فقدان النمط وفقدان المحتوى، وحفظ الصور المنمطة في `results/figures/`. بالإضافة إلى ذلك، قم بتسجيل وقت المعالجة في `results/processing_time.txt`، وحفظ النتائج الوسيطة لعملية نقل النمط في `results/figures/intermediate_results.png`. للاختبار، أدخل صورة محتوى مشهورة (الموناليزا) من [هذا الرابط](https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Mona_Lisa%2C_by_Leonardo_da_Vinci%2C_from_C2RMF_retouched.jpg/768px-Mona_Lisa%2C_by_Leonardo_da_Vinci%2C_from_C2RMF_retouched.jpg) وصورة نمط مشهورة (الليلة المرصعة بالنجوم) من [هذا الرابط](https://ia904705.us.archive.org/34/items/the-starry-night-vincent-van-gogh/The%20Starry%20Night%20-%20Vincent%20van%20Gogh/%21PREVIEW%21%20-%20The%20Starry%20Night%20-%20Vincent%20van%20Gogh.jpg)، وقم بتوليد صورة منقولة النمط. احفظ صور المحتوى والنمط والصور المنقولة النمط إلى `data/content.jpg`، `data/style.jpg`، و `results/figures/`، على التوالي. يجب أن يتعامل المشروع بكفاءة مع الصور عالية الدقة دون وقت معالجة مفرط.",
+    "tags": [
+        "Computer Vision",
+        "Generative Models"
+    ],
+    "requirements": [
+        {
+            "requirement_id": 0,
+            "prerequisites": [],
+            "criteria": "يتم إدخال صورة محتوى شهيرة للاختبار، تم تنزيلها من [هذا الرابط](https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Mona_Lisa%2C_by_Leonardo_da_Vinci%2C_from_C2RMF_retouched.jpg/768px-Mona_Lisa%2C_by_Leonardo_da_Vinci%2C_from_C2RMF_retouched.jpg) وحفظها في `data/content.jpg`.",
+            "category": "Dataset or Environment",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 1,
+            "prerequisites": [],
+            "criteria": "يتم إدخال صورة نمط شهيرة للاختبار، تم تنزيلها من [هذا الرابط](https://ia904705.us.archive.org/34/items/the-starry-night-vincent-van-gogh/The%20Starry%20Night%20-%20Vincent%20van%20Gogh/%21PREVIEW%21%20-%20The%20Starry%20Night%20-%20Vincent%20van%20Gogh.jpg) وحفظها في `data/style.jpg`.",
+            "category": "Dataset or Environment",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 2,
+            "prerequisites": [],
+            "criteria": "يتم تحميل نموذج فقدان الإدراك المنفذ في \"PyTorch\" في `src/model.py`.",
+            "category": "Machine Learning Method",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 3,
+            "prerequisites": [
+                0,
+                1,
+                2
+            ],
+            "criteria": "يتم حفظ الصور الممزوجة في المجلد المحدد `results/figures/`.",
+            "category": "Other",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 4,
+            "prerequisites": [
+                0,
+                1,
+                2
+            ],
+            "criteria": "يتم ضبط كثافة النمط عن طريق تعديل أوزان فقدان النمط وفقدان المحتوى في `src/model.py`.",
+            "category": "Machine Learning Method",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 5,
+            "prerequisites": [
+                0,
+                1,
+                2,
+                3,
+                4
+            ],
+            "criteria": "يتم تسجيل وقت المعالجة وحفظه كـ `results/processing_time.txt`.",
+            "category": "Performance Metrics",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 6,
+            "prerequisites": [
+                0,
+                1,
+                2,
+                3,
+                4
+            ],
+            "criteria": "يتم حفظ النتائج الوسيطة لنقل النمط كـ `results/figures/intermediate_results.png`.",
+            "category": "Visualization",
+            "satisfied": null
+        }
+    ],
+    "preferences": [
+        {
+            "preference_id": 0,
+            "criteria": "يجب أن تسمح عملية نقل النمط بتعديل سلس لشدة النمط، مما يجعل الصورة المنمطة جذابة بصريًا.",
+            "satisfied": null
+        },
+        {
+            "preference_id": 1,
+            "criteria": "يجب أن يتعامل المشروع بكفاءة مع الصور عالية الدقة دون وقت معالجة مفرط.",
+            "satisfied": null
+        }
+    ],
+    "is_kaggle_api_needed": false,
+    "is_training_needed": false,
+    "is_web_navigation_needed": false,
+    "hint": "VGG16 was not originally designed for style transfer. However, the user's query states, 'Please create a PyTorch project for image style transfer using a pre-trained VGG16 model.' Ideally, a well-informed agent should create or find a model for style transfer networks that incorporate pre-trained VGG16, rather than simply loading the VGG16 model.",
+    "language": "Arabic",
+    "judge_stats": [
+        {
+            "requirement_index": 0,
+            "criteria": "يتم إدخال صورة محتوى شهيرة للاختبار، تم تنزيلها من [هذا الرابط](https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Mona_Lisa%2C_by_Leonardo_da_Vinci%2C_from_C2RMF_retouched.jpg/768px-Mona_Lisa%2C_by_Leonardo_da_Vinci%2C_from_C2RMF_retouched.jpg) وحفظها في `data/content.jpg`.",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 11.861430406570435,
+                "input_tokens": 1059,
+                "output_tokens": 114,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\nالمعيار يتطلب وجود صورة محتوى شهيرة (الموناليزا) مخزنة في `data/content.jpg` للاختبار. الأدلة المقدمة تظهر أن محتوى الملف المذكور هو رسالة خطأ نصية تتعلق بـ \"OpenrouterException\" و \"No endpoints found that support image input\"، وليس بيانات صورة فعلية. لا يوجد دليل على أن الملف يحتوي على الصورة التي تم تنزيلها بنجاح."
+                ]
+            },
+            "total_time": 25.233747243881226
+        },
+        {
+            "requirement_index": 1,
+            "criteria": "يتم إدخال صورة نمط شهيرة للاختبار، تم تنزيلها من [هذا الرابط](https://ia904705.us.archive.org/34/items/the-starry-night-vincent-van-gogh/The%20Starry%20Night%20-%20Vincent%20van%20Gogh/%21PREVIEW%21%20-%20The%20Starry%20Night%20-%20Vincent%20van%20Gogh.jpg) وحفظها في `data/style.jpg`.",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 8.560858249664307,
+                "input_tokens": 1261,
+                "output_tokens": 84,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\nلا يوجد دليل في بنية المشروع أو محتوى الملفات على وجود ملف `data/style.jpg`. بنية المشروع المعروضة لا تحتوي على مجلد `data`، ومحتوى `src/model.py` هو تنفيذ دلالي بسيط لا يتضمن أي عملية تنزيل أو حفظ لصورة النمط."
+                ]
+            },
+            "total_time": 15.694337129592896
+        },
+        {
+            "requirement_index": 2,
+            "criteria": "يتم تحميل نموذج فقدان الإدراك المنفذ في \"PyTorch\" في `src/model.py`.",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 3.967548131942749,
+                "input_tokens": 1216,
+                "output_tokens": 142,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\nالمحتوى المقدم في `src/model.py` هو تنفيذ دلالي بسيط (minimal semantic implementation) يحتوي على دوال مساعدة مثل `requirement_notes()` و `build_model()` التي تُرجع نصوصًا وصفية. لا يوجد في الملف أي كود فعلي لتحميل أو تعريف نموذج Perceptual loss باستخدام PyTorch (مثل استيراد torch.nn، تعريف شبكة عصبية، أو تحميل أوزان مُدرَّبة). الكلمات المفتاحية المذكورة لا تُشكل تنفيذًا فعليًا للمتطلب."
+                ]
+            },
+            "total_time": 16.53962516784668
+        },
+        {
+            "requirement_index": 3,
+            "criteria": "يتم حفظ الصور الممزوجة في المجلد المحدد `results/figures/`.",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 5.4342968463897705,
+                "input_tokens": 1151,
+                "output_tokens": 91,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\nلا يوجد دليل في بنية المشروع أو محتوى الملفات على وجود صور ممزوجة محفوظة في المجلد `results/figures/`. الملف الوحيد الموجود في هذا المجلد هو `intermediate_results.png`، ولا يوجد ذكر لملف `merged_image.png` أو أي صور أخرى \"ممزوجة\" في الأدلة المقدمة."
+                ]
+            },
+            "total_time": 12.24801230430603
+        },
+        {
+            "requirement_index": 4,
+            "criteria": "يتم ضبط كثافة النمط عن طريق تعديل أوزان فقدان النمط وفقدان المحتوى في `src/model.py`.",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 6.718962669372559,
+                "input_tokens": 1187,
+                "output_tokens": 157,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\nالمحتوى المقدم لملف `src/model.py` هو تنفيذ دمية بسيط يحتوي على متغيرات نصية ووظيفة `build_model` التي تُرجع سلسلة نصية. لا يحتوي الملف على أي تنفيذ فعلي لنموذج نقل النمط، ولا تعريف لفقدان المحتوى أو فقدان النمط، ولا أي آلية لضبط أوزان هذه الخسائر. المتطلبات المذكورة في `REQUIREMENT_CRITERIA` داخل الملف هي مجرد نص وصفي وليست كودًا تنفيذيًا. لذلك، لم يتم استيفاء المعيار المطلوب."
+                ]
+            },
+            "total_time": 18.647655248641968
+        },
+        {
+            "requirement_index": 5,
+            "criteria": "يتم تسجيل وقت المعالجة وحفظه كـ `results/processing_time.txt`.",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 5.187702178955078,
+                "input_tokens": 934,
+                "output_tokens": 93,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\nيوجد ملف باسم `results/processing_time.txt` في بنية المشروع، لكن محتواه هو `('placeholder\\r\\n', None)`، مما يشير إلى أنه ملف غير مكتمل أو تم إنشاؤه كعنصر نائب. لا يحتوي الملف على وقت معالجة فعلي مسجل، وبالتالي لم يتم تحقيق وظيفة تسجيل وحفظ وقت المعالجة."
+                ]
+            },
+            "total_time": 12.56366515159607
+        },
+        {
+            "requirement_index": 6,
+            "criteria": "يتم حفظ النتائج الوسيطة لنقل النمط كـ `results/figures/intermediate_results.png`.",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 5.786389112472534,
+                "input_tokens": 1019,
+                "output_tokens": 127,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\nالمعيار غير متحقق لأن محتوى الملف `results/figures/intermediate_results.png` لا يحتوي على صورة للنتائج الوسيطة، بل يحتوي على رسالة خطأ نصية تفيد بأنه \"لم يتم العثور على نقاط نهاية تدعم إدخال الصورة\" (No endpoints found that support image input). هذا يشير إلى أن عملية إنشاء أو حفظ الصورة فشلت، وأن الملف الناتج ليس صورة صالحة تحتوي على النتائج المرئية المتوقعة."
+                ]
+            },
+            "total_time": 16.822394132614136
+        }
+    ]
+}

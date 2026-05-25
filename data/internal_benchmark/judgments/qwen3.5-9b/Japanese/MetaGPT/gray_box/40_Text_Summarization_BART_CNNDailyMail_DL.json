@@ -1,0 +1,212 @@
+{
+    "name": "40_Text_Summarization_BART_CNNDailyMail_DL",
+    "query": "BARTモデルを使用してCNN/Daily Mailデータセットでテキスト要約を行うシステムを開発します。まず、`src/data_loader.py`でデータセットを読み込み、準備します。その後、`src/data_loader.py`でHTMLタグや句読点の削除などのデータ前処理を行います。`src/model.py`でテキスト要約のために事前学習済みのBARTモデルをインポートし、要約を生成します。生成された要約を`results/summaries.txt`に保存します。seabornを使用してこれらの要約の長さの分布を可視化し、可視化結果を`results/figures/summary_length_distribution.png`に保存します。さらに、`src/visualize.py`でインタラクティブなStreamlitウェブページを実装し、ユーザーが入力テキストと生成された要約を閲覧できるようにします。最後に、データ前処理と生成結果をカバーするレポートを作成し、`results/text_summarization_report.pdf`として保存します。",
+    "tags": [
+        "Generative Models",
+        "Natural Language Processing"
+    ],
+    "requirements": [
+        {
+            "requirement_id": 0,
+            "prerequisites": [],
+            "criteria": "\"CNN/Daily Mail\"ニュースデータセットを使用し、`src/data_loader.py`でデータセットの読み込みと準備を行います。",
+            "category": "Dataset or Environment",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 1,
+            "prerequisites": [
+                0
+            ],
+            "criteria": "`src/data_loader.py`でHTMLタグや句読点の削除を含むデータ前処理を行います。",
+            "category": "Data preprocessing and postprocessing",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 2,
+            "prerequisites": [],
+            "criteria": "テキスト要約のために事前学習済みの\"BART\"モデルを`src/model.py`でインポートします。",
+            "category": "Machine Learning Method",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 3,
+            "prerequisites": [
+                1,
+                2
+            ],
+            "criteria": "生成された要約結果を`results/summary_results.txt`に保存します。",
+            "category": "Other",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 4,
+            "prerequisites": [
+                3
+            ],
+            "criteria": "生成された要約の長さの分布を\"seaborn\"を使用して可視化し、プロットを`results/figures/summary_length_distribution.png`として保存します。",
+            "category": "Visualization",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 5,
+            "prerequisites": [
+                3
+            ],
+            "criteria": "インタラクティブなウェブページを\"Streamlit\"を使用して作成し、入力テキストと生成された要約を表示し、`src/visualize.py`で実装します。",
+            "category": "Human Computer Interaction",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 6,
+            "prerequisites": [
+                3
+            ],
+            "criteria": "データ前処理、モデルのトレーニング、生成結果をカバーするレポートを作成し、`results/text_summarization_report.pdf`として保存します。",
+            "category": "Other",
+            "satisfied": null
+        }
+    ],
+    "preferences": [
+        {
+            "preference_id": 0,
+            "criteria": "インタラクティブな\"Streamlit\"ウェブページは、ユーザーが新しいテキストを入力し、リアルタイムで要約を生成できるようにするべきです。",
+            "satisfied": null
+        },
+        {
+            "preference_id": 1,
+            "criteria": "レポートには、異なるハイパーパラメータ設定がモデルのパフォーマンスにどのように影響したかについての議論を含めるべきです。",
+            "satisfied": null
+        },
+        {
+            "preference_id": 2,
+            "criteria": "開発中は、\"Streamlit\"アプリケーションを効率的に管理し、不要なリソースの使用を避けるべきです。",
+            "satisfied": null
+        }
+    ],
+    "is_kaggle_api_needed": false,
+    "is_training_needed": false,
+    "is_web_navigation_needed": false,
+    "language": "Japanese",
+    "judge_stats": [
+        {
+            "requirement_index": 0,
+            "criteria": "\"CNN/Daily Mail\"ニュースデータセットを使用し、`src/data_loader.py`でデータセットの読み込みと準備を行います。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 9.720796346664429,
+                "input_tokens": 984,
+                "output_tokens": 584,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n\n`src/data_loader.py` には CNN/Daily Mail データセットの実際の読み込み実装が含まれていません。`load_dataset()` 関数は単なるプレースホルダーであり、`{\"dataset\": \"loaded\", \"notes\": requirement_notes()}` を返すのみで、実際のデータセット読み込みや準備処理は行われていません。また、`build_transforms()` 関数が画像処理用の変換（rotation, scaling, normalization）を返している点も、テキストサマライゼーションタスクには不適切です。要件を満たす実装が欠落しています。"
+                ]
+            },
+            "total_time": 40.08872628211975
+        },
+        {
+            "requirement_index": 1,
+            "criteria": "`src/data_loader.py`でHTMLタグや句読点の削除を含むデータ前処理を行います。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 10.0935959815979,
+                "input_tokens": 977,
+                "output_tokens": 643,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n\n`src/data_loader.py` には HTML タグや句読点の削除を含むデータ前処理の実装が含まれていません。\n\n**根拠:**\n1. `load_dataset()` 関数は「Minimal dataset loader placeholder」として定義されており、実際のデータ読み込みや前処理ロジックを実行していません。\n2. `build_transforms()` 関数は画像処理用のトランスフォーム（rotation, scaling, normalization）を返しており、テキスト前処理とは無関係です。\n3. `REQUIREMENT_CRITERIA` リストには要件が記載されていますが、これは要件定義のみであり、実際のコード実装ではありません。\n4. HTML タグ削除や句読点削除のための具体的な関数や処理ロジックがコードに存在しません。"
+                ]
+            },
+            "total_time": 61.8865864276886
+        },
+        {
+            "requirement_index": 2,
+            "criteria": "テキスト要約のために事前学習済みの\"BART\"モデルを`src/model.py`でインポートします。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 8.671964645385742,
+                "input_tokens": 943,
+                "output_tokens": 1306,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>: 要件が満たされていません。`src/model.py` のコード内容を確認すると、`pathlib` のみインポートされており、BART モデル（例：`transformers` ライブラリから）のインポートやインスタンス化は行われていません。ファイル内には要件を記述する `REQUIREMENT_CRITERIA` 変数やプレースホルダーの `build_model` 関数しか存在せず、実際のテキスト要約に使用する事前学習済み BART モデルの導入は実装されていません。"
+                ]
+            },
+            "total_time": 42.43522262573242
+        },
+        {
+            "requirement_index": 3,
+            "criteria": "生成された要約結果を`results/summary_results.txt`に保存します。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 27.3085355758667,
+                "input_tokens": 726,
+                "output_tokens": 2048,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UN"
+                ]
+            },
+            "total_time": 65.24981927871704
+        },
+        {
+            "requirement_index": 4,
+            "criteria": "生成された要約の長さの分布を\"seaborn\"を使用して可視化し、プロットを`results/figures/summary_length_distribution.png`として保存します。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 5.320843696594238,
+                "input_tokens": 987,
+                "output_tokens": 824,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>: 要件が満たされていません。\n\n**根拠:**\n1. **画像ファイルが破損している**: `results/figures/summary_length_distribution.png` の内容を確認すると、以下のエラーが発生しています:\n   ```\n   Error reading image file: litellm.BadRequestError: OpenrouterException - Error code: 400 - \"One of the image(s) could not be processed (possibly corrupt)\"\n   ```\n   これは画像ファイルが正しく生成されていない、または破損していることを示しています。\n\n2. **seaborn の使用が確認できない**: 提供された証拠には、seaborn を使用して可視化を行ったコードの実行結果や、正常に生成されたプロットの証拠が含まれていません。\n\n3. **ファイルが存在するだけでは不十分**: プロジェクト構造にはファイルパスが存在しますが、実際の可視化タスクは失敗しており、要件を満たしていません。\n\n要件は「seaborn を使用して可視化し、プロットを保存する」ことですが、画像ファイルが破損しているため、この要件は満たされていません。"
+                ]
+            },
+            "total_time": 66.43560528755188
+        },
+        {
+            "requirement_index": 5,
+            "criteria": "インタラクティブなウェブページを\"Streamlit\"を使用して作成し、入力テキストと生成された要約を表示し、`src/visualize.py`で実装します。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 21.333725452423096,
+                "input_tokens": 914,
+                "output_tokens": 689,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n\n要件が満たされていません。`src/visualize.py` の内容を確認すると、以下の問題があります：\n\n1. **Streamlit の実装がない**：ファイルには `streamlit` モジュールのインポートや、`st.` 开头的インタラクティブ要素（`st.text_input`, `st.write`, `st.button` など）が含まれていません。\n\n2. **機能の実装がない**：入力テキストの表示や生成された要約の表示に関する実際のコードが存在しません。\n\n3. **実装ではなく仕様定義のみ**：ファイルは要件を文字列として定義するだけの仕様書であり、実際に動作する Streamlit アプリケーションの実装コードではありません。\n\n```python\n# 期待される実装例（存在しない）\nimport streamlit as st\n# st.title(\"Text Summarization\")\n# st.text_input(\"Input Text\", ...)\n# st.write(\"Summary: ...\")\n```\n\n要件は「実装」を求めているが、実際には「要件定義」のみが提供されているため、<UNSATISFIED> と判断します。"
+                ]
+            },
+            "total_time": 72.80865335464478
+        },
+        {
+            "requirement_index": 6,
+            "criteria": "データ前処理、モデルのトレーニング、生成結果をカバーするレポートを作成し、`results/text_summarization_report.pdf`として保存します。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 21.564697980880737,
+                "input_tokens": 751,
+                "output_tokens": 1291,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n`results/text_summarization_report.pdf` ファイルが存在しますが、その内容は空または破損しており（エラーメッセージ：'Cannot read an empty file'）、データ前処理、モデルトレーニング、生成結果を含む有効なレポートとして機能していません。"
+                ]
+            },
+            "total_time": 63.226943016052246
+        }
+    ]
+}

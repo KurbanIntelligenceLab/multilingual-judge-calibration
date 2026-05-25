@@ -1,0 +1,223 @@
+{
+    "name": "36_Music_Emotion_Classification_SVM_GTZAN_ML",
+    "query": "GTZAN veri kümesi kullanarak bir SVM modeli ile müzik duygu sınıflandırması için bir proje geliştirmeme yardım et. Proje, gürültü giderme ve normalizasyon için librosa kullanarak ses ön işleme, 13 katsayı ile MFCC özellik çıkarımı ve hiperparametre ayarlaması ile bir lineer SVM sınıflandırıcı içermelidir. Veri kümesi yükleme, ses ön işleme, gürültü giderme ve normalizasyon dahil, ve MFCC özellik çıkarımı `src/data_loader.py` içinde uygulanmalıdır. SVM sınıflandırıcıyı `src/model.py` içinde uygula. Sınıflandırma sonuçlarını `results/predictions.txt` dosyasına kaydet, ses spektrogramlarını librosa ile görselleştir (`results/figures/` içine kaydederek) ve `src/app.py` içinde Streamlit ile etkileşimli bir web sayfası oluştur, bu sayfa gerçek zamanlı ses dosyası yüklemelerine izin verir ve hem sınıflandırma sonuçlarını hem de `results/figures/` içindeki spektrogramları gösterir. Streamlit web sayfasının başlatılması ve sonlandırılmasının otomatik yönetimine dikkat ederek verimli kaynak yönetimini sağla.",
+    "tags": [
+        "Audio Processing",
+        "Classification"
+    ],
+    "requirements": [
+        {
+            "requirement_id": 0,
+            "prerequisites": [],
+            "criteria": "\"GTZAN\" müzik duygusu `src/data_loader.py` içinde yüklendi.",
+            "category": "Dataset or Environment",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 1,
+            "prerequisites": [
+                0
+            ],
+            "criteria": "Gürültü giderme ve normalizasyon dahil ses ön işleme `src/data_loader.py` içinde gerçekleştirilir.",
+            "category": "Data preprocessing and postprocessing",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 2,
+            "prerequisites": [
+                0,
+                1
+            ],
+            "criteria": "MFCC özellik çıkarımı `src/data_loader.py` içinde uygulanır.",
+            "category": "Data preprocessing and postprocessing",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 3,
+            "prerequisites": [
+                1,
+                2
+            ],
+            "criteria": "\"SVM sınıflandırıcı\" `src/model.py` içinde uygulanır.",
+            "category": "Machine Learning Method",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 4,
+            "prerequisites": [
+                3
+            ],
+            "criteria": "Sınıflandırma sonuçları `results/predictions.txt` dosyasına kaydedilir.",
+            "category": "Other",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 5,
+            "prerequisites": [
+                0,
+                1,
+                2,
+                3
+            ],
+            "criteria": "Ses spektrogramları \"librosa\" ile görselleştirilir ve `results/figures/` içine kaydedilir.",
+            "category": "Visualization",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 6,
+            "prerequisites": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5
+            ],
+            "criteria": "\"Streamlit\" kullanarak `src/app.py` içinde etkileşimli bir web sayfası oluşturulur ve `results/figures/` içindeki sınıflandırma sonuçlarını ve spektrogramları gösterir.",
+            "category": "Human Computer Interaction",
+            "satisfied": null
+        }
+    ],
+    "preferences": [
+        {
+            "preference_id": 0,
+            "criteria": "\"Streamlit\" web sayfası, kullanıcıların yeni ses dosyaları yüklemesine ve sınıflandırma sonuçlarını gerçek zamanlı olarak görmesine izin vermelidir.",
+            "satisfied": null
+        },
+        {
+            "preference_id": 1,
+            "criteria": "Spektrogram görselleştirmeleri, daha derin analiz için frekans aralığını ve zaman çözünürlüğünü ayarlama seçeneklerini içermelidir.",
+            "satisfied": null
+        },
+        {
+            "preference_id": 2,
+            "criteria": "Sistem, özellikle Streamlit web sayfasının başlatılması ve sonlandırılmasının yönetiminde verimli kaynak yönetimi gerçekleştirmelidir.",
+            "satisfied": null
+        }
+    ],
+    "is_kaggle_api_needed": false,
+    "is_training_needed": true,
+    "is_web_navigation_needed": false,
+    "language": "Turkish",
+    "judge_stats": [
+        {
+            "requirement_index": 0,
+            "criteria": "\"GTZAN\" müzik duygusu `src/data_loader.py` içinde yüklendi.",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 8.298993825912476,
+                "input_tokens": 1444,
+                "output_tokens": 299,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n\n`src/data_loader.py` dosyasının içeriği incelendiğinde, gerçek bir GTZAN veri seti yükleme işlemi yapılmadığı görülmektedir. Dosya yalnızca bir \"placeholder\" (yer tutucu) implementasyon içermektedir:\n\n- `load_dataset()` fonksiyonu gerçek bir veri yükleme işlemi yapmaz; sadece `{\"dataset\": \"loaded\", \"notes\": requirement_notes()}` şeklinde sabit bir sözlük döndürür.\n- GTZAN veri setine erişim için herhangi bir dosya yolu, kütüphane (örn. `librosa`, `tensorflow_datasets`, `torchvision`) veya gerçek veri okuma kodu bulunmamaktadır.\n- \"GTZAN\" kelimesi yalnızca `KEYWORDS` listesinde ve yorum satırlarında geçmekte olup işlevsel bir kod parçası olarak kullanılmamaktadır.\n\nBu nedenle GTZAN müzik veri setinin gerçek anlamda yüklendiği söylenemez."
+                ]
+            },
+            "total_time": 19.897220134735107
+        },
+        {
+            "requirement_index": 1,
+            "criteria": "Gürültü giderme ve normalizasyon dahil ses ön işleme `src/data_loader.py` içinde gerçekleştirilir.",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 8.037272930145264,
+                "input_tokens": 1513,
+                "output_tokens": 326,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n\n`src/data_loader.py` dosyasının içeriği incelendiğinde, gerçek bir ses ön işleme implementasyonu bulunmamaktadır. Dosya yalnızca bir \"minimal semantic implementation\" (minimal semantik uygulama) içermekte olup:\n\n- `load_dataset()` fonksiyonu yalnızca `{\"dataset\": \"loaded\", \"notes\": requirement_notes()}` döndüren bir placeholder'dır.\n- `build_transforms()` fonksiyonu `[\"rotation\", \"scaling\", \"normalization\"]` gibi string listesi döndüren bir placeholder'dır; gerçek ses normalizasyonu veya gürültü giderme işlemi içermemektedir.\n- Gürültü giderme (noise removal) için herhangi bir kütüphane (örn. `librosa`, `scipy`, `noisereduce`) import edilmemiş veya kullanılmamıştır.\n- Normalizasyon için de gerçek bir sinyal işleme kodu bulunmamaktadır.\n\nDosya, gereksinimleri yalnızca yorum satırları ve string listesi olarak listelemekte; ancak hiçbir işlevsel ses ön işleme kodu içermemektedir."
+                ]
+            },
+            "total_time": 20.259878873825073
+        },
+        {
+            "requirement_index": 2,
+            "criteria": "MFCC özellik çıkarımı `src/data_loader.py` içinde uygulanır.",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 6.89508581161499,
+                "input_tokens": 1427,
+                "output_tokens": 306,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n\n`src/data_loader.py` dosyasının içeriği incelendiğinde, gerçek bir MFCC özellik çıkarımı uygulaması bulunmamaktadır. Dosya yalnızca bir \"minimal semantic implementation\" (minimal semantik uygulama) içermekte olup:\n\n- `load_dataset()` fonksiyonu sadece `{\"dataset\": \"loaded\", \"notes\": requirement_notes()}` döndüren bir yer tutucu (placeholder) fonksiyondur.\n- `build_transforms()` fonksiyonu da yalnızca `[\"rotation\", \"scaling\", \"normalization\"]` listesi döndüren bir yer tutucudur.\n- `librosa`, `scipy` veya herhangi bir ses işleme kütüphanesi import edilmemiştir.\n- Gerçek MFCC hesaplama kodu (örn. `librosa.feature.mfcc()`) hiç bulunmamaktadır.\n\nMFCC özellik çıkarımı yalnızca `REQUIREMENT_CRITERIA` listesinde bir metin olarak referans verilmekte, ancak fiilen uygulanmamaktadır."
+                ]
+            },
+            "total_time": 14.89035940170288
+        },
+        {
+            "requirement_index": 3,
+            "criteria": "\"SVM sınıflandırıcı\" `src/model.py` içinde uygulanır.",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 6.696079730987549,
+                "input_tokens": 1441,
+                "output_tokens": 228,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n\n`src/model.py` dosyasının içeriği incelendiğinde, gerçek bir SVM sınıflandırıcı implementasyonu bulunmamaktadır. Dosya yalnızca bir \"placeholder\" (yer tutucu) içermekte olup `sklearn.svm.SVC` veya benzeri bir SVM kütüphanesi import edilmemiş, model eğitimi, hiperparametre ayarı veya tahmin işlemleri gerçekleştirilmemiştir. `build_model()` fonksiyonu yalnızca `\"model placeholder\"` string'i döndürmektedir. `KEYWORDS` listesinde `\"SVM classifier\"` ve `\"svm\"` kelimeleri yer alsa da bu yalnızca metadata niteliğindedir; işlevsel bir SVM implementasyonu değildir."
+                ]
+            },
+            "total_time": 16.84107494354248
+        },
+        {
+            "requirement_index": 4,
+            "criteria": "Sınıflandırma sonuçları `results/predictions.txt` dosyasına kaydedilir.",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 3.760571241378784,
+                "input_tokens": 1303,
+                "output_tokens": 166,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n\n`results/predictions.txt` dosyası mevcut olmakla birlikte, içeriği yalnızca `('placeholder\\r\\n', None)` şeklinde bir yer tutucu değer içermektedir. Bu, gerçek sınıflandırma sonuçlarının (örneğin tahmin edilen etiketler, doğruluk skorları vb.) dosyaya kaydedilmediğini göstermektedir. Trajectory kanıtı da bu dosyaya herhangi bir gerçek sınıflandırma çıktısının yazıldığını doğrulamamaktadır."
+                ]
+            },
+            "total_time": 11.697080135345459
+        },
+        {
+            "requirement_index": 5,
+            "criteria": "Ses spektrogramları \"librosa\" ile görselleştirilir ve `results/figures/` içine kaydedilir.",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 4.838139057159424,
+                "input_tokens": 1831,
+                "output_tokens": 182,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n\nProje dosyalarında (`data_loader.py`, `model.py`, `app.py`) `librosa` kütüphanesi kullanılarak ses spektrogramı görselleştirme işlemi gerçekleştirilmemiştir. Mevcut dosyalar yalnızca minimal placeholder (yer tutucu) implementasyonlar içermekte olup gerçek bir `librosa` entegrasyonu, spektrogram oluşturma veya `results/figures/` dizinine kaydetme işlemi bulunmamaktadır. `results/figures/` dizini yapıda görünmekle birlikte içinde herhangi bir dosya yer almamaktadır."
+                ]
+            },
+            "total_time": 15.88742208480835
+        },
+        {
+            "requirement_index": 6,
+            "criteria": "\"Streamlit\" kullanarak `src/app.py` içinde etkileşimli bir web sayfası oluşturulur ve `results/figures/` içindeki sınıflandırma sonuçlarını ve spektrogramları gösterir.",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 6.2718212604522705,
+                "input_tokens": 1499,
+                "output_tokens": 266,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n\n`src/app.py` dosyasının içeriği incelendiğinde, gerçek bir Streamlit uygulaması bulunmamaktadır. Dosya yalnızca gereksinim kriterlerini listeleyen bir `REQUIREMENT_CRITERIA` değişkeni ve basit bir `main()` fonksiyonu içermektedir. Streamlit importu (`import streamlit as st`) yoktur, `results/figures/` dizinindeki spektrogramları veya sınıflandırma sonuçlarını görüntüleyen herhangi bir kod bulunmamaktadır. Dosya, gerçek bir Streamlit web uygulaması yerine yalnızca bir \"minimal semantic implementation\" (asgari semantik uygulama) olarak tanımlanmıştır. Ayrıca `results/figures/` dizini boş görünmekte ve trajectory'de Streamlit uygulamasının çalıştırıldığına dair herhangi bir kanıt mevcut değildir."
+                ]
+            },
+            "total_time": 16.76941180229187
+        }
+    ]
+}

@@ -1,0 +1,214 @@
+{
+    "name": "41_Stock_Classification_KNN_YahooFinance_ML",
+    "query": "Yahoo Finance डेटासेट पर KNN मॉडल का उपयोग करके एक स्टॉक वर्गीकरण प्रणाली विकसित करें। आपका कार्यान्वयन यह तय करना चाहिए कि दिए गए स्टॉक की कीमत बढ़ेगी या घटेगी। डेटासेट लोड करने और फीचर इंजीनियरिंग करने से शुरू करें, जिसमें तकनीकी संकेतक उत्पन्न करना और `src/data_loader.py` में सबसे प्रासंगिक विशेषताओं का चयन करना शामिल है। डेटा को मानकीकृत करें ताकि `src/data_loader.py` में फीचर मान समान रेंज में हों। इंजीनियर विशेषताओं के आधार पर स्टॉक्स को वर्गीकृत करने के लिए KNN वर्गीकर्ता लागू करें, और कार्यान्वयन को `src/model.py` में सहेजें। इसके बाद, वर्गीकरण परिणामों को `results/classification_results.txt` में सहेजें, और तकनीकी संकेतकों और वर्गीकरण परिणाम के बीच संबंध को seaborn का उपयोग करके एक हीटमैप के रूप में दृश्य बनाएं। हीटमैप को `results/figures/feature_correlation_heatmap.png` के रूप में सहेजें। अंत में, `results/` के अंतर्गत एक इंटरैक्टिव Jupyter Notebook बनाएं जो प्रक्रिया की व्याख्या करता है, वर्गीकरण परिणामों को प्रदर्शित करता है, और नए डेटा को पेश करने वाले भविष्य के अपडेट को आसान बनाने में मदद करेगा।",
+    "tags": [
+        "Classification",
+        "Financial Analysis",
+        "Supervised Learning"
+    ],
+    "requirements": [
+        {
+            "requirement_id": 0,
+            "prerequisites": [],
+            "criteria": "\"Yahoo Finance\" डेटासेट का उपयोग किया जाता है, जिसमें `src/data_loader.py` में डेटा लोडिंग और तैयारी शामिल है।",
+            "category": "Dataset or Environment",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 1,
+            "prerequisites": [
+                0
+            ],
+            "criteria": "फीचर इंजीनियरिंग की जाती है, जिसमें तकनीकी संकेतक उत्पन्न करना और `src/data_loader.py` में फीचर चयन करना शामिल है।",
+            "category": "Data preprocessing and postprocessing",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 2,
+            "prerequisites": [
+                0
+            ],
+            "criteria": "डेटा को मानकीकृत किया जाता है ताकि `src/data_loader.py` में फीचर मान समान रेंज में हों।",
+            "category": "Data preprocessing and postprocessing",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 3,
+            "prerequisites": [
+                2
+            ],
+            "criteria": "\"KNN वर्गीकर्ता\" को इंजीनियर विशेषताओं के आधार पर स्टॉक्स को वर्गीकृत करने के लिए लागू किया जाता है। कृपया कार्यान्वयन को `src/model.py` में सहेजें।",
+            "category": "Machine Learning Method",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 4,
+            "prerequisites": [
+                3
+            ],
+            "criteria": "वर्गीकरण परिणामों को `results/classification_results.txt` में सहेजा जाता है।",
+            "category": "Other",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 5,
+            "prerequisites": [
+                4
+            ],
+            "criteria": "तकनीकी संकेतकों और वर्गीकरण परिणामों के बीच संबंधों का प्रतिनिधित्व करने वाला एक हीटमैप `results/figures/feature_correlation_heatmap.png` के रूप में सहेजा जाता है।",
+            "category": "Visualization",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 6,
+            "prerequisites": [
+                4
+            ],
+            "criteria": "एक इंटरैक्टिव \"Jupyter Notebook\" `results/` के अंतर्गत बनाया जाता है जो प्रक्रिया की व्याख्या करता है और वर्गीकरण परिणामों को प्रदर्शित करता है।",
+            "category": "Human Computer Interaction",
+            "satisfied": null
+        }
+    ],
+    "preferences": [
+        {
+            "preference_id": 0,
+            "criteria": "Jupyter Notebook में प्रत्येक चरण की स्पष्ट व्याख्या शामिल होनी चाहिए, जिसमें फीचर इंजीनियरिंग और मॉडल मूल्यांकन शामिल है।",
+            "satisfied": null
+        },
+        {
+            "preference_id": 1,
+            "criteria": "सहसंबंध हीटमैप को सबसे महत्वपूर्ण तकनीकी संकेतकों को उजागर करना चाहिए और उनके संबंधों में अंतर्दृष्टि प्रदान करनी चाहिए।",
+            "satisfied": null
+        },
+        {
+            "preference_id": 2,
+            "criteria": "सिस्टम को नए डेटा के साथ आसान अपडेट की अनुमति देनी चाहिए, जिससे नोटबुक भविष्य के विश्लेषण के लिए लचीला हो।",
+            "satisfied": null
+        }
+    ],
+    "is_kaggle_api_needed": false,
+    "is_training_needed": true,
+    "is_web_navigation_needed": false,
+    "language": "Hindi",
+    "judge_stats": [
+        {
+            "requirement_index": 0,
+            "criteria": "\"Yahoo Finance\" डेटासेट का उपयोग किया जाता है, जिसमें `src/data_loader.py` में डेटा लोडिंग और तैयारी शामिल है।",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 73.70053219795227,
+                "input_tokens": 1526,
+                "output_tokens": 246,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\nकारण: `src/data_loader.py` फ़ाइल की वास्तविक सामग्री में कोड केवल एक प्लेसहोल्डर/स्टब है जो REQUIREMENT_CRITERIA और KEYWORDS को परिभाषित करता है। इसमें वास्तविक डेटा लोडिंग, Yahoo Finance API (`yfinance`) का उपयोग, या डेटा तैयारी का कोड नहीं है। फ़ाइल में `load_dataset()` फ़ंक्शन केवल एक डिक्शनरी लौटाता है, वास्तविक डेटा नहीं। ट्रैजेक्टरी साक्ष्य बताता है कि `yfinance` पैकेज इंस्टॉल किया गया था, लेकिन फ़ाइल की सामग्री स्वयं आवश्यकता को पूरा नहीं करती।"
+                ]
+            },
+            "total_time": 174.67851161956787
+        },
+        {
+            "requirement_index": 1,
+            "criteria": "फीचर इंजीनियरिंग की जाती है, जिसमें तकनीकी संकेतक उत्पन्न करना और `src/data_loader.py` में फीचर चयन करना शामिल है।",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 7.817540407180786,
+                "input_tokens": 1360,
+                "output_tokens": 165,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\nकारण: `src/data_loader.py` फ़ाइल की सामग्री केवल एक प्लेसहोल्ड/न्यूनतम कार्यान्वयन दिखाती है। इसमें वास्तविक फ़ीचर इंजीनियरिंग, तकनीकी संकेतक उत्पन्न करने, या फ़ीचर चयन करने का कोई कोड नहीं है। फ़ाइल में केवल स्टब फ़ंक्शन (`load_dataset`, `build_transforms`) और आवश्यकताओं की सूची है।"
+                ]
+            },
+            "total_time": 19.935365915298462
+        },
+        {
+            "requirement_index": 2,
+            "criteria": "डेटा को मानकीकृत किया जाता है ताकि `src/data_loader.py` में फीचर मान समान रेंज में हों।",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 6.736989498138428,
+                "input_tokens": 1421,
+                "output_tokens": 237,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\nकारण: फ़ाइल `src/data_loader.py` की सामग्री में केवल एक प्लेसहोल्डर फ़ंक्शन `load_dataset()` है जो एक डिक्शनरी लौटाता है, और `build_transforms()` जो एक सूची लौटाता है। इसमें वास्तविक डेटा लोडिंग, फीचर इंजीनियरिंग, या स्टैंडर्डाइज़ेशन (जैसे StandardScaler, MinMaxScaler का उपयोग) का कोई कोड नहीं है। टिप्पणियों में आवश्यकताओं का उल्लेख है, लेकिन कार्यान्वयन नहीं है। इसलिए, डेटा को मानकीकृत करने की आवश्यकता पूरी नहीं हुई।"
+                ]
+            },
+            "total_time": 15.000630378723145
+        },
+        {
+            "requirement_index": 3,
+            "criteria": "\"KNN वर्गीकर्ता\" को इंजीनियर विशेषताओं के आधार पर स्टॉक्स को वर्गीकृत करने के लिए लागू किया जाता है। कृपया कार्यान्वयन को `src/model.py` में सहेजें।",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 9.34503173828125,
+                "input_tokens": 1369,
+                "output_tokens": 235,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\nकारण: `src/model.py` फ़ाइल का वास्तविक सामग्री केवल एक प्लेसहोल्डर/सेमेंटिक इम्प्लीमेंटेशन दिखाती है जिसमें KNN क्लासिफ़ायर का वास्तविक कोड नहीं है। फ़ाइल में केवल डॉकस्ट्रिंग, REQUIREMENT_CRITERIA और KEYWORDS हैं, लेकिन वास्तविक KNN मॉडल इम्प्लीमेंटेशन, ट्रेनिंग या सेविंग लॉजिक नहीं है। ट्रैजेक्टरी एविडेंस में सफल ट्रेनिंग और सेविंग का उल्लेख है, लेकिन वास्तविक फ़ाइल कंटेंट इसकी पुष्टि नहीं करता।"
+                ]
+            },
+            "total_time": 23.876439094543457
+        },
+        {
+            "requirement_index": 4,
+            "criteria": "वर्गीकरण परिणामों को `results/classification_results.txt` में सहेजा जाता है।",
+            "satisfied": true,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 26.592134475708008,
+                "input_tokens": 1133,
+                "output_tokens": 139,
+                "accumulated_cost": 0.0,
+                "satisfied": true,
+                "reason": [
+                    "<SATISFIED>\nफ़ाइल `results/classification_results.txt` प्रोजेक्ट संरचना में मौजूद है, जो इस बात का प्रमाण है कि वर्गीकरण परिणाम सहेजे गए हैं। ट्रैजेक्टरी साक्ष्य से पता चलता है कि फ़ाइल को सफलतापूर्वक सहेजा गया था और वर्गीकरण प्रक्रिया बिना त्रुटि के पूरी हुई थी।"
+                ]
+            },
+            "total_time": 93.73490834236145
+        },
+        {
+            "requirement_index": 5,
+            "criteria": "तकनीकी संकेतकों और वर्गीकरण परिणामों के बीच संबंधों का प्रतिनिधित्व करने वाला एक हीटमैप `results/figures/feature_correlation_heatmap.png` के रूप में सहेजा जाता है।",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 6.367799520492554,
+                "input_tokens": 1266,
+                "output_tokens": 208,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n\nकारण: दिए गए Key Evidence में `feature_correlation_heatmap.png` फ़ाइल का content एक 404 error दिखाता है (\"No endpoints found that support image input\"), जो संभवतः फ़ाइल को पढ़ने में असफलता को दर्शाता है। Trajectory Evidence में स्क्रिप्ट के सफल execution और फ़ाइल save का उल्लेख है, लेकिन मूल्यांकन के लिए प्रत्यक्ष साक्ष्य (फ़ाइल की उपस्थिति/सामग्री) अनुपलब्ध है। मानदंड के लिए फ़ाइल का वास्तविक सहेजा जाना आवश्यक है, और यहाँ उसकी पुष्टि नहीं होती।"
+                ]
+            },
+            "total_time": 66.67508888244629
+        },
+        {
+            "requirement_index": 6,
+            "criteria": "एक इंटरैक्टिव \"Jupyter Notebook\" `results/` के अंतर्गत बनाया जाता है जो प्रक्रिया की व्याख्या करता है और वर्गीकरण परिणामों को प्रदर्शित करता है।",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 43.642374753952026,
+                "input_tokens": 1714,
+                "output_tokens": 208,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\nकारण: प्रोजेक्ट वर्कस्पेस में `results/` डायरेक्टरी में `classification_results.txt` और `figures/` सबडायरेक्टरी है, लेकिन कोई Jupyter Notebook (`.ipynb` फ़ाइल) नहीं है। ट्रैजेक्टरी साक्ष्य `results/analysis.ipynb` के निर्माण का उल्लेख करता है, लेकिन वास्तविक वर्कस्पेस संरचना में यह फ़ाइल मौजूद नहीं है। इसलिए, \"इंटरैक्टिव Jupyter Notebook `results/` के अंतर्गत बनाया जाता है\" की आवश्यकता पूरी नहीं हुई।"
+                ]
+            },
+            "total_time": 98.61358141899109
+        }
+    ]
+}

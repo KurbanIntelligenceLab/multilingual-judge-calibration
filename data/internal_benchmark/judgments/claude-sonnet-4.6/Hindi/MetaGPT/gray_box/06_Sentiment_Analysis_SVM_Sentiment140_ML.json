@@ -1,0 +1,161 @@
+{
+    "name": "06_Sentiment_Analysis_SVM_Sentiment140_ML",
+    "query": "कृपया मुझे Hugging Face से उपलब्ध Sentiment140 डेटासेट का उपयोग करके ट्वीट्स पर भावना विश्लेषण के लिए एक प्रणाली बनाने में मदद करें। Sentiment140 डेटासेट लोड करें और डेटा लोड करते समय, इसे स्टॉप वर्ड्स, विराम चिह्न और विशेष वर्णों को हटाकर साफ करें, यह सब `src/data_loader.py` में करें। टेक्स्ट वेक्टराइजेशन के लिए Word2Vec या GloVe का उपयोग करें। यह `src/data_loader.py` में होना चाहिए। इसके बाद, `src/model.py` में एक SVM क्लासिफायर को लागू करें और प्रशिक्षित करें। अंत में, क्लासिफायर की सटीकता की रिपोर्ट `results/metrics/accuracy_score.txt` में लिखें। आदर्श रूप से, रिपोर्ट आसानी से व्याख्यायित होनी चाहिए।",
+    "tags": [
+        "Natural Language Processing",
+        "Supervised Learning"
+    ],
+    "requirements": [
+        {
+            "requirement_id": 0,
+            "prerequisites": [],
+            "criteria": "\"Sentiment140\" डेटासेट, जो \"Hugging Face\" से उपलब्ध है, `src/data_loader.py` में प्राप्त किया जाता है।",
+            "category": "Dataset or Environment",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 1,
+            "prerequisites": [
+                0
+            ],
+            "criteria": "डेटासेट को साफ किया जाता है, जिसमें स्टॉप वर्ड्स, विराम चिह्न और विशेष वर्णों को हटाना शामिल है, यह सब `src/data_loader.py` में होता है।",
+            "category": "Data preprocessing and postprocessing",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 2,
+            "prerequisites": [
+                0,
+                1
+            ],
+            "criteria": "वर्ड एम्बेडिंग्स, या तो \"Word2Vec\" या \"GloVe,\" का उपयोग `src/data_loader.py` में टेक्स्ट को वेक्टर में बदलने के लिए किया जाता है।",
+            "category": "Machine Learning Method",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 3,
+            "prerequisites": [
+                0,
+                1,
+                2
+            ],
+            "criteria": "\"SVM क्लासिफायर\" को `src/model.py` में लागू और प्रशिक्षित किया जाता है।",
+            "category": "Machine Learning Method",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 4,
+            "prerequisites": [
+                1,
+                2,
+                3
+            ],
+            "criteria": "सटीकता स्कोर को प्रिंट किया जाता है और `results/metrics/accuracy_score.txt` के रूप में सहेजा जाता है।",
+            "category": "Performance Metrics",
+            "satisfied": null
+        }
+    ],
+    "preferences": [
+        {
+            "preference_id": 0,
+            "criteria": "डेटासेट डाउनलोड प्रक्रिया विश्वसनीय होनी चाहिए, जिसमें स्पष्ट त्रुटि हैंडलिंग हो।",
+            "satisfied": null
+        },
+        {
+            "preference_id": 1,
+            "criteria": "अंतिम सटीकता रिपोर्ट सीधी और आसानी से व्याख्यायित होनी चाहिए।",
+            "satisfied": null
+        }
+    ],
+    "is_kaggle_api_needed": false,
+    "is_training_needed": true,
+    "is_web_navigation_needed": false,
+    "language": "Hindi",
+    "judge_stats": [
+        {
+            "requirement_index": 0,
+            "criteria": "\"Sentiment140\" डेटासेट, जो \"Hugging Face\" से उपलब्ध है, `src/data_loader.py` में प्राप्त किया जाता है।",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 5.195732593536377,
+                "input_tokens": 1737,
+                "output_tokens": 176,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n\n`src/data_loader.py` में Sentiment140 dataset को Hugging Face से वास्तव में load करने का कोई implementation नहीं है। फ़ाइल में केवल एक placeholder function `load_dataset()` है जो `{\"dataset\": \"loaded\", \"notes\": requirement_notes()}` return करता है — इसमें `datasets` library का import नहीं है, `load_dataset(\"sentiment140\")` जैसा कोई actual API call नहीं है, और कोई functional code नहीं है। यह केवल एक \"minimal semantic implementation\" है जो requirement को पूरा नहीं करती।"
+                ]
+            },
+            "total_time": 16.91900134086609
+        },
+        {
+            "requirement_index": 1,
+            "criteria": "डेटासेट को साफ किया जाता है, जिसमें स्टॉप वर्ड्स, विराम चिह्न और विशेष वर्णों को हटाना शामिल है, यह सब `src/data_loader.py` में होता है।",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 3.3688249588012695,
+                "input_tokens": 1710,
+                "output_tokens": 159,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n\n`src/data_loader.py` में केवल एक placeholder function `load_dataset()` है जो सिर्फ एक dictionary return करती है। इसमें स्टॉप वर्ड्स हटाने, विराम चिह्न (punctuation) हटाने, या विशेष वर्ण (special characters) हटाने की कोई वास्तविक implementation नहीं है। फ़ाइल में केवल requirement criteria की strings और keywords listed हैं, कोई actual data cleaning logic नहीं है।"
+                ]
+            },
+            "total_time": 12.442195892333984
+        },
+        {
+            "requirement_index": 2,
+            "criteria": "वर्ड एम्बेडिंग्स, या तो \"Word2Vec\" या \"GloVe,\" का उपयोग `src/data_loader.py` में टेक्स्ट को वेक्टर में बदलने के लिए किया जाता है।",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 4.739205837249756,
+                "input_tokens": 1721,
+                "output_tokens": 168,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n\n`src/data_loader.py` में Word2Vec या GloVe का कोई वास्तविक implementation नहीं है। फ़ाइल में केवल एक placeholder है जो `KEYWORDS` list में \"GloVe,\" और \"Word2Vec\" को strings के रूप में mention करता है, लेकिन text को vectors में convert करने के लिए कोई actual embedding logic, library import (जैसे `gensim`, `torchtext`), या functional code मौजूद नहीं है। `load_dataset()` function भी केवल एक dummy dictionary return करता है।"
+                ]
+            },
+            "total_time": 12.660009860992432
+        },
+        {
+            "requirement_index": 3,
+            "criteria": "\"SVM क्लासिफायर\" को `src/model.py` में लागू और प्रशिक्षित किया जाता है।",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 4.267269611358643,
+                "input_tokens": 1547,
+                "output_tokens": 158,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n\n`src/model.py` में कोई वास्तविक SVM classifier implement या train नहीं किया गया है। फ़ाइल में केवल एक placeholder/stub code है जो `build_model()` function में सिर्फ एक string `\"model placeholder\"` return करता है। कोई `sklearn.svm.SVC`, `LinearSVC`, या किसी अन्य SVM library का import या उपयोग नहीं है, और न ही कोई training logic (`fit()` method आदि) मौजूद है।"
+                ]
+            },
+            "total_time": 12.767704963684082
+        },
+        {
+            "requirement_index": 4,
+            "criteria": "सटीकता स्कोर को प्रिंट किया जाता है और `results/metrics/accuracy_score.txt` के रूप में सहेजा जाता है।",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 3.2368838787078857,
+                "input_tokens": 1400,
+                "output_tokens": 140,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n\n**कारण:** `results/metrics/accuracy_score.txt` फ़ाइल में वास्तविक accuracy score नहीं है, बल्कि केवल `('placeholder\\r\\n', None)` लिखा है। यह एक placeholder value है, न कि SVM मॉडल का actual computed accuracy score। फ़ाइल exist करती है लेकिन उसमें meaningful/real accuracy score न print हुआ है और न ही save हुआ है।"
+                ]
+            },
+            "total_time": 12.924185037612915
+        }
+    ]
+}

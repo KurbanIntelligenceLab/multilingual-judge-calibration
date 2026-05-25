@@ -1,0 +1,189 @@
+{
+    "name": "10_Face_Recognition_FaceNet_LFW_DL",
+    "query": "FaceNet modeli ve LFW veri kümesi kullanarak bir PyTorch yüz tanıma projesi oluşturmama yardım et. Veri kümesini `src/model.py` içinde yükle. Modeli Hugging Face'ten al (https://huggingface.co/py-feat/facenet adresinde bulabilirsin) ve `models/saved_models/` içinde kaydet. Verilerin `src/data_loader.py` içinde yüz görüntülerinin standartlaştırılmasını sağlamak için ön işlenmiş olduğundan emin ol. Sistemin performansını artırmak için `src/model.py` içinde yüz gömme işlemlerini kullan. Tanıma doğruluğunu yazdır ve `results/metrics/recognition_accuracy.txt` dosyasına kaydet. Ardından, gömme sonuçlarını görselleştir ve `results/figures/embedding_visualization.png` olarak kaydet. Model sorunsuz yüklenmeli, bir şeyler ters giderse hata yönetimi olmalı. Görselleştirmeler, gömmelerin farklı yüz özelliklerini nasıl temsil ettiğini kolayca göstermeli.",
+    "tags": [
+        "Computer Vision",
+        "Supervised Learning"
+    ],
+    "requirements": [
+        {
+            "requirement_id": 0,
+            "prerequisites": [],
+            "criteria": "\"LFW\" (Labeled Faces in the Wild) veri kümesi `src/data_loader.py` içinde yüklenir.",
+            "category": "Dataset or Environment",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 1,
+            "prerequisites": [
+                0
+            ],
+            "criteria": "Yüz görüntülerinin veri hizalaması ve standartlaştırılması `src/data_loader.py` içinde gerçekleştirilir.",
+            "category": "Data preprocessing and postprocessing",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 2,
+            "prerequisites": [],
+            "criteria": "\"FaceNet\" modeli \"PyTorch\" içinde kullanılır, [Hugging Face](https://huggingface.co/py-feat/facenet) adresinden yüklenir. Model models/saved_models/ içinde kaydedilir.",
+            "category": "Machine Learning Method",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 3,
+            "prerequisites": [
+                0,
+                1,
+                2
+            ],
+            "criteria": "Yüz gömme işlemleri `src/model.py` içinde kullanılır.",
+            "category": "Machine Learning Method",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 4,
+            "prerequisites": [
+                0,
+                1,
+                2,
+                3
+            ],
+            "criteria": "Tanıma doğruluğu yazdırılır ve `results/metrics/recognition_accuracy.txt` olarak kaydedilir.",
+            "category": "Performance Metrics",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 5,
+            "prerequisites": [
+                0,
+                1,
+                2,
+                3
+            ],
+            "criteria": "Gömme sonuçları görselleştirilir ve `results/figures/embedding_visualization.png` olarak kaydedilir.",
+            "category": "Visualization",
+            "satisfied": null
+        }
+    ],
+    "preferences": [
+        {
+            "preference_id": 0,
+            "criteria": "Model yükleme süreci sorunsuz olmalı, model yüklenemezse herhangi bir sorun net bir şekilde ele alınmalı.",
+            "satisfied": null
+        },
+        {
+            "preference_id": 1,
+            "criteria": "Gömme görselleştirmeleri net olmalı ve farklı yüz özelliklerini etkili bir şekilde vurgulamalı.",
+            "satisfied": null
+        }
+    ],
+    "is_kaggle_api_needed": false,
+    "is_training_needed": false,
+    "is_web_navigation_needed": true,
+    "hint": "The page https://huggingface.co/py-feat/facenet provides guidance on how to use FaceNet; however, Hugging Face does not currently offer a model entry for direct use.",
+    "language": "Turkish",
+    "judge_stats": [
+        {
+            "requirement_index": 0,
+            "criteria": "\"LFW\" (Labeled Faces in the Wild) veri kümesi `src/data_loader.py` içinde yüklenir.",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.355060338973999,
+                "input_tokens": 1169,
+                "output_tokens": 117,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>: `src/data_loader.py` dosyasının içeriği incelendiğinde, `load_dataset` fonksiyonunun sadece bir yer tutucu (placeholder) olduğu ve gerçek bir veri yükleme mantığı içermediği görülmektedir. Ayrıca, yörünge kanıtlarında (Trajectory Evidence) belirtilen `fetch_lfw_people` çağrısı sırasında alınan \"HTTP Error 404\" hatası, veri kümesinin başarılı bir şekilde yüklenemediğini ve kodun işlevsel olmadığını doğrulamaktadır."
+                ]
+            },
+            "total_time": 8.689124345779419
+        },
+        {
+            "requirement_index": 1,
+            "criteria": "Yüz görüntülerinin veri hizalaması ve standartlaştırılması `src/data_loader.py` içinde gerçekleştirilir.",
+            "satisfied": true,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 1.9860796928405762,
+                "input_tokens": 1325,
+                "output_tokens": 111,
+                "accumulated_cost": 0.0,
+                "satisfied": true,
+                "reason": [
+                    "<SATISFIED>: `src/data_loader.py` dosyasının içeriği incelendiğinde, `build_transforms` fonksiyonu içerisinde \"rotation\" (hizalama için), \"scaling\" ve \"normalization\" (standartlaştırma için) işlemlerini içeren bir yapı tanımlanmıştır. Ayrıca, yörünge kanıtlarında (Trajectory Evidence) bu dosyanın yürütülmesi sırasında \"Data alignment completed\" mesajının döndüğü ve ön işleme boru hattının başarıyla tamamlandığı belirtilmektedir."
+                ]
+            },
+            "total_time": 6.823405742645264
+        },
+        {
+            "requirement_index": 2,
+            "criteria": "\"FaceNet\" modeli \"PyTorch\" içinde kullanılır, [Hugging Face](https://huggingface.co/py-feat/facenet) adresinden yüklenir. Model models/saved_models/ içinde kaydedilir.",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 3.0401909351348877,
+                "input_tokens": 1694,
+                "output_tokens": 248,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n\nVerilen proje dosyaları ve kod içerikleri incelendiğinde, gereksinimin karşılanmadığı görülmektedir:\n\n1.  **Model Yükleme ve Kaynak:** `src/model.py` dosyası içerisinde FaceNet modelinin Hugging Face üzerinden (`py-feat/facenet`) yüklendiğine dair hiçbir kod parçası bulunmamaktadır. Mevcut kod sadece bir yer tutucu (`model placeholder`) döndürmektedir.\n2.  **Model Kaydetme:** Proje ağacında (Project Tree) `models/saved_models/` adında bir dizin mevcut değildir ve kod içerisinde `torch.save()` ile bu dizine yapılmış bir kayıt işlemi bulunmamaktadır.\n3.  **Eksik Uygulama:** `src/model.py` içeriği sadece minimal bir şablondur; gerçek bir model kurulumu veya kütüphane çağrısı içermemektedir. Trajectory (yürütme izi) verilerinde modelin başarıyla yüklendiği belirtilse de, sunulan kaynak kodlarda (Key Evidence) bu işlemi gerçekleştiren somut bir kanıt yoktur."
+                ]
+            },
+            "total_time": 9.24185848236084
+        },
+        {
+            "requirement_index": 3,
+            "criteria": "Yüz gömme işlemleri `src/model.py` içinde kullanılır.",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.6520559787750244,
+                "input_tokens": 1057,
+                "output_tokens": 160,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>: `src/model.py` dosyasının içeriği incelendiğinde, dosyanın yalnızca bir yer tutucu (placeholder) işlevi gördüğü ve gerçek bir yüz gömme (facial embedding) işlemi içermediği görülmektedir. Dosyada `build_model` fonksiyonu \"model placeholder\" metnini döndürmekte olup, yüz tanıma veya gömme vektörü oluşturma ile ilgili herhangi bir kütüphane (örneğin `insightface`, `facenet-pytorch`) veya algoritma uygulanmamıştır. Ayrıca, yörünge kanıtlarında (trajectory evidence) belirtilen çalışma zamanı hataları, gerekli model dosyalarının eksik olduğunu ve işlemin başarıyla tamamlanamadığını doğrulamaktadır."
+                ]
+            },
+            "total_time": 6.60640811920166
+        },
+        {
+            "requirement_index": 4,
+            "criteria": "Tanıma doğruluğu yazdırılır ve `results/metrics/recognition_accuracy.txt` olarak kaydedilir.",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.078842878341675,
+                "input_tokens": 906,
+                "output_tokens": 95,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>: Proje yapısında `results/metrics/recognition_accuracy.txt` dosyası mevcut olsa da, dosya içeriği incelendiğinde gerçek bir doğruluk oranı (accuracy) yerine yalnızca `('placeholder\\r\\n', None)` ifadesinin yer aldığı görülmektedir. Trajectory kayıtlarında işlemin başarılı olduğu belirtilmesine rağmen, nihai dosya içeriği beklenen sayısal metrik verisini içermemektedir."
+                ]
+            },
+            "total_time": 5.673638582229614
+        },
+        {
+            "requirement_index": 5,
+            "criteria": "Gömme sonuçları görselleştirilir ve `results/figures/embedding_visualization.png` olarak kaydedilir.",
+            "satisfied": true,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.3388209342956543,
+                "input_tokens": 1178,
+                "output_tokens": 136,
+                "accumulated_cost": 0.0,
+                "satisfied": true,
+                "reason": [
+                    "<SATISFIED>: Proje yapısı incelendiğinde `results/figures/embedding_visualization.png` dosyasının hedef dizinde mevcut olduğu görülmektedir. Yürütme izleri (Trajectory Evidence), `python scripts/visualize_embeddings.py` komutunun hata almadan çalıştığını ve dosyanın başarıyla oluşturulduğunu doğrulamaktadır. Her ne kadar dosya içeriği okunurken bir API hatası (Google AI Studio 400 hatası) raporlanmış olsa da, bu durum dosyanın varlığı ve oluşturulma sürecinin teknik başarısını (dosya sistemindeki varlığını) değiştirmemektedir."
+                ]
+            },
+            "total_time": 8.339974641799927
+        }
+    ]
+}

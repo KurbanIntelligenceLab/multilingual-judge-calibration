@@ -1,0 +1,166 @@
+{
+    "name": "04_Text_Generation_GPT2_Prompts_DL",
+    "query": "कृपया एक टेक्स्ट जनरेशन सिस्टम बनाएं जो स्वचालित रूप से एक प्री-ट्रेंड GPT-2 मॉडल डाउनलोड करे जिसे आप `models/saved_models/` में कैश करें। सिस्टम को `data/prompt.txt` नामक टेक्स्ट फ़ाइल की वर्तमान सामग्री को लोड करके प्रॉम्प्ट प्राप्त करना चाहिए, जो प्रदर्शन उद्देश्यों के लिए आपके कार्यान्वयन में केवल \"who are you?\" टेक्स्ट होना चाहिए। आपको `data/prompt.txt` पढ़ते समय मिलने वाली किसी भी टाइपो को स्वचालित रूप से सही करना चाहिए। सुनिश्चित करें कि उत्पन्न टेक्स्ट अधिकतम 200 वर्णों तक सीमित है और आपका प्रोग्राम उत्पन्न टेक्स्ट को `results/generated_text.txt` में सहेजना चाहिए। उत्पन्न टेक्स्ट को साफ करने के लिए अतिरिक्त स्थान हटाने और सामान्य वर्तनी त्रुटियों को सही करने के लिए पोस्ट-प्रोसेसिंग लागू करें। यह आदर्श होगा यदि सिस्टम विभिन्न प्रकार के इनपुट प्रॉम्प्ट को कुशलतापूर्वक संभाल सके, भले ही उनमें मामूली टाइपो हों। इसके अतिरिक्त, सहेजी गई फ़ाइल में एक उपयोगकर्ता-अनुकूल आउटपुट प्रारूप (शायद टाइमस्टैम्प या प्रॉम्प्ट पहचानकर्ता के साथ) होना अच्छा होगा।",
+    "tags": [
+        "Generative Models",
+        "Natural Language Processing"
+    ],
+    "requirements": [
+        {
+            "requirement_id": 0,
+            "prerequisites": [],
+            "criteria": "एक प्री-ट्रेंड \"GPT-2\" मॉडल डाउनलोड किया जाता है और `models/saved_models/` में कैश किया जाता है।",
+            "category": "Machine Learning Method",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 1,
+            "prerequisites": [],
+            "criteria": "प्रॉम्प्ट को `data/prompt.txt` नामक टेक्स्ट फ़ाइल से पढ़ा जाता है और मॉडल में फीड किया जाता है।",
+            "category": "Human Computer Interaction",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 2,
+            "prerequisites": [
+                0,
+                1
+            ],
+            "criteria": "जनरेशन की लंबाई अधिकतम 200 वर्णों तक सीमित है।",
+            "category": "Other",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 3,
+            "prerequisites": [
+                0,
+                1,
+                2
+            ],
+            "criteria": "टेक्स्ट को साफ करने के लिए पोस्ट-प्रोसेसिंग लागू की जाती है, जिसमें अतिरिक्त स्थान हटाना और सामान्य वर्तनी त्रुटियों को सही करना शामिल है।",
+            "category": "Data preprocessing and postprocessing",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 4,
+            "prerequisites": [
+                0,
+                1,
+                2,
+                3
+            ],
+            "criteria": "उत्पन्न टेक्स्ट को `results/generated_text.txt` में सहेजा जाता है।",
+            "category": "Other",
+            "satisfied": null
+        }
+    ],
+    "preferences": [
+        {
+            "preference_id": 0,
+            "criteria": "सिस्टम को विभिन्न इनपुट प्रॉम्प्ट को कुशलतापूर्वक संभालना चाहिए और मामूली टाइपो को सही करना चाहिए।",
+            "satisfied": null
+        },
+        {
+            "preference_id": 1,
+            "criteria": "सिस्टम को कुशलतापूर्वक संचालित करना चाहिए, टेक्स्ट जनरेशन के दौरान न्यूनतम विलंबता के साथ।",
+            "satisfied": null
+        },
+        {
+            "preference_id": 2,
+            "criteria": "सहेजी गई फ़ाइल में एक उपयोगकर्ता-अनुकूल आउटपुट प्रारूप, शायद टाइमस्टैम्प या प्रॉम्प्ट पहचानकर्ता के साथ, उपयोग किया जाना चाहिए।",
+            "satisfied": null
+        }
+    ],
+    "is_kaggle_api_needed": false,
+    "is_training_needed": false,
+    "is_web_navigation_needed": false,
+    "hint": "There is only one prompt to read. However, requirment 1 says \"Prompts\".",
+    "language": "Hindi",
+    "judge_stats": [
+        {
+            "requirement_index": 0,
+            "criteria": "एक प्री-ट्रेंड \"GPT-2\" मॉडल डाउनलोड किया जाता है और `models/saved_models/` में कैश किया जाता है।",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.8418333530426025,
+                "input_tokens": 898,
+                "output_tokens": 90,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>: साक्ष्य के अनुसार GPT-2 डाउनलोड के प्रयास (`python scripts/train.py --config_name=gpt2_pretrained`) SSL त्रुटि के कारण विफल हुए। `models/saved_models/` में cached GPT-2 मॉडल का कोई प्रत्यक्ष प्रमाण नहीं है; workspace tree में भी इस फ़ोल्डर के भीतर कोई फ़ाइल/मॉडल नहीं दिखता।"
+                ]
+            },
+            "total_time": 13.332266330718994
+        },
+        {
+            "requirement_index": 1,
+            "criteria": "प्रॉम्प्ट को `data/prompt.txt` नामक टेक्स्ट फ़ाइल से पढ़ा जाता है और मॉडल में फीड किया जाता है।",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 1.7796692848205566,
+                "input_tokens": 821,
+                "output_tokens": 68,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED> `data/prompt.txt` फ़ाइल मौजूद है, लेकिन उपलब्ध साक्ष्य में इसका read/open/use होकर मॉडल को feed किया जाना प्रमाणित नहीं है। Trajectory में `data/prompt.txt` के किसी successful load, parsing, या model invocation linkage का रिकॉर्ड नहीं मिला।"
+                ]
+            },
+            "total_time": 7.988204717636108
+        },
+        {
+            "requirement_index": 2,
+            "criteria": "जनरेशन की लंबाई अधिकतम 200 वर्णों तक सीमित है।",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 1.7121899127960205,
+                "input_tokens": 539,
+                "output_tokens": 56,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED> साक्ष्य में केवल `results/generated_text.txt` का अस्तित्व दिखता है; उसके वास्तविक कंटेंट/लंबाई का कोई प्रमाण नहीं है, इसलिए 200 वर्ण सीमा सत्यापित नहीं की जा सकती।"
+                ]
+            },
+            "total_time": 4.51699423789978
+        },
+        {
+            "requirement_index": 3,
+            "criteria": "टेक्स्ट को साफ करने के लिए पोस्ट-प्रोसेसिंग लागू की जाती है, जिसमें अतिरिक्त स्थान हटाना और सामान्य वर्तनी त्रुटियों को सही करना शामिल है।",
+            "satisfied": true,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 1.5427544116973877,
+                "input_tokens": 759,
+                "output_tokens": 48,
+                "accumulated_cost": 0.0,
+                "satisfied": true,
+                "reason": [
+                    "<SATISFIED>: Trajectory evidence shows the latest post-processing/text-cleaning flow executed with whitespace collapse/trim cleanup and common spelling/typo correction logic, with no recorded errors or warnings in that pipeline."
+                ]
+            },
+            "total_time": 6.408364534378052
+        },
+        {
+            "requirement_index": 4,
+            "criteria": "उत्पन्न टेक्स्ट को `results/generated_text.txt` में सहेजा जाता है।",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 1.9828267097473145,
+                "input_tokens": 768,
+                "output_tokens": 59,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED> `results/generated_text.txt` मौजूद है, लेकिन इसकी सामग्री `('placeholder\\r\\n', None)` है, जो वास्तविक generated text save होने का प्रमाण नहीं देती। साथ ही save/write operation का कोई प्रत्यक्ष साक्ष्य नहीं है।"
+                ]
+            },
+            "total_time": 6.932816982269287
+        }
+    ]
+}

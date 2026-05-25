@@ -1,0 +1,184 @@
+{
+    "name": "09_Recommendation_System_NCF_MovieLens_ML",
+    "query": "帮助我开发一个系统，通过使用神经协同过滤（NCF）方法，根据用户评分从MovieLens数据集推荐电影。首先，在`src/data_loader.py`中加载数据集并将其拆分为训练集和测试集。接下来，在`src/model.py`中实现NCF方法和矩阵分解基线。使用这些方法，打印一个测试用户的前10个推荐示例，使用NCF方法和基线，并将它们保存到`results/metrics/top_10_recommendations.txt`。如果这些示例推荐对于测试用户有意义，那就更好了。使用RMSE、MAE等评估系统性能，并将评估结果保存到`results/metrics/evaluation_metrics.txt`。尝试确保有健壮的路径处理，以便在保存文件时能够处理缺失目录等情况。",
+    "tags": [
+        "Recommender Systems",
+        "Supervised Learning"
+    ],
+    "requirements": [
+        {
+            "requirement_id": 0,
+            "prerequisites": [],
+            "criteria": "\"神经协同过滤（NCF）\"算法在`src/model.py`中实现。",
+            "category": "Machine Learning Method",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 1,
+            "prerequisites": [],
+            "criteria": "\"MovieLens\"数据集在`src/data_loader.py`中加载。",
+            "category": "Dataset or Environment",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 2,
+            "prerequisites": [
+                1
+            ],
+            "criteria": "数据在`src/data_loader.py`中拆分为训练集和测试集。",
+            "category": "Data preprocessing and postprocessing",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 3,
+            "prerequisites": [],
+            "criteria": "矩阵分解基线在`src/model.py`中实现。",
+            "category": "Machine Learning Method",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 4,
+            "prerequisites": [
+                0,
+                1,
+                2,
+                3
+            ],
+            "criteria": "测试用户的前10个推荐在\"NCF\"方法和基线下保存到`results/metrics/top_10_recommendations.txt`。",
+            "category": "Other",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 5,
+            "prerequisites": [
+                0,
+                1,
+                2,
+                3
+            ],
+            "criteria": "推荐系统性能进行评估，包括\"RMSE\"和\"MAE\"，结果保存为`results/metrics/evaluation_metrics.txt`。",
+            "category": "Performance Metrics",
+            "satisfied": null
+        }
+    ],
+    "preferences": [
+        {
+            "preference_id": 0,
+            "criteria": "实现了健壮的路径处理，以处理诸如缺失目录之类的问题。",
+            "satisfied": null
+        },
+        {
+            "preference_id": 1,
+            "criteria": "前10个推荐应清晰且与样本用户的偏好相关。",
+            "satisfied": null
+        }
+    ],
+    "is_kaggle_api_needed": false,
+    "is_training_needed": true,
+    "is_web_navigation_needed": false,
+    "language": "Chinese",
+    "judge_stats": [
+        {
+            "requirement_index": 0,
+            "criteria": "\"神经协同过滤（NCF）\"算法在`src/model.py`中实现。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 5.8840672969818115,
+                "input_tokens": 1220,
+                "output_tokens": 287,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "## 评估结果\n\n<UNSATISFIED>\n\n**依据：**\n\n查看 `src/model.py` 的实际内容，该文件是一个**最小化占位实现（minimal semantic implementation）**，并非真正的 NCF 算法实现。\n\n具体证据：\n- 文件仅包含一个 `REQUIREMENT_CRITERIA` 列表（字符串描述）和 `KEYWORDS` 列表，没有任何神经网络模型代码\n- `build_model()` 函数仅返回一个字符串占位符 `\"model placeholder\"`，没有实际的 NCF 模型构建逻辑\n- 没有任何深度学习框架（如 PyTorch、TensorFlow）的导入\n- 没有嵌入层（Embedding）、MLP 层、GMF 层等 NCF 算法所必需的组件\n\n该文件本质上是一个用于评测系统的\"伪实现\"，完全不包含神经协同过滤算法的实际代码。"
+                ]
+            },
+            "total_time": 14.645866632461548
+        },
+        {
+            "requirement_index": 1,
+            "criteria": "\"MovieLens\"数据集在`src/data_loader.py`中加载。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 5.033646821975708,
+                "input_tokens": 1193,
+                "output_tokens": 279,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "## 评估结果\n\n<UNSATISFIED>\n\n**依据：**\n\n查看 `src/data_loader.py` 的实际内容，该文件是一个\"最小语义实现占位符\"（Minimal semantic implementation placeholder），并不包含任何真实的 MovieLens 数据集加载逻辑：\n\n```python\ndef load_dataset():\n    \"\"\"Minimal dataset loader placeholder.\"\"\"\n    return {\"dataset\": \"loaded\", \"notes\": requirement_notes()}\n```\n\n- 没有任何 MovieLens 数据集的下载、读取或解析代码\n- 没有导入任何数据处理库（如 `pandas`、`numpy`、`torch` 等）\n- `load_dataset()` 函数仅返回一个硬编码的字典，并非真实加载数据\n- 轨迹日志为空，无运行时证据支持实际数据加载行为\n\n该文件本质上是一个空壳实现，未满足\"加载 MovieLens 数据集\"的要求。"
+                ]
+            },
+            "total_time": 9.042839765548706
+        },
+        {
+            "requirement_index": 2,
+            "criteria": "数据在`src/data_loader.py`中拆分为训练集和测试集。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 8.16879653930664,
+                "input_tokens": 1210,
+                "output_tokens": 379,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "## 评估：数据在`src/data_loader.py`中拆分为训练集和测试集\n\n**分析文件内容：**\n\n查看 `src/data_loader.py` 的实际内容，该文件是一个**最小化占位符实现**（\"Minimal semantic implementation for benchmark judging\"），其中：\n\n- `load_dataset()` 函数仅返回一个硬编码字典 `{\"dataset\": \"loaded\", \"notes\": requirement_notes()}`，没有任何实际数据加载逻辑\n- `build_transforms()` 函数返回一个静态列表，与数据集拆分无关\n- **完全没有**训练集/测试集拆分的代码（如 `train_test_split`、`random_split` 或任何数据集划分逻辑）\n- 没有导入任何数据处理库（如 `pandas`、`sklearn`、`torch` 等）\n\n该文件仅将需求标准作为字符串存储在 `REQUIREMENT_CRITERIA` 列表中，并未真正实现该功能。\n\n<UNSATISFIED>\n\n`src/data_loader.py` 是一个空壳占位符，不包含任何实际的数据加载或训练集/测试集拆分逻辑，无法满足\"数据拆分为训练集和测试集\"的要求。"
+                ]
+            },
+            "total_time": 13.242083072662354
+        },
+        {
+            "requirement_index": 3,
+            "criteria": "矩阵分解基线在`src/model.py`中实现。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 3.550183057785034,
+                "input_tokens": 1206,
+                "output_tokens": 152,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n\n`src/model.py` 的实际内容仅包含一个占位符实现（`build_model()` 返回 `\"model placeholder\"`），以及一个列出需求标准的字符串列表。文件中**没有任何矩阵分解基线的实际代码实现**（如矩阵分解类、用户/物品嵌入层、点积计算等）。该文件本质上是一个\"最小语义实现\"（minimal semantic implementation），并非真正的算法实现。"
+                ]
+            },
+            "total_time": 8.873722791671753
+        },
+        {
+            "requirement_index": 4,
+            "criteria": "测试用户的前10个推荐在\"NCF\"方法和基线下保存到`results/metrics/top_10_recommendations.txt`。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 3.995089530944824,
+                "input_tokens": 1024,
+                "output_tokens": 195,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "## 评估结果\n\n<UNSATISFIED>\n\n**依据：**\n\n`results/metrics/top_10_recommendations.txt` 文件存在，但其内容仅为：\n\n```\n('placeholder\\r\\n', None)\n```\n\n这是一个占位符内容，并非真实的推荐结果。该文件没有包含：\n- 测试用户的前10个推荐电影列表\n- NCF 方法下的推荐结果\n- 基线方法下的推荐结果\n\n文件内容表明代码并未真正运行 NCF 模型并生成推荐，而只是写入了一个占位符字符串，因此该标准**未被满足**。"
+                ]
+            },
+            "total_time": 8.934627294540405
+        },
+        {
+            "requirement_index": 5,
+            "criteria": "推荐系统性能进行评估，包括\"RMSE\"和\"MAE\"，结果保存为`results/metrics/evaluation_metrics.txt`。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 4.332607746124268,
+                "input_tokens": 1215,
+                "output_tokens": 166,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "**<UNSATISFIED>**\n\n**依据：**\n\n`results/metrics/evaluation_metrics.txt` 文件内容为：\n\n```\n('placeholder\\r\\n', None)\n```\n\n该文件仅包含占位符字符串 `placeholder`，**没有任何实际的 RMSE 或 MAE 评估指标数据**。文件虽然存在，但内容不满足\"对推荐系统性能进行评估并保存 RMSE 和 MAE 结果\"的要求。轨迹日志也为空，无法确认评估计算曾被执行。"
+                ]
+            },
+            "total_time": 13.010916471481323
+        }
+    ]
+}

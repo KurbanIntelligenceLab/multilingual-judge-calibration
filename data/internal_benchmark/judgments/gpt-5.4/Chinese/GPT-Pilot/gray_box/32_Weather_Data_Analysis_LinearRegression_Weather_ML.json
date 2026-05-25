@@ -1,0 +1,210 @@
+{
+    "name": "32_Weather_Data_Analysis_LinearRegression_Weather_ML",
+    "query": "使用Kaggle的Weather数据集开发一个天气数据分析系统，使用线性回归模型。加载数据集并进行特征工程，包括特征选择和生成，并在`src/data_loader.py`中使用均值插补或插值处理缺失数据。然后，在线性回归模型中实现`src/model.py`。可视化并保存相关矩阵在`results/figures/correlation_matrix.png`中，并将预测结果以带置信区间的折线图形式保存在`results/figures/prediction_results.png`中。最后，创建一份详细报告，涵盖数据预处理、特征工程、模型训练和预测结果。将报告保存在`results/weather_analysis_report.pdf`中。特征工程过程应有详细记录。",
+    "tags": [
+        "Regression",
+        "Supervised Learning"
+    ],
+    "requirements": [
+        {
+            "requirement_id": 0,
+            "prerequisites": [],
+            "criteria": "在`src/data_loader.py`中加载\"Kaggle Weather\"数据集。",
+            "category": "Dataset or Environment",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 1,
+            "prerequisites": [
+                0
+            ],
+            "criteria": "在`src/data_loader.py`中进行特征工程，包括特征选择和生成。",
+            "category": "Data preprocessing and postprocessing",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 2,
+            "prerequisites": [
+                1
+            ],
+            "criteria": "在`src/data_loader.py`中使用均值插补或插值处理缺失数据。",
+            "category": "Data preprocessing and postprocessing",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 3,
+            "prerequisites": [],
+            "criteria": "使用\"线性回归\"模型进行天气数据分析，并在`src/model.py`中实现。",
+            "category": "Machine Learning Method",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 4,
+            "prerequisites": [
+                2,
+                3
+            ],
+            "criteria": "相关矩阵保存为`results/figures/correlation_matrix.png`。",
+            "category": "Visualization",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 5,
+            "prerequisites": [
+                2,
+                3
+            ],
+            "criteria": "预测结果绘制并保存为带置信区间的折线图。图表保存为`results/figures/prediction_results.png`。",
+            "category": "Visualization",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 6,
+            "prerequisites": [
+                2,
+                3,
+                5
+            ],
+            "criteria": "创建并保存一份详细报告，包含数据预处理、特征工程、模型训练和预测结果，保存为`results/weather_analysis_report.pdf`。",
+            "category": "Other",
+            "satisfied": null
+        }
+    ],
+    "preferences": [
+        {
+            "preference_id": 0,
+            "criteria": "特征工程过程应在报告中清晰记录，解释特征选择和生成的理由。",
+            "satisfied": null
+        },
+        {
+            "preference_id": 1,
+            "criteria": "报告应包括对相关矩阵的讨论，突出特征之间的任何有趣关系。",
+            "satisfied": null
+        }
+    ],
+    "is_kaggle_api_needed": true,
+    "is_training_needed": true,
+    "is_web_navigation_needed": false,
+    "language": "Chinese",
+    "judge_stats": [
+        {
+            "requirement_index": 0,
+            "criteria": "在`src/data_loader.py`中加载\"Kaggle Weather\"数据集。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 1.8548688888549805,
+                "input_tokens": 1009,
+                "output_tokens": 91,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>：`src/data_loader.py` 仅包含占位实现，`load_dataset()` 直接返回 `{\"dataset\": \"loaded\", \"notes\": requirement_notes()}`，没有任何实际读取 Kaggle Weather 数据集的代码。文件中虽出现字符串 `KEYWORDS = [\"Kaggle Weather\"]`，但这只是文本常量，不构成数据集加载证据。"
+                ]
+            },
+            "total_time": 7.971989870071411
+        },
+        {
+            "requirement_index": 1,
+            "criteria": "在`src/data_loader.py`中进行特征工程，包括特征选择和生成。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.0392425060272217,
+                "input_tokens": 994,
+                "output_tokens": 108,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>：`src/data_loader.py` 中没有实际执行特征工程。代码仅定义了 `REQUIREMENT_CRITERIA` 文本，并提供占位函数 `load_dataset()` 与 `build_transforms()`；其中 `build_transforms()` 只是返回 `[\"rotation\", \"scaling\", \"normalization\"]`，未体现任何针对天气数据的特征选择或特征生成逻辑，也没有数据处理流程或生成新特征的代码。"
+                ]
+            },
+            "total_time": 5.669809579849243
+        },
+        {
+            "requirement_index": 2,
+            "criteria": "在`src/data_loader.py`中使用均值插补或插值处理缺失数据。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.1383159160614014,
+                "input_tokens": 1019,
+                "output_tokens": 96,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>：`src/data_loader.py` 仅包含占位实现，没有实际缺失值处理逻辑。代码中 `load_dataset()` 只是返回 `{\"dataset\": \"loaded\", \"notes\": requirement_notes()}`，未见均值插补（如 `fillna(df.mean())`、`SimpleImputer(strategy=\"mean\")`）或插值（如 `interpolate()`）相关代码。"
+                ]
+            },
+            "total_time": 6.228564500808716
+        },
+        {
+            "requirement_index": 3,
+            "criteria": "使用\"线性回归\"模型进行天气数据分析，并在`src/model.py`中实现。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.3051598072052,
+                "input_tokens": 971,
+                "output_tokens": 74,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>：`src/model.py` 中未实际实现线性回归模型。证据是文件仅返回占位内容：`build_model()` 返回 `\"model placeholder\"`，没有导入或使用任何线性回归相关实现（如 `LinearRegression`），也没有天气数据分析逻辑。"
+                ]
+            },
+            "total_time": 6.86593222618103
+        },
+        {
+            "requirement_index": 4,
+            "criteria": "相关矩阵保存为`results/figures/correlation_matrix.png`。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.053849458694458,
+                "input_tokens": 1017,
+                "output_tokens": 75,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>：虽然工作区中存在文件 `results/figures/correlation_matrix.png`，但提供的证据显示该文件“does not represent a valid image”，即不是可用的有效图片文件。因此不能确认“相关矩阵已正确保存为 `results/figures/correlation_matrix.png`”。"
+                ]
+            },
+            "total_time": 7.197920799255371
+        },
+        {
+            "requirement_index": 5,
+            "criteria": "预测结果绘制并保存为带置信区间的折线图。图表保存为`results/figures/prediction_results.png`。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 1.6178669929504395,
+                "input_tokens": 978,
+                "output_tokens": 79,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>：虽存在目标文件路径 `results/figures/prediction_results.png`，但证据显示该文件无法被读取为有效图片：`\"The image data you provided does not represent a valid image\"`。因此无法证明已成功保存“带置信区间的折线图”，该要求未满足。"
+                ]
+            },
+            "total_time": 5.743236780166626
+        },
+        {
+            "requirement_index": 6,
+            "criteria": "创建并保存一份详细报告，包含数据预处理、特征工程、模型训练和预测结果，保存为`results/weather_analysis_report.pdf`。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 3.0611178874969482,
+                "input_tokens": 809,
+                "output_tokens": 75,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>：证据显示 `results/weather_analysis_report.pdf` 无法读取，内容为 `Error reading PDF file: Cannot read an empty file`，说明该 PDF 为空或未正确生成。因而无法证明其中包含“数据预处理、特征工程、模型训练和预测结果”的详细报告。"
+                ]
+            },
+            "total_time": 6.57438588142395
+        }
+    ]
+}

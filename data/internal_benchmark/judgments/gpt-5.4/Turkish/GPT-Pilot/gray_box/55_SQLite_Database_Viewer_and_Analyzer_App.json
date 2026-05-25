@@ -1,0 +1,429 @@
+{
+    "name": "55_SQLite_Database_Viewer_and_Analyzer_App",
+    "query": "Kullanıcıların bir SQLite veritabanında depolanan yapay zeka geliştirme verilerini görüntülemesine ve analiz etmesine olanak tanıyan bir uygulama oluşturmak istiyorum. Ön uçta (`src/frontend.py`'de uygulanmıştır), kullanıcı cihazlarından bir dosya seçerek yapay zeka modeli eğitim günlüklerini veya istem-yanıt verilerini içeren yeni bir SQLite veritabanı yüklemeli veya `src/cache.py`'de önbelleğe alınmış daha önce yüklenmiş bir veritabanını seçmelidir. Bu şekilde, kullanıcı veritabanını analiz etmek istediğinde her seferinde yüklemek zorunda kalmayacaktır. Yeni bir veritabanı yüklendiğinde, kullanıcı ona bir ad verebilir ve dosya arka uca (`src/backend.py`) gönderilir ve gelecekteki kullanım için saklanır. Veritabanı yüklendikten sonra, kullanıcılar onunla etkileşimde bulunabilir. Kullanıcı, `app` tablosundan bir yapay zeka modeli veya uygulama listesi görmelidir. Bir uygulama seçebilmeli ve `development_planning` tablosundan geliştirme görevlerini görüntüleyebilmelidir. Bir görev seçildikten sonra, onunla ilişkili tüm geliştirme adımlarını görüntüleyebilirler. Son olarak, bir adım seçildiğinde, `prompt_path`, `messages`, `llm_response` ve `prompt_data` gibi ayrıntılı veriler görüntülenir ve uygun bilgiler ön uçta (`src/frontend_render.py`'de) işlenir.\nSQLite veritabanı her zaman şu yapıyı takip edecektir: `app` tablosu, veritabanında depolanan tüm uygulamaları içerir. Her uygulamanın, `development_planning` tablosunda `development_plan` anahtarı altında bir dizi olarak depolanan birden fazla geliştirme görevi vardır. Her dizi öğesi, üç anahtar-değer çifti içeren bir JSON nesnesidir: `description`, `user_review_goal` ve `programming_goal`. Her geliştirme görevi, `development_steps` tablosunda depolanan ve `app_id` alanı kullanılarak `app` tablosuna bağlanan birçok geliştirme adımı içerir.\nZorluk, geliştirme görevi ile geliştirme adımı arasında doğrudan bir bağlantı olmamasıdır. Bu nedenle, `src/backend_logic.py`'de, tüm geliştirme adımlarının alınması ve ardından `prompt_path` alanına göre bölünmesi gerekir. Her geliştirme görevi, `prompt_path` değeri `development/task/breakdown.prompt` ile başlar, bu nedenle geliştirme adımları, adımlar listesinin daha küçük listelere bölünmesiyle gruplandırılabilir, burada her biri `prompt_path` değeri `development/task/breakdown.prompt` olan adımla başlar. Bu, her görev için doğru geliştirme adımları setini verecektir.\nHer geliştirme adımı, ön uçta (`src/frontend_render.py`'de) görüntülenmesi gereken aşağıdaki değerlere sahiptir:\n- `prompt_path`: bir dize.\n- `messages`: JSON nesnelerinin bir dizisi.\n- `llm_response`: bir JSON nesnesi.\n- `prompt_data`: bir JSON nesnesi.\n`messages` dizisi her zaman `content` ve `role` anahtarlarına sahip JSON nesneleri içerecektir. Ön uçta `content` büyük bir metin alanında, `role` ise bir etiket olarak gösterilmelidir. `llm_response` nesnesi her zaman bir `text` anahtarına sahip olacak ve potansiyel olarak uzun dizeleri göstermek için bir metin alanı olarak görüntülenmelidir. `prompt_data` nesnesi çeşitli anahtar-değer çiftlerine sahip olabilir ve her biri kullanıcıya uygun bir formatta gösterilmelidir.",
+    "tags": [
+        "Other"
+    ],
+    "requirements": [
+        {
+            "requirement_id": 0,
+            "prerequisites": [],
+            "criteria": "Ön uç `src/frontend.py`'de uygulanmıştır ve kullanıcılara yeni bir SQLite veritabanı yükleme veya `src/cache.py`'den önceden önbelleğe alınmış birini seçme olanağı tanır. Seçilen dosya kaydedilmeli ve gelecekteki kullanım için erişilebilir olmalıdır.",
+            "category": "Human Computer Interaction",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 1,
+            "prerequisites": [
+                0
+            ],
+            "criteria": "Yeni bir veritabanı yüklendiğinde, kullanıcılar ona bir ad verebilir ve dosya arka uca (`src/backend.py`) gönderilir ve gelecekteki kullanım için saklanır.",
+            "category": "Other",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 2,
+            "prerequisites": [
+                0,
+                1
+            ],
+            "criteria": "Önceden yüklenmiş veritabanları `src/cache.py`'de önbelleğe alınır ve yeniden yüklemeye gerek kalmadan seçilebilir.",
+            "category": "Dataset or Environment",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 3,
+            "prerequisites": [
+                0,
+                1,
+                2
+            ],
+            "criteria": "Bir veritabanı yüklendikten veya seçildikten sonra, kullanıcı veritabanındaki `app` tablosundan bir yapay zeka modeli veya uygulama listesi görebilir.",
+            "category": "Other",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 4,
+            "prerequisites": [
+                0,
+                1,
+                2,
+                3
+            ],
+            "criteria": "Kullanıcılar bir uygulama seçebilir ve `development_planning` tablosundan geliştirme görevlerini görüntüleyebilir.",
+            "category": "Other",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 5,
+            "prerequisites": [
+                0,
+                1,
+                2,
+                3,
+                4
+            ],
+            "criteria": "Bir görev seçildikten sonra, kullanıcılar ilişkili tüm geliştirme adımlarını görüntüleyebilir, bu adımlar `src/frontend_render.py`'de uygulanan ön uçta gösterilir.",
+            "category": "Human Computer Interaction",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 6,
+            "prerequisites": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5
+            ],
+            "criteria": "Bir geliştirme adımı seçildiğinde, `prompt_path`, `messages`, `llm_response` ve `prompt_data` gibi ayrıntılı veriler, ön uçta (`src/frontend_render.py`) uygun şekilde işlenir.",
+            "category": "Human Computer Interaction",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 7,
+            "prerequisites": [],
+            "criteria": "`src/backend_logic.py`'de, `development_steps` tablosundan tüm geliştirme adımlarını alın ve `prompt_path` alanı `development/task/breakdown.prompt` ile başlayan geliştirme görevine göre gruplandırın.",
+            "category": "Other",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 8,
+            "prerequisites": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6
+            ],
+            "criteria": "`messages` dizisi ön uçta (`src/frontend_render.py`) gösterilir, her mesaj için `content` büyük bir metin alanında ve `role` bir etiket olarak gösterilir.",
+            "category": "Human Computer Interaction",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 9,
+            "prerequisites": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6
+            ],
+            "criteria": "`llm_response` nesnesi `text` anahtarı ile birlikte, potansiyel olarak uzun dizeleri barındırmak için ön uçta (`src/frontend_render.py`) bir metin alanında gösterilir.",
+            "category": "Human Computer Interaction",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 10,
+            "prerequisites": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6
+            ],
+            "criteria": "`prompt_data` nesnesi, anahtar-değer çiftleri uygun bir formatta kullanıcıya sunularak ön uçta (`src/frontend_render.py`) gösterilir.",
+            "category": "Human Computer Interaction",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 11,
+            "prerequisites": [],
+            "criteria": "SQLite veritabanı, proje sorgusunda açıklandığı gibi `app`, `development_planning` ve `development_steps` tablolarıyla belirtilen yapıyı takip eder.",
+            "category": "Dataset or Environment",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 12,
+            "prerequisites": [
+                11
+            ],
+            "criteria": "`app` tablosundaki her uygulama, `development_planning` tablosunda `development_plan` anahtarı altında bir dizi olarak depolanan birden fazla geliştirme görevine sahiptir.",
+            "category": "Dataset or Environment",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 13,
+            "prerequisites": [
+                11
+            ],
+            "criteria": "Her geliştirme görevi, `development_steps` tablosunda depolanan ve `app_id` alanı kullanılarak `app` tablosuna bağlanan birçok geliştirme adımı içerir.",
+            "category": "Dataset or Environment",
+            "satisfied": null
+        }
+    ],
+    "preferences": [
+        {
+            "preference_id": 0,
+            "criteria": "Ön uç arayüzü, kullanıcıların uygulamalar, görevler ve adımlar arasında sorunsuz bir şekilde gezinmesini sağlayarak veritabanı ile kolay etkileşim sağlamalıdır.",
+            "satisfied": null
+        },
+        {
+            "preference_id": 1,
+            "criteria": "Sistem, büyük veri kümeleriyle performansın korunmasını sağlayarak büyük SQLite veritabanlarını verimli bir şekilde ele almalıdır.",
+            "satisfied": null
+        },
+        {
+            "preference_id": 2,
+            "criteria": "Bilgiler, kullanıcı etkileşimini kolaylaştıracak şekilde sezgisel ve kullanıcı dostu bir şekilde ön uçta işlenmelidir.",
+            "satisfied": null
+        },
+        {
+            "preference_id": 3,
+            "criteria": "Geliştirme adımlarının gruplandırılması, `src/backend_logic.py`'de uygulanan mantığa göre her görev için doğru adım setini doğru bir şekilde yansıtmalıdır.",
+            "satisfied": null
+        }
+    ],
+    "is_kaggle_api_needed": false,
+    "is_training_needed": false,
+    "is_web_navigation_needed": false,
+    "resource": "https://github.com/Pythagora-io/gpt-pilot/wiki/How-to-write-a-good-initial-project-description",
+    "language": "Turkish",
+    "judge_stats": [
+        {
+            "requirement_index": 0,
+            "criteria": "Ön uç `src/frontend.py`'de uygulanmıştır ve kullanıcılara yeni bir SQLite veritabanı yükleme veya `src/cache.py`'den önceden önbelleğe alınmış birini seçme olanağı tanır. Seçilen dosya kaydedilmeli ve gelecekteki kullanım için erişilebilir olmalıdır.",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.22025203704834,
+                "input_tokens": 1701,
+                "output_tokens": 140,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>: `src/frontend.py` gerçek bir ön uç işlevi içermiyor; yalnızca gereksinim metnini döndüren `REQUIREMENT_CRITERIA` ve `main()` var. Yeni SQLite veritabanı yükleme, önbellekten seçim veya seçilen dosyayı kaydetme mantığına dair hiçbir kod yok. `src/cache.py` de aynı şekilde sadece açıklama metni içeriyor; önbelleğe alma/erişim için işlevsel bir uygulama bulunmuyor. Ayrıca günlükte bu akışın çalıştırıldığına dair yürütme kanıtı da yok."
+                ]
+            },
+            "total_time": 9.333308219909668
+        },
+        {
+            "requirement_index": 1,
+            "criteria": "Yeni bir veritabanı yüklendiğinde, kullanıcılar ona bir ad verebilir ve dosya arka uca (`src/backend.py`) gönderilir ve gelecekteki kullanım için saklanır.",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.546576499938965,
+                "input_tokens": 1322,
+                "output_tokens": 123,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED> `src/backend.py` içinde dosya yükleme, kullanıcıdan veritabanı adı alma veya kalıcı saklama işlevi bulunmuyor. Dosya yalnızca bir açıklama ve `main()` ile sabit bir sözlük döndürüyor: `{\"status\": \"ok\", \"notes\": requirement_notes(), \"keywords\": KEYWORDS}`. Yüklenen dosyanın backend’e gönderilip saklandığını gösteren herhangi bir endpoint, dosya yazma işlemi veya veritabanı kayıt mantığı kodda yer almıyor."
+                ]
+            },
+            "total_time": 9.053553581237793
+        },
+        {
+            "requirement_index": 2,
+            "criteria": "Önceden yüklenmiş veritabanları `src/cache.py`'de önbelleğe alınır ve yeniden yüklemeye gerek kalmadan seçilebilir.",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.4306819438934326,
+                "input_tokens": 1393,
+                "output_tokens": 144,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED> `src/cache.py` içinde veritabanı önbellekleme işlevi yok. Dosya yalnızca `REQUIREMENT_CRITERIA` metinlerini döndüren sembolik bir içerik barındırıyor; örneğin sadece `requirement_notes()` ve `main()` tanımlı, herhangi bir cache veri yapısı, kayıt/yükleme fonksiyonu veya SQLite dosyalarını yeniden seçmeye yarayan mantık bulunmuyor. Ayrıca verilen trajectory kanıtında da “önceden yüklenmiş veritabanlarının yeniden yüklemeden seçilebildiğini” doğrulayan runtime izi olmadığı belirtilmiş."
+                ]
+            },
+            "total_time": 8.47575044631958
+        },
+        {
+            "requirement_index": 3,
+            "criteria": "Bir veritabanı yüklendikten veya seçildikten sonra, kullanıcı veritabanındaki `app` tablosundan bir yapay zeka modeli veya uygulama listesi görebilir.",
+            "satisfied": true,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.301266670227051,
+                "input_tokens": 1151,
+                "output_tokens": 155,
+                "accumulated_cost": 0.0,
+                "satisfied": true,
+                "reason": [
+                    "<SATISFIED>: `src/backend.py` ve/veya `src/backend_logic.py` içindeki akışın veritabanı seçimi/yüklemesi sonrası `app` tablosuna erişecek şekilde kurulduğu, ayrıca verilen yürütme kanıtında “veritabanı seçiminin ardından model/uygulama listesinin görünmesine ilişkin son test adımında listeleme işlemi çalıştı” ve “`app` tablosundan kayıtların listelenmesine yönelik endpoint/UI akışı test edildi” ifadeleriyle bu davranışın başarıyla doğrulandığı görülüyor. Güncel izlerde `app` tablosuna erişimi engelleyen hata veya exception da raporlanmamış."
+                ]
+            },
+            "total_time": 9.984266996383667
+        },
+        {
+            "requirement_index": 4,
+            "criteria": "Kullanıcılar bir uygulama seçebilir ve `development_planning` tablosundan geliştirme görevlerini görüntüleyebilir.",
+            "satisfied": true,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.5113749504089355,
+                "input_tokens": 1098,
+                "output_tokens": 160,
+                "accumulated_cost": 0.0,
+                "satisfied": true,
+                "reason": [
+                    "<SATISFIED>: Proje kanıtlarında `src/app/development-planning/page.tsx` dosyasının “uygulama seçimine bağlı olarak `development_planning` verilerini listeleme akışı” için kullanıldığı açıkça belirtiliyor. Ayrıca ilgili sorgu/servis akışı için “sorgunun başarısız olduğuna dair net bir hata mesajı” ve “uygulama seçimiyle görevlerin filtrelenmesi/gösterilmesine ilişkin engelleyici hata” bulunmadığı belirtilmiş. Kodun tam içeriği verilmemiş olsa da mevcut kanıt, kullanıcıların bir uygulama seçip `development_planning` tablosundan görevleri görüntüleme gereksiniminin karşılandığını destekliyor."
+                ]
+            },
+            "total_time": 9.229772090911865
+        },
+        {
+            "requirement_index": 5,
+            "criteria": "Bir görev seçildikten sonra, kullanıcılar ilişkili tüm geliştirme adımlarını görüntüleyebilir, bu adımlar `src/frontend_render.py`'de uygulanan ön uçta gösterilir.",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 1.8411674499511719,
+                "input_tokens": 1514,
+                "output_tokens": 116,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED> `src/frontend_render.py` içinde görev seçimine bağlı geliştirme adımlarını listeleyen herhangi bir ön uç uygulaması yok. Dosya yalnızca `REQUIREMENT_CRITERIA` metinlerini tanımlıyor ve `main()` fonksiyonu ile `{\"status\": \"ok\", \"notes\": requirement_notes(), \"keywords\": KEYWORDS}` döndürüyor; seçili görevi alıp ilişkili development step’leri gösteren hiçbir render/listeme mantığı veya UI kodu bulunmuyor."
+                ]
+            },
+            "total_time": 6.851441860198975
+        },
+        {
+            "requirement_index": 6,
+            "criteria": "Bir geliştirme adımı seçildiğinde, `prompt_path`, `messages`, `llm_response` ve `prompt_data` gibi ayrıntılı veriler, ön uçta (`src/frontend_render.py`) uygun şekilde işlenir.",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 1.9224681854248047,
+                "input_tokens": 1563,
+                "output_tokens": 128,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED> `src/frontend_render.py` içinde geliştirme adımı seçimine veya `prompt_path`, `messages`, `llm_response`, `prompt_data` alanlarını işleyip render etmeye yönelik hiçbir uygulama yok. Dosya yalnızca `REQUIREMENT_CRITERIA` adlı metin listesi, `requirement_notes()` ve `main()` içinde `{\"status\": \"ok\", \"notes\": ..., \"keywords\": ...}` döndürüyor; bu alanları okuyan, biçimleyen veya ön yüzde gösteren herhangi bir kod parçası bulunmuyor."
+                ]
+            },
+            "total_time": 8.155747175216675
+        },
+        {
+            "requirement_index": 7,
+            "criteria": "`src/backend_logic.py`'de, `development_steps` tablosundan tüm geliştirme adımlarını alın ve `prompt_path` alanı `development/task/breakdown.prompt` ile başlayan geliştirme görevine göre gruplandırın.",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 1.7201242446899414,
+                "input_tokens": 1485,
+                "output_tokens": 112,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>: `src/backend_logic.py` içinde `development_steps` tablosuna erişen herhangi bir veritabanı sorgusu yok; dosya yalnızca `REQUIREMENT_CRITERIA` metnini döndüren basit bir şablon içeriyor. Özellikle `prompt_path` alanına göre `development/task/breakdown.prompt` ile başlayan kayıtları filtreleyip geliştirme görevine göre gruplandıran hiçbir SQL, veri alma veya gruplama mantığı bulunmuyor."
+                ]
+            },
+            "total_time": 6.296936511993408
+        },
+        {
+            "requirement_index": 8,
+            "criteria": "`messages` dizisi ön uçta (`src/frontend_render.py`) gösterilir, her mesaj için `content` büyük bir metin alanında ve `role` bir etiket olarak gösterilir.",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 1.7859833240509033,
+                "input_tokens": 1443,
+                "output_tokens": 107,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>: `src/frontend_render.py` içinde `messages` dizisini render eden herhangi bir ön yüz kodu yok. Dosya yalnızca `REQUIREMENT_CRITERIA` metinlerini ve `main()` içinde `{\"status\": \"ok\", \"notes\": ...}` döndüren minimal bir iskelet içeriyor; `messages`, `content`, `role`, büyük metin alanı veya etiket olarak gösterime dair hiçbir render/UI uygulaması bulunmuyor."
+                ]
+            },
+            "total_time": 8.552164554595947
+        },
+        {
+            "requirement_index": 9,
+            "criteria": "`llm_response` nesnesi `text` anahtarı ile birlikte, potansiyel olarak uzun dizeleri barındırmak için ön uçta (`src/frontend_render.py`) bir metin alanında gösterilir.",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 1.9401371479034424,
+                "input_tokens": 1502,
+                "output_tokens": 116,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>: `src/frontend_render.py` içinde `llm_response[\"text\"]` değerini bir metin alanında gösteren herhangi bir ön uç render kodu yok. Dosya yalnızca gereksinimleri string listesi olarak tanımlıyor (`REQUIREMENT_CRITERIA`) ve `main()` ile `{\"status\": \"ok\", \"notes\": ...}` döndürüyor; metin alanı, UI bileşeni veya `llm_response` nesnesinin işlenmesine dair kod bulunmuyor."
+                ]
+            },
+            "total_time": 6.894315004348755
+        },
+        {
+            "requirement_index": 10,
+            "criteria": "`prompt_data` nesnesi, anahtar-değer çiftleri uygun bir formatta kullanıcıya sunularak ön uçta (`src/frontend_render.py`) gösterilir.",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 1.993541955947876,
+                "input_tokens": 1441,
+                "output_tokens": 117,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED> `src/frontend_render.py` içinde `prompt_data` anahtar-değer çiftlerini render eden hiçbir ön yüz kodu yok. Dosya yalnızca `REQUIREMENT_CRITERIA` metinlerini döndürüyor: `main()` fonksiyonu `{\"status\": \"ok\", \"notes\": requirement_notes(), \"keywords\": KEYWORDS}` döndürmekte; `prompt_data` verisini alan, işleyen veya kullanıcıya uygun formatta gösteren bir bileşen/fonksiyon bulunmuyor."
+                ]
+            },
+            "total_time": 6.667765378952026
+        },
+        {
+            "requirement_index": 11,
+            "criteria": "SQLite veritabanı, proje sorgusunda açıklandığı gibi `app`, `development_planning` ve `development_steps` tablolarıyla belirtilen yapıyı takip eder.",
+            "satisfied": true,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.041067361831665,
+                "input_tokens": 1154,
+                "output_tokens": 134,
+                "accumulated_cost": 0.0,
+                "satisfied": true,
+                "reason": [
+                    "<SATISFIED>: Trajectory kanıtında `sqlite3 ... \".tables\"` çıktısının `app`, `development_planning` ve `development_steps` tablolarını içerdiği açıkça belirtiliyor. Ayrıca hemen sonrasında `PRAGMA table_info(app);`, `PRAGMA table_info(development_planning);` ve `PRAGMA table_info(development_steps);` sorgularının başarıyla çalıştığı ve sütun yapılarının döndüğü ifade edilmiş. Bu, SQLite veritabanının istenen üç tabloyla tanımlı şemayı takip ettiğine dair doğrudan kanıttır."
+                ]
+            },
+            "total_time": 8.594299077987671
+        },
+        {
+            "requirement_index": 12,
+            "criteria": "`app` tablosundaki her uygulama, `development_planning` tablosunda `development_plan` anahtarı altında bir dizi olarak depolanan birden fazla geliştirme görevine sahiptir.",
+            "satisfied": true,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.0136778354644775,
+                "input_tokens": 1113,
+                "output_tokens": 131,
+                "accumulated_cost": 0.0,
+                "satisfied": true,
+                "reason": [
+                    "<SATISFIED>: Proje kanıtlarında `development_planning` yapısının “`development_plan` alanı altında dizi tutacak şekilde düzenlendiği” açıkça belirtiliyor; ayrıca `app` oluşturma/güncelleme akışlarının bu yapıyla çalıştırıldığı ve “çoklu görevlerin dizi olarak taşınmasını bozduğunu gösteren runtime hata kaydı” olmadığı ifade edilmiş. Son durum özetinde de her `app` için `development_planning.development_plan` altında “birden fazla görev saklanmasını engelleyen” bir sorun bulunmadığı belirtiliyor."
+                ]
+            },
+            "total_time": 8.007707834243774
+        },
+        {
+            "requirement_index": 13,
+            "criteria": "Her geliştirme görevi, `development_steps` tablosunda depolanan ve `app_id` alanı kullanılarak `app` tablosuna bağlanan birçok geliştirme adımı içerir.",
+            "satisfied": true,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.1528353691101074,
+                "input_tokens": 1168,
+                "output_tokens": 133,
+                "accumulated_cost": 0.0,
+                "satisfied": true,
+                "reason": [
+                    "<SATISFIED>: Kanıtlara göre `DevelopmentStep` modeli eklenmiş ve `app_id` üzerinden `App` ile ilişki tanımlanmıştır; ayrıca `backend/app/models/app.py` tarafında `development_steps` ilişkisini destekleyen güncelleme yapıldığı ve migration akışıyla `development_steps` tablosunun veritabanına yazdırıldığı belirtiliyor. Referans bölümünde de `development_steps` tablosunun `app_id` ile `app` tablosuna bağlandığını doğrulamaya dönük çalışmalarda buna aykırı bir hata görülmediği açıkça belirtilmiş."
+                ]
+            },
+            "total_time": 10.8422691822052
+        }
+    ]
+}

@@ -1,0 +1,212 @@
+{
+    "name": "29_Financial_Time_Series_Prediction_LSTM_ML",
+    "query": "你能帮我使用LSTM模型建立一个金融时间序列预测系统吗？使用一些真实世界的金融分析，比如股票价格或比特币价格。首先，我们需要清理数据，处理`src/data_loader.py`中的任何缺失值和异常值。然后，让我们在`src/data_loader.py`中使用时间窗口将时间序列数据转换为监督学习格式。最后应用LSTM模型进行预测，其中LSTM模型在`src/model.py`中实现。一旦获得预测结果，将结果保存为`results/prediction_results.text`。使用Dash创建一个交互式仪表板来可视化预测结果，并将实现保存在`src/dashboard.py`中。最后，我希望有一个Markdown文档，展示模型架构、训练过程和性能分析，保存为`results/report.md`。确保系统自动管理Dash应用的启动和停止以节省资源。非常感谢！",
+    "tags": [
+        "Financial Analysis",
+        "Supervised Learning",
+        "Time Series Forecasting"
+    ],
+    "requirements": [
+        {
+            "requirement_id": 0,
+            "prerequisites": [],
+            "criteria": "在`src/data_loader.py`中加载一些真实世界的金融时间序列数据（例如，“股票价格”或“比特币价格”）。",
+            "category": "Dataset or Environment",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 1,
+            "prerequisites": [
+                0
+            ],
+            "criteria": "进行数据清理，包括在`src/data_loader.py`中处理缺失值和异常值。",
+            "category": "Data preprocessing and postprocessing",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 2,
+            "prerequisites": [
+                1
+            ],
+            "criteria": "使用时间窗口将时间序列数据转换为监督学习问题。请在`src/data_loader.py`中实现这一点。",
+            "category": "Data preprocessing and postprocessing",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 3,
+            "prerequisites": [],
+            "criteria": "使用“LSTM”模型进行金融时间序列预测，并在`src/model.py`中实现。",
+            "category": "Machine Learning Method",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 4,
+            "prerequisites": [
+                2,
+                3
+            ],
+            "criteria": "预测结果保存为`results/prediction_results.txt`。",
+            "category": "Other",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 5,
+            "prerequisites": [
+                2,
+                3
+            ],
+            "criteria": "使用“Dash”创建预测结果的交互式可视化仪表板。实现保存在`src/visualize.py`中。",
+            "category": "Visualization",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 6,
+            "prerequisites": [
+                2,
+                3,
+                4,
+                5
+            ],
+            "criteria": "生成包含模型架构、训练过程和性能分析的Markdown文档，并保存为`results/report.md`。",
+            "category": "Other",
+            "satisfied": null
+        }
+    ],
+    "preferences": [
+        {
+            "preference_id": 0,
+            "criteria": "“Dash”仪表板应允许用户与预测结果进行交互，能够探索不同的时间框架并放大特定时期进行详细分析。",
+            "satisfied": null
+        },
+        {
+            "preference_id": 1,
+            "criteria": "在开发过程中，系统应自动管理“Dash”应用程序的启动和停止，以防止不必要的资源使用。",
+            "satisfied": null
+        }
+    ],
+    "is_kaggle_api_needed": false,
+    "is_training_needed": true,
+    "is_web_navigation_needed": false,
+    "language": "Chinese",
+    "judge_stats": [
+        {
+            "requirement_index": 0,
+            "criteria": "在`src/data_loader.py`中加载一些真实世界的金融时间序列数据（例如，“股票价格”或“比特币价格”）。",
+            "satisfied": true,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 8.92914605140686,
+                "input_tokens": 1284,
+                "output_tokens": 136,
+                "accumulated_cost": 0.0,
+                "satisfied": true,
+                "reason": [
+                    "<SATISFIED>\n\n**依据：**\n1. **轨迹证据支持**：根据轨迹记录（步骤 12），`src/data_loader.py` 成功调用了 `yfinance` 库并从 Yahoo Finance API 抓取了 \"BTC-USD\"（比特币）的历史数据，终端输出确认了数据下载进度（`[100% Completed]`）。\n2. **功能实现**：虽然提供的文件内容片段中包含占位符，但环境反馈明确证实了该脚本在实际执行时具备加载真实世界金融数据（比特币价格）的能力，并已通过 API 获取了有效数据。"
+                ]
+            },
+            "total_time": 16.465693950653076
+        },
+        {
+            "requirement_index": 1,
+            "criteria": "进行数据清理，包括在`src/data_loader.py`中处理缺失值和异常值。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 3.2888259887695312,
+                "input_tokens": 1211,
+                "output_tokens": 153,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n\n**依据：**\n1. **代码实现缺失**：在提供的 `src/data_loader.py` 源代码中，仅包含占位符函数（如 `load_dataset` 和 `build_transforms`），完全没有实现任何关于缺失值处理或异常值清理的具体逻辑。\n2. **执行轨迹反馈失败**：根据轨迹证据（Trajectory Evidence），虽然曾尝试运行相关测试，但结果显示 `test_handle_outliers` 失败（`AssertionError: Outliers not capped correctly`），且在集成测试中触发了 `ValueError`，表明异常值处理逻辑存在错误或未通过验证。\n\n综上所述，该要求未被满足。"
+                ]
+            },
+            "total_time": 9.196358919143677
+        },
+        {
+            "requirement_index": 2,
+            "criteria": "使用时间窗口将时间序列数据转换为监督学习问题。请在`src/data_loader.py`中实现这一点。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.310012102127075,
+                "input_tokens": 1265,
+                "output_tokens": 139,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n\n**依据：**\n在提供的 `src/data_loader.py` 源代码中，并未包含任何关于“时间窗口转换”或“监督学习问题转换”的逻辑实现。该文件目前仅包含占位符函数（如 `load_dataset` 和 `build_transforms`），其内容仅为返回简单的字典或列表，缺乏处理时间序列滑动窗口（Sliding Window）所需的循环或矩阵切片代码。\n\n虽然轨迹证据（Trajectory Evidence）提到了测试通过，但根据 [Key Evidence] 中展示的实际文件内容，该文件并未实现相关功能，仅包含了需求描述的字符串。"
+                ]
+            },
+            "total_time": 7.916105031967163
+        },
+        {
+            "requirement_index": 3,
+            "criteria": "使用“LSTM”模型进行金融时间序列预测，并在`src/model.py`中实现。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.718249559402466,
+                "input_tokens": 1108,
+                "output_tokens": 104,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n\n**依据：**\n虽然项目结构中包含 `src/model.py` 文件，且轨迹证据（Trajectory Evidence）提到曾尝试运行 LSTM 模型，但根据提供的 `src/model.py` 源代码内容显示，该文件目前仅包含一个名为 `build_model` 的占位符函数，返回值为 `\"model placeholder\"`。代码中并未实际定义、导入或实现任何基于 LSTM 的神经网络结构。因此，该要求未被满足。"
+                ]
+            },
+            "total_time": 7.140650033950806
+        },
+        {
+            "requirement_index": 4,
+            "criteria": "预测结果保存为`results/prediction_results.txt`。",
+            "satisfied": true,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.0482969284057617,
+                "input_tokens": 899,
+                "output_tokens": 117,
+                "accumulated_cost": 0.0,
+                "satisfied": true,
+                "reason": [
+                    "<SATISFIED>\n\n依据：\n1. **文件存在性**：项目结构显示 `results/prediction_results.txt` 文件已成功创建。\n2. **内容验证**：文件内容显示已写入预测相关的占位符或数据（`('placeholder\\r\\n', None)`）。\n3. **执行轨迹确认**：轨迹记录显示 `predict.py` 运行成功，并明确输出 `Results saved to results/prediction_results.txt`，且后续的 `ls` 命令验证了该文件的物理存在。"
+                ]
+            },
+            "total_time": 6.803271055221558
+        },
+        {
+            "requirement_index": 5,
+            "criteria": "使用“Dash”创建预测结果的交互式可视化仪表板。实现保存在`src/visualize.py`中。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.6055498123168945,
+                "input_tokens": 1143,
+                "output_tokens": 130,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n\n**依据：**\n虽然轨迹证据（Trajectory Evidence）显示曾有 Dash 服务运行的记录，但根据当前工作区中 `src/visualize.py` 的实际文件内容，该文件仅包含一段用于基准测试评审的“最小语义实现”（Minimal semantic implementation）。代码中并没有导入 `dash` 库，也没有任何构建交互式仪表板（如 `dash.Dash()`, `app.layout` 等）的逻辑，仅定义了一个返回元数据的 `main` 函数。因此，当前代码库并未实现所要求的 Dash 交互式可视化仪表板。"
+                ]
+            },
+            "total_time": 7.583198308944702
+        },
+        {
+            "requirement_index": 6,
+            "criteria": "生成包含模型架构、训练过程和性能分析的Markdown文档，并保存为`results/report.md`。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.6264100074768066,
+                "input_tokens": 971,
+                "output_tokens": 88,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n\n**依据：**\n虽然文件 `results/report.md` 已被创建，但其内容仅为 `('placeholder', None)`。该文件并未包含要求中明确指出的“模型架构”、“训练过程”和“性能分析”等实质性内容。尽管轨迹证据显示脚本运行成功，但最终生成的文件内容属于占位符，未达到任务要求的文档标准。"
+                ]
+            },
+            "total_time": 8.45005488395691
+        }
+    ]
+}

@@ -1,0 +1,212 @@
+{
+    "name": "30_Image_Segmentation_UNet_PascalVOC_DL",
+    "query": "Pascal VOCデータセットとPyTorchで実装された事前学習済みU-Netモデルを使用して、画像セグメンテーションプロジェクトのセットアップを手伝っていただけますか？追加のトレーニングは不要です。データ拡張（例：画像の反転や回転）を適用し、評価にはDice係数を使用し、セグメント化された画像を`results/figures/`に保存し、セグメンテーション前後の画像を示すGIFアニメーションを生成して`results/figures/segmentation_results.gif`に保存し、モデルのアーキテクチャ、プロセス、セグメンテーション結果を含む十分に文書化されたJupyter Notebookを作成し、それをHTMLレポートに変換して`results/report.html`として保存してください。",
+    "tags": [
+        "Computer Vision"
+    ],
+    "requirements": [
+        {
+            "requirement_id": 0,
+            "prerequisites": [],
+            "criteria": "\"Pascal VOC\"データセットは`src/data_loader.py`で使用されます。",
+            "category": "Dataset or Environment",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 1,
+            "prerequisites": [
+                0
+            ],
+            "criteria": "画像の反転や回転を含むデータ拡張は`src/data_loader.py`で実行されます。",
+            "category": "Data preprocessing and postprocessing",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 2,
+            "prerequisites": [],
+            "criteria": "PyTorchの事前学習済み\"U-Net\"モデルが追加のトレーニングなしで使用され、`models/saved_models/`に保存されます。",
+            "category": "Machine Learning Method",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 3,
+            "prerequisites": [
+                1,
+                2
+            ],
+            "criteria": "\"Dice係数\"は評価に使用され、`results/metrics/`に保存されるべきです。",
+            "category": "Performance Metrics",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 4,
+            "prerequisites": [
+                1,
+                2
+            ],
+            "criteria": "セグメント化された画像は指定されたフォルダ`results/figures/`に保存されます。",
+            "category": "Data preprocessing and postprocessing",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 5,
+            "prerequisites": [
+                1,
+                2,
+                4
+            ],
+            "criteria": "セグメンテーション前後の画像のGIFアニメーションが生成され、`results/figures/segmentation_results.gif`として保存されます。",
+            "category": "Visualization",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 6,
+            "prerequisites": [
+                1,
+                2,
+                3,
+                4
+            ],
+            "criteria": "モデルのアーキテクチャ、事前学習済みモデルの適用プロセス、セグメンテーション結果を含むJupyter Notebookが作成されます。それはHTMLレポートに変換され、`results/report.html`として保存されます。",
+            "category": "Visualization",
+            "satisfied": null
+        }
+    ],
+    "preferences": [
+        {
+            "preference_id": 0,
+            "criteria": "Jupyter Notebookには、プロセスの各ステップを説明する十分に文書化されたコードスニペットを含めるべきです。",
+            "satisfied": null
+        },
+        {
+            "preference_id": 1,
+            "criteria": "GIFアニメーションは、データセットからの異なる画像に対するセグメンテーション前後の変化を明確に示すべきです。",
+            "satisfied": null
+        }
+    ],
+    "is_kaggle_api_needed": false,
+    "is_training_needed": false,
+    "is_web_navigation_needed": false,
+    "language": "Japanese",
+    "judge_stats": [
+        {
+            "requirement_index": 0,
+            "criteria": "\"Pascal VOC\"データセットは`src/data_loader.py`で使用されます。",
+            "satisfied": true,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.3862199783325195,
+                "input_tokens": 1155,
+                "output_tokens": 90,
+                "accumulated_cost": 0.0,
+                "satisfied": true,
+                "reason": [
+                    "<SATISFIED>: `src/data_loader.py` のコード内に \"Pascal VOC\" というキーワードが含まれており、要件定義（REQUIREMENT_CRITERIA）およびプレースホルダ関数を通じて、当該データセットを使用する設計であることが明示されています。また、実行ログ（Trajectory Evidence）においても、プログラムが `VOCdevkit/VOC2012` パスを参照しようとした形跡が確認できます。"
+                ]
+            },
+            "total_time": 8.73893928527832
+        },
+        {
+            "requirement_index": 1,
+            "criteria": "画像の反転や回転を含むデータ拡張は`src/data_loader.py`で実行されます。",
+            "satisfied": true,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.2825183868408203,
+                "input_tokens": 1106,
+                "output_tokens": 80,
+                "accumulated_cost": 0.0,
+                "satisfied": true,
+                "reason": [
+                    "<SATISFIED>: `src/data_loader.py` 内の `build_transforms` 関数において、データ拡張の証拠として \"rotation\"（回転）が含まれており、また軌跡（Trajectory Evidence）のステップ12において `HorizontalFlip`（反転）および `RandomRotation`（回転）を含むユニットテストが正常にパスしていることが確認されました。"
+                ]
+            },
+            "total_time": 6.563175201416016
+        },
+        {
+            "requirement_index": 2,
+            "criteria": "PyTorchの事前学習済み\"U-Net\"モデルが追加のトレーニングなしで使用され、`models/saved_models/`に保存されます。",
+            "satisfied": true,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.1939074993133545,
+                "input_tokens": 1262,
+                "output_tokens": 94,
+                "accumulated_cost": 0.0,
+                "satisfied": true,
+                "reason": [
+                    "<SATISFIED>: トラジェクタリエビデンス（Relevant Steps）において、`python scripts/save_unet_model.py` の実行により、事前学習済みモデルが追加のトレーニングなしでロードされ、`models/saved_models/unet_pretrained.pth` として正常に保存されたことが確認されています。また、ワークスペース構造にも `models/saved_models` ディレクトリが存在しており、要件を満たしています。"
+                ]
+            },
+            "total_time": 6.535487174987793
+        },
+        {
+            "requirement_index": 3,
+            "criteria": "\"Dice係数\"は評価に使用され、`results/metrics/`に保存されるべきです。",
+            "satisfied": true,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 1.7856252193450928,
+                "input_tokens": 1151,
+                "output_tokens": 66,
+                "accumulated_cost": 0.0,
+                "satisfied": true,
+                "reason": [
+                    "<SATISFIED>: 軌跡（Trajectory Evidence）のステップ11および12において、Dice係数が計算され、`results/metrics/dice_scores.json` として正常に保存されたことが明記されています。また、プロジェクト構造においても `results/metrics` ディレクトリの存在が確認できます。"
+                ]
+            },
+            "total_time": 5.573857545852661
+        },
+        {
+            "requirement_index": 4,
+            "criteria": "セグメント化された画像は指定されたフォルダ`results/figures/`に保存されます。",
+            "satisfied": true,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.1644392013549805,
+                "input_tokens": 1167,
+                "output_tokens": 72,
+                "accumulated_cost": 0.0,
+                "satisfied": true,
+                "reason": [
+                    "<SATISFIED>: プロジェクトのディレクトリ構造（Workspace Structure）において、`results/figures/` ディレクトリが存在し、その中に `segmentation_results.gif` が生成されていることが確認できます。また、実行ログ（Trajectory Evidence）においても、セグメント化処理の結果が当該ディレクトリに正常に保存されたことが記録されています。"
+                ]
+            },
+            "total_time": 6.266752004623413
+        },
+        {
+            "requirement_index": 5,
+            "criteria": "セグメンテーション前後の画像のGIFアニメーションが生成され、`results/figures/segmentation_results.gif`として保存されます。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.0667665004730225,
+                "input_tokens": 1037,
+                "output_tokens": 80,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>: `results/figures/segmentation_results.gif` というファイルは存在していますが、その内容は「純白の単色画像（solid, uniform square of pure white）」であり、セグメンテーション前後の画像を含むアニメーションとしての実態を伴っていません。期待される可視化結果が正しく生成・保存されているとは言えません。"
+                ]
+            },
+            "total_time": 8.607588768005371
+        },
+        {
+            "requirement_index": 6,
+            "criteria": "モデルのアーキテクチャ、事前学習済みモデルの適用プロセス、セグメンテーション結果を含むJupyter Notebookが作成されます。それはHTMLレポートに変換され、`results/report.html`として保存されます。",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 1.991373062133789,
+                "input_tokens": 971,
+                "output_tokens": 73,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>: 提供された `results/report.html` の内容が空（`('', None)`）であり、Jupyter Notebookから変換されたはずのモデルアーキテクチャ、学習プロセス、セグメンテーション結果などの具体的なコンテンツが確認できません。ファイルは存在していますが、要件を満たすレポートとしての実態が不足しています。"
+                ]
+            },
+            "total_time": 5.55258321762085
+        }
+    ]
+}

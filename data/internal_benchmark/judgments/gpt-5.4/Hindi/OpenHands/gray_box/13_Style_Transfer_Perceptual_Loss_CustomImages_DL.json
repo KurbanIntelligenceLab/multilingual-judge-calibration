@@ -1,0 +1,217 @@
+{
+    "name": "13_Style_Transfer_Perceptual_Loss_CustomImages_DL",
+    "query": "कृपया छवि शैली स्थानांतरण के लिए एक PyTorch परसेप्चुअल लॉस प्रोजेक्ट बनाएं (इस पेपर का संदर्भ लें: https://arxiv.org/pdf/1603.08155)। आप VGG16 का उपयोग करके `src/model.py` में परसेप्चुअल लॉस नेटवर्क बना सकते हैं। प्रोजेक्ट को सामग्री और शैली छवियों को संयोजित करना चाहिए, शैली हानि और सामग्री हानि के भार को समायोजित करके शैली की तीव्रता को सुचारू रूप से समायोजित करने की अनुमति देनी चाहिए, और शैलीबद्ध छवियों को `results/figures/` में सहेजना चाहिए। इसके अतिरिक्त, प्रसंस्करण समय को `results/processing_time.txt` में लॉग करें, और शैली स्थानांतरण प्रक्रिया के मध्यवर्ती परिणामों को `results/figures/intermediate_results.png` में सहेजें। परीक्षण के लिए, [इस लिंक](https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Mona_Lisa%2C_by_Leonardo_da_Vinci%2C_from_C2RMF_retouched.jpg/768px-Mona_Lisa%2C_by_Leonardo_da_Vinci%2C_from_C2RMF_retouched.jpg) से एक प्रसिद्ध सामग्री छवि (मोनालिसा) और [इस लिंक](https://ia904705.us.archive.org/34/items/the-starry-night-vincent-van-gogh/The%20Starry%20Night%20-%20Vincent%20van%20Gogh/%21PREVIEW%21%20-%20The%20Starry%20Night%20-%20Vincent%20van%20Gogh.jpg) से एक प्रसिद्ध शैली छवि (द स्टाररी नाइट) इनपुट करें, और एक शैली-स्थानांतरित छवि उत्पन्न करें। सामग्री, शैली, और शैली-स्थानांतरित छवियों को क्रमशः `data/content.jpg`, `data/style.jpg`, और `results/figures/` में सहेजें। प्रोजेक्ट को उच्च-रिज़ॉल्यूशन छवियों को अत्यधिक प्रसंस्करण समय के बिना कुशलतापूर्वक संभालना चाहिए।",
+    "tags": [
+        "Computer Vision",
+        "Generative Models"
+    ],
+    "requirements": [
+        {
+            "requirement_id": 0,
+            "prerequisites": [],
+            "criteria": "परीक्षण के लिए एक प्रसिद्ध सामग्री छवि इनपुट की जाती है, [इस लिंक](https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Mona_Lisa%2C_by_Leonardo_da_Vinci%2C_from_C2RMF_retouched.jpg/768px-Mona_Lisa%2C_by_Leonardo_da_Vinci%2C_from_C2RMF_retouched.jpg) से डाउनलोड की जाती है और `data/content.jpg` में सहेजी जाती है।",
+            "category": "Dataset or Environment",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 1,
+            "prerequisites": [],
+            "criteria": "परीक्षण के लिए एक प्रसिद्ध शैली छवि इनपुट की जाती है, [इस लिंक](https://ia904705.us.archive.org/34/items/the-starry-night-vincent-van-gogh/The%20Starry%20Night%20-%20Vincent%20van%20Gogh/%21PREVIEW%21%20-%20The%20Starry%20Night%20-%20Vincent%20van%20Gogh.jpg) से डाउनलोड की जाती है और `data/style.jpg` में सहेजी जाती है।",
+            "category": "Dataset or Environment",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 2,
+            "prerequisites": [],
+            "criteria": "परसेप्चुअल लॉस मॉडल जो \"PyTorch\" में कार्यान्वित है, `src/model.py` में लोड किया जाता है।",
+            "category": "Machine Learning Method",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 3,
+            "prerequisites": [
+                0,
+                1,
+                2
+            ],
+            "criteria": "शैलीबद्ध छवियों को निर्दिष्ट फ़ोल्डर `results/figures/` में सहेजा जाता है।",
+            "category": "Other",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 4,
+            "prerequisites": [
+                0,
+                1,
+                2
+            ],
+            "criteria": "शैली की तीव्रता को `src/model.py` में शैली हानि और सामग्री हानि के भार को समायोजित करके समायोजित किया जाता है।",
+            "category": "Machine Learning Method",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 5,
+            "prerequisites": [
+                0,
+                1,
+                2,
+                3,
+                4
+            ],
+            "criteria": "प्रसंस्करण समय को रिकॉर्ड किया जाता है और `results/processing_time.txt` के रूप में सहेजा जाता है।",
+            "category": "Performance Metrics",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 6,
+            "prerequisites": [
+                0,
+                1,
+                2,
+                3,
+                4
+            ],
+            "criteria": "शैली स्थानांतरण के मध्यवर्ती परिणामों को `results/figures/intermediate_results.png` के रूप में सहेजा जाता है।",
+            "category": "Visualization",
+            "satisfied": null
+        }
+    ],
+    "preferences": [
+        {
+            "preference_id": 0,
+            "criteria": "शैली स्थानांतरण प्रक्रिया को शैली की तीव्रता के सुचारू समायोजन की अनुमति देनी चाहिए, जिससे शैलीबद्ध छवि दृश्य रूप से आकर्षक हो।",
+            "satisfied": null
+        },
+        {
+            "preference_id": 1,
+            "criteria": "प्रोजेक्ट को उच्च-रिज़ॉल्यूशन छवियों को अत्यधिक प्रसंस्करण समय के बिना कुशलतापूर्वक संभालना चाहिए।",
+            "satisfied": null
+        }
+    ],
+    "is_kaggle_api_needed": false,
+    "is_training_needed": false,
+    "is_web_navigation_needed": false,
+    "hint": "VGG16 was not originally designed for style transfer. However, the user's query states, 'Please create a PyTorch project for image style transfer using a pre-trained VGG16 model.' Ideally, a well-informed agent should create or find a model for style transfer networks that incorporate pre-trained VGG16, rather than simply loading the VGG16 model.",
+    "language": "Hindi",
+    "judge_stats": [
+        {
+            "requirement_index": 0,
+            "criteria": "परीक्षण के लिए एक प्रसिद्ध सामग्री छवि इनपुट की जाती है, [इस लिंक](https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Mona_Lisa%2C_by_Leonardo_da_Vinci%2C_from_C2RMF_retouched.jpg/768px-Mona_Lisa%2C_by_Leonardo_da_Vinci%2C_from_C2RMF_retouched.jpg) से डाउनलोड की जाती है और `data/content.jpg` में सहेजी जाती है।",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.3043620586395264,
+                "input_tokens": 1061,
+                "output_tokens": 95,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>: साक्ष्य में `data/content.jpg` वैध इमेज नहीं है—फ़ाइल पढ़ने पर `\"The image data you provided does not represent a valid image\"` त्रुटि मिलती है। साथ ही डाउनलोड/सेव के सफल होने का कोई पुष्ट लॉग नहीं है, इसलिए Mona Lisa छवि के सही रूप में `data/content.jpg` में सहेजे जाने की पुष्टि नहीं होती।"
+                ]
+            },
+            "total_time": 9.935264825820923
+        },
+        {
+            "requirement_index": 1,
+            "criteria": "परीक्षण के लिए एक प्रसिद्ध शैली छवि इनपुट की जाती है, [इस लिंक](https://ia904705.us.archive.org/34/items/the-starry-night-vincent-van-gogh/The%20Starry%20Night%20-%20Vincent%20van%20Gogh/%21PREVIEW%21%20-%20The%20Starry%20Night%20-%20Vincent%20van%20Gogh.jpg) से डाउनलोड की जाती है और `data/style.jpg` में सहेजी जाती है।",
+            "satisfied": true,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 1.8096232414245605,
+                "input_tokens": 1173,
+                "output_tokens": 56,
+                "accumulated_cost": 0.0,
+                "satisfied": true,
+                "reason": [
+                    "<SATISFIED>: Trajectory evidence shows `wget \"<given-link>\" -O data/style.jpg` ran successfully with HTTP 200 and saved the image to `data/style.jpg`; the same file was later used in testing without load/processing errors."
+                ]
+            },
+            "total_time": 8.49857211112976
+        },
+        {
+            "requirement_index": 2,
+            "criteria": "परसेप्चुअल लॉस मॉडल जो \"PyTorch\" में कार्यान्वित है, `src/model.py` में लोड किया जाता है।",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 1.5800693035125732,
+                "input_tokens": 1021,
+                "output_tokens": 69,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>: `src/model.py` में केवल `import torch` है, लेकिन कोई perceptual loss model वास्तव में load/instantiate नहीं किया गया। `build_model()` सिर्फ `\"model placeholder\"` लौटाता है; VGG/ResNet या किसी perceptual-loss network का उपयोग नहीं दिखता।"
+                ]
+            },
+            "total_time": 6.806006193161011
+        },
+        {
+            "requirement_index": 3,
+            "criteria": "शैलीबद्ध छवियों को निर्दिष्ट फ़ोल्डर `results/figures/` में सहेजा जाता है।",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.485854148864746,
+                "input_tokens": 1014,
+                "output_tokens": 105,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>: उपलब्ध साक्ष्य में `src/model.py` में छवियाँ save करने का कोई कोड नहीं है, और trajectory evidence भी स्पष्ट रूप से कहता है कि `results/figures/` में save success सत्यापित नहीं किया जा सकता। केवल `results/figures/intermediate_results.png` का मौजूद होना पर्याप्त निर्णायक प्रमाण नहीं है कि आवश्यकतानुसार शैलीबद्ध छवियाँ इसी फ़ोल्डर में सहेजी जाती हैं।"
+                ]
+            },
+            "total_time": 8.806099653244019
+        },
+        {
+            "requirement_index": 4,
+            "criteria": "शैली की तीव्रता को `src/model.py` में शैली हानि और सामग्री हानि के भार को समायोजित करके समायोजित किया जाता है।",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 1.9375061988830566,
+                "input_tokens": 1019,
+                "output_tokens": 75,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>: `src/model.py` में style loss/content loss weights को adjust करने वाला कोई वास्तविक implementation नहीं है। फ़ाइल में केवल `REQUIREMENT_CRITERIA` text है; `build_model()` सिर्फ `\"model placeholder\"` लौटाता है, और style/content loss weighting logic, variables, या computation मौजूद नहीं हैं।"
+                ]
+            },
+            "total_time": 6.722939729690552
+        },
+        {
+            "requirement_index": 5,
+            "criteria": "प्रसंस्करण समय को रिकॉर्ड किया जाता है और `results/processing_time.txt` के रूप में सहेजा जाता है।",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 1.8284478187561035,
+                "input_tokens": 806,
+                "output_tokens": 63,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>: `results/processing_time.txt` मौजूद है, लेकिन इसकी सामग्री `('placeholder\\r\\n', None)` है, जो वास्तविक processing time रिकॉर्ड होने का प्रमाण नहीं देती। उपलब्ध साक्ष्य में timing measure/write की सफल execution भी सत्यापित नहीं है।"
+                ]
+            },
+            "total_time": 6.915860176086426
+        },
+        {
+            "requirement_index": 6,
+            "criteria": "शैली स्थानांतरण के मध्यवर्ती परिणामों को `results/figures/intermediate_results.png` के रूप में सहेजा जाता है।",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 1.9242053031921387,
+                "input_tokens": 964,
+                "output_tokens": 83,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>: `results/figures/intermediate_results.png` मौजूद है, लेकिन उपलब्ध साक्ष्य में यह एक वैध PNG के रूप में पढ़ा नहीं जा सका: `\"The image data you provided does not represent a valid image\"`. इसलिए मध्यवर्ती परिणामों का सही इमेज फ़ाइल के रूप में सहेजा जाना सिद्ध नहीं होता।"
+                ]
+            },
+            "total_time": 6.675745010375977
+        }
+    ]
+}

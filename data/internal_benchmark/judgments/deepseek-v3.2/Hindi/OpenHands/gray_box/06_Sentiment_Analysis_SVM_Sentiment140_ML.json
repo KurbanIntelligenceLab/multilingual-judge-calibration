@@ -1,0 +1,161 @@
+{
+    "name": "06_Sentiment_Analysis_SVM_Sentiment140_ML",
+    "query": "कृपया मुझे Hugging Face से उपलब्ध Sentiment140 डेटासेट का उपयोग करके ट्वीट्स पर भावना विश्लेषण के लिए एक प्रणाली बनाने में मदद करें। Sentiment140 डेटासेट लोड करें और डेटा लोड करते समय, इसे स्टॉप वर्ड्स, विराम चिह्न और विशेष वर्णों को हटाकर साफ करें, यह सब `src/data_loader.py` में करें। टेक्स्ट वेक्टराइजेशन के लिए Word2Vec या GloVe का उपयोग करें। यह `src/data_loader.py` में होना चाहिए। इसके बाद, `src/model.py` में एक SVM क्लासिफायर को लागू करें और प्रशिक्षित करें। अंत में, क्लासिफायर की सटीकता की रिपोर्ट `results/metrics/accuracy_score.txt` में लिखें। आदर्श रूप से, रिपोर्ट आसानी से व्याख्यायित होनी चाहिए।",
+    "tags": [
+        "Natural Language Processing",
+        "Supervised Learning"
+    ],
+    "requirements": [
+        {
+            "requirement_id": 0,
+            "prerequisites": [],
+            "criteria": "\"Sentiment140\" डेटासेट, जो \"Hugging Face\" से उपलब्ध है, `src/data_loader.py` में प्राप्त किया जाता है।",
+            "category": "Dataset or Environment",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 1,
+            "prerequisites": [
+                0
+            ],
+            "criteria": "डेटासेट को साफ किया जाता है, जिसमें स्टॉप वर्ड्स, विराम चिह्न और विशेष वर्णों को हटाना शामिल है, यह सब `src/data_loader.py` में होता है।",
+            "category": "Data preprocessing and postprocessing",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 2,
+            "prerequisites": [
+                0,
+                1
+            ],
+            "criteria": "वर्ड एम्बेडिंग्स, या तो \"Word2Vec\" या \"GloVe,\" का उपयोग `src/data_loader.py` में टेक्स्ट को वेक्टर में बदलने के लिए किया जाता है।",
+            "category": "Machine Learning Method",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 3,
+            "prerequisites": [
+                0,
+                1,
+                2
+            ],
+            "criteria": "\"SVM क्लासिफायर\" को `src/model.py` में लागू और प्रशिक्षित किया जाता है।",
+            "category": "Machine Learning Method",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 4,
+            "prerequisites": [
+                1,
+                2,
+                3
+            ],
+            "criteria": "सटीकता स्कोर को प्रिंट किया जाता है और `results/metrics/accuracy_score.txt` के रूप में सहेजा जाता है।",
+            "category": "Performance Metrics",
+            "satisfied": null
+        }
+    ],
+    "preferences": [
+        {
+            "preference_id": 0,
+            "criteria": "डेटासेट डाउनलोड प्रक्रिया विश्वसनीय होनी चाहिए, जिसमें स्पष्ट त्रुटि हैंडलिंग हो।",
+            "satisfied": null
+        },
+        {
+            "preference_id": 1,
+            "criteria": "अंतिम सटीकता रिपोर्ट सीधी और आसानी से व्याख्यायित होनी चाहिए।",
+            "satisfied": null
+        }
+    ],
+    "is_kaggle_api_needed": false,
+    "is_training_needed": true,
+    "is_web_navigation_needed": false,
+    "language": "Hindi",
+    "judge_stats": [
+        {
+            "requirement_index": 0,
+            "criteria": "\"Sentiment140\" डेटासेट, जो \"Hugging Face\" से उपलब्ध है, `src/data_loader.py` में प्राप्त किया जाता है।",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 7.293572664260864,
+                "input_tokens": 1411,
+                "output_tokens": 223,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n\nकारण: `src/data_loader.py` की सामग्री केवल एक प्लेसहोल्डर/स्टब कार्यान्वयन दिखाती है जिसमें वास्तविक डेटासेट लोडिंग तर्क नहीं है। फ़ाइल में `load_dataset()` फ़ंक्शन केवल एक डिक्शनरी लौटाता है `{\"dataset\": \"loaded\", \"notes\": ...}` जो वास्तविक Hugging Face से Sentiment140 डेटासेट प्राप्त करने का प्रमाण नहीं दिखाता। कोड में `datasets` लाइब्रेरी का उपयोग, Hugging Face API कॉल, या वास्तविक डेटा डाउनलोड/लोडिंग तर्क का अभाव है।"
+                ]
+            },
+            "total_time": 24.335698127746582
+        },
+        {
+            "requirement_index": 1,
+            "criteria": "डेटासेट को साफ किया जाता है, जिसमें स्टॉप वर्ड्स, विराम चिह्न और विशेष वर्णों को हटाना शामिल है, यह सब `src/data_loader.py` में होता है।",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 6.043904066085815,
+                "input_tokens": 1575,
+                "output_tokens": 117,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\nकोड execution `ModuleNotFoundError: No module named 'nltk'` के कारण विफल हुआ, जिससे डेटासेट सफाई प्रक्रिया चल ही नहीं सकी। फ़ाइल में सफाई के लिए कोड मौजूद हो सकता है, लेकिन वास्तविक execution के दौरान यह कार्यान्वित नहीं हुआ।"
+                ]
+            },
+            "total_time": 24.489476203918457
+        },
+        {
+            "requirement_index": 2,
+            "criteria": "वर्ड एम्बेडिंग्स, या तो \"Word2Vec\" या \"GloVe,\" का उपयोग `src/data_loader.py` में टेक्स्ट को वेक्टर में बदलने के लिए किया जाता है।",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 6.612509727478027,
+                "input_tokens": 1681,
+                "output_tokens": 125,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n\nकारण: `src/data_loader.py` में GloVe embeddings लोड करने के दोनों प्रयास (`glove.6B.100d.txt` और `glove.6B.50d.txt`) `FileNotFoundError` के कारण विफल हुए। इससे वर्ड एम्बेडिंग्स का उपयोग करके टेक्स्ट को वेक्टर में बदलने की functionality क्रियान्वित नहीं हो पाई।"
+                ]
+            },
+            "total_time": 123.25794720649719
+        },
+        {
+            "requirement_index": 3,
+            "criteria": "\"SVM क्लासिफायर\" को `src/model.py` में लागू और प्रशिक्षित किया जाता है।",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 10.40086030960083,
+                "input_tokens": 1389,
+                "output_tokens": 230,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\nकारण: `src/model.py` फ़ाइल की सामग्री दिखाती है कि यह केवल एक मिनिमल सेमेंटिक इम्प्लीमेंटेशन है जो बेंचमार्क जजिंग के लिए है। फ़ाइल में वास्तविक SVM क्लासिफायर का कोई कोड नहीं है, बल्कि केवल प्लेसहोल्डर फ़ंक्शन और डॉक्स्ट्रिंग हैं। ट्रैजेक्टरी एविडेंस में execution steps का उल्लेख है, लेकिन वह केवल संदर्भ के लिए है और निर्णायक साक्ष्य नहीं है। वास्तविक फ़ाइल सामग्री में SVM क्लासिफायर का implementation या training कोड नहीं दिख रहा।"
+                ]
+            },
+            "total_time": 22.034420490264893
+        },
+        {
+            "requirement_index": 4,
+            "criteria": "सटीकता स्कोर को प्रिंट किया जाता है और `results/metrics/accuracy_score.txt` के रूप में सहेजा जाता है।",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 6.2833287715911865,
+                "input_tokens": 1373,
+                "output_tokens": 131,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\nफ़ाइल `accuracy_score.txt` का कंटेंट `('placeholder\\r\\n', None)` है, जो एक वैध सटीकता स्कोर नहीं दिखाता। यह सिर्फ एक प्लेसहोल्डर टेक्स्ट है, जिससे पता चलता है कि वास्तविक सटीकता स्कोर की गणना या सहेजने की प्रक्रिया पूरी नहीं हुई।"
+                ]
+            },
+            "total_time": 27.303913354873657
+        }
+    ]
+}

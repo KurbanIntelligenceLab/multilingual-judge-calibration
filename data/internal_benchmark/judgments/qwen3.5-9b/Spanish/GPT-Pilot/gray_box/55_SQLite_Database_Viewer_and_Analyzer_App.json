@@ -1,0 +1,429 @@
+{
+    "name": "55_SQLite_Database_Viewer_and_Analyzer_App",
+    "query": "Quiero crear una aplicación que permita a los usuarios ver y analizar datos de desarrollo de IA almacenados en una base de datos SQLite. En el frontend (implementado en `src/frontend.py`), el usuario debería poder subir una nueva base de datos SQLite, incluyendo registros de entrenamiento de modelos de IA o datos de solicitud-respuesta, seleccionando un archivo desde su dispositivo o seleccionar una base de datos previamente subida y almacenada en caché en `src/cache.py`. De esta manera, el usuario no necesitará subir la base de datos cada vez que quiera analizarla. Si se sube una nueva base de datos, pueden nombrarla, y el archivo será enviado al backend (`src/backend.py`) y almacenado para uso futuro. Una vez que la base de datos está subida, los usuarios pueden interactuar con ella. El usuario debería ver una lista de modelos de IA o aplicaciones desde una tabla `app`. Deberían poder seleccionar una aplicación y ver sus tareas de desarrollo desde una tabla `development_planning`. Después de seleccionar una tarea, pueden ver todos los pasos de desarrollo asociados con ella. Finalmente, al seleccionar un paso se mostrarán datos detallados como `prompt_path`, `messages`, `llm_response` y `prompt_data`, con la información adecuada renderizada en el frontend (en `src/frontend_render.py`).\nLa base de datos SQLite siempre seguirá esta estructura: la tabla `app` contiene todas las aplicaciones almacenadas en la base de datos. Cada aplicación tiene múltiples tareas de desarrollo almacenadas como un arreglo en la tabla `development_planning` bajo la clave `development_plan`. Cada elemento del arreglo es un objeto JSON con tres pares clave-valor: `description`, `user_review_goal` y `programming_goal`. Cada tarea de desarrollo contiene muchos pasos de desarrollo, que están almacenados en la tabla `development_steps` y vinculados a la tabla `app` usando el campo `app_id`.\nEl desafío es que no hay una conexión directa entre la tarea de desarrollo y el paso de desarrollo. Por lo tanto, en `src/backend_logic.py`, todos los pasos de desarrollo necesitan ser recuperados y luego divididos por el campo `prompt_path`. Cada tarea de desarrollo comienza con el valor `prompt_path` `development/task/breakdown.prompt`, por lo que los pasos de desarrollo pueden agruparse dividiendo la lista de pasos en listas más pequeñas, donde cada una comienza con el paso que tiene `prompt_path` igual a `development/task/breakdown.prompt`. Esto dará el conjunto correcto de pasos de desarrollo para cada tarea.\nCada paso de desarrollo contiene los siguientes valores, que necesitan ser mostrados en el frontend (`src/frontend_render.py`):\n- `prompt_path`: una cadena de texto.\n- `messages`: un arreglo de objetos JSON.\n- `llm_response`: un objeto JSON.\n- `prompt_data`: un objeto JSON.\nEl arreglo `messages` siempre tendrá objetos JSON con las claves `content` y `role`. El frontend debería mostrar el `content` en un campo de texto grande, con el `role` mostrado como una etiqueta. El objeto `llm_response` siempre tendrá una clave `text`, que debería mostrarse como un área de texto para mostrar cadenas potencialmente largas. El objeto `prompt_data` puede tener varios pares clave-valor, y cada uno debería mostrarse al usuario en un formato apropiado.",
+    "tags": [
+        "Other"
+    ],
+    "requirements": [
+        {
+            "requirement_id": 0,
+            "prerequisites": [],
+            "criteria": "El frontend está implementado en `src/frontend.py` y permite a los usuarios subir una nueva base de datos SQLite o seleccionar una previamente almacenada en caché desde `src/cache.py`. El archivo elegido debería guardarse y ser accesible para uso futuro.",
+            "category": "Human Computer Interaction",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 1,
+            "prerequisites": [
+                0
+            ],
+            "criteria": "Cuando se sube una nueva base de datos, los usuarios pueden asignarle un nombre, y el archivo se envía al backend (`src/backend.py`) y se almacena para uso futuro.",
+            "category": "Other",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 2,
+            "prerequisites": [
+                0,
+                1
+            ],
+            "criteria": "Las bases de datos previamente subidas se almacenan en caché en `src/cache.py` y pueden seleccionarse sin necesidad de volver a subirlas.",
+            "category": "Dataset or Environment",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 3,
+            "prerequisites": [
+                0,
+                1,
+                2
+            ],
+            "criteria": "Una vez que una base de datos está subida o seleccionada, el usuario puede ver una lista de modelos de IA o aplicaciones desde la tabla `app` dentro de la base de datos.",
+            "category": "Other",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 4,
+            "prerequisites": [
+                0,
+                1,
+                2,
+                3
+            ],
+            "criteria": "Los usuarios pueden seleccionar una aplicación y ver sus tareas de desarrollo desde la tabla `development_planning`.",
+            "category": "Other",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 5,
+            "prerequisites": [
+                0,
+                1,
+                2,
+                3,
+                4
+            ],
+            "criteria": "Después de seleccionar una tarea, los usuarios pueden ver todos los pasos de desarrollo asociados, que se muestran en el frontend implementado en `src/frontend_render.py`.",
+            "category": "Human Computer Interaction",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 6,
+            "prerequisites": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5
+            ],
+            "criteria": "Seleccionar un paso de desarrollo muestra datos detallados incluyendo `prompt_path`, `messages`, `llm_response` y `prompt_data`, renderizados adecuadamente en el frontend (`src/frontend_render.py`).",
+            "category": "Human Computer Interaction",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 7,
+            "prerequisites": [],
+            "criteria": "En `src/backend_logic.py`, recuperar todos los pasos de desarrollo de la tabla `development_steps` y agruparlos por tarea de desarrollo usando el campo `prompt_path` comenzando con `development/task/breakdown.prompt`.",
+            "category": "Other",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 8,
+            "prerequisites": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6
+            ],
+            "criteria": "El arreglo `messages` se muestra en el frontend (`src/frontend_render.py`), mostrando `content` en un campo de texto grande y `role` como una etiqueta para cada mensaje.",
+            "category": "Human Computer Interaction",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 9,
+            "prerequisites": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6
+            ],
+            "criteria": "El objeto `llm_response` con la clave `text` se muestra en un área de texto para acomodar cadenas potencialmente largas en el frontend (`src/frontend_render.py`).",
+            "category": "Human Computer Interaction",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 10,
+            "prerequisites": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6
+            ],
+            "criteria": "El objeto `prompt_data` se muestra con sus pares clave-valor presentados en un formato apropiado en el frontend (`src/frontend_render.py`).",
+            "category": "Human Computer Interaction",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 11,
+            "prerequisites": [],
+            "criteria": "La base de datos SQLite sigue la estructura especificada con las tablas `app`, `development_planning` y `development_steps`, como se describe en la consulta del proyecto.",
+            "category": "Dataset or Environment",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 12,
+            "prerequisites": [
+                11
+            ],
+            "criteria": "Cada aplicación en la tabla `app` tiene múltiples tareas de desarrollo almacenadas como un arreglo bajo la clave `development_plan` en la tabla `development_planning`.",
+            "category": "Dataset or Environment",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 13,
+            "prerequisites": [
+                11
+            ],
+            "criteria": "Cada tarea de desarrollo contiene muchos pasos de desarrollo almacenados en la tabla `development_steps` y vinculados a la tabla `app` usando el campo `app_id`.",
+            "category": "Dataset or Environment",
+            "satisfied": null
+        }
+    ],
+    "preferences": [
+        {
+            "preference_id": 0,
+            "criteria": "La interfaz del frontend debería permitir una fácil interacción con la base de datos, asegurando que los usuarios puedan navegar sin problemas entre aplicaciones, tareas y pasos.",
+            "satisfied": null
+        },
+        {
+            "preference_id": 1,
+            "criteria": "El sistema debería manejar eficientemente grandes bases de datos SQLite, asegurando que el rendimiento se mantenga con grandes conjuntos de datos.",
+            "satisfied": null
+        },
+        {
+            "preference_id": 2,
+            "criteria": "La información debería renderizarse en el frontend de manera intuitiva y amigable para el usuario, asegurando facilidad de interacción.",
+            "satisfied": null
+        },
+        {
+            "preference_id": 3,
+            "criteria": "La agrupación de pasos de desarrollo debería reflejar con precisión el conjunto correcto de pasos para cada tarea, según la lógica implementada en `src/backend_logic.py`.",
+            "satisfied": null
+        }
+    ],
+    "is_kaggle_api_needed": false,
+    "is_training_needed": false,
+    "is_web_navigation_needed": false,
+    "resource": "https://github.com/Pythagora-io/gpt-pilot/wiki/How-to-write-a-good-initial-project-description",
+    "language": "Spanish",
+    "judge_stats": [
+        {
+            "requirement_index": 0,
+            "criteria": "El frontend está implementado en `src/frontend.py` y permite a los usuarios subir una nueva base de datos SQLite o seleccionar una previamente almacenada en caché desde `src/cache.py`. El archivo elegido debería guardarse y ser accesible para uso futuro.",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 24.40207314491272,
+                "input_tokens": 1420,
+                "output_tokens": 2048,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    ""
+                ]
+            },
+            "total_time": 72.28518271446228
+        },
+        {
+            "requirement_index": 1,
+            "criteria": "Cuando se sube una nueva base de datos, los usuarios pueden asignarle un nombre, y el archivo se envía al backend (`src/backend.py`) y se almacena para uso futuro.",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 12.596734523773193,
+                "input_tokens": 1083,
+                "output_tokens": 1924,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\nEl archivo `src/backend.py` no implementa la funcionalidad requerida. El contenido del archivo solo define los criterios de requisito en la variable `REQUIREMENT_CRITERIA` y devuelve un estado estático en la función `main()`. No existe código lógico para manejar la subida de archivos, asignar nombres a las bases de datos ni almacenar los archivos para su uso futuro."
+                ]
+            },
+            "total_time": 68.38525390625
+        },
+        {
+            "requirement_index": 2,
+            "criteria": "Las bases de datos previamente subidas se almacenan en caché en `src/cache.py` y pueden seleccionarse sin necesidad de volver a subirlas.",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 22.7639799118042,
+                "input_tokens": 1110,
+                "output_tokens": 2048,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    ""
+                ]
+            },
+            "total_time": 79.80978679656982
+        },
+        {
+            "requirement_index": 3,
+            "criteria": "Una vez que una base de datos está subida o seleccionada, el usuario puede ver una lista de modelos de IA o aplicaciones desde la tabla `app` dentro de la base de datos.",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 30.32383680343628,
+                "input_tokens": 802,
+                "output_tokens": 2048,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    ""
+                ]
+            },
+            "total_time": 76.26219987869263
+        },
+        {
+            "requirement_index": 4,
+            "criteria": "Los usuarios pueden seleccionar una aplicación y ver sus tareas de desarrollo desde la tabla `development_planning`.",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 14.348613739013672,
+                "input_tokens": 784,
+                "output_tokens": 2048,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    ""
+                ]
+            },
+            "total_time": 55.4277241230011
+        },
+        {
+            "requirement_index": 5,
+            "criteria": "Después de seleccionar una tarea, los usuarios pueden ver todos los pasos de desarrollo asociados, que se muestran en el frontend implementado en `src/frontend_render.py`.",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 23.59778070449829,
+                "input_tokens": 1228,
+                "output_tokens": 1804,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\nEl archivo `src/frontend_render.py` solo contiene definiciones de criterios (`REQUIREMENT_CRITERIA`) y una función `main` que devuelve un diccionario de estado. No incluye código funcional de frontend (como HTML o lógica de renderizado) necesario para mostrar los pasos de desarrollo a los usuarios."
+                ]
+            },
+            "total_time": 70.26578640937805
+        },
+        {
+            "requirement_index": 6,
+            "criteria": "Seleccionar un paso de desarrollo muestra datos detallados incluyendo `prompt_path`, `messages`, `llm_response` y `prompt_data`, renderizados adecuadamente en el frontend (`src/frontend_render.py`).",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 28.95117712020874,
+                "input_tokens": 1236,
+                "output_tokens": 2048,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    ""
+                ]
+            },
+            "total_time": 65.77238202095032
+        },
+        {
+            "requirement_index": 7,
+            "criteria": "En `src/backend_logic.py`, recuperar todos los pasos de desarrollo de la tabla `development_steps` y agruparlos por tarea de desarrollo usando el campo `prompt_path` comenzando con `development/task/breakdown.prompt`.",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 24.683393716812134,
+                "input_tokens": 1249,
+                "output_tokens": 2048,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    ""
+                ]
+            },
+            "total_time": 67.51950788497925
+        },
+        {
+            "requirement_index": 8,
+            "criteria": "El arreglo `messages` se muestra en el frontend (`src/frontend_render.py`), mostrando `content` en un campo de texto grande y `role` como una etiqueta para cada mensaje.",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 22.51830530166626,
+                "input_tokens": 1233,
+                "output_tokens": 2048,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    ""
+                ]
+            },
+            "total_time": 72.48993396759033
+        },
+        {
+            "requirement_index": 9,
+            "criteria": "El objeto `llm_response` con la clave `text` se muestra en un área de texto para acomodar cadenas potencialmente largas en el frontend (`src/frontend_render.py`).",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 13.057025671005249,
+                "input_tokens": 1232,
+                "output_tokens": 2048,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    ""
+                ]
+            },
+            "total_time": 54.41669726371765
+        },
+        {
+            "requirement_index": 10,
+            "criteria": "El objeto `prompt_data` se muestra con sus pares clave-valor presentados en un formato apropiado en el frontend (`src/frontend_render.py`).",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 26.233412504196167,
+                "input_tokens": 1225,
+                "output_tokens": 2048,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    ""
+                ]
+            },
+            "total_time": 80.36112093925476
+        },
+        {
+            "requirement_index": 11,
+            "criteria": "La base de datos SQLite sigue la estructura especificada con las tablas `app`, `development_planning` y `development_steps`, como se describe en la consulta del proyecto.",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 24.47645092010498,
+                "input_tokens": 800,
+                "output_tokens": 2048,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    ""
+                ]
+            },
+            "total_time": 64.50593972206116
+        },
+        {
+            "requirement_index": 12,
+            "criteria": "Cada aplicación en la tabla `app` tiene múltiples tareas de desarrollo almacenadas como un arreglo bajo la clave `development_plan` en la tabla `development_planning`.",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 27.839441299438477,
+                "input_tokens": 798,
+                "output_tokens": 2048,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    ""
+                ]
+            },
+            "total_time": 81.76703119277954
+        },
+        {
+            "requirement_index": 13,
+            "criteria": "Cada tarea de desarrollo contiene muchos pasos de desarrollo almacenados en la tabla `development_steps` y vinculados a la tabla `app` usando el campo `app_id`.",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 23.704652547836304,
+                "input_tokens": 799,
+                "output_tokens": 2048,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    ""
+                ]
+            },
+            "total_time": 64.16576170921326
+        }
+    ]
+}

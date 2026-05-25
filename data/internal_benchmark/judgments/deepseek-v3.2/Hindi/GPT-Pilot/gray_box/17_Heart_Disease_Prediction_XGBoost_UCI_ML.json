@@ -1,0 +1,269 @@
+{
+    "name": "17_Heart_Disease_Prediction_XGBoost_UCI_ML",
+    "query": "UCI Heart Disease डेटासेट का उपयोग करके XGBoost मॉडल के साथ हृदय रोग की भविष्यवाणी करने के लिए एक प्रोजेक्ट बनाएं, जिसे [इस लिंक](https://archive.ics.uci.edu/dataset/45/heart+disease) से डाउनलोड किया जा सकता है। डेटासेट को `src/data_loader.py` में लोड करें। `src/data_loader.py` में फीचर चयन और डेटा मानकीकरण लागू करें। फीचर महत्व को समझाने के लिए SHAP मानों का उपयोग करें, और परिणामों को `results/figures/shap_importance.png` के रूप में सहेजें। XGBoost मॉडल को `src/model.py` में लागू करें। फिर, फीचर महत्व को समझाने के लिए SHAP मानों का उपयोग करें, और परिणामों को `results/shap_importance.png` के रूप में सहेजें। ROC कर्व को `results/figures/roc_curve.png` में सहेजें। अंत में, सभी परिणामों और विज़ुअलाइज़ेशन को शामिल करते हुए एक HTML रिपोर्ट जनरेट करें, और इसे `results/report.html` के रूप में सहेजें। सुनिश्चित करें कि SHAP विज़ुअलाइज़ेशन सबसे प्रभावशाली विशेषताओं को स्पष्ट रूप से उजागर करते हैं। XGBoost मॉडल की मजबूती को सत्यापित करने के लिए एक अन्य मॉडल, जैसे Logistic Regression, के साथ प्रदर्शन की तुलना शामिल करें। XGBoost मॉडल को `models/saved_models/` के अंतर्गत सहेजें।",
+    "tags": [
+        "Classification",
+        "Medical Analysis",
+        "Supervised Learning"
+    ],
+    "requirements": [
+        {
+            "requirement_id": 0,
+            "prerequisites": [],
+            "criteria": "\"UCI Heart Disease\" डेटासेट का उपयोग किया जाता है, जिसे [इस लिंक](https://archive.ics.uci.edu/dataset/45/heart+disease) से डाउनलोड किया जा सकता है। डेटासेट को `src/data_loader.py` में लोड करें।",
+            "category": "Dataset or Environment",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 1,
+            "prerequisites": [
+                0
+            ],
+            "criteria": "फीचर चयन `src/data_loader.py` में लागू किया गया है।",
+            "category": "Data preprocessing and postprocessing",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 2,
+            "prerequisites": [
+                0
+            ],
+            "criteria": "डेटा मानकीकरण, जो सुनिश्चित करता है कि फीचर मान समान रेंज में हैं, `src/data_loader.py` में लागू किया गया है।",
+            "category": "Data preprocessing and postprocessing",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 3,
+            "prerequisites": [],
+            "criteria": "\"XGBoost\" मॉडल `src/model.py` में लागू किया गया है।",
+            "category": "Machine Learning Method",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 4,
+            "prerequisites": [
+                0,
+                1,
+                2,
+                3
+            ],
+            "criteria": "\"SHAP\" मानों का उपयोग फीचर महत्व की व्याख्या के लिए किया जाता है, और परिणाम `results/figures/shap_importance.png` के रूप में सहेजे जाते हैं।",
+            "category": "Visualization",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 5,
+            "prerequisites": [
+                0,
+                1,
+                2,
+                3
+            ],
+            "criteria": "ROC कर्व `results/figures/roc_curve.png` के रूप में सहेजा गया है।",
+            "category": "Visualization",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 6,
+            "prerequisites": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5
+            ],
+            "criteria": "परिणामों और विज़ुअलाइज़ेशन को शामिल करते हुए एक HTML रिपोर्ट जनरेट की जाती है, जिसे `results/report.html` के रूप में सहेजा जाता है।",
+            "category": "Visualization",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 7,
+            "prerequisites": [
+                1,
+                2,
+                3
+            ],
+            "criteria": "XGBoost मॉडल की मजबूती को सत्यापित करने के लिए एक अन्य मॉडल (जैसे, Logistic Regression) के साथ प्रदर्शन की तुलना शामिल की जाती है।",
+            "category": "Other",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 8,
+            "prerequisites": [
+                1,
+                2,
+                3
+            ],
+            "criteria": "XGBoost मॉडल को `models/saved_models/` के अंतर्गत सहेजा जाता है।",
+            "category": "Save Trained Model",
+            "satisfied": null
+        }
+    ],
+    "preferences": [
+        {
+            "preference_id": 0,
+            "criteria": "SHAP विज़ुअलाइज़ेशन स्पष्ट होने चाहिए और सबसे प्रभावशाली विशेषताओं को उजागर करना चाहिए, जिससे परिणामों को समझना आसान हो।",
+            "satisfied": null
+        }
+    ],
+    "is_kaggle_api_needed": false,
+    "is_training_needed": true,
+    "is_web_navigation_needed": true,
+    "language": "Hindi",
+    "judge_stats": [
+        {
+            "requirement_index": 0,
+            "criteria": "\"UCI Heart Disease\" डेटासेट का उपयोग किया जाता है, जिसे [इस लिंक](https://archive.ics.uci.edu/dataset/45/heart+disease) से डाउनलोड किया जा सकता है। डेटासेट को `src/data_loader.py` में लोड करें।",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 10.021572589874268,
+                "input_tokens": 1536,
+                "output_tokens": 259,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n\nकारण: `src/data_loader.py` फ़ाइल में डेटासेट लोड करने का कोड केवल एक प्लेसहोल्डर है जो वास्तविक डेटासेट लोड नहीं करता। ट्रैजेक्टरी साक्ष्य से पता चलता है कि फ़ाइल को चलाने पर `ModuleNotFoundError: No module named 'pandas'` त्रुटि हुई, जो दर्शाता है कि वास्तविक डेटासेट लोडिंग कोड (जिसमें pandas की आवश्यकता होती) मौजूद है, लेकिन यह विफल रहा क्योंकि डेटासेट सफलतापूर्वक लोड नहीं हुआ। आवश्यकता में वास्तविक डेटासेट लोड करने की मांग है, जो पूरी नहीं हुई।"
+                ]
+            },
+            "total_time": 25.64261484146118
+        },
+        {
+            "requirement_index": 1,
+            "criteria": "फीचर चयन `src/data_loader.py` में लागू किया गया है।",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 5.586138486862183,
+                "input_tokens": 1650,
+                "output_tokens": 185,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\nफ़ाइल `src/data_loader.py` का दिया गया कोड केवल एक प्लेसहोल्डर है जो वास्तविक डेटासेट लोडिंग या फ़ीचर चयन को लागू नहीं करता। ट्रैजेक्टरी साक्ष्य (Step 5) से पता चलता है कि इस फ़ाइल को चलाने का प्रयास `ModuleNotFoundError` के कारण विफल रहा, जिससे कोई भी फ़ीचर चयन functionality execute नहीं हो सकी। इसलिए, फ़ीचर चयन लागू नहीं किया गया है।"
+                ]
+            },
+            "total_time": 25.328383684158325
+        },
+        {
+            "requirement_index": 2,
+            "criteria": "डेटा मानकीकरण, जो सुनिश्चित करता है कि फीचर मान समान रेंज में हैं, `src/data_loader.py` में लागू किया गया है।",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 13.60948395729065,
+                "input_tokens": 1628,
+                "output_tokens": 273,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\nफ़ाइल `src/data_loader.py` की सामग्री केवल एक प्लेसहोल्डर/स्टब कार्यान्वयन दिखाती है जिसमें वास्तविक डेटा लोडिंग, फीचर चयन या मानकीकरण तर्क नहीं है। `load_dataset()` और `build_transforms()` फ़ंक्शन वास्तविक प्रीप्रोसेसिंग कोड के बजाय सामान्य स्ट्रिंग लौटाते हैं। ट्रैजेक्टरी साक्ष्य एक `normalize_features` फ़ंक्शन के निष्पादन का उल्लेख करता है, लेकिन यह फ़ंक्शन प्रदान की गई फ़ाइल सामग्री में मौजूद नहीं है, जिससे यह स्पष्ट है कि मूल्यांकन के लिए प्रस्तुत कोड में आवश्यकता पूरी नहीं हुई है।"
+                ]
+            },
+            "total_time": 32.673588514328
+        },
+        {
+            "requirement_index": 3,
+            "criteria": "\"XGBoost\" मॉडल `src/model.py` में लागू किया गया है।",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 9.262264251708984,
+                "input_tokens": 1255,
+                "output_tokens": 232,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\n\nकारण: `src/model.py` फ़ाइल की सामग्री दिखाती है कि यह केवल एक \"Minimal semantic implementation for benchmark judging\" है। इसमें XGBoost मॉडल का वास्तविक कार्यान्वयन नहीं है, बल्कि केवल प्लेसहोल्डर कोड और कीवर्ड चेक है। फ़ाइल में `build_model()` फ़ंक्शन स्पष्ट रूप से \"model placeholder\" लौटाता है, जो वास्तविक XGBoost मॉडल नहीं है। ट्रैजेक्टरी साक्ष्य केवल XGBoost पैकेज इंस्टॉलेशन दिखाता है, लेकिन `src/model.py` में वास्तविक मॉडल कार्यान्वयन का प्रमाण नहीं देता।"
+                ]
+            },
+            "total_time": 17.56000518798828
+        },
+        {
+            "requirement_index": 4,
+            "criteria": "\"SHAP\" मानों का उपयोग फीचर महत्व की व्याख्या के लिए किया जाता है, और परिणाम `results/figures/shap_importance.png` के रूप में सहेजे जाते हैं।",
+            "satisfied": true,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 28.432750463485718,
+                "input_tokens": 1299,
+                "output_tokens": 164,
+                "accumulated_cost": 0.0,
+                "satisfied": true,
+                "reason": [
+                    "<SATISFIED>\n\nकारण: ट्रैजेक्टरी साक्ष्य से पुष्टि होती है कि SHAP मानों की गणना सफलतापूर्वक की गई और `results/figures/shap_importance.png` फ़ाइल के रूप में सहेजी गई। स्टेप 4 और 5 में कोई त्रुटि नहीं आई, जो फ़ाइल के सफल निर्माण और संग्रहण को दर्शाता है। वर्कस्पेस संरचना में फ़ाइल का अस्तित्व भी दिखाई देता है।"
+                ]
+            },
+            "total_time": 44.143481731414795
+        },
+        {
+            "requirement_index": 5,
+            "criteria": "ROC कर्व `results/figures/roc_curve.png` के रूप में सहेजा गया है।",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 7.769487619400024,
+                "input_tokens": 993,
+                "output_tokens": 182,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\nकारण: फ़ाइल `results/figures/roc_curve.png` का सामग्री साक्ष्य पढ़ने में त्रुटि दिखाता है (\"Error reading image file... No endpoints found that support image input\")। यह त्रुटि यह साबित नहीं करती कि फ़ाइल सफलतापूर्वक बनी और सहेजी गई है। ट्रैजेक्टरी साक्ष्य केवल संदर्भ के लिए है और निर्णायक नहीं है। मौजूदा साक्ष्य (फ़ाइल पढ़ने में विफलता) आवश्यकता की पुष्टि नहीं करते।"
+                ]
+            },
+            "total_time": 28.57649064064026
+        },
+        {
+            "requirement_index": 6,
+            "criteria": "परिणामों और विज़ुअलाइज़ेशन को शामिल करते हुए एक HTML रिपोर्ट जनरेट की जाती है, जिसे `results/report.html` के रूप में सहेजा जाता है।",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 8.26656460762024,
+                "input_tokens": 1175,
+                "output_tokens": 205,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\nकारण: `results/report.html` फ़ाइल का सामग्री प्रमाण `('', None)` दिखाता है, जो एक खाली या निरर्थक फ़ाइल को इंगित करता है। यह दर्शाता है कि रिपोर्ट सफलतापूर्वक जनरेट या सहेजी नहीं गई है, भले ही विज़ुअलाइज़ेशन स्क्रिप्ट सफलतापूर्वक चली हो। आवश्यकता \"परिणामों और विज़ुअलाइज़ेशन को शामिल करते हुए एक HTML रिपोर्ट\" के लिए वास्तविक सामग्री की आवश्यकता है, जो यहाँ अनुपस्थित है।"
+                ]
+            },
+            "total_time": 20.805092811584473
+        },
+        {
+            "requirement_index": 7,
+            "criteria": "XGBoost मॉडल की मजबूती को सत्यापित करने के लिए एक अन्य मॉडल (जैसे, Logistic Regression) के साथ प्रदर्शन की तुलना शामिल की जाती है।",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 8.310940980911255,
+                "input_tokens": 1871,
+                "output_tokens": 201,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>\nकारण: प्रदान किए गए कोड फ़ाइल सामग्री (data_loader.py और model.py) में केवल प्लेसहोल्डर/न्यूनतम कार्यान्वयन हैं। इन फ़ाइलों में XGBoost और Logistic Regression मॉडलों के बीच प्रदर्शन तुलना का कोई साक्ष्य नहीं है। ट्रैजेक्टरी साक्ष्य में model_comparison.py के निष्पादन का उल्लेख है, लेकिन यह फ़ाइल वर्तमान वर्कस्पेस संरचना में मौजूद नहीं है और इसका कोड सत्यापन के लिए उपलब्ध नहीं कराया गया है।"
+                ]
+            },
+            "total_time": 29.622938632965088
+        },
+        {
+            "requirement_index": 8,
+            "criteria": "XGBoost मॉडल को `models/saved_models/` के अंतर्गत सहेजा जाता है।",
+            "satisfied": true,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 5.595730781555176,
+                "input_tokens": 1923,
+                "output_tokens": 154,
+                "accumulated_cost": 0.0,
+                "satisfied": true,
+                "reason": [
+                    "<SATISFIED>\n\nकारण: ट्रैजेक्टरी साक्ष्य (स्टेप 5 और 6) दर्शाता है कि `xgboost_model.save_model('models/saved_models/xgboost_model.json')` और `joblib.dump(xgboost_model, 'models/saved_models/xgboost_model.joblib')` कॉल किए गए, जो बिना किसी त्रुटि के पूरे हुए। इससे स्पष्ट है कि XGBoost मॉडल को `models/saved_models/` निर्देशिका में सहेजा गया।"
+                ]
+            },
+            "total_time": 23.030075073242188
+        }
+    ]
+}

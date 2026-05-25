@@ -1,0 +1,166 @@
+{
+    "name": "04_Text_Generation_GPT2_Prompts_DL",
+    "query": "Lütfen önceden eğitilmiş bir GPT-2 modelini otomatik olarak indirip `models/saved_models/` içinde önbelleğe alarak bir metin üretim sistemi oluşturun. Sistem, `data/prompt.txt` adlı bir metin dosyasının mevcut içeriğini yükleyerek istemleri almalıdır; bu dosya, uygulamanızda yalnızca \"who are you?\" metnini içermelidir. `data/prompt.txt` dosyasını okurken karşılaştığınız yazım hatalarını otomatik olarak düzeltmelisiniz. Üretilen metnin maksimum 200 karakterle sınırlı olmasını sağlayın ve programınız üretilen metni `results/generated_text.txt` dosyasına kaydetmelidir. Ekstra boşlukları kaldırarak ve yaygın yazım hatalarını düzelterek üretilen metni temizlemek için son işlem uygulayın. Sistem, küçük yazım hataları olsa bile farklı giriş istemlerini verimli bir şekilde işleyebilirse ideal olur. Ayrıca, kaydedilen dosyada kullanıcı dostu bir çıktı formatı (belki zaman damgaları veya istem tanımlayıcıları ile) olması hoş olurdu.",
+    "tags": [
+        "Generative Models",
+        "Natural Language Processing"
+    ],
+    "requirements": [
+        {
+            "requirement_id": 0,
+            "prerequisites": [],
+            "criteria": "Önceden eğitilmiş \"GPT-2\" modeli indirilir ve `models/saved_models/` içinde önbelleğe alınır.",
+            "category": "Machine Learning Method",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 1,
+            "prerequisites": [],
+            "criteria": "İstemler `data/prompt.txt` adlı bir metin dosyasından okunur ve modele beslenir.",
+            "category": "Human Computer Interaction",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 2,
+            "prerequisites": [
+                0,
+                1
+            ],
+            "criteria": "Üretim uzunluğu maksimum 200 karakterle sınırlıdır.",
+            "category": "Other",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 3,
+            "prerequisites": [
+                0,
+                1,
+                2
+            ],
+            "criteria": "Metni temizlemek için ekstra boşlukları kaldırma ve yaygın yazım hatalarını düzeltme dahil son işlem uygulanır.",
+            "category": "Data preprocessing and postprocessing",
+            "satisfied": null
+        },
+        {
+            "requirement_id": 4,
+            "prerequisites": [
+                0,
+                1,
+                2,
+                3
+            ],
+            "criteria": "Üretilen metin `results/generated_text.txt` dosyasına kaydedilir.",
+            "category": "Other",
+            "satisfied": null
+        }
+    ],
+    "preferences": [
+        {
+            "preference_id": 0,
+            "criteria": "Sistem, farklı giriş istemlerini verimli bir şekilde ele almalı ve küçük yazım hatalarını düzeltmelidir.",
+            "satisfied": null
+        },
+        {
+            "preference_id": 1,
+            "criteria": "Sistem, metin üretimi sırasında minimum gecikme ile verimli çalışmalıdır.",
+            "satisfied": null
+        },
+        {
+            "preference_id": 2,
+            "criteria": "Kaydedilen dosyada kullanıcı dostu bir çıktı formatı, belki zaman damgaları veya istem tanımlayıcıları ile kullanılmalıdır.",
+            "satisfied": null
+        }
+    ],
+    "is_kaggle_api_needed": false,
+    "is_training_needed": false,
+    "is_web_navigation_needed": false,
+    "hint": "There is only one prompt to read. However, requirment 1 says \"Prompts\".",
+    "language": "Turkish",
+    "judge_stats": [
+        {
+            "requirement_index": 0,
+            "criteria": "Önceden eğitilmiş \"GPT-2\" modeli indirilir ve `models/saved_models/` içinde önbelleğe alınır.",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 3.3129191398620605,
+                "input_tokens": 915,
+                "output_tokens": 164,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED> Workspace kanıtında `models/saved_models/` dizini mevcut olsa da içinde GPT-2’ye ait herhangi bir model dosyası görünmüyor; yalnızca boş dizin yapısı raporlanmış. Trajectory notlarında da `train.py` içinde `models/saved_models/gpt2` hedefinin kod seviyesinde ayarlandığı belirtiliyor, ancak “GPT-2’nin gerçekten indirildiğini doğrulayan açık bir indirme/log çıktısı yok” deniyor. Ayrıca README örneğinde `models/saved_model/` kullanılması yol tutarsızlığına işaret ediyor. Bu nedenle modelin indirildiği ve `models/saved_models/` altında önbelleğe alındığı kanıtlanmamış."
+                ]
+            },
+            "total_time": 12.994446516036987
+        },
+        {
+            "requirement_index": 1,
+            "criteria": "İstemler `data/prompt.txt` adlı bir metin dosyasından okunur ve modele beslenir.",
+            "satisfied": true,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.1199886798858643,
+                "input_tokens": 960,
+                "output_tokens": 103,
+                "accumulated_cost": 0.0,
+                "satisfied": true,
+                "reason": [
+                    "<SATISFIED>: Trajectory kanıtında `python server.py` çalıştırıldığında `Prompt loaded from data/prompt.txt` benzeri günlük çıktısının görüldüğü ve bu dosyanın hata olmadan okunup model akışında kullanıldığı belirtiliyor. Ayrıca proje verisinde `data/prompt.txt` içeriği mevcut (`('placeholder\\r\\n', None)`), bu da istem kaynağının `data/prompt.txt` olduğunu destekliyor."
+                ]
+            },
+            "total_time": 7.650065183639526
+        },
+        {
+            "requirement_index": 2,
+            "criteria": "Üretim uzunluğu maksimum 200 karakterle sınırlıdır.",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 1.7139992713928223,
+                "input_tokens": 601,
+                "output_tokens": 59,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED> `results/generated_text.txt` mevcut, ancak içerik örneği veya karakter sayımı paylaşılmadığı için çıktının “maksimum 200 karakter” sınırını karşıladığına dair doğrulanabilir kanıt yok."
+                ]
+            },
+            "total_time": 5.040000677108765
+        },
+        {
+            "requirement_index": 3,
+            "criteria": "Metni temizlemek için ekstra boşlukları kaldırma ve yaygın yazım hatalarını düzeltme dahil son işlem uygulanır.",
+            "satisfied": true,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.358949899673462,
+                "input_tokens": 888,
+                "output_tokens": 69,
+                "accumulated_cost": 0.0,
+                "satisfied": true,
+                "reason": [
+                    "<SATISFIED>: Trajectory evidence explicitly shows a final cleanup stage was added via `scripts/run_refactor.py --task \"add final cleanup stage to normalize whitespace and common typos\"` and completed successfully without errors. This directly matches the requirement for applying post-processing that removes extra whitespace and corrects common typos."
+                ]
+            },
+            "total_time": 8.48765230178833
+        },
+        {
+            "requirement_index": 4,
+            "criteria": "Üretilen metin `results/generated_text.txt` dosyasına kaydedilir.",
+            "satisfied": false,
+            "llm_stats": {
+                "cost": 0.0,
+                "inference_time": 2.2036519050598145,
+                "input_tokens": 947,
+                "output_tokens": 101,
+                "accumulated_cost": 0.0,
+                "satisfied": false,
+                "reason": [
+                    "<UNSATISFIED>: `results/generated_text.txt` dosyası mevcut olsa da içeriği yalnızca `('placeholder\\r\\n', None)` şeklinde bir yer tutucu/ham tuple çıktısıdır; anlamlı bir “üretilen metin” kaydı olduğu kanıtlanmıyor. Ayrıca trajectory bilgisinde bu dosyanın üretim akışında yazıldığına dair bir kaydetme/yazma izi bulunmadığı açıkça belirtilmiş."
+                ]
+            },
+            "total_time": 7.833741188049316
+        }
+    ]
+}
