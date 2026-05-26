@@ -411,6 +411,8 @@ This work uses no human annotations and no personal data. The multilingual Agent
 
 Two scope concerns are worth surfacing. First, CBC calibrates the language-backbone interaction $\beta(\ell, b)$ only for languages observed in the calibration panel; languages outside the panel, including most low-resource languages, do not receive the benefit of calibration and may continue to receive systematically biased evaluations. Second, CBC corrects the interaction term but not a shared language-level shift $g(\ell)$ (Section~\ref{sec:framework}); if every evaluator backbone systematically under- or over-scores a particular language by the same amount, that shift remains. Treating CBC-aligned rankings as ground truth without an external anchor therefore risks entrenching shared bias rather than detecting it. Practitioners deploying CBC for fairness-sensitive decisions should combine it with a human-anchor check, such as the gold-preference comparison in Section~\ref{sec:experiments}.
 
+\bibliography{main}
+
 \appendix
 
 %==========================================================
@@ -698,9 +700,5 @@ We also explored a weighted variant of CBC that replaces the uniform backbone av
 \label{app:ds_em_note}
 
 We also tested a Dawid--Skene EM baseline \citep{dawid1979maximum} by binarizing requirement outcomes and treating each language-backbone pair as an annotator. On this benchmark it produced a highly unstable bootstrap summary ($\tau = 0.446$ with 95\% CI $[-0.042, 1.000]$), indicating that the binary latent-class model was a poor fit for our continuous score-matrix setting. Because this interval spans nearly the full range of possible outcomes, we do not treat Dawid--Skene EM as a useful main-table baseline here.
-
-
-%\bibliographystyle{plainnat}
-\bibliography{main}
 
 \end{document}
