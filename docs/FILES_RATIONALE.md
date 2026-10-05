@@ -13,7 +13,7 @@
 | `scripts/generate_aamas_figures.py`, replication/follow-up scripts | Current saved-data figure and analysis entry points. |
 | `agent_as_a_judge/languages.py`, `agent_as_a_judge/module/prompt/` | Original registry and localized prompt sources for inspection and optional embedding generation. No provider credentials are shipped. |
 | `docs/` | Current reproduction, scope, corrections, and general AI-assistance disclosures. |
-| `releases/` | Overleaf upload and compact reproducibility ZIPs. |
+| `scripts/build_supplementary_archive.py`, `docs/README_SUPPLEMENT.md` | Build a local supplementary ZIP outside the public checkout, with dedicated instructions and a SHA-256 inventory. Generated ZIPs are uploaded manually and are not tracked. |
 
 ## Historical data and optional collection
 
@@ -25,7 +25,12 @@ entry point now omits missing margins from weighted means and pair comparisons
 and uses the same `1e-9` gold-margin tolerance as the current audit. Its canonical
 summaries and anchor outputs are corrected; output metadata uses relative paths.
 
-The compact archive does not include full raw judgment/workspace trees, provider
+The compact archive excludes manuscript duplicates, compile assets, generated
+plots, packaging-only code, and unrelated information-theoretic/requirement-type
+outputs. It retains the statistical reference modules imported by the ranking
+runners, the original and corrected anchor samples for distinct audit purposes,
+and the available repeat-call metadata files, which contain different records.
+It does not include full raw judgment/workspace trees, provider
 responses, or collection credentials. Full parser/translation/workspace auditing
 requires original benchmark trees beyond the compact data. The embedding record
 supports aggregate checks; exact model/runtime and prompt-variant metadata are

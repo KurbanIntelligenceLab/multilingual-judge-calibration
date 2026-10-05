@@ -64,3 +64,13 @@ and duplicate root exports are not included. They are kept locally. The release
 is selected explicitly; the existing public raw data is retained. Metadata paths
 for newly published analysis outputs are repository-relative. Current instructions
 replace obsolete unfinished-experiment and accuracy-gain statements.
+
+## Supplementary package cleanup
+
+The public ZIP copies and releases directory were removed after the release.
+The manual-upload supplement is generated outside the checkout. It omits the
+separately submitted manuscript and compile assets, generated plots, packaging
+code, redundant project documentation, and two unrelated legacy analysis outputs.
+It retains the inputs and imported statistical code needed by the documented
+saved-score runners. Its dedicated README and SHA-256 manifest describe the
+package independently of the full repository.
