@@ -1,168 +1,112 @@
-# CBC Multilingual Judge Calibration
+# Language-Conditioned Rank Reversal in Agentic LLM Judges
 
-This repository is the standalone reproducibility package for the paper **"Rank Reversal in Multilingual LLM Judges: A Label-Free Double-Centering Calibrator."** It contains the manuscript source, the curated data needed for the second paper, and the minimal code required to reproduce the reported analyses.
+This repository accompanies the current AAMAS manuscript of this study. It
+contains the paper, saved judging scores, analysis code, and supporting records.
+The manuscript is a revision of the same preprint study, not a new experiment
+claimed to extend that preprint.
 
-## Repository layout
+The question is whether localized judging inputs change scores and quality gates
+when agent-produced code is held fixed. **Evaluator severity is not evaluator
+quality, and consistency improvement is not an accuracy gain.**
 
-```text
-cbc_multilingual_judge_calibration/
-├── README.md
-├── pyproject.toml
-├── requirements.txt
-├── paper/
-│   ├── main.tex
-│   ├── references.bib
-│   ├── acl.sty
-│   ├── acl_natbib.bst
-│   └── analysis/
-├── scripts/
-│   ├── run_internal_benchmark_analysis.py
-│   ├── run_external_mrewardbench_analysis.py
-│   ├── collect_mrewardbench_panel_scores.py
-│   └── render_paper_figures.py
-├── src/
-│   ├── languages.py
-│   ├── requirement_taxonomy.py
-│   └── llm/
-├── data/
-│   ├── internal_benchmark/
-│   │   └── judgments/
-│   └── external_validation/
-│       └── mrewardbench_panel/
-│           ├── collection_logs/
-│           └── analysis_1500_item/
-└── docs/
-    ├── FILES_RATIONALE.md
-    └── PROJECT_EXPLAINER.md
-```
+## Current paper and release
 
-## What is included
-
-The repository already ships everything needed to reproduce the paper without making new API calls:
-
-- the full internal eight-language judgment matrix used by CBC;
-- the canonical five-evaluator, seven-language M-RewardBench collection logs, trimmed to the first 1,500 items per language;
-- the saved internal and external analysis outputs used in the manuscript;
-- the paper source and bibliography.
-
-The external collection script is kept for completeness, but rerunning the paper does **not** require recollecting M-RewardBench scores.
+- [Paper PDF](paper/main.pdf): eight pages total, with the main sections through
+  Ethics ending on page seven; official AAMAS 2027 template, submission 1655.
+- [LaTeX source](paper/main.tex), [bibliography](paper/references.bib), and
+  [editable TikZ overview](paper/figures/fig_overview.tex).
+- [Overleaf upload](releases/aamas2027_overleaf_upload.zip).
+- [Compact reproducibility archive](releases/aamas2027_reproducibility.zip).
+- [Reproduction guide](docs/REPRODUCE.md) and [release audit](docs/RELEASE_AUDIT.md).
 
 ## Setup
 
-Use Python 3.11 or newer.
+Use Python 3.11 or newer. The saved-score analyses require no provider calls or GPU.
 
 ```bash
 python -m venv .venv
-.venv\Scripts\activate
-python -m pip install --upgrade pip
+# Linux/macOS: source .venv/bin/activate
+# Windows PowerShell: .venv/Scripts/Activate.ps1
 python -m pip install -r requirements.txt
-python -m pip install -e .
 ```
 
-## Reproduction workflow
+The core dependencies are pinned to the audited analysis versions. Optional
+collection dependencies are in the `collection` extra of `pyproject.toml`;
+embedding generation uses the `embeddings` extra and separately downloaded LaBSE
+weights. Neither is required to verify the current saved-score results.
 
-Run all commands from the repository root.
+## Reproduce the current results
 
-### 1. Internal benchmark analysis
+Run from the repository root, or the root of the extracted compact archive:
 
 ```bash
-python scripts/run_internal_benchmark_analysis.py
+python paper/code/analysis/verify_claims.py
+python paper/code/analysis/audit_mrewardbench_anchor.py
+python scripts/analyze_replication.py
+python scripts/analyze_panel_sensitivity.py
+python scripts/audit_localization_and_transforms.py --bounded-link-only
+python scripts/generate_aamas_figures.py
 ```
 
-This regenerates the main benchmark outputs in `paper/analysis/`, including:
-
-- `calibration_results.json`
-- `rank_reversal_delta.csv`
-- `beta_hat.csv`
-- `leave_one_language_out.json`
-- `decision_backbone_selection.json`
-
-### 2. External M-RewardBench analysis
+The verifier covers **90 listed numerical claims**, not every manuscript claim.
+Separate ranking runners recompute the Table 2 comparisons:
 
 ```bash
-python scripts/run_external_mrewardbench_analysis.py --max-items-per-language 1500
+python paper/code/analysis/recompute_devai_rankings.py
+python paper/code/analysis/recompute_preference_rankings.py
 ```
 
-This consumes the saved evaluator logs in `data/external_validation/mrewardbench_panel/collection_logs/` and rewrites the canonical external outputs in `data/external_validation/mrewardbench_panel/analysis_1500_item/`.
+Each ranking runner uses 1,000 task/item bootstrap replicates and may take a few
+minutes. For the PDF, use pdfLaTeX, BibTeX, then pdfLaTeX twice in `paper/`, or
+upload the Overleaf ZIP. No template dimensions have been modified.
 
-The most important external outputs are:
+## What the saved evidence shows
 
-- `raw_vs_cbc_summary.json`
-- `raw_vs_cbc_bootstrap_replicates.csv`
-- `xu_judge_aware_btl_matrix.csv`
-- `human_anchor_validation.json`
+- DevAI: 55 tasks x eight languages x six evaluators x three developer-agent
+  frameworks = 7,920 original judge runs, averaged to 2,640 task-level cells.
+- Seven of fifteen evaluator pairs reverse observed mean severity order. The
+  global residual-permutation test gives p = 0.001; it is not a separate
+  significance test for every selected witness pair.
+- Held-out cross-language ranking agreement: DevAI mean Kendall tau 0.650 to
+  0.902; the M-RewardBench preference subset 0.430 to 0.900 after CBC.
+- Gate-25 language spread: 27.9 to 16.4 percentage points on the fitted panel;
+  omitted-task mean reduction 8.7 points, 95% percentile interval [3.8,14.0].
+- The 1,440-call, ten-task MetaGPT repeat slice has mean SD 4.08 versus largest
+  interaction 20.61, ratio 0.20 under the recorded decision rule.
 
-### 3. Regenerate the paper figures
+### Correction to the previous accuracy claim
 
-```bash
-python scripts/render_paper_figures.py
-```
+The former preference-panel gold-agreement increase from 68.7% to 76.6% was a
+floating-point tie artifact. With a common absolute-margin tolerance of `1e-9`,
+the 700-instance sample has **68.7% agreement both before and after CBC**.
+The corrected audit is retained. CBC preserves the evaluator-panel mean exactly
+on a complete balanced panel; no human-accuracy gain is claimed.
 
-This refreshes the figure assets referenced by `paper/main.tex`, including:
+## Data and scope
 
-- `paper/analysis/beta_heatmap.png`
-- `paper/analysis/cbc_before_after.png`
-- `paper/analysis/external_cbc_before_after.png`
-- `paper/analysis/convergence_curve.png`
-- `paper/analysis/rank_reversal_strength.png`
+`paper/analysis/` contains the canonical saved scores, bootstrap records, and
+ablation summaries. `paper/analysis/aamas_2027/` contains the replication,
+structural/translation diagnostics, canonical 1,098-label human export, and
+separate preference panel. The preference subset uses the first 1,500 dataset
+IDs (805 alpacaeval-easy and 695 alpacaeval-hard) across seven languages and five
+evaluators; 35 of 52,500 margins are unavailable.
 
-### 4. Compile the paper
+The full repository also retains the original curated judgment JSONs and
+preference collection logs under `data/`. The compact archive includes the saved
+score matrices and necessary audit records, not the full raw workspaces or
+provider responses. Earlier EMNLP plotting/analysis outputs remain historical
+records; they are not the current paper's figure-generation workflow.
 
-If a LaTeX toolchain is available locally:
+Original provider snapshots, retry logs, and hardware metadata are incomplete.
+Saved-score recomputation is supported, not exact provider-level replay. Holding
+code fixed does not separate judge behavior from translation quality. The planned
+requirement-level human test is blocked by a schema mismatch and binary-only
+saved judgments. The complete-panel theorem does not establish general transfer
+to unseen languages or selectively missing data. See the manuscript's limitations.
 
-```bash
-cd paper
-latexmk -pdf main.tex
-```
+## Further documentation
 
-If `latexmk` is unavailable, standard BibTeX compilation also works:
-
-```bash
-cd paper
-pdflatex main.tex
-bibtex main
-pdflatex main.tex
-pdflatex main.tex
-```
-
-## Optional: recollect a new M-RewardBench panel
-
-The paper already includes saved collection logs. This step is only needed if you want to rebuild the panel from the public benchmark instances.
-
-1. Copy `.env.example` to `.env`.
-2. Set `OPENAI_API_KEY` and `OPENAI_BASE_URL`.
-
-Example command for one evaluator:
-
-```bash
-python scripts/collect_mrewardbench_panel_scores.py ^
-  --models openrouter/openai/gpt-4o-2024-08-06 ^
-  --languages eng_Latn arb_Arab tur_Latn zho_Hans hin_Deva jpn_Jpan spa_Latn ^
-  --max-items 1500 ^
-  --output-dir data/external_validation/mrewardbench_panel/collection_logs/gpt4o_2024_08_06 ^
-  --output-stem run ^
-  --resume
-```
-
-Each collection run writes:
-
-- `<output-stem>_raw_scores.jsonl`
-- `<output-stem>_pair_margins.csv`
-- `<output-stem>_metadata.json`
-
-After collecting all evaluators, rerun:
-
-```bash
-python scripts/run_external_mrewardbench_analysis.py --max-items-per-language 1500
-```
-
-## Data provenance
-
-- The internal benchmark data comes from the multilingual Agent-as-a-Judge benchmark plus the three-language extension used in the paper.
-- The external task instances come from the public M-RewardBench release.
-- The evaluator-by-language matrices in this repository are derived from self-collected model outputs and are retained under `data/external_validation/mrewardbench_panel/`.
-
-## Additional documentation
-
-- `docs/FILES_RATIONALE.md` explains why each file group is included.
-- `docs/PROJECT_EXPLAINER.md` gives a short plain-language overview of the method and experiments.
+- [Project explainer](docs/PROJECT_EXPLAINER.md)
+- [Included-file rationale](docs/FILES_RATIONALE.md)
+- [AI assistance](docs/AI_ASSISTANCE.md)
+- [License](LICENSE)

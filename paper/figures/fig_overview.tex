@@ -1,0 +1,121 @@
+% Figure: study overview. Every number is reported in the body:
+% GPT-4o minus GPT-5.4 gap (Table rev), the GPT-4o Spanish cell (Sec. 5.1),
+% held-out Kendall tau (Table ranking), held-out gate-25 reduction (Sec. 5.4).
+\begin{tikzpicture}[
+  x=1cm, y=1cm, font=\footnotesize,
+  num/.style={circle, fill=#1, text=white, font=\scriptsize\bfseries,
+              inner sep=0pt, minimum size=3.6mm},
+  ttl/.style={font=\footnotesize\bfseries, anchor=west, text=black!85},
+  card/.style={draw=#1!55, fill=#1!7, rounded corners=2pt, line width=0.5pt,
+               align=center, inner sep=2.5pt, minimum width=3.55cm},
+  note/.style={font=\scriptsize, text=black!75, align=center},
+  flow/.style={-{Latex[length=2mm,width=1.6mm]}, line width=0.8pt, draw=black!60},
+  bar/.style={draw=none, fill=#1},
+  lab/.style={font=\scriptsize, text=black!80},
+]
+\def\pw{4.05}
+\def\pg{0.45}
+% Shared baselines keep diagrams and explanatory rows aligned across panels.
+\def\ovGraphTop{2.60}
+\def\ovGraphBottom{1.72}
+\def\ovGraphCenter{2.16}
+\def\ovResultY{0.88}
+\def\ovDetailY{0.50}
+\def\ovFooterY{0.16}
+
+% Panel frame: number badge, title, colored rule.
+\newcommand{\ovpanel}[4]{%
+  \node[num=#4] at ({#1+0.2},3.45) {#2};
+  \node[ttl] at ({#1+0.38},3.45) {#3};
+  \draw[#4, line width=1pt] (#1,3.13) -- ({#1+\pw},3.13);
+}
+
+\pgfmathsetmacro{\xa}{0}
+\pgfmathsetmacro{\xb}{\pw+\pg}
+\pgfmathsetmacro{\xc}{2*(\pw+\pg)}
+\pgfmathsetmacro{\xd}{3*(\pw+\pg)}
+
+\ovpanel{\xa}{1}{Controlled panel}{oiBlue}
+\ovpanel{\xb}{2}{Severity reversal}{oiVermil}
+\ovpanel{\xc}{3}{Label-free correction}{oiGreen}
+\ovpanel{\xd}{4}{Held-out checks}{oiPurple}
+
+\foreach \s/\e in {\xa/\xb, \xb/\xc, \xc/\xd}
+  \draw[flow] ({\s+\pw+0.07},\ovGraphCenter) -- ({\e-0.07},\ovGraphCenter);
+
+% ---------------- 1. controlled panel ----------------
+\begin{scope}[shift={(\xa,0)}]
+  \node[card=oiBlue] at (\pw/2,2.70)
+    {\textbf{Code held fixed}\\[-1pt]{\scriptsize SHA-256-identical workspaces}};
+  \node[font=\small\bfseries, text=black!75] at (\pw/2,\ovGraphCenter) {+};
+  \node[card=black] at (\pw/2,1.62)
+    {\textbf{Judging inputs localized}\\[-1pt]{\scriptsize requirements, rubric, instructions}};
+  \node[anchor=base] at (\pw/2,\ovResultY) {\textbf{8 languages $\times$ 6 evaluators}};
+  \node[lab, anchor=base] at (\pw/2,\ovDetailY) {55 DevAI tasks};
+  \node[note, anchor=base] at (\pw/2,\ovFooterY) {3 developer-agent frameworks};
+\end{scope}
+
+% ---------------- 2. severity reversal ----------------
+\begin{scope}[shift={(\xb,0)}]
+  \pgfmathsetmacro{\zx}{1.8}       % zero line
+  \pgfmathsetmacro{\u}{2.0/35.6}   % cm per score point
+  \node[note] at (\pw/2,2.88) {mean score gap, GPT-4o minus GPT-5.4};
+  \fill[oiBlue]    (\zx,2.30) rectangle ({\zx+35.6*\u},2.60);
+  \fill[oiVermil]  ({\zx-11.2*\u},1.72) rectangle (\zx,2.02);
+  \draw[black!70, line width=0.5pt] (\zx,1.60) -- (\zx,2.72);
+  \node[lab] at (\zx,1.47) {$0$};
+  \node[lab, anchor=west] at (0.08,2.45) {English};
+  \node[lab, anchor=west, text=white, font=\scriptsize\bfseries] at ({\zx+0.05},2.45) {$+35.6$};
+  \node[lab, anchor=west] at (0.08,1.87) {Spanish};
+  \node[lab, anchor=west] at ({\zx+0.06},1.87) {$-11.2$};
+  \node[anchor=base] at (\pw/2,\ovResultY) {\textbf{The severity order flips}};
+  \node[lab, anchor=base] at (\pw/2,\ovDetailY) {7 of 15 evaluator pairs reverse};
+  \node[note, anchor=base] at (\pw/2,\ovFooterY) {higher score means more lenient};
+\end{scope}
+
+% ---------------- 3. label-free correction ----------------
+\begin{scope}[shift={(\xc,0)}]
+  \def\cw{0.24}
+  \pgfmathsetmacro{\ch}{(\ovGraphTop-\ovGraphBottom)/8}
+  \pgfmathsetmacro{\gx}{0.36}
+  \pgfmathsetmacro{\gy}{\ovGraphBottom}
+  \foreach \r in {0,...,7}
+    \foreach \c in {0,...,5}
+      \draw[black!45, line width=0.3pt, fill=white]
+        ({\gx+\c*\cw},{\gy+\r*\ch}) rectangle ++(\cw,\ch);
+  % GPT-4o column, Spanish row
+  \fill[oiVermil!70] ({\gx},{\gy+1*\ch}) rectangle ++(\cw,\ch);
+  \node[font=\tiny, text=black!75, rotate=90] at ({\gx-0.15},{\gy+4*\ch}) {language};
+  \node[font=\tiny, text=black!75] at ({\gx+3*\cw},{\ovGraphTop+0.13}) {evaluator};
+  \node[lab] at ({\gx+3*\cw},1.47) {task means $\bar S_{\ell b}$};
+  \draw[-{Latex[length=1.4mm]}, black!75, line width=0.5pt]
+    ({\gx+6*\cw+0.1},{\gy+4*\ch}) -- ++(0.35,0);
+  \node[align=left, anchor=west, font=\scriptsize] at ({\gx+6*\cw+0.48},{\gy+4*\ch})
+    {double-center\\[-1pt]to get $\hat\beta_{\ell b}$};
+  \node[anchor=base] at (\pw/2,\ovResultY)
+    {$\widetilde S_{t\ell b}=S_{t\ell b}-\hat\beta_{\ell b}$};
+  \node[lab, align=center, anchor=base] at (\pw/2,\ovDetailY)
+    {\resizebox{\pw cm}{!}{GPT-4o--Spanish interaction: $-20.6$ score points}};
+  \node[note, anchor=base] at (\pw/2,\ovFooterY) {no human labels $\cdot$ panel mean unchanged};
+\end{scope}
+
+% ---------------- 4. held-out checks ----------------
+\begin{scope}[shift={(\xd,0)}]
+  \pgfmathsetmacro{\zx}{0.72}
+  \pgfmathsetmacro{\u}{2.9}        % cm per unit tau
+  \node[note] at (\pw/2,2.88) {Mean held-out Kendall $\tau$ (DevAI)};
+  \fill[black!28]  (\zx,2.30) rectangle ({\zx+0.650*\u},2.60);
+  \fill[oiPurple]  (\zx,1.72) rectangle ({\zx+0.902*\u},2.02);
+  \draw[black!70, line width=0.5pt] (\zx,1.60) -- (\zx,2.72);
+  \node[lab] at (\zx,1.47) {$0$};
+  \node[lab, anchor=east] at ({\zx-0.06},2.45) {raw};
+  \node[lab, anchor=east] at ({\zx-0.06},1.87) {CBC};
+  \node[lab, anchor=east] at ({\zx+0.650*\u-0.04},2.45) {$0.650$};
+  \node[lab, anchor=east, text=white, font=\scriptsize\bfseries]
+    at ({\zx+0.902*\u-0.04},1.87) {$0.902$};
+  \node[anchor=base] at (\pw/2,\ovResultY) {\textbf{More consistent across languages}};
+  \node[lab, align=center, anchor=base] at (\pw/2,\ovDetailY)
+    {\resizebox{\pw cm}{!}{Gate-25 spread reduction: 8.7 percentage points}};
+  \node[note, anchor=base] at (\pw/2,\ovFooterY) {consistency, not accuracy};
+\end{scope}
+\end{tikzpicture}

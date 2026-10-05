@@ -1,3 +1,7 @@
+"""Legacy EMNLP plot entry point. For AAMAS use generate_aamas_figures.py.
+
+These plots are retained for historical analysis and are not current paper figures.
+"""
 from __future__ import annotations
 
 import json

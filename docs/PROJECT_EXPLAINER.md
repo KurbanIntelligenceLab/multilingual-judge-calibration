@@ -1,126 +1,73 @@
-# Project Explainer
+# Project explainer
 
-This repository accompanies the paper **"Rank Reversal in Multilingual LLM Judges: A Label-Free Double-Centering Calibrator."** It provides the paper source, the retained data artifacts, and the code needed to reproduce the main results.
+The paper asks how localized judging inputs affect an agentic code evaluator when
+the code is identical. A score can control a quality gate; language-conditioned
+score changes can change whether the same artifact passes.
 
-## What the paper studies
+## Severity and quality
 
-The paper asks whether multilingual LLM judges behave consistently across prompt languages.
+Greater satisfaction scores mean greater evaluator leniency. They do not imply
+better judging. A severity rank reversal means two evaluators change order in
+their mean scores across languages. Seven of fifteen pairs exhibit such a
+reversal; p = 0.001 is a global reversal-count diagnostic, not seven pairwise tests.
 
-The motivating observation is that evaluator rankings can change with language. A backbone that looks strongest in one language may no longer be strongest in another. That makes multilingual evaluation unstable and can weaken claims about a universally best evaluator.
+## Model and correction
 
-## What rank reversal means
+The score model is
 
-Rank reversal means that two evaluator backbones change order across languages.
+```
+S(t,l,b) = mu(t) + alpha(b) + g(l) + beta(l,b) + gamma(t,l) + epsilon(t,l,b)
+```
 
-For example, one backbone may outrank another in English, while the ordering flips in Arabic or Spanish. This is the empirical signal that motivates the paper: if such reversals occur, multilingual judge comparisons are not language-neutral.
+Here mu is a task effect, alpha evaluator severity, g the language shift shared
+across evaluators, beta the language-by-evaluator interaction, and gamma a
+task-language shift shared by evaluators. Under the stated complete balanced
+model and mean-zero assumptions, standard two-way ANOVA double centering
+identifies the normalized interaction:
 
-## Main idea
+```
+beta_hat(l,b) = mean(l,b) - mean(all,b) - mean(l,all) + grand_mean
+corrected_score = score - beta_hat(l,b)
+```
 
-The paper models judge scores as:
+CBC does not require human labels to estimate the interaction. It leaves the
+shared language shift intact. It preserves the mean over the complete evaluator
+pool for each task-language instance. The paper states a conservative task-level
+Hoeffding bound that permits within-task dependence but requires independent tasks.
+Linear corrected scores are not clipped; clipping would break the invariance.
 
-$$
-S(t,\ell,b) = \mu(t) + \alpha(b) + \beta(\ell,b) + \gamma(t,\ell) + \epsilon
-$$
+## Evidence
 
-where:
+DevAI contains 55 tasks, eight languages, six evaluator backbones, and three
+developer-agent framework arms (MetaGPT, GPT-Pilot, OpenHands). The same code is
+used across language conditions. The backbones are GPT-4o, GPT-5.4, Claude Sonnet
+4.6, Gemini 3 Flash Preview, DeepSeek-V3.2, and Qwen3.5-9B. Provider snapshots for
+the original panel were not retained.
 
-- $\mu(t)$ is task difficulty;
-- $\alpha(b)$ is overall evaluator strength;
-- $\beta(\ell,b)$ is the language-backbone interaction term;
-- $\gamma(t,\ell)$ is a task-language effect shared across backbones;
-- $\epsilon$ is residual noise.
+On omitted tasks, mean cross-language Kendall tau rises from 0.650 to 0.902.
+Mean gate-25 language spread falls from 27.9 to 16.4 percentage points on the
+fitted panel; the omitted-task mean reduction is 8.7 points [3.8,14.0]. These are
+consistency results, not accuracy tests. Peak effects depend substantially on
+GPT-4o; residual effects remain without it.
 
-The key quantity is $\beta(\ell,b)$. It captures whether a specific evaluator backbone behaves unusually high or low in a specific language.
+A separately collected M-RewardBench subset has 1,500 aligned items, seven
+languages, five evaluators, and 35 missing margins. Its held-out ranking agreement
+rises from 0.430 to 0.900. Its former 68.7% to 76.6% human-agreement gain was a
+numerical tie artifact. Corrected agreement is 68.7% under both methods.
 
-## What CBC does
+The repeat-call slice has 1,440 calls on ten MetaGPT tasks. Its mean SD 4.08 is
+smaller than the largest interaction 20.61 under the preset ratio rule. This
+does not establish stability for every task, framework, provider version, or time.
 
-CBC stands for **Consensus-Based Calibration**.
+## Limits
 
-It estimates the interaction term $\beta(\ell,b)$ from the observed language-by-backbone score matrix using double centering, then subtracts that estimated interaction from the scores.
+Translation quality remains mixed with evaluator behavior. The planned human
+requirement-level test is unsupported by a schema mismatch and binary-only
+saved verdicts. A coarser task-score comparison remains untested. The theorem's
+balanced-panel assumptions do not establish incomplete-panel identification or
+unseen-language transfer. Existing matrices support recomputation; original
+provider state and exact LaBSE embedding replay are not fully preserved.
 
-In practical terms, CBC:
-
-1. averages scores over tasks;
-2. estimates language-backbone interaction bias;
-3. subtracts that bias;
-4. compares rankings before and after calibration.
-
-CBC is label-free for calibration: it does not require human annotations to estimate the interaction term.
-
-## What CBC does not do
-
-CBC removes the language-backbone interaction term only.
-
-It does **not** remove a language-wide bias shared by all backbones equally. Correcting that kind of shared shift would require an external anchor such as human judgments or a trusted reference evaluator.
-
-## Experimental settings
-
-### Internal benchmark
-
-- 8 languages
-- 6 evaluator backbones
-- 55 tasks
-- 3 judge frameworks
-
-This benchmark is used for the main rank-reversal analysis, CBC evaluation, leave-one-language-out diagnostics, ablations, and decision-level evaluation.
-
-### External M-RewardBench panel
-
-- 7 languages
-- 5 evaluator backbones
-- 1,500 aligned items per language
-
-The public benchmark provides the multilingual instances and gold preferences. The evaluator score matrix was collected separately and is retained in this repository.
-
-## Main results
-
-On the internal benchmark:
-
-- raw mean pairwise Kendall $\tau$ is `0.650`;
-- CBC raises it to `0.902`;
-- 7 of 15 backbone pairs show significant rank reversal.
-
-On the external M-RewardBench panel:
-
-- raw mean pairwise Kendall $\tau$ is `0.430`;
-- CBC raises it to `0.900`;
-- agreement with public gold preferences improves from `68.7%` to `76.6%`.
-
-The paper also compares CBC with post-hoc baselines including quantile normalization, ComBat-style correction, and an adapted judge-aware Bradley-Terry-Luce baseline.
-
-## Scope and limitations
-
-The repository and paper focus on calibration for **observed** language-backbone cells in a shared evaluation panel.
-
-Important scope boundaries are:
-
-- CBC targets the interaction term $\beta(\ell,b)$, not every possible source of multilingual bias;
-- shared language-wide bias across all backbones is not identifiable by double centering alone;
-- the main guarantees apply to the observed panel rather than to arbitrary unseen languages;
-- the external M-RewardBench setting uses public task instances but self-collected evaluator scores.
-
-## Repository contents
-
-The repository keeps only the assets needed for this paper:
-
-- `paper/` for the manuscript and retained analysis artifacts;
-- `scripts/` for the internal analysis, external analysis, collection, and figure-generation entry points;
-- `src/` for the minimal helper modules used by those scripts;
-- `data/internal_benchmark/` for the internal judgment JSON files;
-- `data/external_validation/mrewardbench_panel/` for the retained external logs and canonical 1,500-item external analysis outputs.
-
-## Most useful files
-
-For the shortest path to the main quantitative results, start with:
-
-- `paper/analysis/calibration_results.json`
-- `paper/analysis/rank_reversal_delta.csv`
-- `paper/analysis/beta_hat.csv`
-- `data/external_validation/mrewardbench_panel/analysis_1500_item/raw_vs_cbc_summary.json`
-- `data/external_validation/mrewardbench_panel/analysis_1500_item/human_anchor_validation.json`
-
-## Takeaway
-
-The main message of the paper is:
-
-> multilingual judge disagreement is not just noise; a meaningful part of it can be modeled as a language-backbone interaction, and that interaction can be estimated and removed with a simple label-free post-hoc calibrator.
+Start with [the paper](../paper/main.pdf), [reproduction instructions](REPRODUCE.md),
+and [the release audit](RELEASE_AUDIT.md). The repository contains this same
+preprint study's current manuscript revision.

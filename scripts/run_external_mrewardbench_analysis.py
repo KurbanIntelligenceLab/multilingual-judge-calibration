@@ -105,7 +105,9 @@ def build_score_matrix(
     backbones: list[str],
     task_weights: dict[str, int] | None = None,
 ) -> pd.DataFrame:
-    matrix_df = task_df.copy()
+    # Missing margins are unavailable observations, not zero-valued scores.
+    # Drop them before both the weighted numerator and its denominator.
+    matrix_df = task_df[np.isfinite(task_df["score"])].copy()
     if task_weights is None:
         grouped = matrix_df.groupby(["language", "backbone"], as_index=False)["score"].mean()
     else:
@@ -123,7 +125,7 @@ def build_score_matrix(
         columns=backbones,
     )
     if matrix.isna().any().any():
-        raise ValueError("Score matrix contains missing values after complete-case filtering.")
+        raise ValueError("Some language/evaluator mean scores have no observed margins after aligned-item filtering.")
     return matrix
 
 
@@ -156,6 +158,8 @@ def build_pairwise_evaluator_comparisons(
             for left, right in combinations(backbones, 2):
                 left_score = score_map[str(left)]
                 right_score = score_map[str(right)]
+                if not (np.isfinite(left_score) and np.isfinite(right_score)):
+                    continue
                 if left_score > right_score:
                     outcome = 1.0
                 elif left_score < right_score:
@@ -439,8 +443,8 @@ def run_human_anchor_validation(
             )
 
     sampled_df = pd.concat(sampled_parts, ignore_index=True)
-    sampled_df["raw_correct"] = (sampled_df["raw_margin"] > 0.0).astype(float)
-    sampled_df["cbc_correct"] = (sampled_df["cbc_margin"] > 0.0).astype(float)
+    sampled_df["raw_correct"] = (sampled_df["raw_margin"] > 1e-9).astype(float)
+    sampled_df["cbc_correct"] = (sampled_df["cbc_margin"] > 1e-9).astype(float)
 
     bootstrap_rng = np.random.default_rng(seed + 1)
     raw_rates: list[float] = []
@@ -466,7 +470,7 @@ def run_human_anchor_validation(
             "sampling": "stratified_without_replacement_by_subset_within_language",
             "bootstrap_reps": int(bootstrap_reps),
             "seed": int(seed),
-            "tie_handling": "mean_panel_margin <= 0 counted as non-agreement",
+            "tie_handling": "mean_panel_margin <= 1e-9 counted as non-agreement; common absolute tie tolerance 1e-9",
         },
         "sampling_allocation": allocation_rows,
         "overall": {
@@ -490,6 +494,13 @@ def run_human_anchor_validation(
         ],
     }
     return sampled_df, payload
+
+
+def portable_output_path(path: Path) -> str:
+    try:
+        return path.resolve().relative_to(ROOT.resolve()).as_posix()
+    except ValueError:
+        return path.name
 
 
 def main() -> None:
@@ -548,7 +559,10 @@ def main() -> None:
         "full_panel": {
             "languages": languages,
             "backbones": backbones,
-            "n_complete_tasks": int(task_df["task"].nunique()),
+            "n_complete_tasks": int(task_df["task"].nunique()),  # historical aligned-row field
+            "n_aligned_items": int(task_df["task"].nunique()),
+            "observed_margins": int(task_df["score"].notna().sum()),
+            "missing_margins": int(task_df["score"].isna().sum()),
             "raw_tau_full_panel": mean_pairwise_kendall_tau(full_raw_matrix),
             "cbc_tau_full_panel": mean_pairwise_kendall_tau(full_cbc_matrix),
             "xu_tau_full_panel": mean_pairwise_kendall_tau(full_xu_matrix),
@@ -558,14 +572,14 @@ def main() -> None:
             "xu_judge_weights": xu_judge_weights,
         },
         "outputs": {
-            "complete_panel_csv": str(merged_path),
-            "raw_mean_matrix_csv": str(raw_matrix_path),
-            "beta_hat_csv": str(beta_path),
-            "cbc_mean_matrix_csv": str(cbc_matrix_path),
-            "xu_matrix_csv": str(xu_matrix_path),
-            "replicates_csv": str(replicate_path),
-            "human_anchor_sample_csv": str(anchor_sample_path),
-            "human_anchor_validation_json": str(anchor_summary_path),
+            "complete_panel_csv": portable_output_path(merged_path),
+            "raw_mean_matrix_csv": portable_output_path(raw_matrix_path),
+            "beta_hat_csv": portable_output_path(beta_path),
+            "cbc_mean_matrix_csv": portable_output_path(cbc_matrix_path),
+            "xu_matrix_csv": portable_output_path(xu_matrix_path),
+            "replicates_csv": portable_output_path(replicate_path),
+            "human_anchor_sample_csv": portable_output_path(anchor_sample_path),
+            "human_anchor_validation_json": portable_output_path(anchor_summary_path),
         },
     }
     summary_path.write_text(json.dumps(summary_payload, indent=2), encoding="utf-8")
