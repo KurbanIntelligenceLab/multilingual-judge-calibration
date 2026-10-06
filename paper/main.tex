@@ -61,7 +61,7 @@ and quality-gate decisions more consistent across languages. A separate
 preference benchmark shows a similar ranking pattern. Consistency is not
 accuracy: the correction leaves a language's evaluator-panel mean
 unchanged, and this study does not establish a gain in judging correctness
-against the code-benchmark labels.
+against the code-benchmark labels. Code is available at https://anonymous.4open.science/r/multilingual-judge-calibration-2663/
 \end{abstract}
 \keywords{Agent-as-a-Judge, multilingual evaluation, LLM evaluation, calibration, language bias}
 \begin{CCSXML}
@@ -96,7 +96,10 @@ against the code-benchmark labels.
 Agentic systems increasingly use language models to assess other agents.
 Agent-as-a-Judge pipelines compare an agent's artifacts with written
 requirements \citep{zhuge2024agentjudge}. Their scores
-can decide whether a task passes a quality gate. If the score changes with
+can decide whether a task passes a quality gate. Such evaluators therefore become part of the agent-evaluation
+infrastructure: their behavior can directly affect how agent performance
+is measured and which artifacts are accepted.
+If the score changes with
 the language of the rubric, the same artifact may receive a different
 decision.
 
@@ -119,13 +122,25 @@ evaluators and an interaction between language and evaluator. We then ask
 whether that interaction changes quality-gate decisions and whether it is
 larger than variation between repeat judge calls.
 
-We study whether evaluator severity reverses across languages, how to
-estimate the language-by-evaluator interaction, and what removing it does
-to both evaluator rankings and task-level decisions. We combine a fixed-code
-audit, formal properties of double centering, held-out analyses on two
-benchmarks, and a repeat-call study. We also examine what the
-available human labels can and cannot establish about correctness.
-Figure~\ref{fig:overview} summarizes the study design and analysis.
+% We study whether evaluator severity reverses across languages, how to
+% estimate the language-by-evaluator interaction, and what removing it does
+% to both evaluator rankings and task-level decisions. We combine a fixed-code
+% audit, formal properties of double centering, held-out analyses on two
+% benchmarks, and a repeat-call study. We also examine what the
+% available human labels can and cannot establish about correctness.
+% Figure~\ref{fig:overview} summarizes the study design and analysis.
+
+We make three contributions. First, a fixed-artifact audit shows that
+evaluator severity can reverse across languages even when the judged code
+is byte-identical, with direct consequences for quality-gate decisions.
+Second, we isolate the language-by-evaluator interaction through a
+label-free double-centering correction and give conditions for its
+identification and concentration. Third, held-out analyses on DevAI and a
+separate preference panel test whether the estimated interaction persists
+beyond the fitting tasks, while repeat-call experiments distinguish its
+largest effects from ordinary judge variability. We also state explicitly
+what the available human labels can and cannot establish about judging
+accuracy. Figure~\ref{fig:overview} summarizes the study design and analysis.
 
 \begin{figure*}[t]
 \centering
@@ -203,18 +218,22 @@ language-by-evaluator interaction. It requires a balanced panel for the
 stated identification result and leaves the shared language shift intact.
 
 \paragraph{Agentic code judging.}
-Agent-as-a-Judge supplies requirement-level evaluation of agent-produced
-artifacts and the DevAI benchmark \citep{zhuge2024agentjudge}. The earlier
-five-language localization study finds language and backbone sensitivity
-in this setting \citep{mahmood2026multilingualpromptlocalizationagentasajudge}.
+Agent-as-a-Judge provides requirement-level evaluation of agent-produced
+artifacts and the DevAI benchmark \citep{zhuge2024agentjudge}. An earlier
+five-language localization study established that judge scores vary with
+language and evaluator backbone in this setting
+\citep{mahmood2026multilingualpromptlocalizationagentasajudge}. The current
+study addresses a different question: whether the language-by-evaluator
+interaction can be identified from a balanced judge panel and whether
+removing it stabilizes evaluator severity rankings and downstream quality
+gates. The analysis covers eight languages, derives formal properties of
+the interaction estimate, and evaluates the correction on held-out tasks.
 Automated validation of software-artifact evaluators provides a complementary
-way to test a judge \citep{fandina2025refine}.
-We audit byte-identical code across localized judging conditions and study
-whether interaction correction stabilizes evaluator severity rankings and
-quality gates. A separate M-RewardBench preference panel
-\citep{gureja-etal-2025-rewardbench} checks ranking consistency on a different
-benchmark subset and collection protocol. Neither check establishes that
-the corrected code judgments are more accurate.
+approach to testing judge reliability \citep{fandina2025refine}. A separate
+M-RewardBench preference panel \citep{gureja-etal-2025-rewardbench} tests
+whether the ranking-consistency pattern also appears under a different
+benchmark and collection protocol. Neither analysis establishes that the
+corrected judgments are more accurate.
 
 %=====================================================================
 \section{Score Model and Fixed Artifacts}
@@ -309,7 +328,9 @@ over that index. We estimate the interaction and adjust scores by
 \widetilde S_{t\ell b}=S_{t\ell b}-\hat\beta_{\ell b}.
 \label{eq:cbc}
 \end{equation}
-We call this consensus-based calibration (CBC). Double centering is a
+We call this consensus-based calibration (CBC). Here, calibration
+refers to removing panel-relative language-by-evaluator offsets, not
+calibration to human correctness. Double centering is a
 standard two-way ANOVA operation, not a new estimator
 \citep{scheffe1959analysis,searle1971linear}. Its target is relative to
 the evaluator pool and benchmark. Adjusted scores are not clipped to
@@ -323,10 +344,21 @@ task-language effect $\gamma(t,\ell)$ shared by evaluators. Moreover,
 $m^{-1}\sum_b\widetilde S_{t\ell b}
 =m^{-1}\sum_b S(t,\ell,b)$ for every task and language.
 \end{proposition}
-\noindent\emph{Proof.} The four terms of Eq.~\ref{eq:cbc} cancel
-$\mu,\alpha,g,\gamma$ and leave the normalized $\beta$ plus mean-zero
-error. The row sum of $\hat\beta$ is zero by construction, proving the
-second identity.\hfill$\square$
+\noindent\emph{Proof.} 
+% The four terms of Eq.~\ref{eq:cbc} cancel $\mu,\alpha,g,\gamma$ and leave the normalized $\beta$ plus mean-zero
+% error. The row sum of $\hat\beta$ is zero by construction, proving the
+% second identity.\hfill$\square$
+Taking expectations in Eq.~\ref{eq:cbc}, the task effect $\mu(t)$ and the
+task-language term $\gamma(t,\ell)$ vanish when averaging over
+tasks, while the evaluator effect $\alpha(b)$, the shared language
+shift $g(\ell)$, and the corresponding grand means cancel under
+double centering. Under the stated zero-sum normalization of
+$\beta$, the remaining deterministic term is therefore
+$\beta_{\ell b}$, so $\mathbb{E}[\hat{\beta}_{\ell b}]
+=\beta_{\ell b}$. The second identity follows because
+$\sum_b \hat{\beta}_{\ell b}=0$ by construction, so subtracting
+$\hat{\beta}_{\ell b}$ does not change the evaluator-panel mean for
+any fixed task and language.\hfill$\square$
 
 The identity means CBC cannot change a decision based on the mean score
 of all evaluators for one item. It can change an individual evaluator's
@@ -351,7 +383,8 @@ absolute negative coefficients. It lies in $[-200c,200c]$.
 Hoeffding's inequality across independent tasks and a union bound
 give the result.\hfill$\square$
 
-This bound is deliberately conservative. A Gaussian bound with independent
+This bound is deliberately conservative. Its main role is to establish concentration toward the model target as the number of independent tasks grows, rather than to provide a tight finite-sample confidence interval for this panel.
+A Gaussian bound with independent
 language-evaluator cell noise would be tighter, but
 the same artifact is judged in every condition, making that assumption
 implausible. We therefore use a task bootstrap for empirical intervals.
@@ -434,9 +467,15 @@ for each evaluator and language.}
 \subsection{Held-out ranking consistency}
 \label{sec:ranking}
 We evaluate CBC on tasks omitted from each of 1{,}000 bootstrap fitting
-samples, while all eight languages remain observed. The metric is mean
+samples, while all eight languages remain observed. The reported
+percentile intervals are computed across these task-bootstrap fits and their corresponding omitted-task evaluations. The metric is mean
 pairwise Kendall $\tau$ between language-specific evaluator
-\emph{severity} rankings, over all 28 language pairs. On DevAI, it rises
+\emph{severity} rankings, over all 28 language pairs. Cross-language agreement is a target-aligned diagnostic: CBC is designed
+to remove stable language-by-evaluator offsets. The held-out analysis
+tests whether those offsets persist across omitted tasks rather than only
+describing the fitting sample; it does not establish that the removed
+variation is erroneous.
+On DevAI, it rises
 from $0.650$ to $0.902$ (Table~\ref{tab:ranking}). A language-wide
 empirical-Bayes location/scale adjustment adapted from ComBat
 \citep{johnson2007combat} gives nearly the same agreement as raw scoring
@@ -502,7 +541,7 @@ It does not establish transfer to unseen languages.
 We fit Eq.~\ref{eq:model} to all 7{,}920 framework-level observations
 with framework fixed effects. A simplified version without
 $\gamma(t,\ell)$ has $R^2=0.691$; including task-language terms gives
-$R^2=0.705$. The small $0.015$ increase supports using a compact
+$R^2=0.705$. The modest $0.015$ increase supports using a compact
 description of the panel, but the remaining unexplained variation
 warns against treating the interaction as a complete causal account.
 
@@ -674,7 +713,7 @@ Of 52{,}560 requirement judgments, 4.6\% lack a parseable tag or are empty, and
 requirements and 67\% of its Swahili ones. The released parser scores those
 empty strings unsatisfied. Excluding Qwen3.5-9B, the noncompliance rate is 0.12\%,
 and GPT-4o's Spanish missing-tag rate is 0.5\%, so missing tags do not
-explain the 20.6-point cell.
+explain the 20.6-point cell. We retain Qwen3.5-9B in the primary panel because parser-visible failures are part of the observed behavior of the evaluator under the released judging protocol, but we report reduced-panel analyses because its near-degenerate score distribution can distort scale-sensitive results.
 
 Because four of the seven reversals involve GPT-4o, we repeat the analysis
 without it. Among the five remaining evaluators, the largest interaction is
@@ -727,7 +766,8 @@ the original panel. The manifest seed is recorded and is not sent to the
 provider. The decision rule was fixed before the reruns: retain the magnitude
 claim only if the test--retest standard deviation $s$, averaged over tasks,
 languages, and evaluators, is below one quarter of the largest interaction
-$B$. Otherwise the claim is qualified or withdrawn as specified in the
+$B$. The one-quarter threshold is a practical effect-separation criterion: it requires the largest observed interaction to exceed average test-retest variation by at least a factor of four.
+Otherwise the claim is qualified or withdrawn as specified in the
 analysis script.
 
 The 1{,}440 calls completed. We compute a sample standard deviation across
@@ -844,11 +884,11 @@ implementation used here is version 0.1.5. The original panel's hardware and
 provider snapshot metadata were not preserved, so those analyses can be
 recomputed from the saved matrices but not rerun from the original provider
 state. The new reruns include model routes and decoding metadata.
-AI-assisted tools were used to edit wording and draft analysis and figure
-code. The resulting text, calculations, diagrams, and citations were checked against
-the saved records and cited sources. The authors remain responsible for the
-methods and claims. Further disclosure and available prompts are provided
-with the supplementary material, alongside scripts, score matrices, and
+AI-assisted tools were used for wording edits and to assist with
+implementation of analysis and figure-generation code. The statistical
+design, methodology, calculations, and resulting claims were specified
+and verified by the authors. The authors remain responsible for the
+methods and claims. Further disclosure and available prompts are provided, alongside scripts, score matrices, and
 replication records.
 
 \section*{Ethics}
