@@ -30,6 +30,39 @@ The 1,500 preference IDs include 805 easy and 695 hard AlpacaEval items; 35 of
 52,500 margins are unavailable. The historical filename `pilot_complete_panel.csv`
 denotes aligned rows, not a matrix with all finite margins.
 
+### Comparator implementations
+
+The ComBat-inspired comparator uses one residual location and scale per
+language, shared across evaluators, with shrinkage toward zero and one; it
+restores evaluator main effects. This is a pooled location/scale adaptation,
+not the standard feature-specific ComBat implementation. Its historical script
+function and result label are `combat_eb_adjust` and `ComBat-EB`. Quantile normalization
+sorts each evaluator column across languages, averages the in-bag sorted columns
+into a target distribution, and maps omitted-task column ranks to that target;
+exact ties receive averaged target values. CBC removes the language-by-evaluator
+interaction and retains shared language and evaluator main effects.
+
+The adapted BTL procedure turns differences between evaluator preference margins
+into pairwise wins, with exact ties counted as half a win. It fits one latent
+ranking per language on omitted-item comparisons, using the easy/hard dataset
+strata as discrimination groups. The original cited model uses actual judge
+identities for these parameters. This adaptation compares ranking procedures;
+its fitting data and target differ from CBC's in-bag interaction correction.
+
+### Table 3 sampling
+
+The task-count ablation uses 100 replicates per count (10, 20, 30, 40, 55),
+with one continuing NumPy RNG stream seeded at 107. Each replicate selects tasks
+uniformly without replacement, then draws a bootstrap with replacement of the
+same size within that subset. Fitting uses in-bag multiplicities; evaluation
+uses omitted tasks from the selected subset. Sampling has no category strata
+or category quotas. The three framework arms are averaged before sampling.
+
+The evaluator ablation enumerates every subset at each size: 15, 20, 15, 6,
+and 1 subsets for two through six evaluators. Each subset uses 100 task-bootstrap
+replicates, with seed `7 + evaluator_count`. The reported across-subset SD is
+the SD of subset-specific mean agreement, not the SD of all bootstrap draws.
+
 ## Expected results
 
 | Quantity | Value |
@@ -88,11 +121,23 @@ five-versus-four requirement mismatch and binary-only evaluator verdicts.
 
 The compact archive reproduces saved-score analyses, not original provider calls.
 It lacks raw agent workspaces and provider responses. Original snapshots, retry
-histories, and hardware metadata are incomplete; the ten-task reruns retain
-route/decoding metadata. `compute_meb_foundations.py` and the full local parser/
+histories, and hardware metadata are incomplete. The ten-task reruns retain
+route/decoding metadata for 1,000 of 1,440 saved score records: 194 DeepSeek,
+237 Qwen, 3 GPT-5.4, and 6 Gemini score records lack matching metadata.
+All six evaluators have route and decoding settings represented, but complete
+per-call replay is not established. `compute_meb_foundations.py` and the full local parser/
 translation entry point require the original `benchmark_tests` tree and some
 additional original analysis helpers. The public standalone internal analysis
 has its own curated judgment input; its historical extras are not current claims.
+
+The `calibration` subsection of `paper/analysis/meb_foundations.json` is a
+historical snapshot. Its quantile and ensemble results are superseded by
+`paper/analysis/calibration_results.json` and the corresponding
+`calibration_bootstrap_replicates.csv`; use those files for current ranking
+results. The aggregate's other sections supply the saved model checks.
+Rerun temperature 0 and top-p 0.9 describe text judging requests; they do not
+establish those settings for every auxiliary module call or historical
+provider snapshot.
 
 The bounded-link-only runner avoids the unavailable benchmark tree and writes
 `bounded_link_rerun.json` separately. The arcsin inverse clips corrected angles

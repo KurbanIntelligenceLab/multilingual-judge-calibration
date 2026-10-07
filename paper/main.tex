@@ -48,20 +48,25 @@ on Autonomous Agents and Multiagent Systems (AAMAS 2027)}{3--7 May 2027}{Hanoi, 
 \email{anonymous@example.com}
 
 \begin{abstract}
-An agentic code evaluator scores an agent's work against written
-requirements. Its score can change when the requirements and judging
-instructions are localized, even if the code is identical. We study this
-effect on a balanced multilingual panel and show that evaluator severity
-can reverse across languages. We model the score as task, language,
-evaluator, and language-by-evaluator components. The last component is
-identified by double centering the score matrix, without human labels.
-We state when that estimate is unbiased and give a task-level uncertainty
-bound. On held-out tasks, removing the interaction makes evaluator rankings
-and quality-gate decisions more consistent across languages. A separate
-preference benchmark shows a similar ranking pattern. Consistency is not
-accuracy: the correction leaves a language's evaluator-panel mean
-unchanged, and this study does not establish a gain in judging correctness
-against the code-benchmark labels. Code is available at https://anonymous.4open.science/r/multilingual-judge-calibration-2663/
+Agent-based evaluators assess artifacts produced by autonomous developer
+agents and multiagent teams. Their scores can change when written
+requirements and judge instructions are localized, even if the code is
+identical. This makes evaluator selection and quality-gate decisions
+sensitive to the judging language. We present consensus-based calibration
+(CBC), a label-free method that estimates and removes the
+language-by-evaluator interaction while preserving each language's
+evaluator-panel mean. CBC applies standard two-way double centering to a
+balanced score panel; we establish identification conditions and a
+task-level uncertainty bound. We evaluate it on 55 DevAI tasks with code
+held fixed across eight languages: English, Arabic, Turkish, Chinese, Hindi,
+Japanese, Spanish, and Swahili. Held-out analyses show more consistent
+evaluator severity rankings and quality-gate decisions across languages,
+with similar ranking results on a separate preference benchmark.
+In a task subset, the largest interaction exceeds average repeat-call variation.
+The correction targets consistency; it leaves shared language shifts
+unchanged and does not establish improved judging accuracy. Localized
+inputs still combine judge behavior with translation effects. Code is available at
+\url{https://anonymous.4open.science/r/multilingual-judge-calibration-2663/}.
 \end{abstract}
 \keywords{Agent-as-a-Judge, multilingual evaluation, LLM evaluation, calibration, language bias}
 \begin{CCSXML}
@@ -93,15 +98,14 @@ against the code-benchmark labels. Code is available at https://anonymous.4open.
 %=====================================================================
 \section{Introduction}
 
-Agentic systems increasingly use language models to assess other agents.
-Agent-as-a-Judge pipelines compare an agent's artifacts with written
-requirements \citep{zhuge2024agentjudge}. Their scores
-can decide whether a task passes a quality gate. Such evaluators therefore become part of the agent-evaluation
-infrastructure: their behavior can directly affect how agent performance
-is measured and which artifacts are accepted.
-If the score changes with
-the language of the rubric, the same artifact may receive a different
-decision.
+Agentic systems increasingly use language models to assess work produced
+by developer agents, including multiagent teams. Agent-as-a-Judge uses
+file-location, reading, and evidence-retrieval modules to assess artifacts
+against written requirements \citep{zhuge2024agentjudge}. Its scores can
+decide whether a task passes a quality gate. The reliability of this
+judging agent therefore affects both agent-performance measurement and
+artifact acceptance. If the score changes with the language of the
+judging inputs, the same artifact may receive a different decision.
 
 Multilingual judge studies report inconsistent scores and preferences
 \citep{hada-etal-2024-large,fu2025reliable,yin2026judgels}. In many studies,
@@ -133,9 +137,9 @@ larger than variation between repeat judge calls.
 We make three contributions. First, a fixed-artifact audit shows that
 evaluator severity can reverse across languages even when the judged code
 is byte-identical, with direct consequences for quality-gate decisions.
-Second, we isolate the language-by-evaluator interaction through a
-label-free double-centering correction and give conditions for its
-identification and concentration. Third, held-out analyses on DevAI and a
+Second, consensus-based calibration (CBC) estimates and removes the
+language-by-evaluator interaction without human labels; we give conditions
+for its identification and concentration. Third, held-out analyses on DevAI and a
 separate preference panel test whether the estimated interaction persists
 beyond the fitting tasks, while repeat-call experiments distinguish its
 largest effects from ordinary judge variability. We also state explicitly
@@ -182,7 +186,7 @@ stable evaluator characteristic.
 \paragraph{Multilingual evaluation.}
 \citet{hada-etal-2024-large} compare multilingual ratings with native-speaker
 judgments and find score inflation. Other studies report differences in
-judge agreement across languages \citep{fu2025reliable,babeljudge2026}.
+judge consistency and reliability across languages \citep{fu2025reliable,babeljudge2026}.
 MM-Eval assesses multilingual judging through both pairwise decisions and
 the consistency and fairness of absolute scores \citep{son2024mmeval}.
 The CIA suite combines a human-annotated multilingual test set with Hercule,
@@ -282,7 +286,10 @@ languages, 3 developer-agent frameworks, and 55 DevAI tasks
 \citep{zhuge2024agentjudge}, a complete balanced panel of $55\times8\times6$ task-level cells, each
 the mean of three framework runs.
 The languages are English, Arabic, Turkish, Chinese, Hindi, Japanese,
-Spanish, and Swahili. The framework arms are MetaGPT, GPT-Pilot, and OpenHands. The six
+Spanish, and Swahili. The framework arms are MetaGPT, GPT-Pilot, and
+OpenHands. MetaGPT supplies artifacts from collaborating agents with
+specialized development roles \citep{hong2024metagpt}. Each evaluator
+backbone runs as a separate judging condition. The six
 evaluator backbones are GPT-4o, GPT-5.4, Claude Sonnet 4.6,
 Gemini 3 Flash Preview, DeepSeek-V3.2, and Qwen3.5-9B.
 Figures~\ref{fig:heat} and~\ref{fig:gate} shorten Claude Sonnet 4.6
@@ -301,7 +308,7 @@ Requirement text and user queries were translated from English by GPT-4o under a
 token-preservation instruction (paths, identifiers, and backtick spans held
 fixed); judge templates were localized while keeping the English
 \texttt{<SATISFIED>}/\texttt{<UNSATISFIED>} tags. Native speakers with
-graduate-level training reviewed the translations for fluency and technical
+graduate training reviewed all eight language versions for fluency and technical
 fidelity, following the protocol of the five-language setting
 \citep{mahmood2026multilingualpromptlocalizationagentasajudge}. Localized
 system prompts additionally have mean {LaBSE} cosine similarity $0.90$ with
@@ -313,7 +320,7 @@ snapshot dates, base URLs, or per-call retry logs; we therefore reproduce
 those results from the saved score matrices rather than claim a full
 provider-level regeneration.
 
-Evaluators are not on a common scale: mean satisfaction awarded runs from
+Evaluators differ substantially in mean scores: mean satisfaction awarded runs from
 42.9 (Gemini 3 Flash Preview) to 3.6 (Qwen3.5-9B), and Qwen3.5-9B
 awards zero on 82.0\% of cells.
 These means order evaluator \emph{leniency}, not evaluator quality.
@@ -348,17 +355,13 @@ $m^{-1}\sum_b\widetilde S_{t\ell b}
 % The four terms of Eq.~\ref{eq:cbc} cancel $\mu,\alpha,g,\gamma$ and leave the normalized $\beta$ plus mean-zero
 % error. The row sum of $\hat\beta$ is zero by construction, proving the
 % second identity.\hfill$\square$
-Taking expectations in Eq.~\ref{eq:cbc}, the task effect $\mu(t)$ and the
-task-language term $\gamma(t,\ell)$ vanish when averaging over
-tasks, while the evaluator effect $\alpha(b)$, the shared language
-shift $g(\ell)$, and the corresponding grand means cancel under
-double centering. Under the stated zero-sum normalization of
-$\beta$, the remaining deterministic term is therefore
-$\beta_{\ell b}$, so $\mathbb{E}[\hat{\beta}_{\ell b}]
-=\beta_{\ell b}$. The second identity follows because
-$\sum_b \hat{\beta}_{\ell b}=0$ by construction, so subtracting
-$\hat{\beta}_{\ell b}$ does not change the evaluator-panel mean for
-any fixed task and language.\hfill$\square$
+Task averaging makes $\mu$ a common constant and removes the normalized
+$\gamma$. The four terms in Eq.~\ref{eq:cbc} cancel that constant,
+$\alpha$, and $g$, leaving normalized $\beta$ and mean-zero error.
+Thus $\mathbb E[\hat\beta_{\ell b}]=\beta_{\ell b}$.
+The second identity follows from $\sum_b\hat\beta_{\ell b}=0$:
+subtracting the interaction preserves each task-language panel mean.
+\hfill$\square$
 
 The identity means CBC cannot change a decision based on the mean score
 of all evaluators for one item. It can change an individual evaluator's
@@ -383,13 +386,11 @@ absolute negative coefficients. It lies in $[-200c,200c]$.
 Hoeffding's inequality across independent tasks and a union bound
 give the result.\hfill$\square$
 
-This bound is deliberately conservative. Its main role is to establish concentration toward the model target as the number of independent tasks grows, rather than to provide a tight finite-sample confidence interval for this panel.
-A Gaussian bound with independent
-language-evaluator cell noise would be tighter, but
-the same artifact is judged in every condition, making that assumption
-implausible. We therefore use a task bootstrap for empirical intervals.
-For fixed $k$ and $m$, the bound also shows that the estimated interaction
-converges to its model target as the number of independent tasks grows.
+This conservative bound establishes concentration toward the model target
+as independent tasks increase. Independent language-evaluator cell noise
+would give a tighter bound, but judging the same artifact in every
+condition makes that assumption implausible. We use a task bootstrap for
+empirical intervals.
 For gate analyses, we fit $\hat\beta$ on 1{,}000 bootstrap samples and
 evaluate on omitted tasks from the same observed language set.
 
@@ -410,7 +411,7 @@ scores can simply mean greater leniency.
 \section{Results}
 \label{sec:results}
 
-Rubric language changes which evaluator marks more severely. We first test
+Localizing the judging inputs changes evaluators' relative severity. We first test
 that result, then examine its effect on threshold decisions.
 
 \subsection{Language reverses which evaluator is more severe}
@@ -475,14 +476,22 @@ to remove stable language-by-evaluator offsets. The held-out analysis
 tests whether those offsets persist across omitted tasks rather than only
 describing the fitting sample; it does not establish that the removed
 variation is erroneous.
-On DevAI, it rises
-from $0.650$ to $0.902$ (Table~\ref{tab:ranking}). A language-wide
-empirical-Bayes location/scale adjustment adapted from ComBat
-\citep{johnson2007combat} gives nearly the same agreement as raw scoring
-(equal after rounding to three decimals); it does not estimate the
-language-by-evaluator interaction. Quantile normalization
-\citep{bolstad2003comparison} performs worse. The paired CBC minus
-ComBat difference is positive in all 1{,}000 bootstrap replicates.
+On DevAI, it rises from $0.650$ to $0.902$ (Table~\ref{tab:ranking}).
+ComBat was developed for microarray batch correction using empirical-Bayes
+location and scale estimates \citep{johnson2007combat}. Our
+ComBat-inspired comparator treats language as a batch, shrinks one
+residual location and scale per language toward zero and one, and restores
+evaluator main effects. It uses simpler pooling than standard ComBat and
+does not fit language-by-evaluator interactions. Quantile normalization
+\citep{bolstad2003comparison} maps each evaluator column's ordered
+language means to a common distribution fitted across evaluator columns;
+ties receive averaged target values. Both comparators fit on in-bag tasks
+and apply the fitted adjustments to omitted-task means. CBC instead
+subtracts interaction offsets while retaining language and evaluator
+main effects. The ComBat-inspired adjustment gives nearly the same
+agreement as raw scoring (equal at three decimals), and this quantile
+adaptation performs worse. The paired CBC minus ComBat-inspired difference
+is positive in all 1{,}000 bootstrap replicates.
 These rankings measure which evaluator awards higher scores, not which
 one judges code more accurately.
 
@@ -493,7 +502,7 @@ for the chosen and rejected response of the first 1{,}500 dataset IDs
 English, Arabic, Turkish, Chinese, Hindi, Japanese, and Spanish,
 using GPT-4o, GPT-5.4, Claude Sonnet 4.6,
 Gemini 3 Flash Preview, and DeepSeek-V3.2. The resulting
-10{,}500 language-item instances define 105{,}000 pointwise scores.
+10{,}500 language-item instances define 105{,}000 pointwise score slots.
 Thirty-five of the 52{,}500 evaluator-item-language margins are missing
 from the saved score table; the analysis averages available margins
 within each cell, excluding missing scores from weighted denominators.
@@ -501,11 +510,17 @@ CBC acts on chosen-minus-rejected score margins, which measure preference
 strength rather than evaluator severity. Under the same
 bootstrap fit and omitted-item evaluation, mean cross-language $\tau$
 rises from $0.430$ to $0.900$ (Table~\ref{tab:ranking}). An adapted
-judge-aware Bradley--Terry--Luce comparator
-\citep{xu2026judgeaware} obtains $0.405$; it uses pairwise evaluator
-wins estimated on omitted-item comparisons, excluding pairs with missing
-margins, whereas CBC fits continuous-margin interactions on in-bag items.
-This is an adapted ranking comparator, not a like-for-like calibration model.
+judge-aware Bradley--Terry--Luce (BTL) comparator
+\citep{xu2026judgeaware} obtains $0.405$. The cited model fits latent
+rankings with judge-specific discrimination parameters. Our adaptation
+converts differences between evaluator preference margins into pairwise
+wins, fits evaluator rankings separately per language, and uses the
+easy/hard dataset strata for discrimination parameters. It fits directly
+on omitted-item comparisons, excluding missing margins and assigning
+exact ties half a win. CBC learns continuous-margin interactions on
+in-bag items. Thus this adaptation compares ranking procedures with
+different targets and fitting data; it does not establish superiority
+over the original judge-aware calibration framework.
 The instance source and
 score-collection protocol differ from DevAI, so this result shows
 ranking consistency on another panel, not fixed-code attribution.
@@ -519,7 +534,7 @@ Bold marks the highest mean per panel.}
 \begin{tabular*}{\columnwidth}{@{\extracolsep{\fill}}llcc@{}}\toprule
 \textbf{Panel} & \textbf{Method} & $\boldsymbol{\tau}$ & \textbf{95\% interval}\\\midrule
 DevAI & Raw & 0.650 & [0.610, 0.714]\\
- & Adapted ComBat & 0.650 & [0.610, 0.714]\\
+ & ComBat-inspired & 0.650 & [0.610, 0.714]\\
  & Quantile & $-0.097$ & [$-0.119,-0.068$]\\
  & CBC & \textbf{0.902} & [0.795, 0.968]\\\midrule
 M-RewardBench & Raw & 0.430 & [0.371, 0.486]\\
@@ -541,16 +556,20 @@ It does not establish transfer to unseen languages.
 We fit Eq.~\ref{eq:model} to all 7{,}920 framework-level observations
 with framework fixed effects. A simplified version without
 $\gamma(t,\ell)$ has $R^2=0.691$; including task-language terms gives
-$R^2=0.705$. The modest $0.015$ increase supports using a compact
-description of the panel, but the remaining unexplained variation
+$R^2=0.705$. This modest in-sample increase of $0.015$ is descriptive;
+adding terms improves training fit by construction. Unexplained variation
 warns against treating the interaction as a complete causal account.
 
 Table~\ref{tab:ablations} shows two checks from the DevAI data.
-Each evaluator subset uses 100 bootstrap replicates. Subsampling the
-evaluator pool leaves mean held-out $\tau$ near $0.90$,
-but two-evaluator subsets vary much more than larger subsets. A
-separate 100-replicate task-count experiment selects $n$ tasks without
-replacement, bootstraps within that subset, and evaluates omitted tasks.
+We enumerate every evaluator subset at each pool size, using 100
+task-bootstrap replicates per subset. Mean held-out $\tau$ stays near
+$0.90$, but two-evaluator subsets vary much more than larger subsets.
+For each task count $n\in\{10,20,30,40,55\}$, we run 100 replicates
+with RNG seed 107. Each replicate selects $n$ of the 55 tasks uniformly
+without replacement, then bootstraps $n$ draws within that subset.
+CBC fits on those draws and evaluates omitted tasks from the same subset.
+Selection is not stratified by task category; each task has equal selection
+probability, so category coverage can vary between replicates.
 It shows the estimate
 approaching the full-panel interaction as the number of tasks grows.
 The mean absolute difference falls from 2.01 points with 10 tasks to
@@ -566,8 +585,9 @@ that semantic requirements have a uniquely causal language effect.
 
 \begin{table}[t]\centering\small
 \setlength{\tabcolsep}{3pt}
-\caption{DevAI evaluator and task-count ablations. Beta difference is
-the mean absolute difference from the full-panel estimate.}
+\caption{DevAI evaluator and task-count ablations, with 100 bootstrap
+replicates per evaluator subset or task count. Tasks are sampled uniformly.
+Beta difference is mean absolute difference from the full-panel estimate.}
 \label{tab:ablations}
 \begin{tabular*}{\columnwidth}{@{\extracolsep{\fill}}lrrrrr@{}}\toprule
 \textbf{Evaluators $m$} & \textbf{2} & \textbf{3} & \textbf{4} & \textbf{5} & \textbf{6}\\
@@ -607,16 +627,22 @@ which we examine next.
 \begin{figure}[t]\centering
 \includegraphics[width=\columnwidth]{figures/fig1_gate_by_language.pdf}
 \caption{Pass rates at gate 25 for the same 55 code tasks. Lines span all
-eight languages; symbols identify English, Hindi, and Spanish. Other
-languages are gray dots. Evaluator short labels follow \S\ref{sec:setup}.}
+eight languages. Symbols mark the English reference and GPT-4o's observed
+extremes, Hindi and Spanish; other languages are gray dots.
+Evaluator short labels follow \S\ref{sec:setup}.}
 \Description{Six evaluator rows show language-dependent task pass rates
 from zero to one hundred percent.}
 \label{fig:gate}\end{figure}
 
 For a fixed evaluator on identical code, the fraction of tasks passing a
-satisfaction gate depends heavily on the rubric language: at a gate of 25,
+satisfaction gate depends heavily on the judging language: at a gate of 25,
 GPT-4o passes 90.9\% in Hindi and 10.9\% in Spanish
-(Fig.~\ref{fig:gate}). Sweeping the threshold, the correction cuts
+(Fig.~\ref{fig:gate}). We highlight these languages because they give
+GPT-4o's highest and lowest observed gate-25 pass rates; English is the
+reference. They are descriptive examples, not preselected language groups
+or evidence of a language-wide cause. All eight languages enter the
+interaction estimates, reversal search, and consistency metrics.
+Sweeping the threshold, the correction cuts
 across-language spread by 10.6 to 14.2 percentage points at the tested
 gates from 10 to 30, where scores concentrate (Fig.~\ref{fig:sweep}).
 The changes are smaller and can worsen spread at higher gates, where fewer
@@ -699,39 +725,37 @@ Qwen3.5-9B &  3.6 & \textbf{82.0} &  4.8 & 7/10 & 20.2\\
 \end{tabular*}
 \end{table*}
 
-No task drives the effect: leaving out each task in turn moves
+Leaving out each task in turn moves
 $\max|\hat\beta|$ within $[20.2,20.9]$, and no single task moves it by more
 than 0.4 points. Table~\ref{tab:panel} shows that removing GPT-4o
 reduces reversals from 7/15 to 3/10
 pairs and the largest interaction from 20.6 to 8.0 points. Removing any
 other evaluator leaves the largest interaction at 19.2 points or more.
-The largest effect therefore depends on GPT-4o, though smaller effects
-remain. Qwen3.5-9B is a separate concern: it awards zero on 82.0\% of cells and
-is close to a constant function, so we also check the panel without it.
+Qwen3.5-9B is a separate concern: it awards zero on 82.0\% of cells and
+has scores concentrated at zero, so we also check the panel without it.
 Of 52{,}560 requirement judgments, 4.6\% lack a parseable tag or are empty, and
 2{,}301 of those 2{,}410 cases are empty Qwen3.5-9B responses: 62\% of its Spanish
 requirements and 67\% of its Swahili ones. The released parser scores those
 empty strings unsatisfied. Excluding Qwen3.5-9B, the noncompliance rate is 0.12\%,
 and GPT-4o's Spanish missing-tag rate is 0.5\%, so missing tags do not
-explain the 20.6-point cell. We retain Qwen3.5-9B in the primary panel because parser-visible failures are part of the observed behavior of the evaluator under the released judging protocol, but we report reduced-panel analyses because its near-degenerate score distribution can distort scale-sensitive results.
+explain the 20.6-point cell. We retain Qwen3.5-9B because parser-visible
+failures are part of the released protocol's behavior, and report
+reduced-panel analyses to check the effect of this zero-score concentration.
 
 Because four of the seven reversals involve GPT-4o, we repeat the analysis
 without it. Among the five remaining evaluators, the largest interaction is
 Gemini 3 Flash Preview in Arabic at $+8.0$ points (95\% CI $[6.3, 9.9]$), and gate spread still
 falls from 27.6 to 21.5 points at a gate of 10 and from 17.5 to 13.8 at 25. The
-largest interaction is roughly 39\% of its full-panel size. The largest instance depends on
-GPT-4o, but an interaction remains in the reduced panel.
+largest interaction is roughly 39\% of its full-panel size.
 
 Because both the requirement text and the judge instructions are localized,
 $\hat\beta$ still mixes judge behavior with specification-translation quality.
-A control that keeps requirement text in English and localizes only the
-instructions was previously run at 20-task, two-language, one-evaluator scale
+A control that keeps benchmark text localized and varies judge-instruction
+localization was previously run at 20-task, two-language, one-evaluator scale
 \citep{mahmood2026multilingualpromptlocalizationagentasajudge} and found a
-large Hindi/Arabic asymmetry under that partial localization. We do not
-extend that control to the eight-language, six-evaluator panel here;
-$\hat\beta$ should therefore be read as a mixture of judge behavior and
-specification-translation quality, which is a limitation of this measurement
-rather than a result we claim to have separated.
+large Hindi/Arabic asymmetry. That control is not extended to this panel,
+so it cannot separate these sources across our eight languages and six
+evaluators.
 
 An additive model on $[0,100]$ can strain linearity at the floor. Recovering
 $\hat\beta$ after an arcsin-square-root transform of the satisfaction
@@ -761,12 +785,13 @@ stable language effect. We measure that variation with new calls.
 We reran a stratified subset chosen before any call was made: 10
 tasks spread across the requirement-count distribution, all eight languages,
 all six evaluators, three repeats, and the MetaGPT arm only (1{,}440 calls).
-The judge stack, temperature ($0$), top-$p$ ($0.9$), and parser are those of
-the original panel. The manifest seed is recorded and is not sent to the
+The reruns reuse the released judging workflow and parser; text judging
+calls request temperature $0$ and top-$p$ $0.9$. The manifest seed is recorded and is not sent to the
 provider. The decision rule was fixed before the reruns: retain the magnitude
 claim only if the test--retest standard deviation $s$, averaged over tasks,
 languages, and evaluators, is below one quarter of the largest interaction
-$B$. The one-quarter threshold is a practical effect-separation criterion: it requires the largest observed interaction to exceed average test-retest variation by at least a factor of four.
+$B$. This practical criterion requires the largest interaction to exceed
+average repeat-call variation by a factor of four.
 Otherwise the claim is qualified or withdrawn as specified in the
 analysis script.
 
@@ -784,112 +809,85 @@ establish a language-resource trend.
 \section{Is the Removed Term Error?}
 \label{sec:anchor}
 
-The interaction is larger than mean repeat-call variation in the sampled
-slice. The language-conditioned term could still encode real
-differences in how well a judge reads code when prompted in a given language.
-Separating error from competence needs a reference outside the panel. DevAI
-ships expert satisfaction labels for the evaluated agents
-\citep{zhuge2024agentjudge}; the local export contains 1{,}098 judgments
-across the 55 tasks and three agents. The human base rate is 36.5\%
-satisfied, so an always-unsatisfied classifier scores 63.5\%
-and raw accuracy is misleading. A future human-label test should use
-balanced accuracy and Matthews correlation against that baseline, with task
-resampling that retains requirements and framework judgments together.
-Improvement would support treating the interaction
-as error; degradation would suggest it carries useful signal.
+Exceeding repeat-call variation does not prove the interaction is error:
+it may encode language-dependent judging competence. DevAI supplies expert
+satisfaction labels \citep{zhuge2024agentjudge}; the local export has
+1{,}098 judgments over 55 tasks and three agents. Only 36.5\% are satisfied,
+so always predicting unsatisfied gives 63.5\% accuracy. A human-label test
+should compare paired requirement decisions using balanced accuracy and
+Matthews correlation, retaining requirements and frameworks together in
+task resampling. Matching aggregate human satisfaction rates cannot
+establish correctness. Since requirements and human labels are in English,
+results should be reported with and without English.
 
-Matching a human satisfaction base rate does not establish requirement-level
-correctness. A future test should compare paired requirement decisions,
-not only aggregate positive rates. The benchmark requirements and human
-labels are supplied in English, so results should also be reported with
-and without English.
-
-This submission does not run that requirement-level test. The export audit finds five
-human-label requirements but four evaluator requirements for task
-52\texttt{\_Devin\_AI\_Trains\_an\_AI} in each agent workspace, and the saved
+This submission cannot run that test. The export has five human-label
+requirements and four evaluator requirements for
+\path{52_Devin_AI_Trains_an_AI} in each agent workspace, and the saved
 judgments contain binary verdicts without a continuous requirement-level score
-from which a corrected verdict can be computed. We therefore report no pooled
-balanced-accuracy difference: doing so would require silently reindexing a
-requirement or inventing the missing score. The blocked-test audit is included
-with the analysis records. A comparison of task scores with aggregated human
-satisfaction would address a coarser target and remains untested.
+from which to compute corrected verdicts. Reporting a pooled
+balanced-accuracy difference would require reindexing a requirement or
+inventing scores. The artifact records this blocked test. Comparing task
+scores with aggregated human satisfaction would address a coarser,
+currently untested target.
 
-The M-RewardBench panel includes public gold preferences. A previous
-analysis reported that panel-mean agreement increased from 68.7\% to
-76.6\% after CBC. Rechecking its 700 sampled item-language margins
-shows that this increase is a numerical tie artifact: 55 apparent
-decision changes have zero raw margin but tiny positive floating-point
-corrected margins. Three other margins differ slightly because their
-cells are incomplete, without changing their decisions. With a common
-absolute-margin tie tolerance of $10^{-9}$, panel-mean agreement is 68.7\% both before and
-after CBC. Proposition~\ref{prop:identify} explains why that mean is
-invariant on a complete panel. We retract the earlier accuracy gain
-and make no human-accuracy claim for CBC.
+M-RewardBench supplies gold preferences. A prior analysis reported a
+panel-mean agreement gain from 68.7\% to 76.6\% after CBC. Auditing its
+700 sampled item-language margins identifies a numerical tie artifact:
+55 apparent flips have zero raw margins and tiny positive corrected
+residuals. Three incomplete-cell margins differ slightly without changing
+decisions. Using the same absolute-margin tie tolerance of $10^{-9}$,
+agreement is 68.7\% before and after CBC. Proposition~\ref{prop:identify}
+gives panel-mean invariance for complete panels. We retract the earlier
+accuracy gain and make no human-accuracy claim for CBC.
 
 %=====================================================================
 \section*{Limitations}
 
-The test--retest (\S\ref{sec:repl}) is a 10-task MetaGPT slice, not a rerun of
-the full 55-task, three-framework panel; a few individual tasks have
-three-repeat sds far above the pooled 4.1-point mean. The largest effect
-depends on GPT-4o. The external preference panel covers only two
-AlpacaEval subsets, with 35 missing margins; the complete-panel
-identification result is not exact for this available-case analysis.
-Because we do not rerun the instruction-only
-control on this panel,
-$\hat\beta$ mixes judge behavior with specification-translation quality, which
-plausibly varies across the eight languages. The prior two-language ablation
-cannot estimate the two sources in this panel. The human-label anchor is blocked by a
-requirement-schema mismatch and by binary-only saved judgments; this is not
-evidence for a null effect, and corrected scores should not be treated as
-ground truth. The interaction correction leaves the language shift shared by
-all judges in place. That shift can be centered without labels, but labels
-are needed to decide whether doing so improves accuracy.
-Finally, the evidence is 55 tasks from one code-evaluation family and six
-evaluator routes; the additive model is unbounded while
-scores lie in $[0,100]$, which strains the linear approximation near zero.
-An arcsin-square-root transform leaves the recovered interaction and the
-gate-25 reduction intact; a logit link does not, because of the pile-up at
-zero, so the linear correction should not be read as uniquely privileged at
-the floor. A deployment should refit and monitor the interaction when
-judge versions change; this single panel cannot measure temporal drift.
+The evidence covers 55 tasks from one code-evaluation family and six
+evaluator routes. Repeat calls cover only 10 MetaGPT tasks, with some
+task-level standard deviations far above the pooled mean; the largest
+interaction depends on GPT-4o. The external panel covers two AlpacaEval
+subsets and has 35 missing margins, so complete-panel identification is
+not exact for its available-case analysis. Without an instruction-only
+control at this scale, $\hat\beta$ combines judge behavior with translation
+quality. The human-label test is blocked by a requirement mismatch and
+binary-only judgments; this is not evidence of a null accuracy effect.
+CBC leaves shared language shifts intact, and human labels are needed to
+assess whether removing them improves accuracy. The additive model also
+strains near the score floor: arcsin-square-root checks agree with the
+linear results, but the logit check does not. Corrected scores are not
+ground truth. Deployments should refit and monitor the interaction when
+judge versions change; this panel cannot establish temporal stability.
 
 %=====================================================================
 \section*{Conclusion}
 
-The same code can receive different scores and gate decisions when the
-judging inputs are localized. The fixed artifacts make this a property of the
-judging setup, although they do not separate judge behavior from translation
-quality. The language-by-evaluator interaction changes evaluator severity
-and gate outcomes; the largest shift exceeds mean repeat-call variation in
-the sampled slice. Double centering estimates that interaction without
-labels, and the task-level bound allows dependence among judges within
-a task. Removing the interaction improves held-out evaluator-score ordering
-consistency on DevAI and a separate preference subset, and makes
-individual-evaluator gates more consistent. The panel-mean score remains
-unchanged, so the previously reported preference-gold gain was spurious.
-The corrected scores have not been shown to be more accurate.
+Localizing judging inputs can reverse evaluator severity and alter quality
+gates on identical code. CBC estimates the language-by-evaluator
+interaction without labels, with a task-level bound allowing dependence
+within tasks. Removing it improves held-out ranking consistency on DevAI
+and a separate preference panel, and makes individual-evaluator gates more
+consistent. The largest interaction exceeds mean repeat-call variation
+in the sampled slice. Fixed code narrows attribution to the judging setup,
+but translation differences remain mixed with judge behavior. Panel means
+are preserved, and improved judging accuracy remains unestablished.
 
 \section*{Reproducibility}
-Results in \S\ref{sec:results} were recomputed from the saved score
-matrices at the reported precision; rare numerical rank-tie differences
-are documented in the artifact. The separate preference score panel and the corrected
-human-anchor audit are included with the analysis records. The test--retest in
-\S\ref{sec:repl} is the 1{,}440-call MetaGPT rerun; its pre-registered
-decision file is shipped with the artifact. Human labels are the public
-\texttt{human\_as\_a\_judge} release of the Agent-as-a-Judge repository, MIT
-licensed.
-The codebase records Python 3.11 and a Poetry lockfile; the DevAI
-implementation used here is version 0.1.5. The original panel's hardware and
-provider snapshot metadata were not preserved, so those analyses can be
-recomputed from the saved matrices but not rerun from the original provider
-state. The new reruns include model routes and decoding metadata.
+Results in \S\ref{sec:results} were recomputed from saved matrices at the
+reported precision; the artifact documents rare numerical rank-tie
+differences. It includes preference scores, the corrected human-anchor
+audit, and the 1{,}440-call MetaGPT rerun with its prespecified decision
+file, model routes, and decoding metadata. Human labels come from the
+public MIT-licensed \texttt{human\_as\_a\_judge} release. The original
+codebase records Python 3.11, a Poetry lockfile, and DevAI implementation
+version 0.1.5. Missing original hardware and provider snapshots prevent
+exact provider-level replay. Rerun metadata cover 1{,}000 of 1{,}440 saved
+score records; saved-score recomputation remains available.
 AI-assisted tools were used for wording edits and to assist with
-implementation of analysis and figure-generation code. The statistical
-design, methodology, calculations, and resulting claims were specified
-and verified by the authors. The authors remain responsible for the
-methods and claims. Further disclosure and available prompts are provided, alongside scripts, score matrices, and
-replication records.
+implementation of analysis and figure-generation code. The authors
+specified and verified the design, methodology, calculations, and claims,
+and remain responsible for the work. Further disclosure and available
+prompts accompany the scripts, score matrices, and replication records.
 
 \section*{Ethics}
 No new human subjects were recruited; the human labels are public. The
